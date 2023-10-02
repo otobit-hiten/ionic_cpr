@@ -1,0 +1,108 @@
+
+ion-header {
+  ion-toolbar{
+    ion-img{
+      padding-left: 20%;
+      padding-right: 20%;
+      align-items: center;
+    }
+  }
+}
+ion-text{
+  text-align: start;
+    font-size: medium;
+    font-family: "poppins";
+    font-style: normal;
+    font-weight: normal;
+}
+
+ion-card.text {
+  margin-inline: 20px;
+  margin-top: 15px;
+  border-radius: 5%;
+  background-color: #e7f1fc;
+  padding: 5%;
+  ion-card-title {
+    text-align: start;
+    font-size: medium;
+    font-family: "poppins";
+    font-style: normal;
+    font-weight: normal;
+  }
+  ion-card-subtitle {
+    text-align: start;
+    font-size: small;
+    font-family: "poppins";
+    font-style: normal;
+    font-weight: normal;
+  }
+}
+ion-grid {
+  ion-row {
+    ion-col {
+      text-align: center;
+      ion-card.orange{
+        height: 120px;
+        color: white;
+        background-color: #fe524d;
+        border-radius: 5%;
+        justify-content: center;
+        align-items: center; 
+        img{
+          padding-top: 20px;
+        }
+        ion-card-header{
+          ion-card-title{
+            color: white;
+            font-size: small;
+            font-family: "poppins";
+            font-style: normal;
+            font-weight: bold;
+          }
+        }
+      }
+
+      ion-card.blue{
+        height: 120px;
+        color: white;
+        background-color: #16629c;
+        border-radius: 5%;
+        justify-content: center;
+        align-items: center; 
+        img{
+          padding-top: 20px;
+        }
+        ion-card-header{
+          ion-card-title{
+            color: white;
+            font-size: small;
+            font-family: "poppins";
+            font-style: normal;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+//modal style
+ion-modal{
+  --height:auto;
+  --border-radius: 20px 20px 0px 0px;
+  .sheet{
+    margin-top: 25px;
+    padding:5%;
+    width: 100%;
+    height: max-content;
+    ion-button{
+      --border-radius:15px;
+      --border-width:0.5px
+    }
+  }
+}
+
+li{
+  font-size: large;
+}

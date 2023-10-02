@@ -1,0 +1,44 @@
+
+ion-header {
+    ion-toolbar{
+      ion-img{
+        padding-left: 20%;
+        padding-right: 20%;
+        align-items: center;
+      }
+    }
+  }
+
+  ion-label{
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    text-align: center;
+    font-family: "poppins";
+    font-style: normal;
+    font-weight: normal;
+    color: #828282;
+  }
+  .page_title{
+    display: flex;
+    justify-content: center;
+    color: black;
+    margin-top: 30px;
+    text-align: center;
+    font-size: x-large;
+    font-family: "poppins";
+    font-style: normal;
+    font-weight: bold;
+  }
+  ion-button{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 2px solid #fe524d;
+    border-radius: 10px;
+  }
+
+  .content{
+    margin-inline: 20px;
+  }

@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-img src="assets/logo.png" alt=""></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row style="width: max-content" class="avatar">
+    <ion-col>
+      <img src="assets/profile_pic.png" alt="assets/user.png" />
+    </ion-col>
+    <ion-col>
+      <ion-row>
+        <ion-button class="change" shape="round" size="small">Change</ion-button>
+      </ion-row>
+      <ion-row>
+        <ion-button class="remove" shape="round" size="small">Remove</ion-button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <div class="form">
+    <ion-label style="font-family: 'poppins'; font-size: larger">Accout Information</ion-label>
+
+    <ion-input [(ngModel)]="name" label="Name:" labelPlacement="floating" fill="outline"></ion-input>
+
+    <ion-input [(ngModel)]="phone" label="Phone No:" labelPlacement="floating" fill="outline"></ion-input>
+
+    <ion-input [(ngModel)]="email" label="Email:" labelPlacement="floating" fill="outline"></ion-input>
+
+    <ion-input [(ngModel)]="policyNo" label="Document" labelPlacement="floating" fill="outline"></ion-input>
+
+    
+
+    <ion-button class="submit"  shape="round" expand="block" (click)="update()"> Edit </ion-button>
+    <ion-button class="submit" shape="round" expand="block" (click)="set()">Submit</ion-button>
+  </div>
+</ion-content>

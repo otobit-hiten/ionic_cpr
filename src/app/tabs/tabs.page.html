@@ -1,0 +1,25 @@
+<ion-tabs #tab (ionTabsDidChange)="currentTab($event)">
+  <ion-tab-bar>
+
+    <ion-tab-button tab="home" [ngClass]="{selected:selectedTab === 'home'}">
+      <ion-icon src="assets/home.svg"></ion-icon>
+      <ion-label *ngIf="selectedTab ==='home'" >Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" [ngClass]="{selected:selectedTab === 'profile'}">
+      <ion-icon src="assets/user.svg"></ion-icon>
+      <ion-label *ngIf="selectedTab ==='profile'">Profile</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="resources" [ngClass]="{selected:selectedTab === 'resources'}">
+      <ion-icon src="assets/resources.svg"></ion-icon>
+      <ion-label *ngIf="selectedTab ==='resources'">Resources</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="company" [ngClass]="{selected:selectedTab === 'company'}">
+      <ion-icon src="assets/company.svg"></ion-icon>
+      <ion-label *ngIf="selectedTab ==='company'">Company</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>

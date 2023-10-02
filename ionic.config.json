@@ -1,0 +1,7 @@
+{
+  "name": "Cpr Insurance",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

@@ -7,14 +7,18 @@
 <ion-content>
   <ion-row style="width: max-content" class="avatar">
     <ion-col>
-      <img src="assets/profile_pic.png" alt="assets/user.png" />
+      <ion-avatar>
+        <img *ngIf="imageData.base64 !== '' " src="data:'{{imageData.name}}';base64,{{imageData.base64}}"  alt=""/>
+        <img *ngIf="imageData.base64 === '' " src="assets/profile_pic.png" alt="assets/user.png" />
+
+      </ion-avatar>
     </ion-col>
     <ion-col>
       <ion-row>
-        <ion-button class="change" shape="round" size="small">Change</ion-button>
+        <ion-button class="change" shape="round" size="small" (click)="openGallery()">Change</ion-button>
       </ion-row>
       <ion-row>
-        <ion-button class="remove" shape="round" size="small">Remove</ion-button>
+        <ion-button class="remove" shape="round" size="small" (click)="removeImage()">Remove</ion-button>
       </ion-row>
     </ion-col>
   </ion-row>

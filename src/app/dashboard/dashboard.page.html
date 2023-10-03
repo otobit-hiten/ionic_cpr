@@ -20,10 +20,11 @@
         quickly and accurately manage your claim.
       </ion-card-subtitle>
     </ion-card>
+
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-card class="blue">
+          <ion-card class="blue" href="/form">
             <img src="assets/submit_claim.svg" />
             <ion-card-header>
               <ion-card-title>
@@ -33,7 +34,7 @@
           </ion-card>
         </ion-col>
         <ion-col>
-          <ion-card class="orange" href="/contact-us">
+          <ion-card class="orange" href="/tabs/dashboard/contact-us">
             <img src="assets/contact-us.svg" />
             <ion-card-header>
               <ion-card-title>
@@ -53,7 +54,7 @@
           </ion-card>
         </ion-col>
         <ion-col>
-          <ion-card class="blue" href="/important-tips">
+          <ion-card class="blue" routerDirection="forward" [routerLink]="['/tabs/dashboard/important-tips']">
             <img src="assets/imp_tip.svg" />
             <ion-card-header>
               <ion-card-title>

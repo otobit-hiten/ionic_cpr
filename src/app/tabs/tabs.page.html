@@ -1,9 +1,9 @@
 <ion-tabs #tab (ionTabsDidChange)="currentTab($event)">
   <ion-tab-bar>
 
-    <ion-tab-button tab="home" [ngClass]="{selected:selectedTab === 'home'}">
+    <ion-tab-button tab="dashboard" [ngClass]="{selected:selectedTab === 'dashboard'}">
       <ion-icon src="assets/home.svg"></ion-icon>
-      <ion-label *ngIf="selectedTab ==='home'" >Home</ion-label>
+      <ion-label *ngIf="selectedTab ==='dashboard'" >Home</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="profile" [ngClass]="{selected:selectedTab === 'profile'}">

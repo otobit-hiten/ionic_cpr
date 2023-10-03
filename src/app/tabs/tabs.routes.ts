@@ -17,9 +17,22 @@ export const routes: Routes = [
           import('../company/company.page').then((m) => m.CompanyPage),
       },
       {
-        path: 'home',
-        loadComponent: () =>
-          import('../dashboard/dashboard.page').then((m) => m.Dashboard),
+        path: 'dashboard',
+        children:[
+          {
+            path:'',
+            loadComponent: () =>
+            import('../dashboard/dashboard.page').then((m) => m.Dashboard),
+          },
+          {
+            path: 'contact-us',
+            loadComponent: () => import('../contact-us/contact-us.page').then( m => m.ContactUsPage)
+          },
+          {
+            path: 'important-tips',
+            loadComponent: () => import('../important-tips/important-tips.page').then( m => m.ImportantTipsPage)
+          },
+        ]   
       },
       {
         path: 'resources',
@@ -27,14 +40,14 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/dashboard',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/dashboard',
     pathMatch: 'full',
   }
 ];

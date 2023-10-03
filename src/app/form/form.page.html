@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>form</ion-title>
+    <ion-button (click)="swiperReady()">
+      Ready
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-img src="assets/step_1.svg"></ion-img>
+  <ion-button (click)="call()">
+    Call Api
+  </ion-button> -->
+  <swiper-container #swiper (slidechange)="swiperSlideChanged($event)" [pagination]="true">
+    <swiper-slide>Slide 1
+      <ion-button (click)="goNext()">Next</ion-button>
+    </swiper-slide>
+    <swiper-slide>Slide 2
+      <ion-button (click)="goPrev()">Previous</ion-button>
+      <ion-button (click)="goNext()">Next
+        </ion-button>
+        </swiper-slide>
+    <swiper-slide>Slide 3
+      <ion-button (click)="goPrev()">Previous</ion-button>
+    </swiper-slide>
+  </swiper-container>
+
+
+
+
+</ion-content>

@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import * as  Parse from 'parse';
 import { Swiper } from 'swiper'
+import { FilePicker, PickedFile } from '@capawesome/capacitor-file-picker';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-form',
@@ -23,7 +26,7 @@ export class FormPage implements OnInit {
   ionViewDidEnter() {
     console.log("a = ", this.swiperRef);
  }
-  constructor() {
+  constructor(private readonly domSanitizer: DomSanitizer,) {
     console.log(this.swiperRef?.nativeElement.swiper);
     console.log(this.swiperRef);
     Parse.initialize('4fJYYN0bBUsmOumrcXWZolpXm0OCBId8S0lKr45l', 'RRTqRi9mWSC3Udfu6RQglRK3MDx7N1hjSOQs0RPj');
@@ -77,8 +80,11 @@ export class FormPage implements OnInit {
       }
     ]
   }
-  ngOnInit() {
-    
+
+  public files: PickedFile[] = [];
+
+   ngOnInit() {
+    this.swiperReady()
   }
 
   async call() {
@@ -93,8 +99,8 @@ export class FormPage implements OnInit {
   }
 
 
-  swiperReady() {
-    this.swiper = this.swiperRef?.nativeElement.swiper;
+  async swiperReady() {
+    this.swiper = await this.swiperRef?.nativeElement.swiper;
     console.log("rready")
   }
 
@@ -111,5 +117,32 @@ export class FormPage implements OnInit {
   swiperSlideChanged(e: any) {
     console.log('changed: ', e);
   }
+
+
+
+
+  //imagePicker
+
+  async openImagePicker() {
+    const result = await FilePicker.pickImages({
+      multiple: true,
+      readData: true,
+    });
+    console.log(result);
+    this.files = result.files;
+  }
+
+  public convertPathToWebPath(path: string): SafeUrl {
+    const fileSrc = Capacitor.convertFileSrc(path);
+    return this.domSanitizer.bypassSecurityTrustUrl(fileSrc);
+  }
    
+
+  chunkedImages(arr: PickedFile[], chunkSize: number): PickedFile[][] {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      chunks.push(arr.slice(i, i + chunkSize));
+    }
+    return chunks;
+  }
 }

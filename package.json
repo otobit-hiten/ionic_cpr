@@ -33,6 +33,7 @@
     "@capawesome/capacitor-file-picker": "^5.1.1",
     "@ionic/angular": "^7.4.2",
     "@types/parse": "^3.0.5",
+    "capacitor-voice-recorder": "^5.0.0",
     "ionic-stepper": "^1.1.0",
     "ionicons": "^7.0.0",
     "parse": "^4.2.0",

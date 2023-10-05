@@ -1,26 +1,94 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>form</ion-title>
-    <ion-button (click)="swiperReady()">
-      Ready
-    </ion-button>
+    <ion-header>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/dashboard"></ion-back-button>
+        <ion-img src="assets/logo.png"></ion-img>
+      </ion-buttons>
+      <ion-button (click)="swiperReady()">
+        Ready
+      </ion-button>
+    </ion-header>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <!-- <ion-img src="assets/step_1.svg"></ion-img>
-  <ion-button (click)="call()">
+<ion-content>
+  <ion-img class="stepper" src="assets/step_1.svg"></ion-img>
+  <!-- <ion-button (click)="call()">
     Call Api
   </ion-button> -->
-  <swiper-container #swiper (slidechange)="swiperSlideChanged($event)" [pagination]="true">
-    <swiper-slide>Slide 1
-      <ion-button (click)="goNext()">Next</ion-button>
+  <swiper-container #swiper (slidechange)="swiperSlideChanged($event)" [allowTouchMove]="false">
+
+    <swiper-slide>
+
+      <ion-label class="stepperr_title" style="display: flex; justify-content: center;"> What Happened? </ion-label>
+
+
+      <div class="form_1">
+
+        <div class="address">
+          <ion-label class="label_text">Tell us about what happened</ion-label>
+          <ion-textarea class="textarea" fill="outline" placeholder="Tell us about what happened">
+          </ion-textarea>
+        </div>
+
+        <div class="record">
+          <ion-label class="label_text">Record Audio</ion-label>
+          <ion-item class="record_audio" lines="none">
+            <ion-icon src="assets/microphone.svg" slot="start"></ion-icon>
+            <ion-label> Record Audio </ion-label>
+          </ion-item>
+        </div>
+
+        <div class="upload_scene">
+          <ion-label class="label_text">Upload Scene Images</ion-label>
+
+
+          <ion-list class="border" lines="none">
+            <!-- <ng-container *ngFor="let file of files">
+              <ion-card>
+                <ion-card-content>
+                </ion-card-content>
+              </ion-card>
+            </ng-container> -->
+
+            <ion-grid>
+              <ion-col *ngFor="let file of files" size="3">
+                <div class="image_holder">
+                  <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
+                  <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
+                </div>
+              </ion-col>
+            </ion-grid>
+
+
+
+
+            <ion-item>
+              <ion-label class="ion-text-wrap">Pictures of the location of the vehicles immediately after the
+                accident. Pictures of the nearest street sign indicating street name and direction of the
+                photo.</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+            </ion-item>
+
+          </ion-list>
+
+        </div>
+
+        <ion-button class="next_button" expand="block" (click)="goNext()">Next</ion-button>
+
+
+
+      </div>
     </swiper-slide>
     <swiper-slide>Slide 2
       <ion-button (click)="goPrev()">Previous</ion-button>
       <ion-button (click)="goNext()">Next
-        </ion-button>
-        </swiper-slide>
+      </ion-button>
+    </swiper-slide>
     <swiper-slide>Slide 3
       <ion-button (click)="goPrev()">Previous</ion-button>
     </swiper-slide>

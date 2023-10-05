@@ -2,6 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+
+	<key>NSCameraUsageDescription</key>
+	<string>To Capture Image</string>
+
+	<key>UIFileSharingEnabled</key>
+	<string>To Capture Image</string>
+
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<string>To Capture Image</string>
+
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To Add Image</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To Store Image</string>
+
+	<key>NSMicroPhoneUsageDescription</key>
+	<string>To Record Audio</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

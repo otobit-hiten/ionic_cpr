@@ -7,6 +7,9 @@ import { Swiper } from 'swiper'
 import { FilePicker, PickedFile } from '@capawesome/capacitor-file-picker';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Capacitor } from '@capacitor/core';
+import { VoiceRecorder, RecordingData } from 'capacitor-voice-recorder';
+import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
+
 
 @Component({
   selector: 'app-form',
@@ -33,7 +36,6 @@ export class FormPage implements OnInit {
     (Parse as any).serverURL = "https://parseapi.back4app.com/";
 
   }
-  step :number[]=[1,2,3,4,5];
   steps = {
     email: "hitenchandora21@gmail.com",
     name: "",
@@ -82,9 +84,21 @@ export class FormPage implements OnInit {
   }
 
   public files: PickedFile[] = [];
+  recording: boolean = false;
+  displayTime ='';
+  time=0;
+  storedAudio: FileInfo[] = [];
+  public playback = false;
+  ref = new Audio();
+  selectedItem: any;
+  track:any;
+
 
    ngOnInit() {
     this.swiperReady()
+    VoiceRecorder.requestAudioRecordingPermission()
+    this.loadAudio();
+
   }
 
   async call() {
@@ -138,11 +152,110 @@ export class FormPage implements OnInit {
   }
    
 
-  chunkedImages(arr: PickedFile[], chunkSize: number): PickedFile[][] {
-    const chunks = [];
-    for (let i = 0; i < arr.length; i += chunkSize) {
-      chunks.push(arr.slice(i, i + chunkSize));
+  //voice Record
+  loadAudio(){
+    Filesystem.readdir({
+      path: '',
+      directory: Directory.Data
+    }).then(result => {
+        console.log(result);
+        this.storedAudio = result.files
+    });
+
+  }
+  startOrStopRecording(){
+    if(!this.recording){
+      this.startRecording();
+    }else{
+      this.stopRecording();
     }
-    return chunks;
+  }
+
+  startRecording(){
+    VoiceRecorder.requestAudioRecordingPermission();
+    if(this.recording){
+      return
+    }
+    this.recording = true;
+    VoiceRecorder.startRecording()
+    this.startTimer()
+
+  }
+  stopRecording(){
+    if(!this.recording){
+      return
+    }
+    VoiceRecorder.stopRecording().then(async (res: RecordingData) => {
+        const fileToSave = res.value.recordDataBase64
+        console.log(fileToSave);
+        const fileName = new Date().getTime() + '.wav';
+        await Filesystem.writeFile({
+          path: fileName,
+          directory:Directory.Data,
+          data:fileToSave
+        });
+        this.loadAudio();
+      
+    })
+    this.recording = false;
+  }
+
+  startTimer(){
+    if(!this.recording){
+      this.displayTime='';
+      this.time=0;
+      return;
+    }
+    this.time+=1;
+    const min = Math.floor(this.time/60);
+    const sec = (this.time % 60).toString().padStart(2,'0');
+    this.displayTime = `${min}:${sec}`
+    setTimeout(() => {
+      this.startTimer()
+    },1000)
+  }
+
+  async play(fileName:any){
+    const audioFile = await Filesystem.readFile({
+      path: fileName,
+      directory: Directory.Data
+    });
+
+    if(this.track != this.selectedItem){
+      this.playback = false;
+    }else{
+      this.playback = true;
+    }
+
+    const base64Sound = audioFile.data
+    if(!this.playback){
+      this.ref.src = `data:audio/aac;base64,${base64Sound}`
+      this.ref.play();
+      this.track = this.selectedItem
+    }
+
+    if(this.playback){
+      this.ref.pause()
+      this.playback = false
+      this.selectedItem= null
+      this.track = this.selectedItem
+    }
+
+    let play = this;
+    this.ref.onplaying = function(eve) {
+        console.log(eve)
+        play.playback = true;
+    }
+  
+   this.ref.onended = function (e) {
+      console.log(e);
+      play.playback= false;
+      play.selectedItem= null;
+      play.track = play.selectedItem
+    }
+  }
+
+  deleteAudio(){
+    console.log("deleteAudio");
   }
 }

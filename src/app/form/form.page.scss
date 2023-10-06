@@ -35,7 +35,7 @@ ion-header {
 
 .form_1 {
   margin-inline: 20px;
-  .address {
+  .what_happen {
     margin-top: 20px;
     margin-bottom: 20px;
     .textarea {
@@ -81,9 +81,204 @@ ion-header {
         width: min-content;
       }
     }
-    .next_button {
-      margin-top: 50px;
-      margin-bottom: 100px;
+
+    .add_image {
+      font-size: medium;
+    }
+  }
+  .next_button {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
+
+.form_2 {
+  margin-inline: 20px;
+
+  .address {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .location {
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 0.5px solid #828282;
+    }
+  }
+  .upload_location {
+    .border {
+      border-radius: 5px;
+      border: 0.5px solid #828282;
+      border-style: dashed;
+      ion-button {
+        --background: rgba(254, 27, 20, 0.07);
+        --border-radius: 20px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --padding-start: 20px;
+        --padding-end: 20px;
+        --color: rgba(254, 82, 77, 1);
+      }
+      .image_holder {
+        position: relative;
+        display: inline-block;
+        .imag_prev {
+          padding: 5px;
+          border-radius: 20px;
+          width: 100px;
+          height: 100px;
+        }
+        .imag_icon {
+          zoom: 1.5;
+          position: absolute;
+          top: calc(10% - 10px);
+          right: calc(10% - 10px);
+        }
+      }
+      .ion-text-wrap {
+        color: #828282;
+        width: min-content;
+      }
+    }
+    .add_image {
+      font-size: medium;
+    }
+  }
+  .next_button {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
+
+.form_3 {
+  margin-inline: 20px;
+
+  // overflow-y: auto;
+  // max-height: 80vh;
+  // margin-inline: 20px;
+}
+
+.form_4 {
+  margin-inline: 20px;
+
+  .upload_img {
+    .border {
+      border-radius: 5px;
+      border: 0.5px solid #828282;
+      border-style: dashed;
+      ion-button {
+        --background: rgba(254, 27, 20, 0.07);
+        --border-radius: 20px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --padding-start: 20px;
+        --padding-end: 20px;
+        --color: rgba(254, 82, 77, 1);
+      }
+      .image_holder {
+        position: relative;
+        display: inline-block;
+        .imag_prev {
+          padding: 5px;
+          border-radius: 20px;
+          width: 100px;
+          height: 100px;
+        }
+        .imag_icon {
+          zoom: 1.5;
+          position: absolute;
+          top: calc(10% - 10px);
+          right: calc(10% - 10px);
+        }
+      }
+      .ion-text-wrap {
+        color: #828282;
+        width: min-content;
+      }
+    }
+    .add_image {
+      font-size: medium;
+    }
+  }
+}
+
+.form_5 {
+  margin-inline: 20px;
+  .upload_police_report {
+    .border {
+      border-radius: 5px;
+      border: 0.5px solid #828282;
+      border-style: dashed;
+      ion-button {
+        --background: rgba(254, 27, 20, 0.07);
+        --border-radius: 20px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --padding-start: 20px;
+        --padding-end: 20px;
+        --color: rgba(254, 82, 77, 1);
+      }
+      .image_holder {
+        position: relative;
+        display: inline-block;
+        .imag_prev {
+          padding: 5px;
+          border-radius: 20px;
+          width: 100px;
+          height: 100px;
+        }
+        .imag_icon {
+          zoom: 1.5;
+          position: absolute;
+          top: calc(10% - 10px);
+          right: calc(10% - 10px);
+        }
+      }
+      .ion-text-wrap {
+        color: #828282;
+        width: min-content;
+      }
+    }
+    .add_image {
+      font-size: medium;
+    }
+  }
+  .upload_witness_id{
+    .border {
+      border-radius: 5px;
+      border: 0.5px solid #828282;
+      border-style: dashed;
+      ion-button {
+        --background: rgba(254, 27, 20, 0.07);
+        --border-radius: 20px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --padding-start: 20px;
+        --padding-end: 20px;
+        --color: rgba(254, 82, 77, 1);
+      }
+      .image_holder {
+        position: relative;
+        display: inline-block;
+        .imag_prev {
+          padding: 5px;
+          border-radius: 20px;
+          width: 100px;
+          height: 100px;
+        }
+        .imag_icon {
+          zoom: 1.5;
+          position: absolute;
+          top: calc(10% - 10px);
+          right: calc(10% - 10px);
+        }
+      }
+      .ion-text-wrap {
+        color: #828282;
+        width: min-content;
+      }
+    }
+    .add_image {
+      font-size: medium;
     }
   }
 }

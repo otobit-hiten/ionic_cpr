@@ -1,23 +1,28 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-img src="assets/logo.png"></ion-img>
+   
+    <ion-list>
+      <ion-item>
+        <ion-img src="assets/logo.png"></ion-img>
+
+
+        <ion-select placeholder="Language" (ionChange)="ionChange($event)">
+          <ion-select-option  *ngFor="let lang of languageList" [value]="lang.code">{{lang.title}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-infinite-scroll-content>
     <ion-card class="text">
-      <ion-card-title>
-        We are sorry for your accident and we are here to provide immediate
-        assistance.
+      <ion-card-title translate>
+        dashboard.Title
       </ion-card-title>
       <p></p>
-      <ion-card-subtitle>
-        Our qualified claim intake staff is available 24/7/365 to take your loss
-        and begin the process towards resolution. Our goal is to get your life
-        back to normal as quickly as possible. Please use one of the options
-        below to provide us with as much information as possible so we can
-        quickly and accurately manage your claim.
+      <ion-card-subtitle translate>
+        dashboard.Sub_Title
       </ion-card-subtitle>
     </ion-card>
 

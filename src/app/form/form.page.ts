@@ -28,7 +28,7 @@ export class FormPage implements OnInit {
 
   ionViewDidEnter() {
     console.log("a = ", this.swiperRef);
- }
+  }
   constructor(private readonly domSanitizer: DomSanitizer,) {
     console.log(this.swiperRef?.nativeElement.swiper);
     console.log(this.swiperRef);
@@ -85,19 +85,23 @@ export class FormPage implements OnInit {
 
   public files: PickedFile[] = [];
   recording: boolean = false;
-  displayTime ='';
-  time=0;
+  displayTime = '';
+  time = 0;
   storedAudio: FileInfo[] = [];
   public playback = false;
   ref = new Audio();
   selectedItem: any;
-  track:any;
+  track: any;
+  witnessObj = { name: '', phone: '', email: '', image: [] }
+  witnessArray : any = []
 
 
-   ngOnInit() {
+  ngOnInit() {
     this.swiperReady()
     VoiceRecorder.requestAudioRecordingPermission()
     this.loadAudio();
+    this.witnessArray.push(this.witnessObj)
+    console.log(this.witnessArray.length)
 
   }
 
@@ -105,7 +109,7 @@ export class FormPage implements OnInit {
     try {
       console.log("Calling...")
       var Parse = require('parse');
-      const query = await Parse.Cloud.run('result',this.steps)
+      const query = await Parse.Cloud.run('result', this.steps)
       console.log(query)
     } catch (error) {
       console.log(error);
@@ -150,30 +154,30 @@ export class FormPage implements OnInit {
     const fileSrc = Capacitor.convertFileSrc(path);
     return this.domSanitizer.bypassSecurityTrustUrl(fileSrc);
   }
-   
+
 
   //voice Record
-  loadAudio(){
+  loadAudio() {
     Filesystem.readdir({
       path: '',
       directory: Directory.Data
     }).then(result => {
-        console.log(result);
-        this.storedAudio = result.files
+      console.log(result);
+      this.storedAudio = result.files
     });
 
   }
-  startOrStopRecording(){
-    if(!this.recording){
+  startOrStopRecording() {
+    if (!this.recording) {
       this.startRecording();
-    }else{
+    } else {
       this.stopRecording();
     }
   }
 
-  startRecording(){
+  startRecording() {
     VoiceRecorder.requestAudioRecordingPermission();
-    if(this.recording){
+    if (this.recording) {
       return
     }
     this.recording = true;
@@ -181,81 +185,91 @@ export class FormPage implements OnInit {
     this.startTimer()
 
   }
-  stopRecording(){
-    if(!this.recording){
+  stopRecording() {
+    if (!this.recording) {
       return
     }
     VoiceRecorder.stopRecording().then(async (res: RecordingData) => {
-        const fileToSave = res.value.recordDataBase64
-        console.log(fileToSave);
-        const fileName = new Date().getTime() + '.wav';
-        await Filesystem.writeFile({
-          path: fileName,
-          directory:Directory.Data,
-          data:fileToSave
-        });
-        this.loadAudio();
-      
+      const fileToSave = res.value.recordDataBase64
+      console.log(fileToSave);
+      const fileName = new Date().getTime() + '.wav';
+      await Filesystem.writeFile({
+        path: fileName,
+        directory: Directory.Data,
+        data: fileToSave
+      });
+      this.loadAudio();
+
     })
     this.recording = false;
   }
 
-  startTimer(){
-    if(!this.recording){
-      this.displayTime='';
-      this.time=0;
+  startTimer() {
+    if (!this.recording) {
+      this.displayTime = '';
+      this.time = 0;
       return;
     }
-    this.time+=1;
-    const min = Math.floor(this.time/60);
-    const sec = (this.time % 60).toString().padStart(2,'0');
+    this.time += 1;
+    const min = Math.floor(this.time / 60);
+    const sec = (this.time % 60).toString().padStart(2, '0');
     this.displayTime = `${min}:${sec}`
     setTimeout(() => {
       this.startTimer()
-    },1000)
+    }, 1000)
   }
 
-  async play(fileName:any){
+  async play(fileName: any) {
     const audioFile = await Filesystem.readFile({
       path: fileName,
       directory: Directory.Data
     });
 
-    if(this.track != this.selectedItem){
+    if (this.track != this.selectedItem) {
       this.playback = false;
-    }else{
+    } else {
       this.playback = true;
     }
 
     const base64Sound = audioFile.data
-    if(!this.playback){
+    if (!this.playback) {
       this.ref.src = `data:audio/aac;base64,${base64Sound}`
       this.ref.play();
       this.track = this.selectedItem
     }
 
-    if(this.playback){
+    if (this.playback) {
       this.ref.pause()
       this.playback = false
-      this.selectedItem= null
+      this.selectedItem = null
       this.track = this.selectedItem
     }
 
     let play = this;
-    this.ref.onplaying = function(eve) {
-        console.log(eve)
-        play.playback = true;
+    this.ref.onplaying = function (eve) {
+      console.log(eve)
+      play.playback = true;
     }
-  
-   this.ref.onended = function (e) {
+
+    this.ref.onended = function (e) {
       console.log(e);
-      play.playback= false;
-      play.selectedItem= null;
+      play.playback = false;
+      play.selectedItem = null;
       play.track = play.selectedItem
     }
   }
 
-  deleteAudio(){
+  deleteAudio() {
     console.log("deleteAudio");
+  }
+
+  addWitness(){
+    console.log(this.witnessArray)
+    this.witnessArray.push(this.witnessObj);
+  }
+  deleteWitness(i:number) {
+    console.log(i)
+    this.witnessArray.splice(i,i);
+    console.log(this.witnessArray)
   }
 }

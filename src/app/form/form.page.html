@@ -5,9 +5,6 @@
         <ion-back-button defaultHref="/tabs/dashboard"></ion-back-button>
         <ion-img src="assets/logo.png"></ion-img>
       </ion-buttons>
-      <ion-button (click)="swiperReady()">
-        Readyy
-      </ion-button>
     </ion-header>
   </ion-toolbar>
 </ion-header>
@@ -77,7 +74,7 @@
 
         </div>
 
-        <ion-button class="next_button" expand="block" (click)="goNext()">Next</ion-button>
+        <ion-button class="next_button" expand="block" (click)="swiperReady()">Next</ion-button>
 
       </div>
 
@@ -336,8 +333,6 @@
 
         <ion-list *ngFor="let data of witnessArray; let i = index">
           
-         
-
           <div class="witness_name">
             <ion-label class="label_text">Witness Name</ion-label>
             <ion-input fill="outline" placeholder="Witness Name">
@@ -383,14 +378,10 @@
 
         </ion-list>
 
-
         <ion-button (click)="addWitness()">
           Add Witness
         </ion-button>
-
-
-
-
+        
       </div>
       <ion-row>
         <ion-col>

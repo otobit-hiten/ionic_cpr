@@ -120,6 +120,7 @@ export class FormPage implements OnInit {
   async swiperReady() {
     this.swiper = await this.swiperRef?.nativeElement.swiper;
     console.log("rready")
+    this.goNext();
   }
 
   goNext() {

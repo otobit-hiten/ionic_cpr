@@ -1,106 +1,182 @@
-
-ion-header {
-  ion-toolbar{
-    ion-img{
-      
+.header {
+  ion-list {
+    background: #e5ebf1;
+    ion-item {
+      --background: #e5ebf1;
     }
   }
 }
-ion-text{
-  text-align: start;
-    font-size: medium;
-    font-family: "poppins";
-    font-style: normal;
-    font-weight: normal;
-}
 
-ion-card.text {
-  margin-inline: 20px;
-  margin-top: 15px;
-  border-radius: 5%;
-  background-color: #e7f1fc;
-  padding: 5%;
-  ion-card-title {
-    text-align: start;
-    font-size: medium;
-    font-family: "poppins";
-    font-style: normal;
-    font-weight: normal;
+
+.new-background-color ion-list {
+  background: #e5ebf1;
+  ion-item {
+    --background: #e5ebf1;
   }
-  ion-card-subtitle {
-    text-align: start;
+  ion-item.title {
+    font-family: "poppins";
+    font-size: large;
+    font-weight: bold;
+  }
+  ion-item.sub_title {
+    font-family: "poppins";
     font-size: small;
+    font-weight: lighter;
+  }
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.all_button {
+  margin-inline: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  ion-button.red {
+
+    --border-radius: 10px;
     font-family: "poppins";
-    font-style: normal;
-    font-weight: normal;
+    font-size: medium;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-top: 10px;
+    .ion-text-left {
+      padding: 10px;
+      margin-right: auto;
+    }
   }
-}
-ion-grid {
-  ion-row {
-    ion-col {
-      text-align: center;
-      ion-card.orange{
-        height: 120px;
-        color: white;
-        background-color: #fe524d;
-        border-radius: 5%;
-        justify-content: center;
-        align-items: center; 
-        img{
-          padding-top: 20px;
-        }
-        ion-card-header{
-          ion-card-title{
-            color: white;
-            font-size: small;
-            font-family: "poppins";
-            font-style: normal;
-            font-weight: bold;
-          }
-        }
-      }
 
-      ion-card.blue{
-        height: 120px;
-        color: white;
-        background-color: #16629c;
-        border-radius: 5%;
-        justify-content: center;
-        align-items: center; 
-        img{
-          padding-top: 20px;
-        }
-        ion-card-header{
-          ion-card-title{
-            color: white;
-            font-size: small;
-            font-family: "poppins";
-            font-style: normal;
-            font-weight: bold;
-          }
-        }
-      }
+  ion-button.blue {
+    --border-radius: 10px;
+    margin-top: 10px;
+    --background: #305399;
+    font-family: "poppins";
+    font-weight: 500;
+    font-size: medium;
+    text-transform: capitalize;
+    .ion-text-left {
+      padding: 10px;
+      margin-right: auto;
     }
   }
 }
 
-
-//modal style
-ion-modal{
-  --height:auto;
-  --border-radius: 20px 20px 0px 0px;
-  .sheet{
-    margin-top: 25px;
-    padding:5%;
-    width: 100%;
-    height: max-content;
-    ion-button{
-      --border-radius:15px;
-      --border-width:0.5px
-    }
-  }
+.text {
+  margin-top: 10px;
+  color: black;
+  font-size: medium;
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.points {
+  margin-top: 10px;
+  color: black;
+  font-size: small;
+  font-family: "poppins";
 }
 
-li{
-  font-size: large;
-}
+// .logo{
+//   margin-top: 15px;
+//   width: 200px;
+//   margin-inline:10px;
+// }
+// ion-text{
+//   text-align: start;
+//     font-size: medium;
+//     font-family: "poppins";
+//     font-style: normal;
+//     font-weight: normal;
+// }
+
+// ion-card.text {
+//   margin-inline: 20px;
+//   margin-top: 15px;
+//   border-radius: 5%;
+//   background-color: #e7f1fc;
+//   padding: 5%;
+//   ion-card-title {
+//     text-align: start;
+//     font-size: medium;
+//     font-family: "poppins";
+//     font-style: normal;
+//     font-weight: normal;
+//   }
+//   ion-card-subtitle {
+//     text-align: start;
+//     font-size: small;
+//     font-family: "poppins";
+//     font-style: normal;
+//     font-weight: normal;
+//   }
+// }
+// ion-grid {
+//   ion-row {
+//     ion-col {
+//       text-align: center;
+//       ion-card.orange{
+//         height: 120px;
+//         color: white;
+//         background-color: #fe524d;
+//         border-radius: 5%;
+//         justify-content: center;
+//         align-items: center;
+//         img{
+//           padding-top: 20px;
+//         }
+//         ion-card-header{
+//           ion-card-title{
+//             color: white;
+//             font-size: small;
+//             font-family: "poppins";
+//             font-style: normal;
+//             font-weight: bold;
+//           }
+//         }
+//       }
+
+//       ion-card.blue{
+//         height: 120px;
+//         color: white;
+//         background-color: #16629c;
+//         border-radius: 5%;
+//         justify-content: center;
+//         align-items: center;
+//         img{
+//           padding-top: 20px;
+//         }
+//         ion-card-header{
+//           ion-card-title{
+//             color: white;
+//             font-size: small;
+//             font-family: "poppins";
+//             font-style: normal;
+//             font-weight: bold;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// //modal style
+// ion-modal{
+//   --height:auto;
+//   --border-radius: 20px 20px 0px 0px;
+//   .sheet{
+//     margin-top: 25px;
+//     padding:5%;
+//     width: 100%;
+//     height: max-content;
+//     ion-button{
+//       --border-radius:15px;
+//       --border-width:0.5px
+//     }
+//   }
+// }
+
+// li{
+//   font-size: large;
+// }

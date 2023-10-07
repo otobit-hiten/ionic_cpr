@@ -1,30 +1,80 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-   
+  <ion-toolbar class="header">
     <ion-list>
-      <ion-item>
-        <ion-img src="assets/logo.png"></ion-img>
-
-
-        <ion-select placeholder="Language" (ionChange)="ionChange($event)">
-          <ion-select-option  *ngFor="let lang of languageList" [value]="lang.code">{{lang.title}}</ion-select-option>
+      <ion-item lines="none">
+        <ion-img class="logo" src="assets/cpr_logo.png"></ion-img>
+     </ion-item>
+      <ion-item style="max-width: max-content !important;" lines="none">
+        <ion-select placeholder="Language" (ionChange)="ionChange($event)" fill="outline" shape="round">
+          <ion-select-option *ngFor="let lang of languageList" [value]="lang.code">{{lang.title}}</ion-select-option>
         </ion-select>
       </ion-item>
-    </ion-list>
+
+      </ion-list>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-infinite-scroll-content>
-    <ion-card class="text">
-      <ion-card-title translate>
+  <div class="new-background-color">
+    <ion-list>
+
+
+      <ion-item class="title" lines="none" translate>
         dashboard.Title
-      </ion-card-title>
-      <p></p>
-      <ion-card-subtitle translate>
+      </ion-item>
+      <ion-item lines="none" translate class="Sub_title">
         dashboard.Sub_Title
-      </ion-card-subtitle>
-    </ion-card>
+      </ion-item>
+
+    </ion-list>
+  </div>
+  <div class="all_button">
+
+    <ion-button expand="block" class="red" routerDirection="forward" [routerLink]="['/form']">
+      <span class="ion-icon-left">
+        <ion-icon slot="start" class="icon" src="assets/submit_claim.svg"></ion-icon>
+        <ion-icon class="icon" src="assets/line.svg"></ion-icon>
+      </span>
+      <span class="ion-text-left">
+        <ion-text class="inner"> Submit a Claim Online</ion-text>
+      </span>
+    </ion-button>
+
+
+    <ion-button expand="block" class="blue" routerDirection="forward" [routerLink]="['/tabs/dashboard/contact-us']">
+      <span class="ion-icon-left">
+        <ion-icon class="icon" src="assets/contact-us.svg"></ion-icon>
+        <ion-icon class="icon" src="assets/line.svg"></ion-icon></span>
+      <span class="ion-text-left">
+        <ion-text class="inner">Contact us for claims support</ion-text></span>
+    </ion-button>
+
+    <ion-button expand="block" class="blue">
+      <span class="ion-icon-left">
+        <ion-icon class="icon" src="assets/download.svg"></ion-icon>
+        <ion-icon class="icon" src="assets/line.svg"></ion-icon></span>
+      <span class="ion-text-left">
+        <ion-text class="inner">Download a claim form</ion-text></span>
+    </ion-button>
+
+  </div>
+
+  <ion-card>
+    <ion-label class="text">Important Tips During an Accident</ion-label>
+    <ol class="points">
+      <li> Do not sign any documents unless it's for the police</li>
+      <li> Record voice notes including damages, injuries, witness and what happened</li>
+      <li> Record name of other drivers</li>
+      <li> Don't tell anyone the accident was your fault even if you think it was</li>
+      <li> Be careful to state on the facts, not what you think happened.</li>
+    </ol>
+  </ion-card>
+
+  <!-- 
+  <ion-infinite-scroll-content>
+
+  
+     
 
     <ion-grid>
       <ion-row>
@@ -70,5 +120,5 @@
       </ion-row>
     </ion-grid>
 
-  </ion-infinite-scroll-content>
+  </ion-infinite-scroll-content> -->
 </ion-content>

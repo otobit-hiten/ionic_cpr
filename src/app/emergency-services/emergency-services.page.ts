@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-resources',
-  templateUrl: './resources.page.html',
-  styleUrls: ['./resources.page.scss'],
+  selector: 'app-emergency-services',
+  templateUrl: './emergency-services.page.html',
+  styleUrls: ['./emergency-services.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,TranslateModule,RouterModule]
+  imports: [IonicModule, CommonModule, FormsModule,TranslateModule]
 })
-export class ResourcesPage implements OnInit {
+export class EmergencyServicesPage implements OnInit {
+
   languageList = [
     {
        code: "en", title: "English", text: "English"
@@ -33,6 +33,7 @@ export class ResourcesPage implements OnInit {
   compareWithFn(o1: any, o2: any) {
     return o1 === o2;
   };
+
 
   ngOnInit() {
   }

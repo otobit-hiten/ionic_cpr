@@ -18,31 +18,41 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        children:[
+        children: [
           {
-            path:'',
+            path: '',
             loadComponent: () =>
-            import('../dashboard/dashboard.page').then((m) => m.Dashboard),
+              import('../dashboard/dashboard.page').then((m) => m.Dashboard),
           },
           {
             path: 'contact-us',
-            loadComponent: () => import('../contact-us/contact-us.page').then( m => m.ContactUsPage)
+            loadComponent: () => import('../contact-us/contact-us.page').then(m => m.ContactUsPage)
           },
           {
             path: 'important-tips',
-            loadComponent: () => import('../important-tips/important-tips.page').then( m => m.ImportantTipsPage)
+            loadComponent: () => import('../important-tips/important-tips.page').then(m => m.ImportantTipsPage)
           },
-        ]   
+        ]
       },
       {
         path: 'resources',
-        loadComponent: () => import('../resources/resources.page').then( m => m.ResourcesPage)
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/dashboard',
-        pathMatch: 'full',
-      },
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('../resources/resources.page').then(m => m.ResourcesPage)
+          },
+          {
+            path: 'emergency-services',
+            loadComponent: () => import('../emergency-services/emergency-services.page').then(m => m.EmergencyServicesPage)
+          },
+          {
+            path: 'tabs/resources',
+            redirectTo: '/tabs/resources',
+            pathMatch: 'full'
+
+          }
+        ]
+      }
     ],
   },
   {

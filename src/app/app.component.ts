@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-
 import { register } from 'swiper/element/bundle';
 register();
 

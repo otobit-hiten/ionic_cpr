@@ -9,6 +9,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Capacitor } from '@capacitor/core';
 import { VoiceRecorder, RecordingData } from 'capacitor-voice-recorder';
 import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
   styleUrls: ['./form.page.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,TranslateModule]
 })
 export class FormPage implements OnInit {
 
@@ -29,13 +30,32 @@ export class FormPage implements OnInit {
   ionViewDidEnter() {
     console.log("a = ", this.swiperRef);
   }
-  constructor(private readonly domSanitizer: DomSanitizer,) {
+  constructor(private readonly domSanitizer: DomSanitizer,private translateService :TranslateService) {
     console.log(this.swiperRef?.nativeElement.swiper);
     console.log(this.swiperRef);
     Parse.initialize('4fJYYN0bBUsmOumrcXWZolpXm0OCBId8S0lKr45l', 'RRTqRi9mWSC3Udfu6RQglRK3MDx7N1hjSOQs0RPj');
     (Parse as any).serverURL = "https://parseapi.back4app.com/";
 
   }
+  languageList = [
+    {
+       code: "en", title: "English", text: "English"
+    },
+    {
+      code: "es", title: "Spanish", text: "Española"
+    }
+  ]
+
+  ionChange(event:any) {
+    console.log(event.detail.value)
+    this.translateService.use(event.target.value ? event.target.value : "en")
+  }
+  compareWith : any ;
+  MyDefaultValue: String ="en";  //set default language here  {en= English ; es = spanish}
+
+  compareWithFn(o1: any, o2: any) {
+    return o1 === o2;
+  };
   steps = {
     email: "hitenchandora21@gmail.com",
     name: "",

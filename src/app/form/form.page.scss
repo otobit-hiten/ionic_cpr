@@ -1,14 +1,4 @@
-// swiper-container {
-//   width: 100%;
-//   height: 100%;
-// }
 
-// swiper-slide {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-// }
 
 .stepper {
   justify-content: center;
@@ -17,24 +7,53 @@
   margin-inline: 20px;
 }
 
-ion-header {
-  ion-toolbar {
-    ion-img {
-      padding-left: 10%;
-      padding-right: 20%;
-      align-items: center;
-    }
-  }
+.header {
+  display: flex;
+  orientation: vertical;
+  --background: #ffffff;
 }
+.lang-sel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.grey-line{
+  background:rgb(196, 196, 196,0.3) ;
+  height:.1%;
+  width:80%;
+  align-self: center;
+  margin-left: 10%;
+}
+
 
 .record_audio {
   color: #828282;
   border-radius: 5px;
   border: 0.5px solid #828282;
 }
+.stepperr_title {
+  color: #201e1e;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 135%; /* 27px */
+  font-family: Poppins;
+}
+.black-line{
+  --ion-background-color-rgb:rgba(7, 7, 7, 0.7) !important;
+  height:30% !important;
+  width:80%;
+  align-self: center;
+  margin-top: 10%;
+
+}
+.label_text{
+  width: 80% !important;
+}
 
 .form_1 {
   margin-inline: 20px;
+
   .what_happen {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -151,10 +170,6 @@ ion-header {
 
 .form_3 {
   margin-inline: 20px;
-
-  // overflow-y: auto;
-  // max-height: 80vh;
-  // margin-inline: 20px;
 }
 
 .form_4 {
@@ -242,7 +257,7 @@ ion-header {
       font-size: medium;
     }
   }
-  .upload_witness_id{
+  .upload_witness_id {
     .border {
       border-radius: 5px;
       border: 0.5px solid #828282;

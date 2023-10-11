@@ -1,22 +1,31 @@
-ion-header {
-    ion-toolbar{
-      ion-img{
-        margin-right: 20%;
-      }
-    }
-  }
-  .title{
-    padding: 3%;
-    text-align: center;
-    font-weight: bold;
-    font-size: x-large;
- }
+.header {
+  display: flex;
+  orientation: vertical;
+  --background: #ffffff;
+}
+.lang-sel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.title {
+  padding: 3.5%;
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+}
 
- .text{
-    padding: 3%;
-    text-align: left;
- }
+.text {
+  padding: 3%;
+  text-align: left;
+}
 
-ion-img.map{
-    padding: 3%;
- }
+ion-img.map {
+  padding: 3%;
+}
+.grey-line{
+  background:rgb(196, 196, 196,.3) !important;
+  height:.1%;
+  width:80%;
+  align-self: center;
+}

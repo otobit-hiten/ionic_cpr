@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  translateServiceHere: TranslateService;
 
-  constructor() { }
+  constructor( translateService :TranslateService) { this.translateServiceHere=translateService}
 
   async create(key: string,value:string){
     await Preferences.set({key,value});
@@ -23,5 +25,9 @@ export class UserService {
 
   async clear(){
     Preferences.clear();
+  }
+
+  async getTranslationService(){
+    return (await this.translateServiceHere);
   }
 }

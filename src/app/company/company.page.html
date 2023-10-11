@@ -1,8 +1,31 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-img src="assets/logo.png"></ion-img>
+  <ion-toolbar class="header">
+    <ion-row class="ion-justify-content-between" >
+      <ion-col size="7.5" class="logo"
+        ><img class="logo" src="assets/cpr_logo.png"
+      /></ion-col>
+      <ion-col  size="3" class="lang-sel"
+        ><ion-select
+          class="holder"
+          [compareWith]="compareWith"
+          value="{{MyDefaultValue}}"
+          placeholder="Language"
+          (ionChange)="ionChange($event)"
+          fill="outline"
+          shape="round"
+          interface="popover"
+        >
+          <ion-select-option
+            *ngFor="let lang of languageList"
+            [value]="lang.code"
+            >{{lang.title}}</ion-select-option
+          >
+        </ion-select>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
+<div class="grey-line"></div>
 
 <ion-content>
   <div class="title">

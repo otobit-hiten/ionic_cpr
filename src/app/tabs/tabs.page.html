@@ -1,24 +1,34 @@
 <ion-tabs #tab (ionTabsDidChange)="currentTab($event)">
   <ion-tab-bar>
 
-    <ion-tab-button tab="dashboard" [ngClass]="{selected:selectedTab === 'dashboard'}">
-      <ion-icon src="assets/home.svg"></ion-icon>
-      <ion-label *ngIf="selectedTab ==='dashboard'" >Home</ion-label>
+    <ion-tab-button tab="profile" [ngClass]="{selected:selectedTab === 'profile'}">
+      <ion-icon *ngIf="selectedTab ==='profile'" src="assets/user.svg"></ion-icon>
+      <ion-icon  *ngIf="selectedTab !=='profile'" src="assets/user_dark.svg"></ion-icon>
+      <ion-label *ngIf="selectedTab ==='profile'" class="color-red">User</ion-label>
+      <ion-label *ngIf="selectedTab !=='profile'" class="color-grey" >User</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="profile" [ngClass]="{selected:selectedTab === 'profile'}">
-      <ion-icon src="assets/user.svg"></ion-icon>
-      <ion-label *ngIf="selectedTab ==='profile'">Profile</ion-label>
+    <ion-tab-button tab="dashboard" [ngClass]="{selected:selectedTab === 'dashboard'}">
+      <ion-icon *ngIf="selectedTab ==='dashboard'" src="assets/home.svg"></ion-icon>
+      <ion-icon  *ngIf="selectedTab !=='dashboard'" src="assets/home_dark.svg"></ion-icon>
+      <ion-label *ngIf="selectedTab ==='dashboard'" class="color-red">Home</ion-label>
+      <ion-label *ngIf="selectedTab !=='dashboard'" class="color-grey" >Home</ion-label>
     </ion-tab-button>
+
+
 
     <ion-tab-button tab="resources" [ngClass]="{selected:selectedTab === 'resources'}">
-      <ion-icon src="assets/resources.svg"></ion-icon>
-      <ion-label *ngIf="selectedTab ==='resources'">Resources</ion-label>
+      <ion-icon *ngIf="selectedTab ==='resources'" src="assets/resources.svg"></ion-icon>
+      <ion-icon  *ngIf="selectedTab !=='resources'" src="assets/resources_dark.svg"></ion-icon>
+      <ion-label *ngIf="selectedTab ==='resources'" class="color-red">Resources</ion-label>
+      <ion-label *ngIf="selectedTab !=='resources'" class="color-grey" >Resources</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="company" [ngClass]="{selected:selectedTab === 'company'}">
-      <ion-icon src="assets/company.svg"></ion-icon>
-      <ion-label *ngIf="selectedTab ==='company'">Company</ion-label>
+      <ion-icon *ngIf="selectedTab ==='company'" src="assets/company.svg"></ion-icon>
+      <ion-icon  *ngIf="selectedTab !=='company'" src="assets/company_dark.svg"></ion-icon>
+      <ion-label *ngIf="selectedTab ==='company'" class="color-red">Company</ion-label>
+      <ion-label *ngIf="selectedTab !=='company'" class="color-grey" >Company</ion-label>
     </ion-tab-button>
 
   </ion-tab-bar>

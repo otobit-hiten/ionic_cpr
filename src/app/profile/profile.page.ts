@@ -19,14 +19,39 @@ export class ProfilePage implements OnInit {
   public email: string = "";
   public policyNo: string = "";
   public imageData = { name: '', base64: ''};
-  isEdit: boolean = true;
+  public isEdit: boolean = false;
+  public dataExists : boolean=false;
   constructor(private userService: UserService) { }
+
+  languageList = [
+    {
+       code: "en", title: "English", text: "English"
+    },
+    {
+      code: "es", title: "Spanish", text: "Española"
+    }
+  ]
+
+  ionChange(event:any) {
+    console.log(event.detail.value)
+    this.userService.getTranslationService().then((data:any)=>{
+      data.use(event.target.value ? event.target.value : "en")
+    })
+  }
+  compareWith : any ;
+  MyDefaultValue: String ="en";  //set default language here  {en= English ; es = spanish}
+
+  compareWithFn(o1: any, o2: any) {
+    return o1 === o2;
+  };
+
 
   ngOnInit() {
     this.get()
   }
 
   set() {
+    this.isEdit=false;
     let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo, image: this.imageData }
     this.userService.create("user", JSON.stringify(user));
     // this.userService.create("user","da÷ta");
@@ -37,8 +62,9 @@ export class ProfilePage implements OnInit {
     }
     await this.userService.get("user").then((data: any) => {
       if (data.value) {
+        this.dataExists=true;
         let userData = JSON.parse(data.value);
-        this.user = userData; 
+        this.user = userData;
         this.name = this.user.name;
         this.phone = this.user.phone;
         this.email = this.user.email;
@@ -52,7 +78,8 @@ export class ProfilePage implements OnInit {
   }
 
   update() {
-
+    console.log(this.isEdit)
+    this.isEdit=true;
   }
 
   clear() {
@@ -70,7 +97,7 @@ export class ProfilePage implements OnInit {
         })
         console.log(data);
     });
-    
+
   }
 
   removeImage(){

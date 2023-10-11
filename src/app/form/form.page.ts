@@ -145,6 +145,7 @@ export class FormPage implements OnInit {
 
   goNext() {
     console.log('changed: ');
+    // $ionicScrollDelegate.scrollTop();
     this.swiper?.slideNext(500);
   }
 

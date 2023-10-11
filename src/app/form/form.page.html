@@ -309,9 +309,60 @@
                 </div>
               </ion-col>
             </ion-grid>
-
-
-
+            <ion-item>
+              <ion-button
+                slot="end"
+                class="add_image"
+                (click)="openImagePicker()"
+                >Add Image</ion-button
+              >
+            </ion-item>
+          </ion-list>
+        </div>
+        <div class="sixth_label">
+          Were there any witnesses?
+        </div>
+        <div>
+          <ion-label class="sixth_label">
+            Witness name
+          </ion-label>
+          <ion-input placeholder="Witness name"></ion-input>
+          <ion-label class="sixth_label">
+            Witness phone number
+          </ion-label>
+          <ion-input placeholder="Witness phone number"></ion-input>
+        </div>
+        <div class="sixth_label">
+          Was there a police report?
+        </div>
+        <div>
+          <ion-label class="sixth_label">
+            Police officer name
+          </ion-label>
+          <ion-input placeholder="Police officer name"></ion-input>
+          <ion-label class="sixth_label">
+            Police report number
+          </ion-label>
+          <ion-input placeholder="Police report number "></ion-input>
+        </div>
+        <div>
+          <ion-label>Please Upload Police Report Images</ion-label>
+          <ion-list class="border_address" lines="none">
+            <ion-grid>
+              <ion-col *ngFor="let file of files" size="3">
+                <div class="image_holder">
+                  <ion-icon
+                    class="imag_icon"
+                    src="assets/img_del.svg"
+                  ></ion-icon>
+                  <img
+                    class="imag_prev"
+                    *ngIf="file.path"
+                    [src]="convertPathToWebPath(file.path)"
+                  />
+                </div>
+              </ion-col>
+            </ion-grid>
             <ion-item>
               <ion-button
                 slot="end"
@@ -333,6 +384,7 @@
       </div>
 
 
+
     </swiper-slide>
 
     <swiper-slide>
@@ -341,15 +393,102 @@
         class="stepperr_title"
         style="display: flex; justify-content: center"
       >
-        What is the damage?</ion-label
+       Vehicle Damage</ion-label
       >
       <div class="form_4">
+        <div>
+          <ion-label >My Vehicle</ion-label>
+        </div>
+        <div>
+          <ion-label class="sixth_label">
+            Vehicle Make and Model
+          </ion-label>
+          <ion-input placeholder="Vehicle Make and Model"></ion-input>
+          <ion-label class="sixth_label">
+            Vehicle License Plate Number
+          </ion-label>
+          <ion-input placeholder="Vehicle License Plate Number"></ion-input>
+        </div>
         <div class="upload_img">
           <ion-label class="label_text"
-            >Please upload images of the four sides of your vehicle taken from a
-            position facing each corner? These images should capture the
-            corners, including the side, front, and back of the your
-            vehicle.</ion-label
+            >Please Upload an Images of the license plate</ion-label
+          >
+          <ion-list class="border" lines="none">
+            <ion-grid>
+              <ion-col *ngFor="let file of files" size="3">
+                <div class="image_holder">
+                  <ion-icon
+                    class="imag_icon"
+                    src="assets/img_del.svg"
+                  ></ion-icon>
+                  <img
+                    class="imag_prev"
+                    *ngIf="file.path"
+                    [src]="convertPathToWebPath(file.path)"
+                  />
+                </div>
+              </ion-col>
+            </ion-grid>
+
+            <ion-item>
+              <ion-button
+                slot="end"
+                class="add_image"
+                (click)="openImagePicker()"
+                >Add Image</ion-button
+              >
+            </ion-item>
+          </ion-list>
+
+        </div>
+        <div>
+          <ion-label class="sixth_label">
+            Vehicle VIN number
+          </ion-label>
+          <ion-input placeholder="Vehicle VIN number"></ion-input>
+        </div>
+        <div class="upload_img">
+          <ion-label class="label_text"
+            >Please upload an images of the vehicle vin number in the drivers’ side windshield just above the dashboard</ion-label
+          >
+
+          <ion-list class="border" lines="none">
+            <ion-grid>
+              <ion-col *ngFor="let file of files" size="3">
+                <div class="image_holder">
+                  <ion-icon
+                    class="imag_icon"
+                    src="assets/img_del.svg"
+                  ></ion-icon>
+                  <img
+                    class="imag_prev"
+                    *ngIf="file.path"
+                    [src]="convertPathToWebPath(file.path)"
+                  />
+                </div>
+              </ion-col>
+            </ion-grid>
+
+            <ion-item>
+              <ion-button
+                slot="end"
+                class="add_image"
+                (click)="openImagePicker()"
+                >Add Image</ion-button
+              >
+            </ion-item>
+          </ion-list>
+        </div>
+        <div>
+          <ion-label class="sixth_label">
+            Vehicle mileage from speedometer
+          </ion-label>
+          <ion-input placeholder="Vehicle mileage from speedometer"></ion-input>
+        </div>
+
+        <div class="upload_img">
+          <ion-label class="label_text"
+            >Add photos of car from all four corners, showcasing the front, back, and two sides of the car.</ion-label
           >
           <ion-list class="border" lines="none">
             <ion-grid>
@@ -381,41 +520,7 @@
 
         <div class="upload_img">
           <ion-label class="label_text"
-            >Upload your vehicle damage images.</ion-label
-          >
-
-          <ion-list class="border" lines="none">
-            <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
-                <div class="image_holder">
-                  <ion-icon
-                    class="imag_icon"
-                    src="assets/img_del.svg"
-                  ></ion-icon>
-                  <img
-                    class="imag_prev"
-                    *ngIf="file.path"
-                    [src]="convertPathToWebPath(file.path)"
-                  />
-                </div>
-              </ion-col>
-            </ion-grid>
-
-            <ion-item>
-              <ion-button
-                slot="end"
-                class="add_image"
-                (click)="openImagePicker()"
-                >Add Image</ion-button
-              >
-            </ion-item>
-          </ion-list>
-        </div>
-
-        <div class="upload_img">
-          <ion-label class="label_text"
-            >Upload an image of your vehicle mileage from the
-            speedometer.</ion-label
+            >Add close-up photos of damages to the vehicle.</ion-label
           >
           <ion-list class="border" lines="none">
             <ion-grid>
@@ -444,105 +549,29 @@
             </ion-item>
           </ion-list>
         </div>
+        <div>
+          <div>
+            <ion-label >Was your vehicle towed?</ion-label>
+          </div>
+          <div>
+            <ion-label class="sixth_label">
+              Towing company Name
+            </ion-label>
+            <ion-input placeholder="Towing company Name"></ion-input>
+          </div>
+          <div class="address">
+            <ion-label class="label_text">Towing company Address </ion-label>
 
-        <div class="upload_img">
-          <ion-label class="label_text"
-            >Please upload images of the four sides of other vehicle taken from
-            a position facing each corner? These images should capture the
-            corners, including the side, front, and back of the other
-            vehicle.</ion-label
-          >
-          <ion-list class="border" lines="none">
-            <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
-                <div class="image_holder">
-                  <ion-icon
-                    class="imag_icon"
-                    src="assets/img_del.svg"
-                  ></ion-icon>
-                  <img
-                    class="imag_prev"
-                    *ngIf="file.path"
-                    [src]="convertPathToWebPath(file.path)"
-                  />
-                </div>
-              </ion-col>
-            </ion-grid>
-
-            <ion-item>
-              <ion-button
-                slot="end"
-                class="add_image"
-                (click)="openImagePicker()"
-                >Add Image</ion-button
-              >
+            <ion-item class="location">
+              <ion-icon
+                class="location_icon"
+                slot="start"
+                color="primary"
+                name="location-outline"
+              ></ion-icon>
+              Towing company Address
             </ion-item>
-          </ion-list>
-        </div>
-
-        <div class="upload_img">
-          <ion-label class="label_text"
-            >Upload other vehicle damage images.</ion-label
-          >
-          <ion-list class="border" lines="none">
-            <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
-                <div class="image_holder">
-                  <ion-icon
-                    class="imag_icon"
-                    src="assets/img_del.svg"
-                  ></ion-icon>
-                  <img
-                    class="imag_prev"
-                    *ngIf="file.path"
-                    [src]="convertPathToWebPath(file.path)"
-                  />
-                </div>
-              </ion-col>
-            </ion-grid>
-
-            <ion-item>
-              <ion-button
-                slot="end"
-                class="add_image"
-                (click)="openImagePicker()"
-                >Add Image</ion-button
-              >
-            </ion-item>
-          </ion-list>
-        </div>
-
-        <div class="upload_img">
-          <ion-label class="label_text"
-            >Upload an images of the other vehicle mileage from the
-            speedometer.</ion-label
-          >
-          <ion-list class="border" lines="none">
-            <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
-                <div class="image_holder">
-                  <ion-icon
-                    class="imag_icon"
-                    src="assets/img_del.svg"
-                  ></ion-icon>
-                  <img
-                    class="imag_prev"
-                    *ngIf="file.path"
-                    [src]="convertPathToWebPath(file.path)"
-                  />
-                </div>
-              </ion-col>
-            </ion-grid>
-
-            <ion-item>
-              <ion-button
-                slot="end"
-                class="add_image"
-                (click)="openImagePicker()"
-                >Add Image</ion-button
-              >
-            </ion-item>
-          </ion-list>
+          </div>
         </div>
       </div>
       <ion-row>
@@ -561,24 +590,30 @@
         class="stepperr_title"
         style="display: flex; justify-content: center"
       >
-        Additional Information</ion-label
+      Other Party’s Vehicle</ion-label
       >
       <div class="form_5">
+        <div class="sixth_label"></div>
         <div class="police_name">
-          <ion-label class="label_text">Police officer Name</ion-label>
-          <ion-input fill="outline" placeholder="Police officer Name">
+          <ion-label class="label_text">Vehicle Make and Model</ion-label>
+          <ion-input fill="outline" placeholder="Vehicle Make and Model">
           </ion-input>
         </div>
 
         <div class="police_rep_no">
-          <ion-label class="label_text">Police Report Number</ion-label>
-          <ion-input fill="outline" placeholder="Police Report Number">
+          <ion-label class="label_text">Vehicle License Plate Number</ion-label>
+          <ion-input fill="outline" placeholder="Vehicle License Plate Number">
+          </ion-input>
+        </div>
+        <div class="police_rep_no">
+          <ion-label class="label_text">Vehicle VIN number</ion-label>
+          <ion-input fill="outline" placeholder="Vehicle VIN number">
           </ion-input>
         </div>
 
         <div class="upload_police_report">
           <ion-label class="label_text"
-            >Please Upload Police Report Images</ion-label
+            >Add images of car from all four corners, showcasing the front, back, and two sides of the car.</ion-label
           >
           <ion-list class="border" lines="none">
             <ion-grid>
@@ -608,69 +643,61 @@
           </ion-list>
         </div>
 
-        <div class="towing_company_name">
-          <ion-label class="label_text">Towing company Name</ion-label>
-          <ion-input fill="outline" placeholder="Towing company Name">
-          </ion-input>
+        <div class="upload_police_report">
+          <ion-label class="label_text"
+            >Add close-up photos of damages to the vehicle.</ion-label
+          >
+          <ion-list class="border" lines="none">
+            <ion-grid>
+              <ion-col *ngFor="let file of files" size="3">
+                <div class="image_holder">
+                  <ion-icon
+                    class="imag_icon"
+                    src="assets/img_del.svg"
+                  ></ion-icon>
+                  <img
+                    class="imag_prev"
+                    *ngIf="file.path"
+                    [src]="convertPathToWebPath(file.path)"
+                  />
+                </div>
+              </ion-col>
+            </ion-grid>
+
+            <ion-item>
+              <ion-button
+                slot="end"
+                class="add_image"
+                (click)="openImagePicker()"
+                >Add Image</ion-button
+              >
+            </ion-item>
+          </ion-list>
         </div>
-
-        <ion-list *ngFor="let data of witnessArray; let i = index">
-          <div class="witness_name">
-            <ion-label class="label_text">Witness Name</ion-label>
-            <ion-input fill="outline" placeholder="Witness Name"> </ion-input>
+        <div>
+          <div>
+            <ion-label >Was your vehicle towed?</ion-label>
           </div>
-
-          <div class="witness_phone">
-            <ion-label class="label_text">Witness Phone</ion-label>
-            <ion-input fill="outline" placeholder="Witness Phone"> </ion-input>
+          <div>
+            <ion-label class="sixth_label">
+              Towing company Name
+            </ion-label>
+            <ion-input placeholder="Towing company Name"></ion-input>
           </div>
+          <div class="address">
+            <ion-label class="label_text">Towing company Address </ion-label>
 
-          <div class="witness_email">
-            <ion-label class="label_text">Witness Email</ion-label>
-            <ion-input fill="outline" placeholder="Witness Email"> </ion-input>
+            <ion-item class="location">
+              <ion-icon
+                class="location_icon"
+                slot="start"
+                color="primary"
+                name="location-outline"
+              ></ion-icon>
+              Towing company Address
+            </ion-item>
           </div>
-
-          <div class="upload_witness_id">
-            <ion-label class="label_text"
-              >Please upload an image for witness' identification
-              card</ion-label
-            >
-            <ion-list class="border" lines="none">
-              <ion-grid>
-                <ion-col *ngFor="let file of files" size="3">
-                  <div class="image_holder">
-                    <ion-icon
-                      class="imag_icon"
-                      src="assets/img_del.svg"
-                    ></ion-icon>
-                    <img
-                      class="imag_prev"
-                      *ngIf="file.path"
-                      [src]="convertPathToWebPath(file.path)"
-                    />
-                  </div>
-                </ion-col>
-              </ion-grid>
-
-              <ion-item>
-                <ion-button
-                  slot="end"
-                  class="add_image"
-                  (click)="openImagePicker()"
-                  >Add Image</ion-button
-                >
-              </ion-item>
-            </ion-list>
-          </div>
-
-          <ion-item *ngIf="witnessArray.length > 1 && i!==0">
-            <ion-button slot="end" (click)="deleteWitness(i)"
-              >Remove</ion-button
-            >
-          </ion-item>
-        </ion-list>
-
-        <ion-button (click)="addWitness()"> Add Witness </ion-button>
+        </div>
       </div>
       <ion-row>
         <ion-col>

@@ -3,7 +3,10 @@
     <ion-row class="ion-justify-content-between">
       <ion-col size="2">
         <ion-buttons>
-          <ion-back-button defaultHref="/tabs/dashboard" text="Exit"></ion-back-button>
+          <ion-back-button
+            defaultHref="/tabs/dashboard"
+            text="Exit"
+          ></ion-back-button>
           <ion-img src="assets/logo.png"></ion-img>
         </ion-buttons>
       </ion-col>
@@ -29,10 +32,8 @@
         </ion-select>
       </ion-col>
     </ion-row>
-
   </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <div class="grey-line"></div>
@@ -40,6 +41,7 @@
     #swiper
     (slidechange)="swiperSlideChanged($event)"
     [allowTouchMove]="false"
+    loop="false"
   >
     <swiper-slide>
       <ion-img class="stepper" src="assets/step_1.svg"></ion-img>
@@ -53,15 +55,11 @@
       <div class="form_1">
         <div class="what_happen">
           <ion-label class="label_text_policy">Policy</ion-label>
-          <div class="black-line"></div>
+          <div class="black_line"></div>
           <ion-label class="label_text">Name Insured</ion-label>
-          <ion-input
-            class="textarea"
-            fill="outline"
-            placeholder="Name Insured"
-          >
+          <ion-input class="textarea" fill="outline" placeholder="Name Insured">
           </ion-input>
-          <ion-label class="label_text">Policy Number</ion-label>
+          <ion-label class="label_text_policy_number">Policy Number</ion-label>
           <ion-input
             class="textarea"
             fill="outline"
@@ -71,17 +69,17 @@
         </div>
         <div class="black-line"></div>
 
-
         <div class="record">
-          <div class="second_label">
-            What Happened?
-
-          </div>
+          <div class="second_label">What Happened?</div>
+          <div class="black_line"></div>
           <div class="third-label">Tell us what Happened?</div>
-          <ion-textarea class="textarea_top" placeholder="Describe where, when and how the accident took place. Describe damage that took place." >
-
+          <ion-textarea
+            class="textarea_top"
+            [autogrow]="true"
+            placeholder="Describe where, when and how the accident took place. Describe damage that took place."
+          >
           </ion-textarea>
-          <ion-label class="label_text">Record Audio</ion-label>
+          <ion-label class="label_text_radio">Record Audio</ion-label>
           <ion-item class="record_audio" lines="none">
             <ion-icon
               [name]="recording === true ? 'stop' : 'play'"
@@ -107,8 +105,6 @@
           </ion-list>
         </div>
 
-
-
         <ion-button class="next_button" expand="block" (click)="swiperReady()"
           >Next</ion-button
         >
@@ -121,13 +117,14 @@
         class="stepperr_title"
         style="display: flex; justify-content: center"
       >
-      Accident Location
+        Accident Location
       </ion-label>
-
 
       <div class="form_2">
         <div class="address">
-          <ion-label class="label_text">Where did the incident take place?</ion-label>
+          <ion-label class="label_text"
+            >Where did the incident take place?</ion-label
+          >
 
           <ion-item class="location">
             <ion-icon
@@ -142,15 +139,15 @@
         <div class="fifth_label">
           Pictures of the accident location and its surroundings
         </div>
-        <ion-label class="sixth_label">Pictures of the actual area of damage from the accident. Close up and from about 10 feet.</ion-label>
+        <ion-label class="sixth_label"
+          >Pictures of the actual area of damage from the accident. Close up and
+          from about 10 feet.</ion-label
+        >
         <ion-list class="border_address" lines="none">
           <ion-grid>
             <ion-col *ngFor="let file of files" size="3">
               <div class="image_holder">
-                <ion-icon
-                  class="imag_icon"
-                  src="assets/img_del.svg"
-                ></ion-icon>
+                <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                 <img
                   class="imag_prev"
                   *ngIf="file.path"
@@ -169,16 +166,16 @@
           </ion-item>
 
           <ion-item>
-            <ion-button
-              slot="end"
-              class="add_image"
-              (click)="openImagePicker()"
+            <ion-button slot="end" class="add_image" (click)="openImagePicker()"
               >Add Image</ion-button
             >
           </ion-item>
         </ion-list>
         <div class="upload_scene">
-          <ion-label class="sixth_label">Pictures of the nearest street sign indicating street name and direction of the photo.</ion-label>
+          <ion-label class="sixth_label"
+            >Pictures of the nearest street sign indicating street name and
+            direction of the photo.</ion-label
+          >
           <ion-list class="border_address" lines="none">
             <ion-grid>
               <ion-col *ngFor="let file of files" size="3">
@@ -232,16 +229,14 @@
         class="stepperr_title"
         style="display: flex; justify-content: center"
       >
-      Involved Parties</ion-label
+        Involved Parties</ion-label
       >
       <div class="form_3">
         <div>
-          <ion-label >Who was involved in the accident?</ion-label>
+          <ion-label>Who was involved in the accident?</ion-label>
         </div>
         <div>
-          <ion-label>
-            Name of other party
-          </ion-label>
+          <ion-label> Name of other party </ion-label>
           <ion-input placeholder="Name of other party"></ion-input>
         </div>
         <div>
@@ -280,15 +275,11 @@
           </ion-list>
         </div>
         <div>
-          <ion-label>
-            Contact phone number
-          </ion-label>
+          <ion-label> Contact phone number </ion-label>
           <ion-input placeholder="Contact phone number"></ion-input>
         </div>
         <div>
-          <ion-label>
-            Other Party’s Insurance Company
-          </ion-label>
+          <ion-label> Other Party’s Insurance Company </ion-label>
           <ion-input placeholder="Other Party’s Insurance Company"></ion-input>
         </div>
         <div>
@@ -319,30 +310,18 @@
             </ion-item>
           </ion-list>
         </div>
-        <div class="sixth_label">
-          Were there any witnesses?
-        </div>
+        <div class="sixth_label">Were there any witnesses?</div>
         <div>
-          <ion-label class="sixth_label">
-            Witness name
-          </ion-label>
+          <ion-label class="sixth_label"> Witness name </ion-label>
           <ion-input placeholder="Witness name"></ion-input>
-          <ion-label class="sixth_label">
-            Witness phone number
-          </ion-label>
+          <ion-label class="sixth_label"> Witness phone number </ion-label>
           <ion-input placeholder="Witness phone number"></ion-input>
         </div>
-        <div class="sixth_label">
-          Was there a police report?
-        </div>
+        <div class="sixth_label">Was there a police report?</div>
         <div>
-          <ion-label class="sixth_label">
-            Police officer name
-          </ion-label>
+          <ion-label class="sixth_label"> Police officer name </ion-label>
           <ion-input placeholder="Police officer name"></ion-input>
-          <ion-label class="sixth_label">
-            Police report number
-          </ion-label>
+          <ion-label class="sixth_label"> Police report number </ion-label>
           <ion-input placeholder="Police report number "></ion-input>
         </div>
         <div>
@@ -382,9 +361,6 @@
           </ion-col>
         </ion-row>
       </div>
-
-
-
     </swiper-slide>
 
     <swiper-slide>
@@ -393,16 +369,14 @@
         class="stepperr_title"
         style="display: flex; justify-content: center"
       >
-       Vehicle Damage</ion-label
+        Vehicle Damage</ion-label
       >
       <div class="form_4">
         <div>
-          <ion-label >My Vehicle</ion-label>
+          <ion-label>My Vehicle</ion-label>
         </div>
         <div>
-          <ion-label class="sixth_label">
-            Vehicle Make and Model
-          </ion-label>
+          <ion-label class="sixth_label"> Vehicle Make and Model </ion-label>
           <ion-input placeholder="Vehicle Make and Model"></ion-input>
           <ion-label class="sixth_label">
             Vehicle License Plate Number
@@ -439,17 +413,15 @@
               >
             </ion-item>
           </ion-list>
-
         </div>
         <div>
-          <ion-label class="sixth_label">
-            Vehicle VIN number
-          </ion-label>
+          <ion-label class="sixth_label"> Vehicle VIN number </ion-label>
           <ion-input placeholder="Vehicle VIN number"></ion-input>
         </div>
         <div class="upload_img">
           <ion-label class="label_text"
-            >Please upload an images of the vehicle vin number in the drivers’ side windshield just above the dashboard</ion-label
+            >Please upload an images of the vehicle vin number in the drivers’
+            side windshield just above the dashboard</ion-label
           >
 
           <ion-list class="border" lines="none">
@@ -488,7 +460,8 @@
 
         <div class="upload_img">
           <ion-label class="label_text"
-            >Add photos of car from all four corners, showcasing the front, back, and two sides of the car.</ion-label
+            >Add photos of car from all four corners, showcasing the front,
+            back, and two sides of the car.</ion-label
           >
           <ion-list class="border" lines="none">
             <ion-grid>
@@ -551,12 +524,10 @@
         </div>
         <div>
           <div>
-            <ion-label >Was your vehicle towed?</ion-label>
+            <ion-label>Was your vehicle towed?</ion-label>
           </div>
           <div>
-            <ion-label class="sixth_label">
-              Towing company Name
-            </ion-label>
+            <ion-label class="sixth_label"> Towing company Name </ion-label>
             <ion-input placeholder="Towing company Name"></ion-input>
           </div>
           <div class="address">
@@ -590,7 +561,7 @@
         class="stepperr_title"
         style="display: flex; justify-content: center"
       >
-      Other Party’s Vehicle</ion-label
+        Other Party’s Vehicle</ion-label
       >
       <div class="form_5">
         <div class="sixth_label"></div>
@@ -613,7 +584,8 @@
 
         <div class="upload_police_report">
           <ion-label class="label_text"
-            >Add images of car from all four corners, showcasing the front, back, and two sides of the car.</ion-label
+            >Add images of car from all four corners, showcasing the front,
+            back, and two sides of the car.</ion-label
           >
           <ion-list class="border" lines="none">
             <ion-grid>
@@ -676,12 +648,10 @@
         </div>
         <div>
           <div>
-            <ion-label >Was your vehicle towed?</ion-label>
+            <ion-label>Was your vehicle towed?</ion-label>
           </div>
           <div>
-            <ion-label class="sixth_label">
-              Towing company Name
-            </ion-label>
+            <ion-label class="sixth_label"> Towing company Name </ion-label>
             <ion-input placeholder="Towing company Name"></ion-input>
           </div>
           <div class="address">

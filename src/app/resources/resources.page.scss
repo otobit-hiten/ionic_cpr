@@ -15,6 +15,12 @@
   align-self: center;
 }
 
+.black_line{
+  background:black;
+  height:10%;
+  width:80%;
+}
+
 ion-label {
   display: flex;
   justify-content: center;
@@ -51,5 +57,7 @@ ion-button {
 .button{
   display: flex;
 }
+
+
 
 

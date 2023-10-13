@@ -49,18 +49,20 @@
   font-family: Poppins;
   font-size: 14px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
   text-transform: capitalize;
-  margin-top: 7%;
+  margin-top: 5%;
+  margin-bottom: 2.5%;
 }
-.black-line {
-  background-color: #000000 !important;
-  height: 1% !important;
-  width: 80%;
+.black_line {
+  height: 1px !important;
+  margin-top: 3%;
+  margin-bottom: 5%;
   align-self: center;
   position: relative;
+  border-top: 0.01px solid rgb(189, 189, 189);
 }
 .label_text_policy {
   width: 80% !important;
@@ -70,6 +72,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: 135%; /* 24.3px */
+  margin-top: 6px;
 }
 .label_text {
   color: #201e1e !important;
@@ -82,22 +85,34 @@
   text-transform: capitalize;
   margin-top: 7% !important;
 }
+
+.label_text_radio {
+  color: #201e1e !important;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  text-transform: capitalize;
+
+
+}
 ion-input {
   border-radius: 8px;
   border: 1px solid #bdbdbd;
   padding-left: 10px !important;
 }
-.location{
-    border-radius: 8px;
-    border: 1px solid #bdbdbd;
-    padding-left: 10px !important;
-
+.location {
+  border-radius: 8px;
+  border: 1px solid #bdbdbd;
+  padding-left: 10px !important;
 }
 .border_address {
   border-radius: 5px;
   border: 0.5px solid #828282;
   border-style: dashed;
-  ion-button {
+    button {
     --background: rgba(254, 27, 20, 0.07);
     --border-radius: 20px;
     --padding-top: 10px;
@@ -128,13 +143,25 @@ ion-input {
   }
 }
 .textarea_top {
-  ::placeholder{
+  height: 150px !important;
+  ::placeholder {
     font-size: 12px !important;
   }
   border-radius: 8px;
   border: 1px solid #bdbdbd;
   padding-left: 10px !important;
-
+  margin-bottom: 6%;
+}
+.label_text_policy_number {
+  color: #201e1e !important;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  text-transform: capitalize;
+  margin-top: 10% !important;
 }
 .form_1 {
   margin-inline: 20px;
@@ -143,14 +170,16 @@ ion-input {
     margin-top: 20px;
     margin-bottom: 20px;
     .textarea {
-      margin-top: 10px;
+      display: flex;
+      margin-top: 2%;
       padding-left: 5px;
-      height: 10% !important;
+      height: 1000 !important;
+      margin-bottom: 6%;
     }
   }
   .record {
     margin-top: 20px;
-    margin-bottom: 20px;
+
   }
   .upload_scene {
     .border {
@@ -193,8 +222,16 @@ ion-input {
     }
   }
   .next_button {
-    margin-top: 50px;
+    margin-top:10%;
     margin-bottom: 50px;
+    border-radius: 10px;
+    --background: #ffefee !important;
+    color: #fe524d;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 }
 
@@ -206,7 +243,6 @@ ion-input {
     margin-bottom: 20px;
     .location {
       margin-top: 10px;
-
     }
   }
   .upload_location {
@@ -388,9 +424,8 @@ ion-input {
     }
   }
 }
-.fifth_label{
-
-  color: #201E1E;
+.fifth_label {
+  color: #201e1e;
   font-family: Poppins;
   font-size: 18px;
   font-style: normal;
@@ -398,8 +433,8 @@ ion-input {
   line-height: 135%; /* 24.3px */
   margin-bottom: 6%;
 }
-.sixth_label{
-  color: #201E1E;
+.sixth_label {
+  color: #201e1e;
   font-family: Poppins;
   font-size: 14px;
   font-style: normal;

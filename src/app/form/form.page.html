@@ -125,20 +125,22 @@
           <ion-label class="label_text"
             >Where did the incident take place?</ion-label
           >
-
-          <ion-item class="location">
+          <div class="black_line"></div>
+          <ion-label class="label_text">Address of accident</ion-label>
+          <ion-item class="location_accident">
             <ion-icon
               class="location_icon"
               slot="start"
               color="primary"
               name="location-outline"
             ></ion-icon>
-            Address of Accident
+            <ion-text>Address of Accident</ion-text>
           </ion-item>
         </div>
         <div class="fifth_label">
           Pictures of the accident location and its surroundings
         </div>
+        <div class="black_line"></div>
         <ion-label class="sixth_label"
           >Pictures of the actual area of damage from the accident. Close up and
           from about 10 feet.</ion-label
@@ -176,6 +178,7 @@
             >Pictures of the nearest street sign indicating street name and
             direction of the photo.</ion-label
           >
+          Address of accident
           <ion-list class="border_address" lines="none">
             <ion-grid>
               <ion-col *ngFor="let file of files" size="3">

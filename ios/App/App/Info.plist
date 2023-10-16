@@ -3,8 +3,15 @@
 <plist version="1.0">
 <dict>
 
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Privacy - Location Always Usage Description</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Privacy - Location When In Use Usage Description</string>
+
 	<key>NSCameraUsageDescription</key>
 	<string>To Capture Image</string>
+	
 
 	<key>UIFileSharingEnabled</key>
 	<string>To Capture Image</string>

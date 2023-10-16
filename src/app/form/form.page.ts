@@ -10,6 +10,7 @@ import { Capacitor } from '@capacitor/core';
 import { VoiceRecorder, RecordingData } from 'capacitor-voice-recorder';
 import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrls: ['./form.page.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [IonicModule, CommonModule, FormsModule,TranslateModule]
+  imports: [IonicModule, CommonModule, FormsModule,TranslateModule, RouterModule]
 })
 export class FormPage implements OnInit {
 

@@ -1,9 +1,31 @@
 <ion-header>
   <ion-toolbar>
+    <ion-back-button slot="start"
+    defaultHref="/form"></ion-back-button>
     <ion-title>Map</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
+  <div class="gmap">
   <capacitor-google-map #map></capacitor-google-map>
+</div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <ion-label>Latitude: {{cordinates.lat}} </ion-label><br>
+      <ion-label>Longitude: {{cordinates.lng}}</ion-label><br>
+      <ion-row>
+        <ion-col>
+          <ion-button *ngIf="drag" expand="block">Use this location</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block">Use current location</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,6 +1,6 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import * as  Parse from 'parse';
 import { Swiper } from 'swiper'
@@ -11,6 +11,7 @@ import { VoiceRecorder, RecordingData } from 'capacitor-voice-recorder';
 import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -19,24 +20,30 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./form.page.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [IonicModule, CommonModule, FormsModule,TranslateModule, RouterModule]
+  imports: [IonicModule, CommonModule, ReactiveFormsModule, FormsModule,TranslateModule, RouterModule]
 })
 export class FormPage implements OnInit {
 
   @ViewChild('swiper')
   swiperRef: ElementRef | undefined;
   swiper?: Swiper
+  slideOneForm : FormGroup 
 
 
   ionViewDidEnter() {
     console.log("a = ", this.swiperRef);
   }
-  constructor(private readonly domSanitizer: DomSanitizer,private translateService :TranslateService) {
+  constructor(public formBuilder: FormBuilder,private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer,private translateService :TranslateService) {
     console.log(this.swiperRef?.nativeElement.swiper);
     console.log(this.swiperRef);
     Parse.initialize('4fJYYN0bBUsmOumrcXWZolpXm0OCBId8S0lKr45l', 'RRTqRi9mWSC3Udfu6RQglRK3MDx7N1hjSOQs0RPj');
     (Parse as any).serverURL = "https://parseapi.back4app.com/";
-
+    this.slideOneForm = formBuilder.group({
+      firstName: [''],
+      lastName: [''],
+      age: ['']
+  });
+  
   }
   languageList = [
     {
@@ -57,6 +64,7 @@ export class FormPage implements OnInit {
   compareWithFn(o1: any, o2: any) {
     return o1 === o2;
   };
+
   steps = {
     email: "hitenchandora21@gmail.com",
     name: "",
@@ -116,13 +124,20 @@ export class FormPage implements OnInit {
   witnessObj = { name: '', phone: '', email: '', image: [] }
   witnessArray : any = []
 
+  //Fields - ACCIDENT OVERRVIEW
+  name_insured: string = ""
+  policy_no:string = ""
+  tell_us_what_happened:string = ""
+
+
 
   ngOnInit() {
     this.swiperReady()
     VoiceRecorder.requestAudioRecordingPermission()
-    this.loadAudio();
+    // this.loadAudio();
     this.witnessArray.push(this.witnessObj)
     console.log(this.witnessArray.length)
+    
 
   }
 
@@ -142,6 +157,15 @@ export class FormPage implements OnInit {
     this.swiper = await this.swiperRef?.nativeElement.swiper;
     console.log("rready")
     this.goNext();
+  }
+
+  async next_one(){
+    this.swiper = await this.swiperRef?.nativeElement.swiper;
+    if(this.name_insured === "" || this.policy_no === "" || this.tell_us_what_happened === ""){
+
+    }else{
+      this.goNext();
+    }
   }
 
   goNext() {
@@ -183,7 +207,7 @@ export class FormPage implements OnInit {
   loadAudio() {
     Filesystem.readdir({
       path: '',
-      directory: Directory.Data
+      directory: Directory.External
     }).then(result => {
       console.log(result);
       this.storedAudio = result.files
@@ -218,7 +242,7 @@ export class FormPage implements OnInit {
       const fileName = new Date().getTime() + '.wav';
       await Filesystem.writeFile({
         path: fileName,
-        directory: Directory.Data,
+        directory: Directory.External,
         data: fileToSave
       });
       this.loadAudio();
@@ -245,7 +269,8 @@ export class FormPage implements OnInit {
   async play(fileName: any) {
     const audioFile = await Filesystem.readFile({
       path: fileName,
-      directory: Directory.Data
+      directory: Directory.External
+
     });
 
     if (this.track != this.selectedItem) {
@@ -282,8 +307,14 @@ export class FormPage implements OnInit {
     }
   }
 
-  deleteAudio() {
-    console.log("deleteAudio");
+  async deleteAudio(fileName: any) {
+    console.log(fileName)
+    await Filesystem.deleteFile({
+      path: fileName,
+      directory: Directory.External})
+       this.loadAudio();
+
+
   }
 
   addWitness(){

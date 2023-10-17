@@ -8,3 +8,9 @@ export interface User {
         base64: string;
     }
 }
+
+
+export interface Locations{
+    lat:number;
+    lng:number;
+}

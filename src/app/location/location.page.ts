@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { LatLng, Marker } from '@capacitor/google-maps/dist/typings/definitions';
 import { animate } from '@angular/animations';
+import { Locations } from '../services/user';
 
 @Component({
 
@@ -97,7 +98,9 @@ export class LocationPage implements OnInit {
     await this.newMap.destroy();
    }
 
-  
+   getLocation(){
+    let location: Locations = {lat:this.cordinates.lat, lng:this.cordinates.lng};
+   }
 }
 
 

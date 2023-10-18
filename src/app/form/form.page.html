@@ -3,13 +3,31 @@
     <ion-row class="ion-justify-content-between">
       <ion-col size="2">
         <ion-buttons>
-          <ion-back-button defaultHref="/tabs/dashboard"></ion-back-button>
+          <ion-back-button
+            defaultHref="/tabs/dashboard"
+            icon="assets/back_button.svg"
+          ></ion-back-button>
         </ion-buttons>
       </ion-col>
-      <ion-col size="6.5" class="logo"><img class="logo" src="assets/cpr_logo.png" /></ion-col>
-      <ion-col size="2.8" class="lang-sel"><ion-select class="holder" [compareWith]="compareWith"
-          value="{{MyDefaultValue}}" placeholder="Language" (ionChange)="ionChange($event)" interface="popover">
-          <ion-select-option *ngFor="let lang of languageList" [value]="lang.code">{{lang.title}}</ion-select-option>
+      <ion-col size="6.5" class="logo"
+        ><img class="logo" src="assets/cpr_logo.png"
+      /></ion-col>
+      <ion-col size="2.8" class="lang-sel"
+        ><ion-select
+          class="holder"
+          [compareWith]="compareWith"
+          value="{{MyDefaultValue}}"
+          placeholder="Language"
+          (ionChange)="ionChange($event)"
+          shape="round"
+          interface="popover"
+        >
+          <ion-select-option
+            *ngFor="let lang of languageList"
+            [value]="lang.code"
+            >{{lang.title}}</ion-select-option
+          >
+
         </ion-select>
       </ion-col>
     </ion-row>
@@ -27,7 +45,7 @@
 
       <form [formGroup]="slideOneForm" (ngSubmit)="submitOneForm()">
         <div class="form_1">
-    
+
           <div class="what_happen">
             <ion-label class="label_text_policy">Policy</ion-label>
             <div class="black_line"></div>
@@ -200,7 +218,7 @@
       <ion-img class="stepper" src="assets/step_3.svg"></ion-img>
       <ion-label class="stepperr_title" style="display: flex; justify-content: center">
         Involved Parties</ion-label>
-      
+
       <form [formGroup]="slideThreeForm" (ngSubmit)="submitOneForm()">
       <div class="form_3">
         <div>

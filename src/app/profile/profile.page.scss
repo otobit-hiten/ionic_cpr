@@ -2,55 +2,79 @@
   display: flex;
   orientation: vertical;
   --background: #ffffff;
-  margin-bottom:0 !important;
+  margin-bottom: 0 !important;
 }
 
-  .avatar{
-    margin-inline: 20px;
-    margin-top: 10px;
+.avatar {
+  margin-inline: 20px;
+  margin-top: 10px;
 }
-.lang-sel{
+.lang-sel {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-.grey-line{
-  background:rgb(196, 196, 196,.3) !important;
-  height:.1%;
-  width:80%;
+.grey-line {
+  background: rgb(196, 196, 196, 0.3) !important;
+  height: 0.1%;
+  width: 80%;
   align-self: center;
 }
-ion-button.change{
-    padding: 5px;
-    --background: rgba(254, 70, 20, 0.2);
-    color: red;
-  }
-  ion-button.submit{
-    padding: 5px;
-    margin-top: 20px;
-    height: 50px;
-    --background: rgba(254, 70, 20, 0.2);
-    color: red;
-  }
-  ion-button.remove{
-    padding: 5px;
-    --background: rgba(255, 255, 255);
-    color: #828282;
-  }
+ion-button.change {
+  padding: 5px;
+  --background: rgba(254, 70, 20, 0.2);
+  color: red;
+  text-transform: initial;
+  --color-hover: #ffffff;
+  width: 100%;
+}
+ion-button.submit {
+  padding: 5px;
+  margin-top: 20px;
+  height: 50px;
+  --background: rgba(254, 70, 20, 0.2);
+  color: red;
+}
+ion-button.remove {
+  padding: 5px;
+  --background: rgba(255, 255, 255);
+  color: #828282;
+  text-transform: initial;
+  --color-hover: #ffffff;
+}
 
-  .profile{
-    padding: 5%;
-  }
+.profile {
+  padding: 5%;
+}
 
-  .form{
-    padding: 20px;
-  }
-  ion-input{
-    margin-top: 10px;
-    font-family: 'poppins';
-  }
+.form {
+  padding: 20px;
+}
+ion-input {
+  margin-top: 10px;
+  font-family: "poppins";
+}
 
-  ion-avatar {
-    width: 100px;
-    height: 100px;
+ion-avatar {
+  width: 100px;
+  height: 100px;
+}
+.page_header{
+  color: #201E1E;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 135%; /* 21.6px */
+}
+.profile_header_one {
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  text-transform: capitalize;
+  padding-top: 100%;
 }

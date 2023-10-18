@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { GoogleMap } from '@capacitor/google-maps';
-import { RouterModule } from '@angular/router';
+import { NavigationExtras, Router, RouterModule } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { LatLng, Marker } from '@capacitor/google-maps/dist/typings/definitions';
 import { animate } from '@angular/animations';
@@ -27,7 +27,7 @@ export class LocationPage implements OnInit {
   drag:boolean = false;
 
 
-  constructor(private changeRef: ChangeDetectorRef) {
+  constructor(private changeRef: ChangeDetectorRef,private router: Router) {
     
   }
 
@@ -99,7 +99,14 @@ export class LocationPage implements OnInit {
    }
 
    getLocation(){
+
     let location: Locations = {lat:this.cordinates.lat, lng:this.cordinates.lng};
+    let navigationExtras: NavigationExtras = {
+      state: {
+        coord: this.cordinates
+      }
+    };
+    this.router.navigate(['/form'],navigationExtras)
    }
 }
 

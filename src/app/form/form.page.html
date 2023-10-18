@@ -25,51 +25,71 @@
         Accident Overview
       </ion-label>
 
-      <form [formGroup]="slideOneForm" >
-      <div class="form_1">
-        <div class="what_happen">
-          <ion-label class="label_text_policy">Policy</ion-label>
-          <div class="black_line"></div>
-          <ion-label class="label_text">Name Insured</ion-label>
-          <ion-input class="textarea" placeholder="Name Insured">
-          </ion-input>
-          <ion-label class="label_text_policy_number">Policy Number</ion-label>
-          <ion-input class="textarea" placeholder="Policy Number">
-          </ion-input>
-        </div>
-        <div class="black-line"></div>
+      <form [formGroup]="slideOneForm" (ngSubmit)="submitOneForm()">
+        <div class="form_1">
+          <p *ngIf="submitAttempt" style="color: #ea6153">
+            Please fill out all details.
+          </p>
+          <div class="what_happen">
+            <ion-label class="label_text_policy">Policy</ion-label>
+            <div class="black_line"></div>
+            <div *ngIf="this.slideOneForm.controls?.name_insured?.touched && this.slideOneForm.controls?.name_insured?.invalid">
+              <div *ngIf="this.slideOneForm.controls?.name_insured?.errors?.required">
+                <ion-text color="danger">Please Enter Name</ion-text>
+              </div>
+            </div>
+            <ion-label class="label_text">Name Insured</ion-label>
+            <ion-input class="textarea" placeholder="Name Insured" formControlName="name_insured"></ion-input>
+       
 
-        <div class="record">
-          <div class="second_label">What Happened?</div>
-          <div class="black_line"></div>
-          <div class="third-label">Tell us what Happened?</div>
-          <ion-textarea class="textarea_top" [autogrow]="true"
-            placeholder="Describe where, when and how the accident took place. Describe damage that took place.">
-          </ion-textarea>
-          <ion-label class="label_text_radio">Record Audio</ion-label>
-          <ion-item class="record_audio" lines="none">
-            <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
-              color="primary"></ion-icon>
-            <ion-label> Record Audio </ion-label>
-            <span *ngIf="recording"> {{displayTime}}</span>
-          </ion-item>
-          <ion-list lines="none">
-            <ion-item button *ngFor="let j of storedAudio; let i = index ">
-              {{j.name}}
-              <ion-button slot="end" (click)="play(j.name); selectedItem = i">
-                <ion-icon [name]="selectedItem === i ? 'stop' : 'play'"></ion-icon>
-              </ion-button>
-              <ion-button slot="end" color="primary" (click)="deleteAudio(j.name)">
-                <ion-icon name="trash-outline"></ion-icon>
-              </ion-button>
+            <div *ngIf="this.slideOneForm.controls?.policy_no?.touched && this.slideOneForm.controls?.policy_no?.invalid">
+              <div *ngIf="this.slideOneForm.controls?.policy_no?.errors?.required">
+                <ion-text color="danger">Please Enter Policy Number.</ion-text>
+              </div>
+            </div>
+            <ion-label class="label_text_policy_number">Policy Number</ion-label>
+            <ion-input class="textarea" placeholder="Policy Number" formControlName="policy_no">
+            </ion-input>
+          </div>
+          <div class="black-line"></div>
+
+          <div class="record">
+            <div class="second_label">What Happened?</div>
+            <div class="black_line"></div>
+            <div class="third-label">Tell us what Happened?</div>
+            <div *ngIf="this.slideOneForm.controls?.tell_us_what_happened?.touched && this.slideOneForm.controls?.tell_us_what_happened?.invalid">
+              <div *ngIf="this.slideOneForm.controls?.tell_us_what_happened?.errors?.required">
+                <ion-text color="danger">Please Tell Us What Happened?</ion-text>
+              </div>
+            </div>
+            <ion-textarea class="textarea_top" [autogrow]="true" formControlName="tell_us_what_happened"
+              placeholder="Describe where, when and how the accident took place. Describe damage that took place.">
+            </ion-textarea>
+
+            <ion-label class="label_text_radio">Record Audio</ion-label>
+            <ion-item class="record_audio" lines="none">
+              <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
+                color="primary"></ion-icon>
+              <ion-label> Record Audio </ion-label>
+              <span *ngIf="recording"> {{displayTime}}</span>
             </ion-item>
-          </ion-list>
+            <ion-list lines="none">
+              <ion-item button *ngFor="let j of storedAudio; let i = index ">
+                {{j.name}}
+                <ion-button slot="end" (click)="play(j.name); selectedItem = i">
+                  <ion-icon [name]="selectedItem === i ? 'stop' : 'play'"></ion-icon>
+                </ion-button>
+                <ion-button slot="end" color="primary" (click)="deleteAudio(j.name)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
+            </ion-list>
+          </div>
+
+          <ion-button class="next_button" type="submit" expand="block">Next</ion-button>
         </div>
+      </form>
 
-        <ion-button class="next_button" expand="block" (click)="next_one()">Next</ion-button>
-
-      </div>
-    </form>
     </swiper-slide>
 
     <swiper-slide>
@@ -78,6 +98,7 @@
         Accident Location
       </ion-label>
 
+      <form [formGroup]="slideTwoForm" (ngSubmit)="submitTwoForm()">
       <div class="form_2">
         <div class="address">
           <ion-label class="label_text">Where did the incident take place?</ion-label>
@@ -167,6 +188,7 @@
           </ion-col>
         </ion-row>
       </div>
+      </form>
     </swiper-slide>
 
     <swiper-slide>

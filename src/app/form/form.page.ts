@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import * as  Parse from 'parse';
 import { Swiper } from 'swiper'
@@ -10,7 +10,7 @@ import { Capacitor } from '@capacitor/core';
 import { VoiceRecorder, RecordingData } from 'capacitor-voice-recorder';
 import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -20,50 +20,93 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./form.page.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [IonicModule, CommonModule, ReactiveFormsModule, FormsModule,TranslateModule, RouterModule]
+  imports: [IonicModule, CommonModule, ReactiveFormsModule, FormsModule, TranslateModule, RouterModule]
 })
 export class FormPage implements OnInit {
 
   @ViewChild('swiper')
   swiperRef: ElementRef | undefined;
   swiper?: Swiper
-  slideOneForm : FormGroup 
+  slideOneForm: FormGroup
+  slideTwoForm: FormGroup
+  public submitAttempt: boolean = false;
+  public files: PickedFile[] = [];
+  recording: boolean = false;
+  displayTime = '';
+  time = 0;
+  storedAudio: FileInfo[] = [];
+  public playback = false;
+  ref = new Audio();
+  selectedItem: any;
+  track: any;
+  witnessObj = { name: '', phone: '', email: '', image: [] }
+  witnessArray: any = []
 
-
-  ionViewDidEnter() {
-    console.log("a = ", this.swiperRef);
-  }
-  constructor(public formBuilder: FormBuilder,private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer,private translateService :TranslateService) {
-    console.log(this.swiperRef?.nativeElement.swiper);
-    console.log(this.swiperRef);
-    Parse.initialize('4fJYYN0bBUsmOumrcXWZolpXm0OCBId8S0lKr45l', 'RRTqRi9mWSC3Udfu6RQglRK3MDx7N1hjSOQs0RPj');
-    (Parse as any).serverURL = "https://parseapi.back4app.com/";
-    this.slideOneForm = formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      age: ['']
-  });
-  
-  }
   languageList = [
     {
-       code: "en", title: "English", text: "English"
+      code: "en", title: "English", text: "English"
     },
     {
       code: "es", title: "Spanish", text: "Española"
     }
   ]
 
-  ionChange(event:any) {
+  ionChange(event: any) {
     console.log(event.detail.value)
     this.translateService.use(event.target.value ? event.target.value : "en")
   }
-  compareWith : any ;
-  MyDefaultValue: String ="en";  //set default language here  {en= English ; es = spanish}
+
+  compareWith: any;
+  MyDefaultValue: String = "en";  //set default language here  {en= English ; es = spanish}
 
   compareWithFn(o1: any, o2: any) {
     return o1 === o2;
   };
+
+  constructor(private route: ActivatedRoute,private router: Router, public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService) {
+    console.log(this.swiperRef?.nativeElement.swiper);
+    console.log(this.swiperRef);
+    Parse.initialize('4fJYYN0bBUsmOumrcXWZolpXm0OCBId8S0lKr45l', 'RRTqRi9mWSC3Udfu6RQglRK3MDx7N1hjSOQs0RPj');
+    (Parse as any).serverURL = "https://parseapi.back4app.com/";
+    this.slideOneForm = formBuilder.group({
+      name_insured: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      policy_no: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+      tell_us_what_happened: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+    });
+
+    this.route.queryParams.subscribe(params => {
+      console.log(this.router.getCurrentNavigation()?.extras.state?.coords)
+    });
+
+    this.slideTwoForm = formBuilder.group({
+      address_of_accident: ['', Validators.required]
+    })
+
+  }
+
+  get errorControl() {
+    return this.slideOneForm.controls;
+  }
+
+  submitOneForm = async () => {
+    this.submitAttempt = true;
+    if (this.slideOneForm.valid) {
+      console.log(this.slideOneForm.value);
+      this.submitAttempt = false;
+      this.swiper = await this.swiperRef?.nativeElement.swiper;
+      this.goNext();
+      return false;
+    } else {
+      this.submitAttempt = true;
+      return console.log('Please provide all the required values!');
+    }
+  }
+  submitTwoForm = async () => {
+
+  }
+
+
+
 
   steps = {
     email: "hitenchandora21@gmail.com",
@@ -112,22 +155,8 @@ export class FormPage implements OnInit {
     ]
   }
 
-  public files: PickedFile[] = [];
-  recording: boolean = false;
-  displayTime = '';
-  time = 0;
-  storedAudio: FileInfo[] = [];
-  public playback = false;
-  ref = new Audio();
-  selectedItem: any;
-  track: any;
-  witnessObj = { name: '', phone: '', email: '', image: [] }
-  witnessArray : any = []
 
-  //Fields - ACCIDENT OVERRVIEW
-  name_insured: string = ""
-  policy_no:string = ""
-  tell_us_what_happened:string = ""
+
 
 
 
@@ -137,7 +166,6 @@ export class FormPage implements OnInit {
     // this.loadAudio();
     this.witnessArray.push(this.witnessObj)
     console.log(this.witnessArray.length)
-    
 
   }
 
@@ -159,12 +187,14 @@ export class FormPage implements OnInit {
     this.goNext();
   }
 
-  async next_one(){
-    this.swiper = await this.swiperRef?.nativeElement.swiper;
-    if(this.name_insured === "" || this.policy_no === "" || this.tell_us_what_happened === ""){
-
-    }else{
+  async next_one() {
+    this.submitAttempt = true;
+    if (this.slideOneForm.valid) {
+      console.log("Form Validation Passed");
+      this.swiper = await this.swiperRef?.nativeElement.swiper;
       this.goNext();
+    } else {
+      console.log("Form Validation Failed");
     }
   }
 
@@ -311,19 +341,20 @@ export class FormPage implements OnInit {
     console.log(fileName)
     await Filesystem.deleteFile({
       path: fileName,
-      directory: Directory.External})
-       this.loadAudio();
+      directory: Directory.External
+    })
+    this.loadAudio();
 
 
   }
 
-  addWitness(){
+  addWitness() {
     console.log(this.witnessArray)
     this.witnessArray.push(this.witnessObj);
   }
-  deleteWitness(i:number) {
+  deleteWitness(i: number) {
     console.log(i)
-    this.witnessArray.splice(i,i);
+    this.witnessArray.splice(i, i);
     console.log(this.witnessArray)
   }
 }

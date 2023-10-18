@@ -49,18 +49,18 @@
   <div class="form">
     <ion-label style="font-family: 'poppins'; font-size: larger">Accout Information</ion-label>
 
-    <ion-input [(ngModel)]="name" [readonly]="isEdit" label="Name:" labelPlacement="floating" fill="outline"></ion-input>
+    <ion-input [(ngModel)]="name" [readonly]="!isEdit" label="Name:" labelPlacement="floating" fill="outline"></ion-input>
 
-    <ion-input [(ngModel)]="phone" [readonly]="isEdit" label="Phone No:" labelPlacement="floating" fill="outline"></ion-input>
+    <ion-input [(ngModel)]="phone" [readonly]="!isEdit" label="Phone No:" labelPlacement="floating" fill="outline"></ion-input>
 
-    <ion-input [(ngModel)]="email"  [readonly]="isEdit" label="Email:" labelPlacement="floating" fill="outline"></ion-input>
+    <ion-input [(ngModel)]="email"  [readonly]="!isEdit" label="Email:" labelPlacement="floating" fill="outline"></ion-input>
 
-    <ion-input [(ngModel)]="policyNo" [readonly]="isEdit" label="Document" labelPlacement="floating" fill="outline"></ion-input>
+    <ion-input [(ngModel)]="policyNo" [readonly]="!isEdit" label="Document" labelPlacement="floating" fill="outline"></ion-input>
 
 
 
-    <ion-button *ngIf="!dataExists" class="submit"  shape="round" expand="block" (click)="update()"> Edit </ion-button>
+    <ion-button *ngIf="!isEdit" class="submit"  shape="round" expand="block" (click)="update()"> Edit </ion-button>
 
-    <ion-button *ngIf="dataExists" class="submit" shape="round" expand="block" (click)="set()" >Submit</ion-button>
+    <ion-button *ngIf="isEdit" class="submit" shape="round" expand="block" (click)="set()" >Submit</ion-button>
   </div>
 </ion-content>

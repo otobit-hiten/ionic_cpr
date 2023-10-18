@@ -105,4 +105,5 @@ export class ProfilePage implements OnInit {
     this.imageData.base64 =""
     this.get()
   }
+
 }

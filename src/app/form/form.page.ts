@@ -357,4 +357,14 @@ export class FormPage implements OnInit {
     this.witnessArray.splice(i, i);
     console.log(this.witnessArray)
   }
+
+  async addAudio(){
+    const result = await FilePicker.pickFiles({
+      types: ['audio/aac'],
+
+      readData:true
+    });
+    console.log(result);
+  }
+
 }

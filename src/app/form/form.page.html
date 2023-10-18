@@ -40,7 +40,7 @@
             </div>
             <ion-label class="label_text">Name Insured</ion-label>
             <ion-input class="textarea" placeholder="Name Insured" formControlName="name_insured"></ion-input>
-       
+
 
             <div *ngIf="this.slideOneForm.controls?.policy_no?.touched && this.slideOneForm.controls?.policy_no?.invalid">
               <div *ngIf="this.slideOneForm.controls?.policy_no?.errors?.required">
@@ -67,12 +67,15 @@
             </ion-textarea>
 
             <ion-label class="label_text_radio">Record Audio</ion-label>
-            <ion-item class="record_audio" lines="none">
+            <div><ion-item class="record_audio" lines="none">
               <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
                 color="primary"></ion-icon>
               <ion-label> Record Audio </ion-label>
               <span *ngIf="recording"> {{displayTime}}</span>
+              <ion-icon *ngIf="!recording" name="add-outline" class="add_audio" (click)="addAudio()"></ion-icon>
             </ion-item>
+
+          </div>
             <ion-list lines="none">
               <ion-item button *ngFor="let j of storedAudio; let i = index ">
                 {{j.name}}
@@ -105,7 +108,7 @@
           <div class="black_line"></div>
           <ion-label class="label_text">Address of accident</ion-label>
           <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
-            [routerLink]="['/location']">
+            [routerLink]="['/location']" >
             <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
             <ion-text>Address of Accident</ion-text>
           </ion-item>

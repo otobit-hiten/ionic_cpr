@@ -24,13 +24,30 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class FormPage implements OnInit {
 
+  languageList = [
+    {
+      code: "en", title: "English", text: "English"
+    },
+    {
+      code: "es", title: "Spanish", text: "Española"
+    }
+  ]
+  ionChange(event: any) {
+    console.log(event.detail.value)
+    this.translateService.use(event.target.value ? event.target.value : "en")
+  }
+  compareWith: any;
+  MyDefaultValue: String = "en";  //set default language here  {en= English ; es = spanish}
+  compareWithFn(o1: any, o2: any) {
+    return o1 === o2;
+  };
+
   @ViewChild('swiper')
   swiperRef: ElementRef | undefined;
   swiper?: Swiper
   slideOneForm: FormGroup
   slideTwoForm: FormGroup
-  public submitAttempt: boolean = false;
-  public files: PickedFile[] = [];
+  slideThreeForm: FormGroup
   recording: boolean = false;
   displayTime = '';
   time = 0;
@@ -41,68 +58,75 @@ export class FormPage implements OnInit {
   track: any;
   witnessObj = { name: '', phone: '', email: '', image: [] }
   witnessArray: any = []
+  public actualAreaOfDamage: PickedFile[] = [];
+  public nearestStreet: PickedFile[] = [];
+  public liscenseAndNoPlate: PickedFile[] = [];
+  public insuranceIdImage: PickedFile[] = [];
+  public policeReport: PickedFile[] = [];
+  public licensePlate: PickedFile[] = [];
+  public vinNo: PickedFile[] = [];
+  public allFourSide: PickedFile[] = [];
+  public closeUp: PickedFile[] = [];
+  public otherPartyCarImage: PickedFile[] = [];
+  public otherPartyCloseUpImage: PickedFile[] = [];
 
-  languageList = [
-    {
-      code: "en", title: "English", text: "English"
-    },
-    {
-      code: "es", title: "Spanish", text: "Española"
-    }
-  ]
+  involvedPartiesArray = [];
+  involvedPartiesObject = {name: '', idImage:[], contact: '', insuranceCompany:'', insuranceImage:[]};
 
-  ionChange(event: any) {
-    console.log(event.detail.value)
-    this.translateService.use(event.target.value ? event.target.value : "en")
+  ngOnInit() {
+    this.swiperReady()
+    VoiceRecorder.requestAudioRecordingPermission()
+    // this.loadAudio();
+    this.witnessArray.push(this.witnessObj)
+    
+    console.log(this.witnessArray.length)
+
   }
 
-  compareWith: any;
-  MyDefaultValue: String = "en";  //set default language here  {en= English ; es = spanish}
-
-  compareWithFn(o1: any, o2: any) {
-    return o1 === o2;
-  };
-
-  constructor(private route: ActivatedRoute,private router: Router, public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService) {
+  constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService) {
     console.log(this.swiperRef?.nativeElement.swiper);
     console.log(this.swiperRef);
     Parse.initialize('4fJYYN0bBUsmOumrcXWZolpXm0OCBId8S0lKr45l', 'RRTqRi9mWSC3Udfu6RQglRK3MDx7N1hjSOQs0RPj');
     (Parse as any).serverURL = "https://parseapi.back4app.com/";
-    this.slideOneForm = formBuilder.group({
-      name_insured: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      policy_no: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
-      tell_us_what_happened: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
-    });
 
-    this.route.queryParams.subscribe(params => {
-      console.log(this.router.getCurrentNavigation()?.extras.state?.coords)
+    this.slideOneForm = formBuilder.group({
+      name_insured: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*')])],
+      policy_no: ['', Validators.compose([Validators.maxLength(30),Validators.pattern('^\\d+$')])],
+      tell_us_what_happened: ['', Validators.compose([Validators.maxLength(30)])],
     });
 
     this.slideTwoForm = formBuilder.group({
-      address_of_accident: ['', Validators.required]
-    })
+      address_of_accident: ['']
+    });
 
+    this.slideThreeForm = formBuilder.group({
+
+    })
   }
+
+
 
   get errorControl() {
     return this.slideOneForm.controls;
   }
 
   submitOneForm = async () => {
-    this.submitAttempt = true;
     if (this.slideOneForm.valid) {
       console.log(this.slideOneForm.value);
-      this.submitAttempt = false;
       this.swiper = await this.swiperRef?.nativeElement.swiper;
       this.goNext();
-      return false;
     } else {
-      this.submitAttempt = true;
       return console.log('Please provide all the required values!');
     }
   }
   submitTwoForm = async () => {
-
+    if (this.slideTwoForm.valid) {
+      console.log(this.slideTwoForm.value);
+      this.swiper = await this.swiperRef?.nativeElement.swiper;
+      this.goNext();
+    } else {
+      return console.log('Please provide all the required values!');
+    }
   }
 
 
@@ -160,15 +184,7 @@ export class FormPage implements OnInit {
 
 
 
-  ngOnInit() {
-    this.swiperReady()
-    VoiceRecorder.requestAudioRecordingPermission()
-    // this.loadAudio();
-    this.witnessArray.push(this.witnessObj)
-    console.log(this.witnessArray.length)
-
-  }
-
+ 
   async call() {
     try {
       console.log("Calling...")
@@ -188,7 +204,6 @@ export class FormPage implements OnInit {
   }
 
   async next_one() {
-    this.submitAttempt = true;
     if (this.slideOneForm.valid) {
       console.log("Form Validation Passed");
       this.swiper = await this.swiperRef?.nativeElement.swiper;
@@ -218,13 +233,19 @@ export class FormPage implements OnInit {
 
   //imagePicker
 
-  async openImagePicker() {
+  async openImagePicker(name:string) :Promise<void>{
     const result = await FilePicker.pickImages({
       multiple: true,
       readData: true,
+    }).then(data => {
+      if(name === "actualAreaOfDamage"){
+        this.actualAreaOfDamage = data.files
+      }
+
     });
-    console.log(result);
-    this.files = result.files;
+    console.log(name);
+    
+    
   }
 
   public convertPathToWebPath(path: string): SafeUrl {

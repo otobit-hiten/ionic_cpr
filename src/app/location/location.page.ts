@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -27,7 +27,7 @@ export class LocationPage implements OnInit {
   drag:boolean = false;
 
 
-  constructor(private changeRef: ChangeDetectorRef,private router: Router) {
+  constructor(private ngZone: NgZone, private changeRef: ChangeDetectorRef,private router: Router) {
     
   }
 
@@ -58,7 +58,7 @@ export class LocationPage implements OnInit {
 
     });
 
-    const markerId = await this.newMap.addMarker({
+    await this.newMap.addMarker({
       coordinate: this.cordinates,
       draggable : true,
       
@@ -101,12 +101,7 @@ export class LocationPage implements OnInit {
    getLocation(){
 
     let location: Locations = {lat:this.cordinates.lat, lng:this.cordinates.lng};
-    let navigationExtras: NavigationExtras = {
-      state: {
-        coord: this.cordinates
-      }
-    };
-    this.router.navigate(['/form'],navigationExtras)
+    
    }
 }
 

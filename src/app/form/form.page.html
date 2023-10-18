@@ -27,14 +27,12 @@
 
       <form [formGroup]="slideOneForm" (ngSubmit)="submitOneForm()">
         <div class="form_1">
-          <p *ngIf="submitAttempt" style="color: #ea6153">
-            Please fill out all details.
-          </p>
+    
           <div class="what_happen">
             <ion-label class="label_text_policy">Policy</ion-label>
             <div class="black_line"></div>
             <div *ngIf="this.slideOneForm.controls?.name_insured?.touched && this.slideOneForm.controls?.name_insured?.invalid">
-              <div *ngIf="this.slideOneForm.controls?.name_insured?.errors?.required">
+              <div *ngIf="this.slideOneForm.controls?.name_insured?.errors?.pattern">
                 <ion-text color="danger">Please Enter Name</ion-text>
               </div>
             </div>
@@ -43,7 +41,7 @@
 
 
             <div *ngIf="this.slideOneForm.controls?.policy_no?.touched && this.slideOneForm.controls?.policy_no?.invalid">
-              <div *ngIf="this.slideOneForm.controls?.policy_no?.errors?.required">
+              <div *ngIf="this.slideOneForm.controls?.policy_no?.errors?.pattern">
                 <ion-text color="danger">Please Enter Policy Number.</ion-text>
               </div>
             </div>
@@ -112,6 +110,12 @@
             <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
             <ion-text>Address of Accident</ion-text>
           </ion-item>
+          <ion-input formControlName="address_of_accident"></ion-input>
+          <div *ngIf="this.slideTwoForm.controls?.address_of_accident?.touched && this.slideTwoForm.controls?.address_of_accident?.invalid">
+            <div *ngIf="this.slideTwoForm.controls?.address_of_accident?.errors?.required">
+              <ion-text color="danger">Please Select Location?</ion-text>
+            </div>
+          </div>
         </div>
         <div class="fifth_label">
           Pictures of the accident location and its surroundings
@@ -121,15 +125,14 @@
           from about 10 feet.</ion-label>
         <ion-list class="border_address" lines="none">
           <ion-grid>
-            <ion-col *ngIf="files.length===0" size="3">
+            <ion-col *ngIf="actualAreaOfDamage.length===0" size="2">
               <div class="image_holder">
                 <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
                 <img class="imag_prev" src="assets/img_holder.png" />
                 <img class="imag_prev" src="assets/img_holder.png" />
-                <img class="imag_prev" src="assets/img_holder.png" />
               </div>
             </ion-col>
-            <ion-col *ngFor="let file of files" size="3">
+            <ion-col *ngFor="let file of actualAreaOfDamage" size="3">
               <div class="image_holder">
                 <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                 <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -144,7 +147,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+            <ion-button slot="end" class="add_image" (click)="openImagePicker('actualAreaOfDamage')">Add Image</ion-button>
           </ion-item>
         </ion-list>
         <div class="upload_scene">
@@ -153,16 +156,15 @@
           Address of accident
           <ion-list class="border_address" lines="none">
             <ion-grid>
-              <ion-col *ngIf="files.length===0" size="3">
+              <ion-col *ngIf="nearestStreet.length===0" size="3">
                 <div class="image_holder">
                   <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
-                  <img class="imag_prev" src="assets/img_holder.png" />
                   <img class="imag_prev" src="assets/img_holder.png" />
                   <img class="imag_prev" src="assets/img_holder.png" />
                 </div>
               </ion-col>
 
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngFor="let file of nearestStreet" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -177,7 +179,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('nearestStreet')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -187,7 +189,7 @@
             <ion-button expand="block" (click)="goPrev()">Previous</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button expand="block" (click)="goNext()">Next</ion-button>
+            <ion-button expand="block" type="submit">Next</ion-button>
           </ion-col>
         </ion-row>
       </div>
@@ -198,10 +200,14 @@
       <ion-img class="stepper" src="assets/step_3.svg"></ion-img>
       <ion-label class="stepperr_title" style="display: flex; justify-content: center">
         Involved Parties</ion-label>
+      
+      <form [formGroup]="slideThreeForm" (ngSubmit)="submitOneForm()">
       <div class="form_3">
         <div>
           <ion-label>Who was involved in the accident?</ion-label>
         </div>
+        <ion-list *ngFor="let data of involvedPartiesArray">
+
         <div>
           <ion-label> Name of other party </ion-label>
           <ion-input placeholder="Name of other party"></ion-input>
@@ -210,7 +216,15 @@
           <ion-label>Add photo of license or ID of other party</ion-label>
           <ion-list class="border_address" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="liscenseAndNoPlate.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of liscenseAndNoPlate" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -223,7 +237,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('liscenseAndNoPlate')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -239,7 +253,15 @@
           <ion-label>Please Upload Your Insurance ID’s Images</ion-label>
           <ion-list class="border_address" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="insuranceIdImage.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of insuranceIdImage" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -247,10 +269,11 @@
               </ion-col>
             </ion-grid>
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('insuranceIdImage')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
+        </ion-list>
         <div class="sixth_label">Were there any witnesses?</div>
         <div>
           <ion-label class="sixth_label"> Witness name </ion-label>
@@ -269,7 +292,15 @@
           <ion-label>Please Upload Police Report Images</ion-label>
           <ion-list class="border_address" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="policeReport.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of policeReport" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -277,7 +308,7 @@
               </ion-col>
             </ion-grid>
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('policeReport')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -290,6 +321,7 @@
           </ion-col>
         </ion-row>
       </div>
+      </form>
     </swiper-slide>
 
     <swiper-slide>
@@ -312,7 +344,15 @@
           <ion-label class="label_text">Please Upload an Images of the license plate</ion-label>
           <ion-list class="border" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="licensePlate.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of licensePlate" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -321,7 +361,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('licensePlate')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -335,7 +375,15 @@
 
           <ion-list class="border" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="vinNo.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of vinNo" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -344,7 +392,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('vinNo')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -360,7 +408,15 @@
             back, and two sides of the car.</ion-label>
           <ion-list class="border" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="allFourSide.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of allFourSide" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -369,7 +425,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('allFourSide')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -378,7 +434,15 @@
           <ion-label class="label_text">Add close-up photos of damages to the vehicle.</ion-label>
           <ion-list class="border" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="closeUp.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of closeUp" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -387,7 +451,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('closeUp')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -447,7 +511,15 @@
             back, and two sides of the car.</ion-label>
           <ion-list class="border" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="otherPartyCarImage.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of otherPartyCarImage" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -456,7 +528,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('otherPartyCarImage')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -465,7 +537,15 @@
           <ion-label class="label_text">Add close-up photos of damages to the vehicle.</ion-label>
           <ion-list class="border" lines="none">
             <ion-grid>
-              <ion-col *ngFor="let file of files" size="3">
+              <ion-col *ngIf="otherPartyCloseUpImage.length===0" size="3">
+                <div class="image_holder">
+                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                </div>
+              </ion-col>
+              <ion-col *ngFor="let file of otherPartyCloseUpImage" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -474,7 +554,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker()">Add Image</ion-button>
+              <ion-button slot="end" class="add_image" (click)="openImagePicker('otherPartyCloseUpImage')">Add Image</ion-button>
             </ion-item>
           </ion-list>
         </div>

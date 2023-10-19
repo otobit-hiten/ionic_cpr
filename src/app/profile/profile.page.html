@@ -52,23 +52,22 @@
 
     <ion-label class="profile_header_one">Name</ion-label>
 
-    <ion-input [(ngModel)]="name" [readonly]="isEdit"></ion-input>
+    <ion-input [(ngModel)]="name" [readonly]="!isEdit" type="name"></ion-input>
 
     <ion-label class="profile_headers">Phone Number</ion-label>
 
-
-    <ion-input [(ngModel)]="phone" [readonly]="isEdit"></ion-input>
+    <ion-input [(ngModel)]="phone" [readonly]="!isEdit" type="Number"></ion-input>
 
     <ion-label class="profile_headers">Email</ion-label>
 
-    <ion-input [(ngModel)]="email"  [readonly]="isEdit" ></ion-input>
+    <ion-input [(ngModel)]="email"  [readonly]="!isEdit" type="Email" ></ion-input>
 
     <ion-label class="profile_headers">Policy Number</ion-label>
 
-    <ion-input [(ngModel)]="policyNo" [readonly]="isEdit"></ion-input>
+    <ion-input [(ngModel)]="policyNo" [readonly]="!isEdit" type=""></ion-input>
 
-    <ion-button *ngIf="!isEdit" class="submit"  shape="round" expand="block" (click)="update()"> Edit </ion-button>
+    <ion-button *ngIf="!isEdit " class="submit"  shape="round" expand="block" (click)="update()"> Edit </ion-button>
 
-    <ion-button *ngIf="isEdit" class="submit" shape="round" expand="block" (click)="set()" >Submit</ion-button>
+    <ion-button *ngIf="isEdit " class="submit" shape="round" expand="block" (click)="set()" >Submit</ion-button>
   </div>
 </ion-content>

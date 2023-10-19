@@ -1,7 +1,13 @@
+import { LocationPage } from './../location/location.page';
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/tabs/dashboard',
+    pathMatch: 'full',
+  },
   {
     path: 'tabs',
     component: TabsPage,
@@ -29,9 +35,18 @@ export const routes: Routes = [
             loadComponent: () => import('../contact-us/contact-us.page').then(m => m.ContactUsPage)
           },
           {
-            path: 'important-tips',
-            loadComponent: () => import('../important-tips/important-tips.page').then(m => m.ImportantTipsPage)
-          },
+            path: 'form',
+            children: [
+              {
+                path: '',
+                loadComponent: () => import('../form/form.page').then(m => m.FormPage)
+              },
+              {
+                path: 'location',
+                loadComponent: () => import('../location/location.page').then(m => m.LocationPage)
+              }
+            ]
+          }
         ]
       },
       {
@@ -54,10 +69,5 @@ export const routes: Routes = [
         ]
       }
     ],
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/dashboard',
-    pathMatch: 'full',
   }
 ];

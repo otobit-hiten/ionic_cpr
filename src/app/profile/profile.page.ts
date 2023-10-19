@@ -54,25 +54,26 @@ export class ProfilePage implements OnInit {
     this.isEdit=false;
     let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo, image: this.imageData }
     this.userService.create("user", JSON.stringify(user));
-    // this.userService.create("user","da÷ta");
   }
   async get() {
-    if (this.isEdit) {
-      this.isEdit = false;
-    }
+
     await this.userService.get("user").then((data: any) => {
-      if (data.value) {
-        this.dataExists=true;
+      console.log(data)
         let userData = JSON.parse(data.value);
         this.user = userData;
         this.name = this.user.name;
         this.phone = this.user.phone;
         this.email = this.user.email;
         this.policyNo = this.user.policyNo;
+        if(this.name===""&&this.phone===""&&this.email===""&&this.policyNo===""){
+          this.isEdit=true
+          console.log(this.isEdit)
+        }else{
+          this.isEdit=false
+          console.log(this.isEdit)
+        }
         this.imageData.name = this.user.image.name;
         this.imageData.base64 = this.user.image.base64;
-        this.isEdit = true;
-      }
     }
     );
   }
@@ -80,6 +81,7 @@ export class ProfilePage implements OnInit {
   update() {
     console.log(this.isEdit)
     this.isEdit=true;
+    console.log(this.isEdit)
   }
 
   clear() {

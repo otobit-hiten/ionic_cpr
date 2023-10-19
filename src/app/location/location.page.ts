@@ -20,7 +20,9 @@ import { Locations } from '../services/user';
   imports: [IonicModule, CommonModule, FormsModule,RouterModule]
 })
 export class LocationPage implements OnInit {
-  @ViewChild('map')mapRef:ElementRef | undefined;
+
+  @ViewChild('map')
+  mapRef!:ElementRef <HTMLElement>;
   newMap!: GoogleMap;
   marker :any;
   cordinates: LatLng = {lat: 0, lng: 0}
@@ -28,7 +30,7 @@ export class LocationPage implements OnInit {
 
 
   constructor(private ngZone: NgZone, private changeRef: ChangeDetectorRef,private router: Router) {
-    
+
   }
 
    async ngOnInit() {
@@ -61,16 +63,16 @@ export class LocationPage implements OnInit {
     await this.newMap.addMarker({
       coordinate: this.cordinates,
       draggable : true,
-      
+
     });
-    
+
     await this.newMap.setCamera({
       coordinate: this.cordinates,
       animate:true
     });
 
 
-    
+
      await this.newMap.setOnMarkerDragListener((event) => {
       this.drag = true;
          this.cordinates = {lat: event.latitude, lng: event.longitude}
@@ -87,7 +89,7 @@ export class LocationPage implements OnInit {
       //   draggable : true,
       // });
     })
-    
+
 
 
   }
@@ -101,7 +103,10 @@ export class LocationPage implements OnInit {
    getLocation(){
 
     let location: Locations = {lat:this.cordinates.lat, lng:this.cordinates.lng};
-    
+
+   }
+   navigate(){
+    // this.nav
    }
 }
 

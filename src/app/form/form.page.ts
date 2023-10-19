@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { IonicModule } from '@ionic/angular';
 import * as  Parse from 'parse';
 import { Swiper } from 'swiper'
-import { FilePicker, PickedFile } from '@capawesome/capacitor-file-picker';
+import { FilePicker, PickFilesResult, PickedFile } from '@capawesome/capacitor-file-picker';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Capacitor } from '@capacitor/core';
 import { VoiceRecorder, RecordingData } from 'capacitor-voice-recorder';
@@ -12,6 +12,7 @@ import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Cloudinary, ResourceType } from '@capawesome/capacitor-cloudinary';
 
 
 @Component({
@@ -52,6 +53,7 @@ export class FormPage implements OnInit {
   displayTime = '';
   time = 0;
   storedAudio: FileInfo[] = [];
+  uploadAudio: any[] = [];
   public playback = false;
   ref = new Audio();
   selectedItem: any;
@@ -69,19 +71,8 @@ export class FormPage implements OnInit {
   public closeUp: PickedFile[] = [];
   public otherPartyCarImage: PickedFile[] = [];
   public otherPartyCloseUpImage: PickedFile[] = [];
-
-  involvedPartiesArray = [];
-  involvedPartiesObject = {name: '', idImage:[], contact: '', insuranceCompany:'', insuranceImage:[]};
-
-  ngOnInit() {
-    this.swiperReady()
-    VoiceRecorder.requestAudioRecordingPermission()
-    // this.loadAudio();
-    this.witnessArray.push(this.witnessObj)
-    
-    console.log(this.witnessArray.length)
-
-  }
+  involvedPartiesArray : any =[];
+  involvedPartiesObject = { name: '', idImage: [], contact: '', insuranceCompany: '', insuranceImage: [] };
 
   constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService) {
     console.log(this.swiperRef?.nativeElement.swiper);
@@ -91,7 +82,7 @@ export class FormPage implements OnInit {
 
     this.slideOneForm = formBuilder.group({
       name_insured: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*')])],
-      policy_no: ['', Validators.compose([Validators.maxLength(30),Validators.pattern('^\\d+$')])],
+      policy_no: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^\\d+$')])],
       tell_us_what_happened: ['', Validators.compose([Validators.maxLength(30)])],
     });
 
@@ -104,6 +95,21 @@ export class FormPage implements OnInit {
     })
   }
 
+  ngOnInit() {
+    this.swiperReady()
+    VoiceRecorder.requestAudioRecordingPermission()
+    // this.loadAudio();
+    this.witnessArray.push(this.witnessObj)
+    this.involvedPartiesArray.push(this.involvedPartiesObject)
+    console.log(this.witnessArray.length)
+    this.initialize();
+
+  }
+
+  async initialize() {
+    await Cloudinary.initialize({ cloudName: 'dbdfrtxli' });
+    console.log('initialize');
+  };
 
 
   get errorControl() {
@@ -115,6 +121,7 @@ export class FormPage implements OnInit {
       console.log(this.slideOneForm.value);
       this.swiper = await this.swiperRef?.nativeElement.swiper;
       this.goNext();
+      this.uploadAudioToCloudinary()
     } else {
       return console.log('Please provide all the required values!');
     }
@@ -128,6 +135,7 @@ export class FormPage implements OnInit {
       return console.log('Please provide all the required values!');
     }
   }
+
 
 
 
@@ -183,8 +191,6 @@ export class FormPage implements OnInit {
 
 
 
-
- 
   async call() {
     try {
       console.log("Calling...")
@@ -203,19 +209,8 @@ export class FormPage implements OnInit {
     this.goNext();
   }
 
-  async next_one() {
-    if (this.slideOneForm.valid) {
-      console.log("Form Validation Passed");
-      this.swiper = await this.swiperRef?.nativeElement.swiper;
-      this.goNext();
-    } else {
-      console.log("Form Validation Failed");
-    }
-  }
-
   goNext() {
     console.log('changed: ');
-    // $ionicScrollDelegate.scrollTop();
     this.swiper?.slideNext(500);
   }
 
@@ -229,32 +224,34 @@ export class FormPage implements OnInit {
   }
 
 
-
-
   //imagePicker
-
-  async openImagePicker(name:string) :Promise<void>{
+  async openImagePicker(name: string): Promise<void> {
     const result = await FilePicker.pickImages({
       multiple: true,
       readData: true,
     }).then(data => {
-      if(name === "actualAreaOfDamage"){
+      if (name === "actualAreaOfDamage") {
         this.actualAreaOfDamage = data.files
+        this.actualAreaOfDamage.forEach(async file => {
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm442awuh',
+          })
+        })
       }
 
     });
-    console.log(name);
-    
-    
   }
 
+  // convert path of image
   public convertPathToWebPath(path: string): SafeUrl {
     const fileSrc = Capacitor.convertFileSrc(path);
     return this.domSanitizer.bypassSecurityTrustUrl(fileSrc);
   }
 
 
-  //voice Record
+  //voice record load, start, stop and timer
   loadAudio() {
     Filesystem.readdir({
       path: '',
@@ -317,39 +314,36 @@ export class FormPage implements OnInit {
     }, 1000)
   }
 
+
+
+  // play and delete recorded audio
   async play(fileName: any) {
     const audioFile = await Filesystem.readFile({
       path: fileName,
       directory: Directory.External
-
     });
-
     if (this.track != this.selectedItem) {
       this.playback = false;
     } else {
       this.playback = true;
     }
-
     const base64Sound = audioFile.data
     if (!this.playback) {
       this.ref.src = `data:audio/aac;base64,${base64Sound}`
       this.ref.play();
       this.track = this.selectedItem
     }
-
     if (this.playback) {
       this.ref.pause()
       this.playback = false
       this.selectedItem = null
       this.track = this.selectedItem
     }
-
     let play = this;
     this.ref.onplaying = function (eve) {
       console.log(eve)
       play.playback = true;
     }
-
     this.ref.onended = function (e) {
       console.log(e);
       play.playback = false;
@@ -359,16 +353,99 @@ export class FormPage implements OnInit {
   }
 
   async deleteAudio(fileName: any) {
+    this.play(fileName)
     console.log(fileName)
     await Filesystem.deleteFile({
       path: fileName,
       directory: Directory.External
     })
     this.loadAudio();
-
-
   }
 
+
+  //upload and delete uploaded audio from device
+  async addAudio() {
+    await FilePicker.pickFiles({
+      types: ['audio/aac'],
+    }).then(async res => {
+      this.uploadAudio.push(res.files[0]);
+    
+    });
+  }
+
+  async playUploadAudio(file: any) {
+    const contents = await Filesystem.readFile({
+      path: file.path!,
+    })
+    console.log(contents.data)
+  
+    if (this.track != this.selectedItem) {
+      this.playback = false;
+    } else {
+      this.playback = true;
+    }
+
+    if (!this.playback) {
+      this.ref.src = `data:audio/aac;base64,${contents.data}`
+      this.ref.play();
+      this.track = this.selectedItem
+
+    }
+    if (this.playback) {
+      this.ref.pause()
+      this.playback = false
+      this.selectedItem = null
+      this.track = this.selectedItem
+    }
+    let play = this;
+    this.ref.onplaying = function (eve) {
+      console.log(eve)
+      play.playback = true;
+    }
+    this.ref.onended = function (e) {
+      console.log(e);
+      play.playback = false;
+      play.selectedItem = null;
+      play.track = play.selectedItem
+    }
+    
+  }
+
+  deleteUploadAudio(file: any,index: number) {
+    this.playUploadAudio(file)
+    this.uploadAudio.splice(index, 1)
+    console.log(this.uploadAudio, index)
+  }
+
+
+
+  // upload audio to Cloudinary
+  async uploadAudioToCloudinary() {
+    this.storedAudio.forEach(async element => {
+      await Cloudinary.uploadResource({
+        path: element.uri,
+        resourceType: ResourceType.Video,
+        uploadPreset: 'm442awuh',
+      }).then(response => {
+        console.log("Successfully uploaded 1")
+      })
+    });
+
+    this.uploadAudio.forEach(async element => {
+      await Cloudinary.uploadResource({
+        path: element.path,
+        resourceType: ResourceType.Video,
+        uploadPreset: 'm442awuh',
+      }).then(response => {
+        console.log("Successfully uploaded 2")
+      })
+    });
+  }
+
+
+
+
+  // add and remove witness
   addWitness() {
     console.log(this.witnessArray)
     this.witnessArray.push(this.witnessObj);
@@ -379,13 +456,22 @@ export class FormPage implements OnInit {
     console.log(this.witnessArray)
   }
 
-  async addAudio(){
-    const result = await FilePicker.pickFiles({
-      types: ['audio/aac'],
+  addInvolvedParty(){
+    this.involvedPartiesArray.push(this.involvedPartiesObject)
+    console.log(this.involvedPartiesArray)
+  }
 
-      readData:true
-    });
-    console.log(result);
+  deleteInvolvedParty(i: number) {
+    this.involvedPartiesArray.splice(i, 1);
+  }
+
+
+  removeImage(index: number, name: string) {
+    console.log(this.actualAreaOfDamage.length)
+    if(name == "actualAreaOfDamage"){
+      this.actualAreaOfDamage.splice(index, 1);
+    }
+    console.log(this.actualAreaOfDamage.length)
   }
 
 }

@@ -103,6 +103,18 @@
                 </ion-button>
               </ion-item>
             </ion-list>
+
+            <ion-list lines="none">
+              <ion-item button *ngFor="let k of uploadAudio; let l = index ">
+                {{k.name}}
+                <ion-button slot="end" (click)="playUploadAudio(k); selectedItem = l">
+                  <ion-icon [name]="selectedItem === l ? 'stop' : 'play'"></ion-icon>
+                </ion-button>
+                <ion-button slot="end" color="primary" (click)="deleteUploadAudio(k,l)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
+            </ion-list>
           </div>
 
           <ion-button class="next_button" type="submit" expand="block">Next</ion-button>
@@ -150,9 +162,9 @@
                 <img class="imag_prev" src="assets/img_holder.png" />
               </div>
             </ion-col>
-            <ion-col *ngFor="let file of actualAreaOfDamage" size="3">
+            <ion-col *ngFor="let file of actualAreaOfDamage; let i = index" size="3">
               <div class="image_holder">
-                <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
+                <ion-icon class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,'actualAreaOfDamage')"></ion-icon>
                 <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
               </div>
             </ion-col>
@@ -224,7 +236,7 @@
         <div>
           <ion-label>Who was involved in the accident?</ion-label>
         </div>
-        <ion-list *ngFor="let data of involvedPartiesArray">
+        <ion-list *ngFor="let data of involvedPartiesArray; let i = index">
 
         <div>
           <ion-label> Name of other party </ion-label>
@@ -279,7 +291,7 @@
                   <img class="imag_prev" src="assets/img_holder.png" />
                 </div>
               </ion-col>
-              <ion-col *ngFor="let file of insuranceIdImage" size="3">
+              <ion-col *ngFor="let file of involvedPartiesArray" size="3">
                 <div class="image_holder">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -291,7 +303,18 @@
             </ion-item>
           </ion-list>
         </div>
-        </ion-list>
+       
+
+
+        <ion-item *ngIf="involvedPartiesArray.length > 1 && i!==0">
+          <ion-button slot="end" (click)="deleteInvolvedParty(i)">Remove</ion-button>
+        </ion-item>
+
+        <ion-button shape="round" fill="outline" size="small" (click)="addInvolvedParty()">
+          <ion-icon name="add-outline"></ion-icon>
+          Add More Party
+        </ion-button>
+ </ion-list>
         <div class="sixth_label">Were there any witnesses?</div>
         <div>
           <ion-label class="sixth_label"> Witness name </ion-label>

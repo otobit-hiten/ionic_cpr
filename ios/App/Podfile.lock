@@ -24,8 +24,14 @@ PODS:
     - Capacitor
   - CapacitorVoiceRecorder (5.0.0):
     - Capacitor
+  - CapawesomeCapacitorCloudinary (5.1.0):
+    - Capacitor
+    - Cloudinary (= 3.3.0)
   - CapawesomeCapacitorFilePicker (5.1.1):
     - Capacitor
+  - Cloudinary (3.3.0):
+    - Cloudinary/ios (= 3.3.0)
+  - Cloudinary/ios (3.3.0)
   - Google-Maps-iOS-Utils (4.2.2):
     - Google-Maps-iOS-Utils/Clustering (= 4.2.2)
     - Google-Maps-iOS-Utils/Geometry (= 4.2.2)
@@ -64,10 +70,12 @@ DEPENDENCIES:
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - CapacitorVoiceRecorder (from `../../node_modules/capacitor-voice-recorder`)
+  - "CapawesomeCapacitorCloudinary (from `../../node_modules/@capawesome/capacitor-cloudinary`)"
   - "CapawesomeCapacitorFilePicker (from `../../node_modules/@capawesome/capacitor-file-picker`)"
 
 SPEC REPOS:
   trunk:
+    - Cloudinary
     - Google-Maps-iOS-Utils
     - GoogleMaps
 
@@ -96,6 +104,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
   CapacitorVoiceRecorder:
     :path: "../../node_modules/capacitor-voice-recorder"
+  CapawesomeCapacitorCloudinary:
+    :path: "../../node_modules/@capawesome/capacitor-cloudinary"
   CapawesomeCapacitorFilePicker:
     :path: "../../node_modules/@capawesome/capacitor-file-picker"
 
@@ -112,10 +122,12 @@ SPEC CHECKSUMS:
   CapacitorSplashScreen: 5fa2ab5e46cf5cc530cf16a51c80c7a986579ccd
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
   CapacitorVoiceRecorder: 872ea857b497ce2c71afe3e4eb5de0a74290c0db
+  CapawesomeCapacitorCloudinary: b26aa866e62b502e3c4dd2b2fc36446d34e28d4f
   CapawesomeCapacitorFilePicker: 4a27a464c569de315738fcb7bdd3ad544ef3c7c2
+  Cloudinary: c6a6a66b8b9aac18dce2ad54eb0243ea5e5119b8
   Google-Maps-iOS-Utils: f77eab4c4326d7e6a277f8e23a0232402731913a
   GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
 
-PODFILE CHECKSUM: b2690992b61866dae99d66e1870ccc9bc9b63702
+PODFILE CHECKSUM: 5ff50f51285c102080962ee1ebcdc0acddd88b17
 
 COCOAPODS: 1.12.1

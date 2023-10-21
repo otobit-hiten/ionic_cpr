@@ -3,30 +3,14 @@
     <ion-row class="ion-justify-content-between">
       <ion-col size="2">
         <ion-buttons>
-          <ion-back-button
-            defaultHref="/tabs/dashboard"
-            icon="assets/back_button.svg"
-          ></ion-back-button>
+          <ion-back-button defaultHref="/tabs/dashboard" icon="assets/back_button.svg"></ion-back-button>
         </ion-buttons>
       </ion-col>
-      <ion-col size="6.5" class="logo"
-        ><img class="logo" src="assets/cpr_logo.png"
-      /></ion-col>
-      <ion-col size="2.8" class="lang-sel"
-        ><ion-select
-          class="holder"
-          [compareWith]="compareWith"
-          value="{{MyDefaultValue}}"
-          placeholder="Language"
-          (ionChange)="ionChange($event)"
-          shape="round"
-          interface="popover"
-        >
-          <ion-select-option
-            *ngFor="let lang of languageList"
-            [value]="lang.code"
-            >{{lang.title}}</ion-select-option
-          >
+      <ion-col size="6.5" class="logo"><img class="logo" src="assets/cpr_logo.png" /></ion-col>
+      <ion-col size="2.8" class="lang-sel"><ion-select class="holder" [compareWith]="compareWith"
+          value="{{MyDefaultValue}}" placeholder="Language" (ionChange)="ionChange($event)" shape="round"
+          interface="popover">
+          <ion-select-option *ngFor="let lang of languageList" [value]="lang.code">{{lang.title}}</ion-select-option>
 
         </ion-select>
       </ion-col>
@@ -49,7 +33,8 @@
           <div class="what_happen">
             <ion-label class="label_text_policy">Policy</ion-label>
             <div class="black_line"></div>
-            <div *ngIf="this.slideOneForm.controls?.name_insured?.touched && this.slideOneForm.controls?.name_insured?.invalid">
+            <div
+              *ngIf="this.slideOneForm.controls?.name_insured?.touched && this.slideOneForm.controls?.name_insured?.invalid">
               <div *ngIf="this.slideOneForm.controls?.name_insured?.errors?.pattern">
                 <ion-text color="danger">Please Enter Name</ion-text>
               </div>
@@ -58,7 +43,8 @@
             <ion-input class="textarea" placeholder="Name Insured" formControlName="name_insured"></ion-input>
 
 
-            <div *ngIf="this.slideOneForm.controls?.policy_no?.touched && this.slideOneForm.controls?.policy_no?.invalid">
+            <div
+              *ngIf="this.slideOneForm.controls?.policy_no?.touched && this.slideOneForm.controls?.policy_no?.invalid">
               <div *ngIf="this.slideOneForm.controls?.policy_no?.errors?.pattern">
                 <ion-text color="danger">Please Enter Policy Number.</ion-text>
               </div>
@@ -73,7 +59,8 @@
             <div class="second_label">What Happened?</div>
             <div class="black_line"></div>
             <div class="third-label">Tell us what Happened?</div>
-            <div *ngIf="this.slideOneForm.controls?.tell_us_what_happened?.touched && this.slideOneForm.controls?.tell_us_what_happened?.invalid">
+            <div
+              *ngIf="this.slideOneForm.controls?.tell_us_what_happened?.touched && this.slideOneForm.controls?.tell_us_what_happened?.invalid">
               <div *ngIf="this.slideOneForm.controls?.tell_us_what_happened?.errors?.required">
                 <ion-text color="danger">Please Tell Us What Happened?</ion-text>
               </div>
@@ -84,14 +71,14 @@
 
             <ion-label class="label_text_radio">Record Audio</ion-label>
             <div><ion-item class="record_audio" lines="none">
-              <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
-                color="primary"></ion-icon>
-              <ion-label> Record Audio </ion-label>
-              <span *ngIf="recording"> {{displayTime}}</span>
-              <ion-icon *ngIf="!recording" name="add-outline" class="add_audio" (click)="addAudio()"></ion-icon>
-            </ion-item>
+                <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
+                  color="primary"></ion-icon>
+                <ion-label> Record Audio </ion-label>
+                <span *ngIf="recording"> {{displayTime}}</span>
+                <ion-icon *ngIf="!recording" name="add-outline" class="add_audio" (click)="addAudio()"></ion-icon>
+              </ion-item>
 
-          </div>
+            </div>
             <ion-list lines="none">
               <ion-item button *ngFor="let j of storedAudio; let i = index ">
                 {{j.name}}
@@ -130,73 +117,43 @@
       </ion-label>
 
       <form [formGroup]="slideTwoForm" (ngSubmit)="submitTwoForm()">
-      <div class="form_2">
-        <div class="address">
-          <ion-label class="label_text">Where did the incident take place?</ion-label>
-          <div class="black_line"></div>
-          <ion-label class="label_text">Address of accident</ion-label>
-          <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
-            [routerLink]="['location']" >
-            <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-            <ion-text>Address of Accident</ion-text>
-          </ion-item>
-          <ion-input formControlName="address_of_accident"></ion-input>
-          <div *ngIf="this.slideTwoForm.controls?.address_of_accident?.touched && this.slideTwoForm.controls?.address_of_accident?.invalid">
-            <div *ngIf="this.slideTwoForm.controls?.address_of_accident?.errors?.required">
-              <ion-text color="danger">Please Select Location?</ion-text>
+        <div class="form_2">
+          <div class="address">
+            <ion-label class="label_text">Where did the incident take place?</ion-label>
+            <div class="black_line"></div>
+            <ion-label class="label_text">Address of accident</ion-label>
+            <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
+              [routerLink]="['location']">
+              <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
+              <ion-text>Address of Accident</ion-text>
+            </ion-item>
+            <ion-input formControlName="address_of_accident"></ion-input>
+            <div
+              *ngIf="this.slideTwoForm.controls?.address_of_accident?.touched && this.slideTwoForm.controls?.address_of_accident?.invalid">
+              <div *ngIf="this.slideTwoForm.controls?.address_of_accident?.errors?.required">
+                <ion-text color="danger">Please Select Location?</ion-text>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="fifth_label">
-          Pictures of the accident location and its surroundings
-        </div>
-        <div class="black_line"></div>
-        <ion-label class="sixth_label">Pictures of the actual area of damage from the accident. Close up and
-          from about 10 feet.</ion-label>
-        <ion-list class="border_address" lines="none">
-          <ion-grid>
-            <ion-col *ngIf="actualAreaOfDamage.length===0" size="2">
-              <div class="image_holder">
-                <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
-                <img class="imag_prev" src="assets/img_holder.png" />
-                <img class="imag_prev" src="assets/img_holder.png" />
-              </div>
-            </ion-col>
-            <ion-col *ngFor="let file of actualAreaOfDamage; let i = index" size="3">
-              <div class="image_holder">
-                <ion-icon class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,'actualAreaOfDamage')"></ion-icon>
-                <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
-              </div>
-            </ion-col>
-          </ion-grid>
-
-          <ion-item>
-            <ion-label class="ion-text-wrap">Pictures of the location of the vehicles immediately after the
-              accident. Pictures of the nearest street sign indicating street
-              name and direction of the photo.</ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-button slot="end" class="add_image" (click)="openImagePicker('actualAreaOfDamage')">Add Image</ion-button>
-          </ion-item>
-        </ion-list>
-        <div class="upload_scene">
-          <ion-label class="sixth_label">Pictures of the nearest street sign indicating street name and
-            direction of the photo.</ion-label>
-          Address of accident
+          <div class="fifth_label">
+            Pictures of the accident location and its surroundings
+          </div>
+          <div class="black_line"></div>
+          <ion-label class="sixth_label">Pictures of the actual area of damage from the accident. Close up and
+            from about 10 feet.</ion-label>
           <ion-list class="border_address" lines="none">
             <ion-grid>
-              <ion-col *ngIf="nearestStreet.length===0" size="3">
+              <ion-col *ngIf="actualAreaOfDamage.length===0" size="2">
                 <div class="image_holder">
                   <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
                   <img class="imag_prev" src="assets/img_holder.png" />
                   <img class="imag_prev" src="assets/img_holder.png" />
                 </div>
               </ion-col>
-
-              <ion-col *ngFor="let file of nearestStreet" size="3">
+              <ion-col *ngFor="let file of actualAreaOfDamage; let i = index" size="3">
                 <div class="image_holder">
-                  <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
+                  <ion-icon class="imag_icon" src="assets/img_del.svg"
+                    (click)="removeImage(i,'actualAreaOfDamage')"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
                 </div>
               </ion-col>
@@ -209,20 +166,54 @@
             </ion-item>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('nearestStreet')">Add Image</ion-button>
+              <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('actualAreaOfDamage')">Add
+                Image</ion-button> -->
             </ion-item>
           </ion-list>
-        </div>
+          <div class="upload_scene">
+            <ion-label class="sixth_label">Pictures of the nearest street sign indicating street name and
+              direction of the photo.</ion-label>
+            Address of accident
+            <ion-list class="border_address" lines="none">
+              <ion-grid>
+                <ion-col *ngIf="nearestStreet.length===0" size="3">
+                  <div class="image_holder">
+                    <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                    <img class="imag_prev" src="assets/img_holder.png" />
+                    <img class="imag_prev" src="assets/img_holder.png" />
+                  </div>
+                </ion-col>
 
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" (click)="goPrev()">Previous</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button expand="block" type="submit">Next</ion-button>
-          </ion-col>
-        </ion-row>
-      </div>
+                <ion-col *ngFor="let file of nearestStreet" size="3">
+                  <div class="image_holder">
+                    <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
+                    <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
+                  </div>
+                </ion-col>
+              </ion-grid>
+
+              <ion-item>
+                <ion-label class="ion-text-wrap">Pictures of the location of the vehicles immediately after the
+                  accident. Pictures of the nearest street sign indicating street
+                  name and direction of the photo.</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('nearestStreet')">Add
+                  Image</ion-button> -->
+              </ion-item>
+            </ion-list>
+          </div>
+
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" (click)="goPrev()">Previous</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button expand="block" type="submit">Next</ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
       </form>
     </swiper-slide>
 
@@ -232,136 +223,144 @@
         Involved Parties</ion-label>
 
       <form [formGroup]="slideThreeForm" (ngSubmit)="submitOneForm()">
-      <div class="form_3">
-        <div>
-          <ion-label>Who was involved in the accident?</ion-label>
-        </div>
-        <ion-list *ngFor="let data of involvedPartiesArray; let i = index">
+        <div class="form_3">
+          <div>
+            <ion-label>Who was involved in the accident?</ion-label>
+          </div>
+          <div formArrayName="involvedParties">
+            <ion-button shape="round" fill="outline" size="small" (click)="addInvolvedParties()">
+              Add involved party
+            <ion-icon slot="start" name="add-outline"></ion-icon></ion-button>
 
-        <div>
-          <ion-label> Name of other party </ion-label>
-          <ion-input placeholder="Name of other party"></ion-input>
-        </div>
-        <div>
-          <ion-label>Add photo of license or ID of other party</ion-label>
-          <ion-list class="border_address" lines="none">
-            <ion-grid>
-              <ion-col *ngIf="liscenseAndNoPlate.length===0" size="3">
-                <div class="image_holder">
-                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                </div>
-              </ion-col>
-              <ion-col *ngFor="let file of liscenseAndNoPlate" size="3">
-                <div class="image_holder">
-                  <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                  <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
-                </div>
-              </ion-col>
-            </ion-grid>
+            <ion-list *ngFor="let data of involvedParties().controls; let i = index" [formGroupName]="i">
+              <div>
+                <ion-label> Name of other party </ion-label>
+                <ion-input placeholder="Name of other party" formControlName="name" class="form-control"></ion-input>
+              </div>
+              <div>
+                <ion-label>Add photo of license or ID of other party</ion-label>
+                <ion-list class="border_address" lines="none" >
+                  <ion-grid>
+                    <ion-col *ngIf="involvedPartiesArray[i].idImage.length===0" size="3">
+                      <div class="image_holder">
+                        <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                        <img class="imag_prev" src="assets/img_holder.png" />
+                        <img class="imag_prev" src="assets/img_holder.png" />
+                      </div>
+                    </ion-col>
+                    <ion-col *ngFor="let file of involvedPartiesArray[i].idImage" size="3">
+                      <div class="image_holder">
+                        <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
+                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
+                      </div>
+                    </ion-col>
+                  </ion-grid>
+  
+                  <ion-item>
+                    <ion-label class="ion-text-wrap">Pictures of the license plate and drivers ID</ion-label>
+                  </ion-item>
+  
+                  <ion-item>
+                    <ion-button slot="end" class="add_image" (click)="openImagePicker('idImage',i)">Add
+                      Image</ion-button>
+                  </ion-item>
+                </ion-list>
+              </div>
+              <div>
+                <ion-label> Contact phone number </ion-label>
+                <ion-input placeholder="Contact phone number" formControlName="number" class="form-control"></ion-input>
+              </div>
+              <div>
+                <ion-label> Other Party’s Insurance Company </ion-label>
+                <ion-input placeholder="Other Party’s Insurance Company" formControlName="insuranceCompany" class="form-control"></ion-input>
+              </div>
+              <div>
+                <ion-label>Please Upload Your Insurance ID’s Images</ion-label>
+                <ion-list class="border_address" lines="none">
+                  <ion-grid>
+                    <ion-col *ngIf="involvedPartiesArray[i].insuranceImage.length===0" size="3">
+                      <div class="image_holder">
+                        <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                        <img class="imag_prev" src="assets/img_holder.png" />
+                        <img class="imag_prev" src="assets/img_holder.png" />
+                      </div>
+                    </ion-col>
+                    <ion-col *ngFor="let file of involvedPartiesArray[i].insuranceImage" size="3">
+                      <div class="image_holder">
+                        <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
+                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
+                      </div>
+                    </ion-col>
+                  </ion-grid>
+                  <ion-item>
+                    <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('insuranceIdImage')">Add
+                      Image</ion-button> -->
+                  </ion-item>
+                </ion-list>
+              </div>
+              <ion-button shape="round" fill="outline" size="small" (click)="removeInvolvedParties(i)">
 
-            <ion-item>
-              <ion-label class="ion-text-wrap">Pictures of the license plate and drivers ID</ion-label>
-            </ion-item>
-
-            <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('liscenseAndNoPlate')">Add Image</ion-button>
-            </ion-item>
-          </ion-list>
-        </div>
-        <div>
-          <ion-label> Contact phone number </ion-label>
-          <ion-input placeholder="Contact phone number"></ion-input>
-        </div>
-        <div>
-          <ion-label> Other Party’s Insurance Company </ion-label>
-          <ion-input placeholder="Other Party’s Insurance Company"></ion-input>
-        </div>
-        <div>
-          <ion-label>Please Upload Your Insurance ID’s Images</ion-label>
-          <ion-list class="border_address" lines="none">
-            <ion-grid>
-              <ion-col *ngIf="insuranceIdImage.length===0" size="3">
-                <div class="image_holder">
-                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                </div>
-              </ion-col>
-              <ion-col *ngFor="let file of involvedPartiesArray" size="3">
-                <div class="image_holder">
-                  <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                  <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
-                </div>
-              </ion-col>
-            </ion-grid>
-            <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('insuranceIdImage')">Add Image</ion-button>
-            </ion-item>
-          </ion-list>
-        </div>
-       
+              <ion-icon name="trash-outline" ></ion-icon></ion-button>
+            </ion-list>
 
 
-        <ion-item *ngIf="involvedPartiesArray.length > 1 && i!==0">
-          <ion-button slot="end" (click)="deleteInvolvedParty(i)">Remove</ion-button>
-        </ion-item>
-
-        <ion-button shape="round" fill="outline" size="small" (click)="addInvolvedParty()">
-          <ion-icon name="add-outline"></ion-icon>
-          Add More Party
-        </ion-button>
- </ion-list>
-        <div class="sixth_label">Were there any witnesses?</div>
-        <div>
-          <ion-label class="sixth_label"> Witness name </ion-label>
-          <ion-input placeholder="Witness name"></ion-input>
-          <ion-label class="sixth_label"> Witness phone number </ion-label>
-          <ion-input placeholder="Witness phone number"></ion-input>
+          </div>
+         
+          <div class="sixth_label">Were there any witnesses?</div>
+          <div formNameArray="witness"> 
+            <ion-button shape="round" fill="outline" size="small" (click)="addWitness()">
+              Add Witness
+            <ion-icon slot="start" name="add-outline"></ion-icon></ion-button>
+          <div *ngFor="let data of witness().controls; let i = index" [formGroupName]="i">
+            <ion-label class="sixth_label"> Witness name </ion-label>
+            <ion-input placeholder="Witness name" formControlName="name" class="form-control"></ion-input>
+            <ion-label class="sixth_label"> Witness phone number </ion-label>
+            <ion-input placeholder="Witness phone number" formControlName="number" class="form-control"></ion-input>
+            <ion-button shape="round" fill="outline" size="small" (click)="removeWitness(i)">
+            <ion-icon name="trash-outline"></ion-icon></ion-button>
+          </div>
         </div>
-        <div class="sixth_label">Was there a police report?</div>
-        <div>
-          <ion-label class="sixth_label"> Police officer name </ion-label>
-          <ion-input placeholder="Police officer name"></ion-input>
-          <ion-label class="sixth_label"> Police report number </ion-label>
-          <ion-input placeholder="Police report number "></ion-input>
+          <div class="sixth_label">Was there a police report?</div>
+          <div>
+            <ion-label class="sixth_label"> Police officer name </ion-label>
+            <ion-input placeholder="Police officer name"></ion-input>
+            <ion-label class="sixth_label"> Police report number </ion-label>
+            <ion-input placeholder="Police report number "></ion-input>
+          </div>
+          <div>
+            <ion-label>Please Upload Police Report Images</ion-label>
+            <ion-list class="border_address" lines="none">
+              <ion-grid>
+                <ion-col *ngIf="policeReport.length===0" size="3">
+                  <div class="image_holder">
+                    <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                    <img class="imag_prev" src="assets/img_holder.png" />
+                    <img class="imag_prev" src="assets/img_holder.png" />
+                    <img class="imag_prev" src="assets/img_holder.png" />
+                  </div>
+                </ion-col>
+                <ion-col *ngFor="let file of policeReport" size="3">
+                  <div class="image_holder">
+                    <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
+                    <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
+                  </div>
+                </ion-col>
+              </ion-grid>
+              <ion-item>
+                <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('policeReport')">Add
+                  Image</ion-button> -->
+              </ion-item>
+            </ion-list>
+          </div>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" (click)="goPrev()">Previous</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button expand="block" (click)="goNext()">Next</ion-button>
+            </ion-col>
+          </ion-row>
         </div>
-        <div>
-          <ion-label>Please Upload Police Report Images</ion-label>
-          <ion-list class="border_address" lines="none">
-            <ion-grid>
-              <ion-col *ngIf="policeReport.length===0" size="3">
-                <div class="image_holder">
-                  <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                  <img class="imag_prev" src="assets/img_holder.png" />
-                </div>
-              </ion-col>
-              <ion-col *ngFor="let file of policeReport" size="3">
-                <div class="image_holder">
-                  <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                  <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
-                </div>
-              </ion-col>
-            </ion-grid>
-            <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('policeReport')">Add Image</ion-button>
-            </ion-item>
-          </ion-list>
-        </div>
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" (click)="goPrev()">Previous</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button expand="block" (click)="goNext()">Next</ion-button>
-          </ion-col>
-        </ion-row>
-      </div>
       </form>
     </swiper-slide>
 
@@ -402,7 +401,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('licensePlate')">Add Image</ion-button>
+              <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('licensePlate')">Add Image</ion-button> -->
             </ion-item>
           </ion-list>
         </div>
@@ -433,7 +432,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('vinNo')">Add Image</ion-button>
+              <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('vinNo')">Add Image</ion-button> -->
             </ion-item>
           </ion-list>
         </div>
@@ -466,7 +465,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('allFourSide')">Add Image</ion-button>
+              <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('allFourSide')">Add Image</ion-button> -->
             </ion-item>
           </ion-list>
         </div>
@@ -492,7 +491,7 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('closeUp')">Add Image</ion-button>
+              <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('closeUp')">Add Image</ion-button> -->
             </ion-item>
           </ion-list>
         </div>
@@ -569,7 +568,8 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('otherPartyCarImage')">Add Image</ion-button>
+              <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('otherPartyCarImage',i)">Add
+                Image</ion-button> -->
             </ion-item>
           </ion-list>
         </div>
@@ -595,7 +595,8 @@
             </ion-grid>
 
             <ion-item>
-              <ion-button slot="end" class="add_image" (click)="openImagePicker('otherPartyCloseUpImage')">Add Image</ion-button>
+              <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('otherPartyCloseUpImage')">Add -->
+                <!-- Image</ion-button> -->
             </ion-item>
           </ion-list>
         </div>

@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import * as  Parse from 'parse';
 import { Swiper } from 'swiper'
@@ -71,8 +71,9 @@ export class FormPage implements OnInit {
   public closeUp: PickedFile[] = [];
   public otherPartyCarImage: PickedFile[] = [];
   public otherPartyCloseUpImage: PickedFile[] = [];
+
   involvedPartiesArray : any =[];
-  involvedPartiesObject = { name: '', idImage: [], contact: '', insuranceCompany: '', insuranceImage: [] };
+  involvedPartiesObject = {idImage: [], insuranceImage: [] };
 
   constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService) {
     console.log(this.swiperRef?.nativeElement.swiper);
@@ -90,9 +91,49 @@ export class FormPage implements OnInit {
       address_of_accident: ['']
     });
 
-    this.slideThreeForm = formBuilder.group({
-
+    this.slideThreeForm = this.formBuilder.group({
+        involvedParties: this.formBuilder.array([]),
+        witness: this.formBuilder.array([]),
     })
+  }
+
+  involvedParties():FormArray{
+    return this.slideThreeForm.get("involvedParties") as FormArray
+  }
+  newInvolvedParties():FormGroup{
+    return this.formBuilder.group({
+        name:'',
+        idImage:[],
+        number:'',
+        insuranceCompany: '',
+        insuranceImage:[]        
+    })
+  }
+  addInvolvedParties(){
+    let involvedPartiesObjects = {idImage: [], insuranceImage: [] };
+    this.involvedPartiesArray.push(involvedPartiesObjects)
+    this.involvedParties().push(this.newInvolvedParties());
+  }
+  removeInvolvedParties(i:number){
+    this.involvedPartiesArray.splice(i,1)
+    this.involvedParties().removeAt(i)
+  }
+
+
+  witness():FormArray{
+    return this.slideThreeForm.get("witness") as FormArray
+  }
+  newWitness():FormGroup{
+    return this.formBuilder.group({
+      name:'',
+      number:'',
+    })
+  }
+  addWitness(){
+    this.witness().push(this.newWitness());
+  }
+  removeWitness(i:number){
+    this.witness().removeAt(i)
   }
 
   ngOnInit() {
@@ -100,7 +141,6 @@ export class FormPage implements OnInit {
     VoiceRecorder.requestAudioRecordingPermission()
     // this.loadAudio();
     this.witnessArray.push(this.witnessObj)
-    this.involvedPartiesArray.push(this.involvedPartiesObject)
     console.log(this.witnessArray.length)
     this.initialize();
 
@@ -225,7 +265,8 @@ export class FormPage implements OnInit {
 
 
   //imagePicker
-  async openImagePicker(name: string): Promise<void> {
+  async openImagePicker(name: string,i:number): Promise<void> {
+    console.log(i)
     const result = await FilePicker.pickImages({
       multiple: true,
       readData: true,
@@ -239,6 +280,10 @@ export class FormPage implements OnInit {
             uploadPreset: 'm442awuh',
           })
         })
+      }
+      if (name === "idImage") {
+        this.involvedPartiesArray[i].idImage = data.files
+        console.log(this.involvedPartiesArray)
       }
 
     });
@@ -446,10 +491,10 @@ export class FormPage implements OnInit {
 
 
   // add and remove witness
-  addWitness() {
-    console.log(this.witnessArray)
-    this.witnessArray.push(this.witnessObj);
-  }
+  // addWitness() {
+  //   console.log(this.witnessArray)
+  //   this.witnessArray.push(this.witnessObj);
+  // }
   deleteWitness(i: number) {
     console.log(i)
     this.witnessArray.splice(i, i);

@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { GoogleMap } from '@capacitor/google-maps';
 import { NavigationExtras, Router, RouterModule } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
@@ -29,7 +29,7 @@ export class LocationPage implements OnInit {
   drag:boolean = false;
 
 
-  constructor(private ngZone: NgZone, private changeRef: ChangeDetectorRef,private router: Router) {
+  constructor(private ngZone: NgZone, private changeRef: ChangeDetectorRef,private router: Router, private navCtrl: NavController) {
 
   }
 
@@ -101,12 +101,15 @@ export class LocationPage implements OnInit {
    }
 
    getLocation(){
-
     let location: Locations = {lat:this.cordinates.lat, lng:this.cordinates.lng};
-
+    this.router.navigate(['/tabs/dashboard/form'],{
+      queryParams:{lat:location.lat, lng:location.lng},
+    })
    }
    navigate(){
-    // this.nav
+    this.router.navigate(['/tabs/dashboard/form'],{
+      queryParams:{lat:this.cordinates.lat, lng:this.cordinates.lng},
+    })
    }
 }
 

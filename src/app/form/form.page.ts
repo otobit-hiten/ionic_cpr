@@ -75,7 +75,12 @@ export class FormPage implements OnInit {
   involvedPartiesArray : any =[];
   involvedPartiesObject = {idImage: [], insuranceImage: [] };
 
-  constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService) {
+  constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe((params) => {
+      console.log(params['lat'] || 'empty');
+      console.log(params['lng'] || 'empty');
+      console.log("COORDINATES RECEIVED");
+    });
     console.log(this.swiperRef?.nativeElement.swiper);
     console.log(this.swiperRef);
     Parse.initialize('4fJYYN0bBUsmOumrcXWZolpXm0OCBId8S0lKr45l', 'RRTqRi9mWSC3Udfu6RQglRK3MDx7N1hjSOQs0RPj');

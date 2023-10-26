@@ -125,9 +125,8 @@
             <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
               [routerLink]="['location']">
               <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-              <ion-text>Address of Accident</ion-text>
+              <ion-text>{{latAndLng}}</ion-text>
             </ion-item>
-            <ion-input formControlName="address_of_accident"></ion-input>
             <div
               *ngIf="this.slideTwoForm.controls?.address_of_accident?.touched && this.slideTwoForm.controls?.address_of_accident?.invalid">
               <div *ngIf="this.slideTwoForm.controls?.address_of_accident?.errors?.required">
@@ -146,7 +145,7 @@
               <ion-col *ngIf="actualAreaOfDamage.length===0" size="2">
                 <div class="image_holder">
                   <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
-                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.svg" />
                   <img class="imag_prev" src="assets/img_holder.png" />
                 </div>
               </ion-col>

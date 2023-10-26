@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-resources',
@@ -35,6 +36,13 @@ export class ResourcesPage implements OnInit {
   };
 
   ngOnInit() {
+  }
+
+  async openbrowser(event:string){
+    if(event === 'tow'){
+      await Browser.open({ url: 'https://www.google.co.in/maps/search/tow/@21.1797475,72.8059125' });
+
+    }
   }
 
 }

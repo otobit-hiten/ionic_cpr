@@ -2,36 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Privacy - Location Always Usage Description</string>
-
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Privacy - Location When In Use Usage Description</string>
-
-	<key>NSCameraUsageDescription</key>
-	<string>To Capture Image</string>
-	
-
-	<key>UIFileSharingEnabled</key>
-	<string>To Capture Image</string>
-
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<string>To Capture Image</string>
-
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>To Add Image</string>
-
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To Store Image</string>
-
-	<key>NSMicroPhoneUsageDescription</key>
-	<string>To Record Audio</string>
-
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>Cpr Insurance</string>
+	<string>Cpr Insurance</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -48,6 +22,22 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<string>To Capture Image</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To Capture Image</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Privacy - Location Always Usage Description</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Privacy - Location When In Use Usage Description</string>
+	<key>NSMicroPhoneUsageDescription</key>
+	<string>To Record Audio</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To Add Image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To Store Image</string>
+	<key>UIFileSharingEnabled</key>
+	<string>To Capture Image</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

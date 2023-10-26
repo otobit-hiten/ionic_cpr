@@ -71,15 +71,22 @@ export class FormPage implements OnInit {
   public closeUp: PickedFile[] = [];
   public otherPartyCarImage: PickedFile[] = [];
   public otherPartyCloseUpImage: PickedFile[] = [];
+  latAndLng: string = "";
 
   involvedPartiesArray : any =[];
   involvedPartiesObject = {idImage: [], insuranceImage: [] };
 
   constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService, private route: ActivatedRoute) {
     this.route.queryParams.subscribe((params) => {
+      if(typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined" ){
+        this.latAndLng = 'Address of Accident';
+      }else{
+        this.latAndLng = `${params['lat']},${params['lng']}`;
+      }
       console.log(params['lat'] || 'empty');
       console.log(params['lng'] || 'empty');
       console.log("COORDINATES RECEIVED");
+      
     });
     console.log(this.swiperRef?.nativeElement.swiper);
     console.log(this.swiperRef);
@@ -93,7 +100,7 @@ export class FormPage implements OnInit {
     });
 
     this.slideTwoForm = formBuilder.group({
-      address_of_accident: ['']
+     
     });
 
     this.slideThreeForm = this.formBuilder.group({

@@ -1,6 +1,28 @@
 {
     "dashboard": {
-        "Title": "Lamentamos su accidente y estamos aquí para brindarle asistencia inmediata.",
-        "Sub_Title": "Nuestro personal calificado de recepción de reclamos está disponible las 24 horas del día, los 7 días de la semana, los 365 días del año para tomar su pérdida y comenzar el proceso hacia la resolución. Nuestro objetivo es que su vida vuelva a la normalidad lo más rápido posible. Utilice una de las opciones siguientes para proporcionarnos la mayor cantidad de información posible para que podamos gestionar su reclamo de forma rápida y precisa."
+        "Title": "Lamentamos su accidente y estamos aquí para ayudarlo de inmediato.",
+        "Sub_Title": "Nuestro equipo está aquí para usted las 24 horas del día, los 7 días de la semana, listo para ayudarlo a iniciar el proceso de reclamo y volver a encarrilar su vida. Simplemente elija una de las siguientes opciones para enviar su reclamo. Cuanta más información pueda proporcionar, más rápido y con mayor precisión podremos manejar su reclamo.",
+        "submit_claim_btn":"Presentar un reclamo en línea",
+        "contact_us_btn":"Contáctenos para soporte de reclamos",
+        "download_btn":"Descargar un formulario de reclamaciones",
+        "imp_tip_header":"Consejos importantes durante un accidente ",
+        "tip_1":"No firme ningún documento a menos que sea para la policía. ",
+        "tip_2":"Grabe notas de voz que incluyan daños, lesiones, testigos y lo sucedido. ",
+        "tip_3":"Nombre de registro de otras conductoras ",
+        "tip_4":"No le digas a nadie que el accidente fue culpa tuya aunque creas que lo fue ",
+        "tip_5":"Tenga cuidado al exponer los hechos, no lo que cree que sucedió. "
+    },
+    "form":{
+        "form1_header":"Resumen de accidentes ",
+        "header_policy":"Política",
+        "label_name":"Nombre asegurado ",
+        "input_name":"Nombre asegurado ",
+        "label_policy_number":"Número de póliza ",
+        "input_policy_number":"Número de póliza ",
+        "header_what_happened":"qué sucedió",
+        "label_what_happened":"Cuéntanos qué pasó ",
+        "input_what_happened":"Describe dónde, cuándo y cómo ocurrió el accidente. lugar. Describa los daños que se produjeron. ",
+        "label_record_audio":"Grabar audio",
+        "next":"Próxima"
     }
 }

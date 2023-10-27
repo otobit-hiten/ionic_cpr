@@ -1,6 +1,42 @@
 {
     "dashboard": {
         "Title": "We're sorry for your accident and here to help right away.",
-        "Sub_Title": "Our team is here for you 24/7, ready to assist you in starting the claims process and getting your life back on track. Just pick an option below to submit your claim. The more information you can provide, the quicker and more accurately we can handle your claim."
+        "Sub_Title": "Our team is here for you 24/7, ready to assist you in starting the claims process and getting your life back on track. Just pick an option below to submit your claim. The more information you can provide, the quicker and more accurately we can handle your claim.",
+        "submit_claim_btn":"Submit a claim online ",
+        "contact_us_btn":"Contact us for claims support ",
+        "download_btn":"Download a claims form ",
+        "imp_tip_header":"Important Tips During an Accident ",
+        "tip_1":"Do not sign any documents unless it's for the police ",
+        "tip_2":"Record voice notes including damages, injuries, witness and what happened ",
+        "tip_3":"Record name of other drivers ",
+        "tip_4":"Don't tell anyone the accident was your fault even if you think it was ",
+        "tip_5":"Be careful to state on the facts, not what you think happened. "
+    },
+    "form":{
+        "form1_header":"Accident Overview",
+        "header_policy":"Policy",
+        "label_name":"Name Insured",
+        "input_name":"Name Insured",
+        "label_policy_number":"Policy Number",
+        "input_policy_number":"Policy Number",
+        "header_what_happened":"What happened",
+        "label_what_happened":"Tell us about what happened ",
+        "input_what_happened":"Describe where, when and how the accident took place. Describe damage that took place.",
+        "label_record_audio":"Record Audio",
+        "next":"Next "
+    },
+    "profile":{
+        "profile_header":"Account Information",
+        "label_name":"Name",
+        "input_name":"Name",
+        "label_number":"",
+        "input_number":"",
+        "label_email":"",
+        "input_email":"",
+        "label_policy_number":"",
+        "input_policy_number":"",
+        "edit":"",
+        "submit":""
     }
+
 }

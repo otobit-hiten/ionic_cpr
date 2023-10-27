@@ -27,6 +27,7 @@
   color: #828282;
   border-radius: 5px;
   border: 0.5px solid #828282;
+  margin-top: 2%;
 }
 .stepperr_title {
   color: #201e1e;
@@ -35,6 +36,7 @@
   font-weight: 600;
   line-height: 135%; /* 27px */
   font-family: Poppins;
+  margin-bottom: 3%;
 }
 .second_label {
   color: #201e1e;
@@ -74,6 +76,17 @@
   line-height: 135%; /* 24.3px */
   margin-top: 6px;
 }
+.label_text_accident {
+  width: 80% !important;
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 135%; /* 24.3px */
+  margin-top: 6px;
+  margin-bottom: 17px !important;
+}
 .label_text {
   color: #201e1e !important;
   font-family: Poppins;
@@ -95,8 +108,7 @@
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
   text-transform: capitalize;
-
-
+  margin: bottom 100px !important;
 }
 ion-input {
   border-radius: 8px;
@@ -107,19 +119,19 @@ ion-input {
   border-radius: 8px;
   border: 1px solid #bdbdbd;
   padding-left: 10px !important;
-
 }
-.location_accident{
+.location_accident {
   border-radius: 8px;
   border: 1px solid #bdbdbd;
   padding-left: 10px !important;
-  margin-bottom:10%;
+  margin-top:5%;
+  margin-bottom: 5%;
 }
 .border_address {
   border-radius: 5px;
   border: 0.5px solid #828282;
   border-style: dashed;
-    button {
+  button {
     --background: rgba(254, 27, 20, 0.07);
     --border-radius: 20px;
     --padding-top: 10px;
@@ -185,22 +197,12 @@ ion-input {
   }
   .record {
     margin-top: 20px;
-
   }
   .upload_scene {
     .border {
       border-radius: 5px;
       border: 0.5px solid #828282;
       border-style: dashed;
-      ion-button {
-        --background: rgba(254, 27, 20, 0.07);
-        --border-radius: 20px;
-        --padding-top: 10px;
-        --padding-bottom: 10px;
-        --padding-start: 20px;
-        --padding-end: 20px;
-        --color: rgba(254, 82, 77, 1);
-      }
       .image_holder {
         position: relative;
         display: inline-block;
@@ -222,49 +224,32 @@ ion-input {
         width: min-content;
       }
     }
-
-    .add_image {
-      font-size: medium;
-    }
   }
-  .next_button {
-    margin-top:10%;
-    margin-bottom: 50px;
-    border-radius: 10px;
-    --background: #ffefee !important;
-    color: #fe524d;
-    font-family: Poppins;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
+}
+.next_button {
+  margin-top: 10%;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  --background: #ffefee !important;
+  color: #fe524d;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .form_2 {
   margin-inline: 20px;
-
   .address {
     margin-top: 20px;
-    margin-bottom: 20px;
-    .location {
-      margin-top: 10px;
-    }
   }
   .upload_location {
     .border {
       border-radius: 5px;
       border: 0.5px solid #828282;
       border-style: dashed;
-      ion-button {
-        --background: rgba(254, 27, 20, 0.07);
-        --border-radius: 20px;
-        --padding-top: 10px;
-        --padding-bottom: 10px;
-        --padding-start: 20px;
-        --padding-end: 20px;
-        --color: rgba(254, 82, 77, 1);
-      }
+
       .image_holder {
         position: relative;
         display: inline-block;
@@ -286,13 +271,6 @@ ion-input {
         width: min-content;
       }
     }
-    .add_image {
-      font-size: medium;
-    }
-  }
-  .next_button {
-    margin-top: 50px;
-    margin-bottom: 50px;
   }
 }
 
@@ -313,15 +291,7 @@ ion-input {
       border-radius: 5px;
       border: 0.5px solid #828282;
       border-style: dashed;
-      ion-button {
-        --background: rgba(254, 27, 20, 0.07);
-        --border-radius: 20px;
-        --padding-top: 10px;
-        --padding-bottom: 10px;
-        --padding-start: 20px;
-        --padding-end: 20px;
-        --color: rgba(254, 82, 77, 1);
-      }
+
       .image_holder {
         position: relative;
         display: inline-block;
@@ -356,15 +326,7 @@ ion-input {
       border-radius: 5px;
       border: 0.5px solid #828282;
       border-style: dashed;
-      ion-button {
-        --background: rgba(254, 27, 20, 0.07);
-        --border-radius: 20px;
-        --padding-top: 10px;
-        --padding-bottom: 10px;
-        --padding-start: 20px;
-        --padding-end: 20px;
-        --color: rgba(254, 82, 77, 1);
-      }
+
       .image_holder {
         position: relative;
         display: inline-block;
@@ -395,15 +357,7 @@ ion-input {
       border-radius: 5px;
       border: 0.5px solid #828282;
       border-style: dashed;
-      ion-button {
-        --background: rgba(254, 27, 20, 0.07);
-        --border-radius: 20px;
-        --padding-top: 10px;
-        --padding-bottom: 10px;
-        --padding-start: 20px;
-        --padding-end: 20px;
-        --color: rgba(254, 82, 77, 1);
-      }
+
       .image_holder {
         position: relative;
         display: inline-block;
@@ -439,6 +393,25 @@ ion-input {
   line-height: 135%; /* 24.3px */
   margin-bottom: 6%;
 }
+.ninth_label {
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 135%; /* 24.3px */
+  margin-bottom: 6%;
+  margin-top: 10%;
+}
+.tenth_label {
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 135%; /* 24.3px */
+  margin-top: 10%;
+}
 .sixth_label {
   color: #201e1e;
   font-family: Poppins;
@@ -447,10 +420,141 @@ ion-input {
   font-weight: 600;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
-
 }
-.add_audio{
+.add_audio {
   zoom: 1.25;
-  color : #FE524D;
+  color: #fe524d;
+}
+.seventh_label {
+  position: relative;
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  margin-bottom: 10px !important;
+}
+.eight_label {
+  position: relative;
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  margin-bottom: 10% !important;
 }
 
+.border_address_damage {
+  border-radius: 5px;
+  border-style: dashed;
+  border-color: #828282;
+  border-width: 1px;
+  margin-top: 2% !important;
+  margin-bottom: 5% !important;
+  button {
+    --background: rgba(254, 27, 20, 0.07);
+    --border-radius: 20px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --color: rgba(254, 82, 77, 1);
+  }
+  .image_holder_damage {
+    position: relative;
+    display: inline-block;
+    --padding:0px !important;
+    .imag_prev {
+      border-radius: 20px;
+      width: 100px;
+      height: 100px;
+
+    }
+    .imag_icon {
+      zoom: 1.5;
+      position: absolute;
+      top: calc(10% - 10px);
+      right: calc(10% - 10px);
+    }
+  }
+  .ion-text-wrap {
+    color: #828282;
+    width: min-content;
+  }
+}
+
+.add_image_damage {
+  justify-content: center;
+  align-items: center;
+  --border-radius: 50px;
+  color: #fe524d;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  --background: rgba(254, 27, 20, 0.07) !important;
+  --background-hover: rgba(254, 27, 20, 0.07) !important;
+  --background-activated: rgba(254, 27, 20, 0.07) !important;
+  --background-focused: rgba(254, 27, 20, 0.07) !important;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --padding-start: 30px;
+  --padding-end: 30px;
+  margin-bottom: 5%;
+
+}
+.wrap-damage {
+  color: #828282 !important;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: fit-content;
+}
+.involved_parties{
+  margin-top: 3% !important;
+  margin-bottom :3%;
+}
+.involved_parties_button{
+  color: #fe524d;
+  font-family: Poppins;
+  font-size: medium;
+  font-style: normal;
+  font-weight: 600;
+
+}
+.sixth_two_label {
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  margin-bottom: 100% !important;
+}
+.input_sixth_two {
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  margin-top: 3% !important;
+}
+.eleventh_label {
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  margin-top:3%;
+}

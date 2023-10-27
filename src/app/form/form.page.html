@@ -70,7 +70,7 @@
             </ion-textarea>
 
             <ion-label class="label_text_radio">Record Audio</ion-label>
-            <div><ion-item class="record_audio" lines="none">
+            <div class="record_audio"><ion-item  lines="none">
                 <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
                   color="primary"></ion-icon>
                 <ion-label> Record Audio </ion-label>
@@ -121,7 +121,7 @@
           <div class="address">
             <ion-label class="label_text">Where did the incident take place?</ion-label>
             <div class="black_line"></div>
-            <ion-label class="label_text">Address of accident</ion-label>
+            <ion-label class="label_text_accident">Address of accident</ion-label>
             <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
               [routerLink]="['location']">
               <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
@@ -132,25 +132,26 @@
               <div *ngIf="this.slideTwoForm.controls?.address_of_accident?.errors?.required">
                 <ion-text color="danger">Please Select Location?</ion-text>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="fifth_label">
             Pictures of the accident location and its surroundings
           </div>
           <div class="black_line"></div>
-          <ion-label class="sixth_label">Pictures of the actual area of damage from the accident. Close up and
+          <ion-label class="seventh_label">Pictures of the actual area of damage from the accident. Close up and
             from about 10 feet.</ion-label>
-          <ion-list class="border_address" lines="none">
+          <ion-list class="border_address_damage" lines="none">
             <ion-grid>
               <ion-col *ngIf="actualAreaOfDamage.length===0" size="2">
-                <div class="image_holder">
+                <div class="image_holder_damage">
                   <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
-                  <img class="imag_prev" src="assets/img_holder.svg" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
+                  <img class="imag_prev" src="assets/img_holder.png" />
                   <img class="imag_prev" src="assets/img_holder.png" />
                 </div>
               </ion-col>
               <ion-col *ngFor="let file of actualAreaOfDamage; let i = index" size="3">
-                <div class="image_holder">
+                <div class="image_holder_damage">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"
                     (click)="removeImage(i,'actualAreaOfDamage')"></ion-icon>
                   <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -159,25 +160,24 @@
             </ion-grid>
 
             <ion-item>
-              <ion-label class="ion-text-wrap">Pictures of the location of the vehicles immediately after the
-                accident. Pictures of the nearest street sign indicating street
-                name and direction of the photo.</ion-label>
+              <ion-label class="ion-text-wrap ion-no-padding">Pictures of the actual area of damage from the accident. Close up and
+                from about 10 feet.</ion-label>
             </ion-item>
 
             <ion-item>
-              <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('actualAreaOfDamage')">Add
-                Image</ion-button> -->
+              <ion-button class="add_image_damage" slot="end"  (click)="openImagePicker('actualAreaOfDamage',0)">Add
+                Image</ion-button>
             </ion-item>
           </ion-list>
           <div class="upload_scene">
-            <ion-label class="sixth_label">Pictures of the nearest street sign indicating street name and
+            <ion-label class="eight_label">Pictures of the nearest street sign indicating street name and
               direction of the photo.</ion-label>
-            Address of accident
-            <ion-list class="border_address" lines="none">
+            <ion-list class="border_address_damage" lines="none">
               <ion-grid>
                 <ion-col *ngIf="nearestStreet.length===0" size="3">
-                  <div class="image_holder">
+                  <div class="image_holder_damage">
                     <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
+                    <img class="imag_prev" src="assets/img_holder.png" />
                     <img class="imag_prev" src="assets/img_holder.png" />
                     <img class="imag_prev" src="assets/img_holder.png" />
                   </div>
@@ -198,18 +198,18 @@
               </ion-item>
 
               <ion-item>
-                <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('nearestStreet')">Add
-                  Image</ion-button> -->
+                <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('nearestStreet',0)">Add
+                  Image</ion-button>
               </ion-item>
             </ion-list>
           </div>
 
           <ion-row>
             <ion-col>
-              <ion-button expand="block" (click)="goPrev()">Previous</ion-button>
+              <ion-button class="next_button" expand="block" (click)="goPrev()">Previous</ion-button>
             </ion-col>
             <ion-col>
-              <ion-button expand="block" type="submit">Next</ion-button>
+              <ion-button class="next_button" expand="block" type="submit">Next</ion-button>
             </ion-col>
           </ion-row>
         </div>
@@ -224,10 +224,11 @@
       <form [formGroup]="slideThreeForm" (ngSubmit)="submitOneForm()">
         <div class="form_3">
           <div>
-            <ion-label>Who was involved in the accident?</ion-label>
+            <ion-label class="ninth_label">Who was involved in the accident?</ion-label>
           </div>
-          <div formArrayName="involvedParties">
-            <ion-button shape="round" fill="outline" size="small" (click)="addInvolvedParties()">
+          <div class="black_line"></div>
+          <div class="involved_parties" formArrayName="involvedParties">
+            <ion-button class="involved_parties_button" shape="round" fill="outline" size="default" (click)="addInvolvedParties()">
               Add involved party
             <ion-icon slot="start" name="add-outline"></ion-icon></ion-button>
 
@@ -245,6 +246,7 @@
                         <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
                         <img class="imag_prev" src="assets/img_holder.png" />
                         <img class="imag_prev" src="assets/img_holder.png" />
+                        <img class="imag_prev" src="assets/img_holder.png" />
                       </div>
                     </ion-col>
                     <ion-col *ngFor="let file of involvedPartiesArray[i].idImage" size="3">
@@ -254,13 +256,13 @@
                       </div>
                     </ion-col>
                   </ion-grid>
-  
+
                   <ion-item>
                     <ion-label class="ion-text-wrap">Pictures of the license plate and drivers ID</ion-label>
                   </ion-item>
-  
+
                   <ion-item>
-                    <ion-button slot="end" class="add_image" (click)="openImagePicker('idImage',i)">Add
+                    <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('idImage',i)">Add
                       Image</ion-button>
                   </ion-item>
                 </ion-list>
@@ -304,10 +306,11 @@
 
 
           </div>
-         
-          <div class="sixth_label">Were there any witnesses?</div>
-          <div formNameArray="witness"> 
-            <ion-button shape="round" fill="outline" size="small" (click)="addWitness()">
+
+          <div class="tenth_label">Were there any witnesses?</div>
+          <div class="black_line"></div>
+          <div class="involved_parties"  formNameArray="witness">
+            <ion-button class="involved_parties_button"  shape="round" fill="outline" size="default" (click)="addWitness()">
               Add Witness
             <ion-icon slot="start" name="add-outline"></ion-icon></ion-button>
           <div *ngFor="let data of witness().controls; let i = index" [formGroupName]="i">
@@ -319,12 +322,13 @@
             <ion-icon name="trash-outline"></ion-icon></ion-button>
           </div>
         </div>
-          <div class="sixth_label">Was there a police report?</div>
+          <div class="ninth_label">Was there a police report?</div>
+          <div class="black_line"></div>
           <div>
-            <ion-label class="sixth_label"> Police officer name </ion-label>
-            <ion-input placeholder="Police officer name"></ion-input>
-            <ion-label class="sixth_label"> Police report number </ion-label>
-            <ion-input placeholder="Police report number "></ion-input>
+            <ion-label class="sixth_two_label"> Police officer name </ion-label>
+            <ion-input class="input_sixth_two" placeholder="Police officer name"></ion-input>
+            <ion-label class="eleventh_label"> Police report number </ion-label>
+            <ion-input class="input_sixth_two" placeholder="Police report number "></ion-input>
           </div>
           <div>
             <ion-label>Please Upload Police Report Images</ion-label>
@@ -346,17 +350,17 @@
                 </ion-col>
               </ion-grid>
               <ion-item>
-                <!-- <ion-button slot="end" class="add_image" (click)="openImagePicker('policeReport')">Add
-                  Image</ion-button> -->
+                <ion-button slot="end" class="add_image" (click)="openImagePicker('policeReport',0)">Add
+                  Image</ion-button>
               </ion-item>
             </ion-list>
           </div>
           <ion-row>
             <ion-col>
-              <ion-button expand="block" (click)="goPrev()">Previous</ion-button>
+              <ion-button class="next_button" expand="block" (click)="goPrev()">Previous</ion-button>
             </ion-col>
             <ion-col>
-              <ion-button expand="block" (click)="goNext()">Next</ion-button>
+              <ion-button class="next_button" expand="block" (click)="goNext()">Next</ion-button>
             </ion-col>
           </ion-row>
         </div>

@@ -36,38 +36,38 @@
     </ion-col>
     <ion-col>
       <ion-row>
-        <ion-button class="change" shape="round" type="button" size="small" (click)="openGallery()" >Change   </ion-button>
+        <ion-button class="change" shape="round" type="button" size="small" (click)="openGallery()" translate>profile.change</ion-button>
       </ion-row>
       <ion-row>
-        <ion-button class="remove" shape="round" type="button" size="small" (click)="removeImage()">Remove</ion-button>
+        <ion-button class="remove" shape="round" type="button" size="small" (click)="removeImage()"translate>profile.remove</ion-button>
       </ion-row>
     </ion-col>
   </ion-row>
 
   <div class="form">
-    <ion-label class="page_header" >Account Information</ion-label>
+    <ion-label class="page_header" translate>profile.profile_header</ion-label>
 
 
     <br>
 
-    <ion-label class="profile_header_one">Name</ion-label>
+    <ion-label class="profile_header_one" translate>profile.label_name</ion-label>
 
-    <ion-input [(ngModel)]="name" [readonly]="!isEdit" type="name"></ion-input>
+    <ion-input [(ngModel)]="name" [readonly]="!isEdit" type="name" translate></ion-input>
 
-    <ion-label class="profile_headers">Phone Number</ion-label>
+    <ion-label class="profile_headers" translate>profile.label_number</ion-label>
 
     <ion-input [(ngModel)]="phone" [readonly]="!isEdit" type="Number"></ion-input>
 
-    <ion-label class="profile_headers">Email</ion-label>
+    <ion-label class="profile_headers" translate>profile.label_number</ion-label>
 
     <ion-input [(ngModel)]="email"  [readonly]="!isEdit" type="Email" ></ion-input>
 
-    <ion-label class="profile_headers">Policy Number</ion-label>
+    <ion-label class="profile_headers" translate>profile.label_policy_number</ion-label>
 
     <ion-input [(ngModel)]="policyNo" [readonly]="!isEdit" type=""></ion-input>
 
-    <ion-button *ngIf="!isEdit " class="submit"  shape="round" expand="block" (click)="update()"> Edit </ion-button>
+    <ion-button *ngIf="!isEdit " class="submit"  shape="round" expand="block" (click)="update()" translate>profile.edit</ion-button>
 
-    <ion-button *ngIf="isEdit " class="submit" shape="round" expand="block" (click)="set()" >Submit</ion-button>
+    <ion-button *ngIf="isEdit " class="submit" shape="round" expand="block" (click)="set()" translate>profile.submit</ion-button>
   </div>
 </ion-content>

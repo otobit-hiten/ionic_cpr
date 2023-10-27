@@ -5,12 +5,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { FilePicker, PickedFile } from '@capawesome/capacitor-file-picker';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,TranslateModule]
 })
 export class ProfilePage implements OnInit {
   user: User = { name: '', phone: '', email: '', policyNo: '', image:{name:'',base64:''} }
@@ -21,7 +22,7 @@ export class ProfilePage implements OnInit {
   public imageData = { name: '', base64: ''};
   public isEdit: boolean = false;
   public dataExists : boolean=false;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private translateService: TranslateService) { }
 
   languageList = [
     {
@@ -34,9 +35,7 @@ export class ProfilePage implements OnInit {
 
   ionChange(event:any) {
     console.log(event.detail.value)
-    this.userService.getTranslationService().then((data:any)=>{
-      data.use(event.target.value ? event.target.value : "en")
-    })
+    this.translateService.use(event.target.value ? event.target.value : "en")
   }
   compareWith : any ;
   MyDefaultValue: String ="en";  //set default language here  {en= English ; es = spanish}

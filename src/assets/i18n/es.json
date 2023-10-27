@@ -29,13 +29,38 @@
         "profile_header":"Información de la cuenta",
         "label_name":"Nombre",
         "input_name":"Nombre",
-        "label_number":"",
-        "input_number":"",
-        "label_email":"",
-        "input_email":"",
-        "label_policy_number":"",
-        "input_policy_number":"",
-        "edit":"",
-        "submit":""
+        "label_number":"Telefono no.",
+        "input_number":"Telefono no.",
+        "label_email":"Correo electrónico",
+        "input_email":"Correo electrónico",
+        "label_policy_number":"Número de póliza",
+        "input_policy_number":"Número de póliza",
+        "edit":"Editar",
+        "submit":"Entregar",
+        "change":"Cambiar",
+        "remove":"Eliminar"
+    },
+    "add_resource":{
+        "header":"Recursos adicionales para reclamos",
+        "header_title":"Por favor contáctenos desde la escena si es posible.",
+        "tow_btn":"Servicios de remolque",
+        "emergency_btn":"Servicios de emergencia",
+        "refer_btn":"Recomendar a un amigo",
+        "share_btn":"Compartir aplicación"
+    },
+    "emergency_services":{
+        "header":"Recursos adicionales para reclamos",
+        "header_title":"Por favor contáctenos desde la escena si es posible.",
+        "fire":"cuerpo de Bomberos",
+        "hospital":"hospitales",
+        "police":"policía",
+        "911":"911"
+    },
+    "company":{
+        "header":"Acerca del seguro CPR",
+        "text_1":"CPR Insurance Group, LLC, con licencia del Departamento de Seguros de Texas, es una empresa administradora y liquidadora de reclamaciones independiente que ofrece estrategias de resolución innovadoras a compañías de seguros, corporaciones autoaseguradas, entidades gubernamentales, agentes y corredores de seguros. ",
+        "text_2":"Nuestra empresa tiene su sede en Irving, Texas, y cuenta con ubicaciones asociadas en Luisiana y Oklahoma. CPR maneja todas las áreas principales de reclamos de seguros, incluidos automóviles, propiedad y accidentes.",
+        "text_3":"Contamos con equipos profesionales para aquellos clientes que necesitan una solución completa de subcontratación de TPA o podemos proporcionar ajustadores de campo para los clientes que necesitan una solución de campo profesional. Nuestro experimentado equipo de TPA gestionará el 100% de sus necesidades de reclamos, desde el aviso de pérdida inicial hasta el cierre final, incluidos informes financieros y estadísticos personalizados. "
     }
+
 }

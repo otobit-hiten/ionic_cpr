@@ -29,29 +29,29 @@
 <div class="grey-line"></div>
 <ion-content [fullscreen]="false">
   <div class="content">
-<ion-label class="page_title">Additional Claim Resources</ion-label><br>
-<ion-label>Please contact us from the scene if possible</ion-label>
+<ion-label class="page_title" translate>add_resource.header</ion-label><br>
+<ion-label translate>add_resource.header_title</ion-label>
 
 <ion-button expand="block" fill="clear" size="large" class="button" (click)="openbrowser('tow')">
   <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-  <ion-text style="text-transform: none; color: #000;">Towing Services</ion-text>
+  <ion-text style="text-transform: none; color: #000;" translate>add_resource.tow_btn</ion-text>
 </ion-button>
 
 <ion-button expand="block" fill="clear" size="large" routerDirection="forward" [routerLink]="['/tabs/resources/emergency-services']" class="button">
   <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-  <ion-text style="text-transform: none; color: #000;">Emergency Services</ion-text>
+  <ion-text style="text-transform: none; color: #000;" translate>add_resource.emergency_btn</ion-text>
 </ion-button>
 
 
 <ion-button expand="block"  fill="clear" size="large" class="button">
   <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-  <ion-text style="text-transform: none; color: #000;">Share App</ion-text>
+  <ion-text style="text-transform: none; color: #000;" translate>add_resource.share_btn</ion-text>
 </ion-button>
 
 
 <ion-button expand="block"  fill="clear" size="large" class="button">
   <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-  <ion-text style="text-transform: none; color: #000;">Refer a Friend</ion-text>
+  <ion-text style="text-transform: none; color: #000;" translate>add_resource.refer_btn</ion-text>
 </ion-button>
 
 </div>

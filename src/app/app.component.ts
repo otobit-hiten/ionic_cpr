@@ -1,8 +1,11 @@
+import { LanguageService } from './services/language.service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { register } from 'swiper/element/bundle';
+
+
 register();
 
 @Component({
@@ -13,8 +16,14 @@ register();
   imports: [IonicModule,FormsModule],
 })
 export class AppComponent {
-  constructor(private translateService : TranslateService) {
-    this.translateService.setDefaultLang('en');
-    this.translateService.addLangs(['en','es']);
+  constructor(private languageService: LanguageService) {
+    // this.translateService.setDefaultLang('en');
+    // this.translateService.addLangs(['en','es']);
+
+    this.initilize();
+  }
+
+  initilize(){
+    this.languageService.initialLanguage();
   }
 }

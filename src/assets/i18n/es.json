@@ -24,5 +24,18 @@
         "input_what_happened":"Describe dónde, cuándo y cómo ocurrió el accidente. lugar. Describa los daños que se produjeron. ",
         "label_record_audio":"Grabar audio",
         "next":"Próxima"
+    },
+    "profile":{
+        "profile_header":"Información de la cuenta",
+        "label_name":"Nombre",
+        "input_name":"Nombre",
+        "label_number":"",
+        "input_number":"",
+        "label_email":"",
+        "input_email":"",
+        "label_policy_number":"",
+        "input_policy_number":"",
+        "edit":"",
+        "submit":""
     }
 }

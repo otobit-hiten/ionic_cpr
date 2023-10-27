@@ -536,7 +536,7 @@ ion-input {
   font-weight: 600;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
-  margin-bottom: 100% !important;
+
 }
 .input_sixth_two {
   color: #201e1e;
@@ -547,8 +547,9 @@ ion-input {
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
   margin-top: 3% !important;
+  margin-bottom: 3% !important;
 }
-.eleventh_label {
+.police_number_header{
   color: #201e1e;
   font-family: Poppins;
   font-size: 14px;
@@ -556,5 +557,25 @@ ion-input {
   font-weight: 600;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
-  margin-top:3%;
+  margin-top:30%;
 }
+.name_of_party{
+  color: #201e1e;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+  margin-bottom:13% !important;
+}
+.party_gap{
+  height: 6px !important;
+}
+.involved_parties{
+  .form-control{
+    margin-top: 3px !important;
+    margin-bottom: 5px !important;
+  }
+}
+

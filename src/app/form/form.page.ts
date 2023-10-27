@@ -86,7 +86,7 @@ export class FormPage implements OnInit {
       console.log(params['lat'] || 'empty');
       console.log(params['lng'] || 'empty');
       console.log("COORDINATES RECEIVED");
-      
+
     });
     console.log(this.swiperRef?.nativeElement.swiper);
     console.log(this.swiperRef);
@@ -100,7 +100,7 @@ export class FormPage implements OnInit {
     });
 
     this.slideTwoForm = formBuilder.group({
-     
+
     });
 
     this.slideThreeForm = this.formBuilder.group({
@@ -118,7 +118,7 @@ export class FormPage implements OnInit {
         idImage:[],
         number:'',
         insuranceCompany: '',
-        insuranceImage:[]        
+        insuranceImage:[]
     })
   }
   addInvolvedParties(){
@@ -283,19 +283,33 @@ export class FormPage implements OnInit {
       multiple: true,
       readData: true,
     }).then(data => {
-      if (name === "actualAreaOfDamage") {
-        this.actualAreaOfDamage = data.files
-        this.actualAreaOfDamage.forEach(async file => {
-          await Cloudinary.uploadResource({
-            path: file.path,
-            resourceType: ResourceType.Image,
-            uploadPreset: 'm442awuh',
-          })
-        })
-      }
-      if (name === "idImage") {
-        this.involvedPartiesArray[i].idImage = data.files
-        console.log(this.involvedPartiesArray)
+      switch (name) {
+        case "actualAreaOfDamage":
+          this.actualAreaOfDamage = data.files;
+          this.actualAreaOfDamage.forEach(async (file) => {
+            await Cloudinary.uploadResource({
+              path: file.path,
+              resourceType: ResourceType.Image,
+              uploadPreset: 'm442awuh',
+            });
+          });
+          break;
+          case "nearestStreet":
+            this.nearestStreet = data.files;
+            this.nearestStreet.forEach(async (file) => {
+              await Cloudinary.uploadResource({
+                path: file.path,
+                resourceType: ResourceType.Image,
+                uploadPreset: 'm442awuh',
+              });
+            });
+            break;
+
+
+        case "idImage":
+          this.involvedPartiesArray[i].idImage = data.files;
+          console.log(this.involvedPartiesArray);
+          break;
       }
 
     });
@@ -426,7 +440,7 @@ export class FormPage implements OnInit {
       types: ['audio/aac'],
     }).then(async res => {
       this.uploadAudio.push(res.files[0]);
-    
+
     });
   }
 
@@ -435,7 +449,7 @@ export class FormPage implements OnInit {
       path: file.path!,
     })
     console.log(contents.data)
-  
+
     if (this.track != this.selectedItem) {
       this.playback = false;
     } else {
@@ -465,7 +479,7 @@ export class FormPage implements OnInit {
       play.selectedItem = null;
       play.track = play.selectedItem
     }
-    
+
   }
 
   deleteUploadAudio(file: any,index: number) {

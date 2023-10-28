@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { FilePicker, PickedFile } from '@capawesome/capacitor-file-picker';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LanguageService } from '../services/language.service';
 import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -16,7 +15,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,TranslateModule]
+  imports: [IonicModule, CommonModule, FormsModule, TranslateModule]
 })
 export class ProfilePage implements OnInit {
   user: User = { name: '', phone: '', email: '', policyNo: '', image: { name: '', localPath: '' } }
@@ -28,36 +27,28 @@ export class ProfilePage implements OnInit {
   public isEdit: boolean = false;
   public dataExists: boolean = false;
   private localPath: string = "";
-  constructor(private userService: UserService,private readonly domSanitizer: DomSanitizer,private languageService:LanguageService) { }
-
-  public selected = 'en';
-
-  languageList : any = []
-
-
+  constructor(private userService: UserService, private readonly domSanitizer: DomSanitizer, private languageService: LanguageService) { }
+  public selected = 'en';   //set default language here  {en= English ; es = spanish}
+  languageList: any = []
   ionChange(event: any) {
     console.log(event.detail.value)
     this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
   }
   compareWith: any;
-  MyDefaultValue: String = "en";  //set default language here  {en= English ; es = spanish}
-
   compareWithFn(o1: any, o2: any) {
     return o1 === o2;
   };
-
-
   ngOnInit() {
+    this.languageService.initialLanguage()
     this.languageList = this.languageService.getLanguage();
-    console.log("languageList")
-    console.log(this.languageList)
     this.selected = this.languageService.selectedLanguage
-    console.log(this.selected)
-    console.log(this.selected)
     this.get()
 
   }
-
+  ionViewDidEnter() {
+    this.languageList = this.languageService.getLanguage();
+    this.selected = this.languageService.selectedLanguage
+  }
   set() {
     this.isEdit = false;
     let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo, image: this.imageData }
@@ -95,22 +86,17 @@ export class ProfilePage implements OnInit {
     }
     );
   }
-
   update() {
     console.log(this.isEdit)
     this.isEdit = true;
     console.log(this.isEdit)
   }
-
   clear() {
-
   }
-
   public convertPathToWebPath(path: string): SafeUrl {
     const fileSrc = Capacitor.convertFileSrc(path);
     return this.domSanitizer.bypassSecurityTrustUrl(fileSrc);
   }
-
   async openGallery() {
     await FilePicker.pickImages({
       multiple: false,
@@ -122,13 +108,12 @@ export class ProfilePage implements OnInit {
       })
       console.log(data);
     });
-     await Filesystem.copy({ from: this.imageData.path, to: "photo.jpg" , directory: Directory.External,toDirectory:Directory.Data }).then((data: any) => {
+    await Filesystem.copy({ from: this.imageData.path, to: "photo.jpg", directory: Directory.External, toDirectory: Directory.Data }).then((data: any) => {
       console.log("data")
       console.log(data)
       this.imageData.localPath = data.uri
     });
   }
-
   removeImage() {
     this.imageData.name = "";
     this.imageData.base64 = "";
@@ -136,5 +121,4 @@ export class ProfilePage implements OnInit {
     this.imageData.localPath = "";
     this.get()
   }
-
 }

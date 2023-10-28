@@ -2,7 +2,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-const KEY = 'SELECTED_LANGUAGE'; 
+const KEY = 'SELECTED_LANGUAGE';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,8 @@ export class LanguageService {
         this.selectedLanguage = data;
       }else{
         let language = this.translateService.getBrowserLang()
+        this.selectedLanguage = language!;
+        console.log(this.selectedLanguage)
         this.translateService.setDefaultLang(language!);
       }
     })

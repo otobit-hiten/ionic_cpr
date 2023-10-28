@@ -23,15 +23,15 @@ export class ProfilePage implements OnInit {
   public imageData = { name: '', base64: ''};
   public isEdit: boolean = false;
   public dataExists : boolean=false;
+  public selected = 'en';
   constructor(private userService: UserService, private translateService: TranslateService,private languageService: LanguageService) { }
 
   languageList : any = []
-  selected = '';
- 
+
+
   ionChange(event:any) {
     console.log(event.detail.value)
-    this.languageService.setLanguage(event.target.value ? event.target.value : "en")
-    // this.translateService.use(event.target.value ? event.target.value : "en")
+    this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
   }
   compareWith : any ;
   MyDefaultValue: String ="en";  //set default language here  {en= English ; es = spanish}
@@ -43,8 +43,13 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.languageList = this.languageService.getLanguage();
+    console.log("languageList")
+    console.log(this.languageList)
     this.selected = this.languageService.selectedLanguage
+    console.log(this.selected)
+    console.log(this.selected)
     this.get()
+
   }
 
   set() {

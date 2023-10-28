@@ -29,8 +29,8 @@
   <ion-row style="width: max-content" class="avatar">
     <ion-col>
       <ion-avatar>
-        <img *ngIf="imageData.base64 !== '' " src="data:'{{imageData.name}}';base64,{{imageData.base64}}"  alt=""/>
-        <img *ngIf="imageData.base64 === '' " src="assets/profile_pic.png" alt="assets/user.png" />
+        <ion-img *ngIf="imageData.localPath !== '' " [src]="convertPathToWebPath(imageData.localPath)"  alt=""/>
+        <ion-img *ngIf="imageData.localPath === '' " src="assets/profile_pic.png" alt="assets/user.png" />
 
       </ion-avatar>
     </ion-col>

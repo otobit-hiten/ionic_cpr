@@ -5,7 +5,7 @@ export interface User {
     policyNo: string;
     image: {
         name: string;
-        base64: string;
+        localPath: string;
     }
 }
 

@@ -12,7 +12,6 @@ export class LanguageService {
   selectedLanguage ='';
 
   constructor(private translateService:TranslateService, private storage : Storage) {}
-
    async initialLanguage(){
     const storage = await this.storage.create();
     this._storage = storage;
@@ -22,11 +21,14 @@ export class LanguageService {
         this.translateService.setDefaultLang(data);
         this.setLanguage(data);
         this.selectedLanguage = data;
+        console.log("selected language")
       }else{
         let language = this.translateService.getBrowserLang()
         this.selectedLanguage = language!;
+        console.log("selected language")
         console.log(this.selectedLanguage)
         this.translateService.setDefaultLang(language!);
+        this.setLanguage(language)
       }
     })
   }

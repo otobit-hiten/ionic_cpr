@@ -16,24 +16,28 @@ import { LanguageService } from '../services/language.service';
 })
 export class ResourcesPage implements OnInit {
   languageList:any = []
-  selected="en" //set default language here  {en= English ; es = spanish}
-  constructor(private languageService :LanguageService) { }
+  selected="" //set default language here  {en= English ; es = spanish}
+  constructor( public languageService :LanguageService) { }
   compareWith : any ;
-  MyDefaultValue: String ="en";
+  MyDefaultValue: String ="";
   compareWithFn(o1: any, o2: any) {
     return o1 === o2;
   };
   ngOnInit(){
-    this.languageService.initialLanguage();
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
   }
   ionViewDidEnter(){
+    console.log(this.selected)
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
+    console.log(this.selected)
   }
   ionChange(event:any) {
+    console.log(event)
+    console.log(event.target.value)
     this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
+    console.log(this.languageService.selectedLanguage)
   }
   async openbrowser(event:string){
     if(event === 'tow'){

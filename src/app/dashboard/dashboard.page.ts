@@ -16,19 +16,22 @@ import { LanguageService } from '../services/language.service';
 export class Dashboard {
 
   languageList:any = [];
-  selected ='en'; //set default language here  {en= English ; es = spanish}
+  selected =''; //set default language here  {en= English ; es = spanish}
   compareWith : any ;
-  constructor(private translateService :TranslateService,private languageService: LanguageService) { }
+  constructor(public languageService: LanguageService) { }
   ngOnInit(){
-    this.languageService.initialLanguage();
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
   }
   ionViewDidEnter(){
-    this.languageList = this.languageService.getLanguage();
+    console.log(this.selected)
     this.selected = this.languageService.selectedLanguage
+    console.log(this.selected)
   }
   ionChange(event:any) {
+    console.log(event)
+    console.log(event.target.value)
     this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
+    console.log(this.languageService.selectedLanguage)
   }
 }

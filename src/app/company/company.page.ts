@@ -15,23 +15,27 @@ import { LanguageService } from '../services/language.service';
 export class CompanyPage implements OnInit {
 
   languageList: any = []
-  selected ='en';
-  constructor(private languageService: LanguageService) { }
+  selected ='';
+  constructor(public languageService: LanguageService) { }
   ngOnInit(){
-    this.languageService.initialLanguage();
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
   }
   compareWith: any;
   ionChange(event:any) {
+    console.log(event)
+    console.log(event.target.value)
     this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
+    console.log(this.languageService.selectedLanguage)
   }
 
   compareWithFn(o1: any, o2: any) {
     return o1 === o2;
   };
   ionViewDidEnter(){
+    console.log(this.selected)
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
+    console.log(this.selected)
   }
 }

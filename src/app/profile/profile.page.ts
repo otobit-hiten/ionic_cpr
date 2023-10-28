@@ -10,6 +10,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -27,27 +28,30 @@ export class ProfilePage implements OnInit {
   public isEdit: boolean = false;
   public dataExists: boolean = false;
   private localPath: string = "";
-  constructor(private userService: UserService, private readonly domSanitizer: DomSanitizer, private languageService: LanguageService) { }
-  public selected = 'en';   //set default language here  {en= English ; es = spanish}
+  constructor(private userService: UserService, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService,private changeRef: ChangeDetectorRef) { }
+  public selected = '';   //set default language here  {en= English ; es = spanish}
   languageList: any = []
-  ionChange(event: any) {
-    console.log(event.detail.value)
+  ionChange(event:any) {
+    console.log(event)
+    console.log(event.target.value)
     this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
+    console.log(this.languageService.selectedLanguage)
   }
   compareWith: any;
   compareWithFn(o1: any, o2: any) {
     return o1 === o2;
   };
   ngOnInit() {
-    this.languageService.initialLanguage()
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
     this.get()
 
   }
-  ionViewDidEnter() {
-    this.languageList = this.languageService.getLanguage();
+  ionViewDidEnter(){
+    console.log(this.selected)
     this.selected = this.languageService.selectedLanguage
+    console.log(this.selected)
+    this.changeRef.detectChanges()
   }
   set() {
     this.isEdit = false;

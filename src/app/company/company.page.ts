@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../services/language.service';
 
 @Component({
   selector: 'app-company',
@@ -13,19 +14,19 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class CompanyPage implements OnInit {
 
-  languageList = [
-    {
-      code: "en", title: "English", text: "English"
-    },
-    {
-      code: "es", title: "Spanish", text: "Española"
-    }
-  ]
-  constructor(private translateService: TranslateService) { }
+  languageList: any = []
+  selected ='';
+  constructor(private languageService: LanguageService,private translateService: TranslateService) { }
 
-  ionChange(event: any) {
-    console.log(event.detail.value)
-    this.translateService.use(event.target.value ? event.target.value : "en")
+  ionChange(event:any) {
+    console.log(event.detail.value,"language")
+    this.languageService.setLanguage(event.target.value ? event.target.value : "en")
+    // this.translateService.use(event.target.value ? event.target.value : "en")
+  }
+  ngOnInit(){
+    this.languageList = this.languageService.getLanguage();
+    this.selected = this.languageService.selectedLanguage
+    console.log(this.selected,"Selected")
   }
   compareWith: any;
   MyDefaultValue: String = "en";  //set default language here  {en= English ; es = spanish}
@@ -34,7 +35,5 @@ export class CompanyPage implements OnInit {
     return o1 === o2;
   };
 
-  ngOnInit() {
-  }
 
 }

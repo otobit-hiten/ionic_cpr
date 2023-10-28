@@ -8,15 +8,18 @@
         ><ion-select
           class="holder"
           [compareWith]="compareWith"
-          value="{{MyDefaultValue}}"
+          value="{{selected}}"
           placeholder="Language"
           (ionChange)="ionChange($event)"
           interface="popover"
         >
+        
           <ion-select-option
             *ngFor="let lang of languageList"
-            [value]="lang.code"
-            >{{lang.title}}</ion-select-option
+            [value]="lang.code">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            {{lang.title}}
+            </ion-select-option
           >
         </ion-select>
       </ion-col>

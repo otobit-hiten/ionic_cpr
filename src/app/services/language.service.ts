@@ -11,24 +11,20 @@ export class LanguageService {
   private _storage: Storage | null = null;
   selectedLanguage ='';
 
-  constructor(private translateService:TranslateService, private storage : Storage) {
-    this.init()
+  constructor(private translateService:TranslateService, private storage : Storage) {}
 
-   }
-   async init(){
+   async initialLanguage(){
     const storage = await this.storage.create();
     this._storage = storage;
-   }
-  
-  initialLanguage(){
-    let language = this.translateService.getBrowserLang()
-    this.translateService.setDefaultLang(language!);
-    console.log(language);
     this._storage?.get(KEY).then((data: any) => {
-
+      console.log(data,"MILA")
       if(data){
+        this.translateService.setDefaultLang(data);
         this.setLanguage(data);
         this.selectedLanguage = data;
+      }else{
+        let language = this.translateService.getBrowserLang()
+        this.translateService.setDefaultLang(language!);
       }
     })
   }

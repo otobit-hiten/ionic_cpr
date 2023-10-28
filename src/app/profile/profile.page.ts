@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { FilePicker, PickedFile } from '@capawesome/capacitor-file-picker';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -22,20 +23,15 @@ export class ProfilePage implements OnInit {
   public imageData = { name: '', base64: ''};
   public isEdit: boolean = false;
   public dataExists : boolean=false;
-  constructor(private userService: UserService, private translateService: TranslateService) { }
+  constructor(private userService: UserService, private translateService: TranslateService,private languageService: LanguageService) { }
 
-  languageList = [
-    {
-       code: "en", title: "English", text: "English"
-    },
-    {
-      code: "es", title: "Spanish", text: "Española"
-    }
-  ]
-
+  languageList : any = []
+  selected = '';
+ 
   ionChange(event:any) {
     console.log(event.detail.value)
-    this.translateService.use(event.target.value ? event.target.value : "en")
+    this.languageService.setLanguage(event.target.value ? event.target.value : "en")
+    // this.translateService.use(event.target.value ? event.target.value : "en")
   }
   compareWith : any ;
   MyDefaultValue: String ="en";  //set default language here  {en= English ; es = spanish}
@@ -46,6 +42,8 @@ export class ProfilePage implements OnInit {
 
 
   ngOnInit() {
+    this.languageList = this.languageService.getLanguage();
+    this.selected = this.languageService.selectedLanguage
     this.get()
   }
 

@@ -19,11 +19,10 @@ export class AppComponent {
   constructor(private languageService: LanguageService) {
     // this.translateService.setDefaultLang('en');
     // this.translateService.addLangs(['en','es']);
-
     this.initilize();
   }
 
-  initilize(){
+  async initilize(){
     this.languageService.initialLanguage();
   }
 }

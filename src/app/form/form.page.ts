@@ -13,6 +13,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Cloudinary, ResourceType } from '@capawesome/capacitor-cloudinary';
+import { LanguageService } from '../services/language.service';
 
 
 @Component({
@@ -25,18 +26,32 @@ import { Cloudinary, ResourceType } from '@capawesome/capacitor-cloudinary';
 })
 export class FormPage implements OnInit {
 
-  languageList = [
-    {
-      code: "en", title: "English", text: "English"
-    },
-    {
-      code: "es", title: "Spanish", text: "Española"
-    }
-  ]
-  ionChange(event: any) {
-    console.log(event.detail.value)
-    this.translateService.use(event.target.value ? event.target.value : "en")
+  languageList: any = []
+  selected='';
+
+  ngOnInit(){
+    this.languageList = this.languageService.getLanguage();
+    this.selected = this.languageService.selectedLanguage
+
+    this.swiperReady()
+    VoiceRecorder.requestAudioRecordingPermission()
+    // this.loadAudio();
+    this.witnessArray.push(this.witnessObj)
+    console.log(this.witnessArray.length)
+    this.initialize();
   }
+  ionViewDidEnter(){
+    console.log(this.selected)
+    this.selected = this.languageService.selectedLanguage
+    console.log(this.selected)
+  }
+  ionChange(event:any) {
+    console.log(event)
+    console.log(event.target.value)
+    this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
+    console.log(this.languageService.selectedLanguage)
+  }
+
   compareWith: any;
   MyDefaultValue: String = "en";  //set default language here  {en= English ; es = spanish}
   compareWithFn(o1: any, o2: any) {
@@ -71,12 +86,14 @@ export class FormPage implements OnInit {
   public closeUp: PickedFile[] = [];
   public otherPartyCarImage: PickedFile[] = [];
   public otherPartyCloseUpImage: PickedFile[] = [];
+  public otherPartyVinNo: PickedFile[] = [];
+  public otherPartylicensePlate: PickedFile[] = [];
   latAndLng: string = "";
 
   involvedPartiesArray : any =[];
   involvedPartiesObject = {idImage: [], insuranceImage: [] };
 
-  constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, private translateService: TranslateService, private route: ActivatedRoute) {
+  constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute) {
     this.route.queryParams.subscribe((params) => {
       if(typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined" ){
         this.latAndLng = 'Address of Accident';
@@ -148,15 +165,7 @@ export class FormPage implements OnInit {
     this.witness().removeAt(i)
   }
 
-  ngOnInit() {
-    this.swiperReady()
-    VoiceRecorder.requestAudioRecordingPermission()
-    // this.loadAudio();
-    this.witnessArray.push(this.witnessObj)
-    console.log(this.witnessArray.length)
-    this.initialize();
 
-  }
 
   async initialize() {
     await Cloudinary.initialize({ cloudName: 'dbdfrtxli' });

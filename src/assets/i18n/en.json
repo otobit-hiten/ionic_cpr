@@ -23,7 +23,75 @@
         "label_what_happened":"Tell us about what happened ",
         "input_what_happened":"Describe where, when and how the accident took place. Describe damage that took place.",
         "label_record_audio":"Record Audio",
-        "next":"Next "
+        "next":"Next ",
+
+        "form2_header":"Accident Location",
+        "header_where_did_take_place":"Where did the incident take place?",
+        "Address_of_accident":"Accident of Location",
+        "header_img_surrounding":"Pictures of the accident location and its surroundings",
+        "label_img_surrounding":"Pictures of the actual area of damage from the accident. Close up and from about 10 feet.",
+        "add_img":"Add Image",
+        "subtitle_img_nearest":"Pictures of the location of the vehicles immediately after the accident. Pictures of the nearest street sign indicatingstreet name and direction of the photo.",
+        "label_img_nearest":"Pictures of the nearest street sign indicating street name and direction of the photo.",
+        "previous":"Previous",
+        
+      
+
+        "form3_header":"Involved Parties",
+        "label_who_was_involved":"Who was involved in the accident?",
+        "label_name_of_party":"Name of other party",
+        "input_name_of_party":"Name of other party",
+        "label_img_insurance_id":"Add photo of license or ID of other party",
+        "subtitle_img_insurance_id":"Pictures of the license plate.",
+        "label_contact_no":"Contact phone number",
+        "input_contact_no":"Contact phone number",
+        "label_other_party_insurance_company":"Other Party’s Insurance Company",
+        "input_other_party_insurance_company":"Other Party’s Insurance Company",
+        "label_other_party_insurance_img":"Please Upload Your Insurance ID’s Images",
+        "label_add_more_party":"Add More Party",
+        "label_were_any_witness":"Were there any witnesses?",
+        "label_witness_name":"Witness name",
+        "input_witness_name":"Witness name",
+        "label_witness_contact":"Witness Phone No",
+        "input_witness_contact":"Witness Phone No",
+        "label_add_more_witness":"Add More Witness",
+        "label_was_any_police_report":"Was there a police report?",
+        "label_police_name":"Police Officer name",
+        "input_police_name":"Police Officer name",
+        "label_police_report_no":"Police Report number",
+        "input_police_report_no":"Police Report number",
+        "label_img_police_report":"Please Upload Police Report Images",
+        "delete":"Delete",
+
+
+        "form4_header":"Your Vehicle Damage",
+        "label_my_vehicle":"My Vehicle",
+        "label_vehicle_make_and_model":"Vehicle Make and Model",
+        "input_vehicle_make_and_model":"Vehicle Make and Model",
+        "label_licence_plate":"Vehicle License Plate Number",
+        "input_licence_plate":"Vehicle License Plate Number",
+        "label_img_licence":"Please Upload an Images of the license plate",
+        "subtitle_img_licence":"Pictures of the license plate.",
+        "label_vin_no":"Vehicle VIN number",
+        "input_vin_no":"Vehicle VIN number",
+        "label_img_vin_no":"Please upload an images of the vehicle vin number in the drivers’ side windshield just above the dashboard",
+        "label_speedometer":"Vehicle mileage from speedometer",
+        "input_speedometer":"Vehicle mileage from speedometer",
+        "label_img_all_4_side":"Add photos of car from all four corners, showcasing the front, back, and two sides of the car.",
+        "label_img_close_up":"Add close-up photos of damages to the vehicle.",
+        "label_was_vehicle_towed":"Was your vehicle towed?",
+        "label_tow_company":"Towing company Name",
+        "input_tow_company":"Towing company Name",
+        "label_tow_company_address":"Towing company Address",
+        "label_add_more_vehicle":"Add More vehicle",
+        "submit":"Entregar",
+
+        "form5_header":"Other Vehicle Damage",
+        "label_my_vehicle_other":"Other Party’s Vehicle"
+
+
+
+
     },
     "profile":{
         "profile_header":"Account Information",

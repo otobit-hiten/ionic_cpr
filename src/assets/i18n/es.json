@@ -23,7 +23,78 @@
         "label_what_happened":"Cuéntanos qué pasó ",
         "input_what_happened":"Describe dónde, cuándo y cómo ocurrió el accidente. lugar. Describa los daños que se produjeron. ",
         "label_record_audio":"Grabar audio",
-        "next":"Próxima"
+        "next":"Próxima",
+
+        
+        "form2_header":"Ubicación del accidente",
+        "header_where_did_take_place":"¿Dónde tuvo lugar el incidente?",
+        "Address_of_accident":"Accidente de ubicación",
+        "header_img_surrounding":"Fotografías del lugar del accidente y sus alrededores.",
+        "label_img_surrounding":"Imágenes del área real de daños por el accidente. De cerca y desde unos 10 pies.",
+        "subtitle_img_nearest":"Fotografías de la ubicación de los vehículos inmediatamente después del accidente. Imágenes del letrero de la calle más cercana que indique el nombre de la calle y la dirección de la foto.",
+        "add_img":"Añadir imagen",
+        "label_img_nearest":"Imágenes del letrero de la calle más cercana que indique el nombre de la calle y la dirección de la foto.",
+        "previous":"Previo",
+
+        
+      
+
+        "form3_header":"Partes involucradas",
+        "label_who_was_involved":"¿Quién estuvo involucrado en el accidente?",  
+        "label_name_of_party":"Nombre de la otra parte",
+        "input_name_of_party":"Nombre de la otra parte",
+        "label_img_insurance_id":"Agregue una foto de la licencia o identificación de la otra parte",
+        "subtitle_img_insurance_id":"Pictures of the license plate.",
+        "label_contact_no":"Teléfono de contacto",
+        "input_contact_no":"Teléfono de contacto",
+        "label_other_party_insurance_company":"Compañía de seguros de la otra parte",
+        "input_other_party_insurance_company":"Compañía de seguros de la otra parte",
+        "label_other_party_insurance_img":"Cargue las imágenes de su identificación de seguro",
+        "label_add_more_party":"Agregar más fiesta",
+        "label_witness_name":"Nombre del testigo",
+        "input_witness_name":"Nombre del testigo",
+        "label_witness_contact":"Número de teléfono del testigo",
+        "input_witness_contact":"Número de teléfono del testigo",
+        "label_add_more_witness":"Agregar más testigo",
+        "label_were_any_witness":"¿Hubo testigos?",
+        "label_was_any_police_report":"¿Hubo un informe policial?",
+        "label_police_name":"Nombre del oficial de policía",
+        "input_police_name":"Nombre del oficial de policía",
+        "label_police_report_no":"Número de informe policial",
+        "input_police_report_no":"Número de informe policial",
+        "label_img_police_report":"Por favor cargue imágenes del informe policial",
+        "delete":"Borrar",
+
+
+
+        
+        "form4_header":"Daños a tu vehículo",
+        "label_my_vehicle":"Mi vehículo",
+        "label_vehicle_make_and_model":"Marca y modelo de vehículo",
+        "input_vehicle_make_and_model":"Marca y modelo de vehículo",
+        "label_licence_plate":"Número de placa del vehículo",
+        "input_licence_plate":"Número de placa del vehículo",
+        "label_img_licence":"Cargue una imagen de la matrícula.",
+        "subtitle_img_licence":"Fotografías de la matrícula.",
+        "label_vin_no":"Número VIN del vehículo",
+        "input_vin_no":"Número VIN del vehículo",
+        "label_img_vin_no":"Cargue una imagen del número VIN del vehículo en el parabrisas del lado del conductor, justo encima del tablero.",
+        "label_speedometer":"Kilometraje del vehículo desde el velocímetro",
+        "input_speedometer":"Kilometraje del vehículo desde el velocímetro",
+        "label_img_all_4_side":"Agregue fotografías del automóvil desde las cuatro esquinas, mostrando la parte delantera, trasera y dos lados del automóvil.",
+        "label_img_close_up":"Agregue fotografías en primer plano de los daños al vehículo.",
+        "label_was_vehicle_towed":"¿Su vehículo fue remolcado?",
+        "label_tow_company":"Nombre de la empresa de remolque",
+        "input_tow_company":"Nombre de la empresa de remolque",
+        "label_tow_company_address":"Dirección de la empresa de remolque",
+        "label_add_more_vehicle":"Añadir más vehículo",
+        "submit":"Entregar",
+
+        "form5_header":"Otros daños al vehículo",
+        "label_my_vehicle_other":"Vehículo de la otra parte"
+       
+
+
     },
     "profile":{
         "profile_header":"Información de la cuenta",

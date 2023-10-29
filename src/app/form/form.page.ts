@@ -27,9 +27,9 @@ import { LanguageService } from '../services/language.service';
 export class FormPage implements OnInit {
 
   languageList: any = []
-  selected='';
+  selected = '';
 
-  ngOnInit(){
+  ngOnInit() {
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
 
@@ -40,12 +40,12 @@ export class FormPage implements OnInit {
     console.log(this.witnessArray.length)
     this.initialize();
   }
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     console.log(this.selected)
     this.selected = this.languageService.selectedLanguage
     console.log(this.selected)
   }
-  ionChange(event:any) {
+  ionChange(event: any) {
     console.log(event)
     console.log(event.target.value)
     this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
@@ -64,6 +64,9 @@ export class FormPage implements OnInit {
   slideOneForm: FormGroup
   slideTwoForm: FormGroup
   slideThreeForm: FormGroup
+  slideFourForm: FormGroup
+  slideFiveForm: FormGroup
+
   recording: boolean = false;
   displayTime = '';
   time = 0;
@@ -90,14 +93,18 @@ export class FormPage implements OnInit {
   public otherPartylicensePlate: PickedFile[] = [];
   latAndLng: string = "";
 
-  involvedPartiesArray : any =[];
-  involvedPartiesObject = {idImage: [], insuranceImage: [] };
+  involvedPartiesArray: any = [];
+  involvedPartiesObject = { idImage: [], insuranceImage: [] };
+
+
+  otherVehicleArray: any = [];
+  otherVehicleArrayObject = { licenceImg: [], vinNo: [], all$side: [], closeUp: [] };
 
   constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute) {
     this.route.queryParams.subscribe((params) => {
-      if(typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined" ){
+      if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
         this.latAndLng = 'Address of Accident';
-      }else{
+      } else {
         this.latAndLng = `${params['lat']},${params['lng']}`;
       }
       console.log(params['lat'] || 'empty');
@@ -121,48 +128,82 @@ export class FormPage implements OnInit {
     });
 
     this.slideThreeForm = this.formBuilder.group({
-        involvedParties: this.formBuilder.array([]),
-        witness: this.formBuilder.array([]),
+      involvedParties: this.formBuilder.array([]),
+      witness: this.formBuilder.array([]),
+    })
+
+    this.slideFourForm = formBuilder.group({
+      vehicleMakeModel: '',
+      vehicleLicencePlateNo: '',
+      vehicleVinNo:'',
+      speedometer:'',
+    })
+
+    this.slideFiveForm = this.formBuilder.group({
+      otherVehicle: this.formBuilder.array([]),
     })
   }
 
-  involvedParties():FormArray{
+  involvedParties(): FormArray {
     return this.slideThreeForm.get("involvedParties") as FormArray
   }
-  newInvolvedParties():FormGroup{
+  newInvolvedParties(): FormGroup {
     return this.formBuilder.group({
-        name:'',
-        idImage:[],
-        number:'',
-        insuranceCompany: '',
-        insuranceImage:[]
+      name: '',
+      idImage: [],
+      number: '',
+      insuranceCompany: '',
+      insuranceImage: []
     })
   }
-  addInvolvedParties(){
-    let involvedPartiesObjects = {idImage: [], insuranceImage: [] };
+  addInvolvedParties() {
+    let involvedPartiesObjects = { idImage: [], insuranceImage: [] };
     this.involvedPartiesArray.push(involvedPartiesObjects)
     this.involvedParties().push(this.newInvolvedParties());
   }
-  removeInvolvedParties(i:number){
-    this.involvedPartiesArray.splice(i,1)
+  removeInvolvedParties(i: number) {
+    this.involvedPartiesArray.splice(i, 1)
     this.involvedParties().removeAt(i)
   }
 
 
-  witness():FormArray{
+  witness(): FormArray {
     return this.slideThreeForm.get("witness") as FormArray
   }
-  newWitness():FormGroup{
+  newWitness(): FormGroup {
     return this.formBuilder.group({
-      name:'',
-      number:'',
+      witness_name: '',
+      witness_number: '',
     })
   }
-  addWitness(){
+  addWitness() {
     this.witness().push(this.newWitness());
   }
-  removeWitness(i:number){
+  removeWitness(i: number) {
     this.witness().removeAt(i)
+  }
+
+
+  otherVehicle(): FormArray {
+    return this.slideFiveForm.get("otherVehicle") as FormArray
+  }
+  newOtherVehicle(): FormGroup {
+    return this.formBuilder.group({
+      name: '',
+      idImage: [],
+      number: '',
+      insuranceCompany: '',
+      insuranceImage: []
+    })
+  }
+  addOtherVehicle() {
+    let otherVehicleArrayObject = { licenceImg: [], vinNo: [], all$side: [], closeUp: [] };
+    this.otherVehicleArray.push(otherVehicleArrayObject)
+    this.otherVehicle().push(this.newOtherVehicle());
+  }
+  removeOtherVehicle(i: number) {
+    this.otherVehicleArray.splice(i, 1)
+    this.otherVehicle().removeAt(i)
   }
 
 
@@ -196,6 +237,30 @@ export class FormPage implements OnInit {
       return console.log('Please provide all the required values!');
     }
   }
+
+  submitThreeForm = async () => {
+    if (this.slideThreeForm.valid) {
+      console.log(this.slideThreeForm.value,"Three");
+      this.swiper = await this.swiperRef?.nativeElement.swiper;
+      this.goNext();
+    } else {
+      return console.log('Please provide all the required values!');
+    }
+  }
+
+  submitFourForm = async () => {
+    if (this.slideFourForm.valid) {
+      console.log(this.slideFourForm.value,"Four");
+      this.swiper = await this.swiperRef?.nativeElement.swiper;
+      this.goNext();
+    } else {
+      return console.log('Please provide all the required values!');
+    }
+  }
+  submitFiveForm(){
+    
+  }
+
 
 
 
@@ -271,12 +336,10 @@ export class FormPage implements OnInit {
   }
 
   goNext() {
-    console.log('changed: ');
     this.swiper?.slideNext(500);
   }
 
   goPrev() {
-    console.log('changed: ');
     this.swiper?.slidePrev(500);
   }
 
@@ -286,7 +349,7 @@ export class FormPage implements OnInit {
 
 
   //imagePicker
-  async openImagePicker(name: string,i:number): Promise<void> {
+  async openImagePicker(name: string, i: number): Promise<void> {
     console.log(i)
     const result = await FilePicker.pickImages({
       multiple: true,
@@ -303,21 +366,38 @@ export class FormPage implements OnInit {
             });
           });
           break;
-          case "nearestStreet":
-            this.nearestStreet = data.files;
-            this.nearestStreet.forEach(async (file) => {
-              await Cloudinary.uploadResource({
-                path: file.path,
-                resourceType: ResourceType.Image,
-                uploadPreset: 'm442awuh',
-              });
+        case "nearestStreet":
+          this.nearestStreet = data.files;
+          this.nearestStreet.forEach(async (file) => {
+            await Cloudinary.uploadResource({
+              path: file.path,
+              resourceType: ResourceType.Image,
+              uploadPreset: 'm442awuh',
             });
-            break;
-
-
+          });
+          break;
         case "idImage":
           this.involvedPartiesArray[i].idImage = data.files;
           console.log(this.involvedPartiesArray);
+          break;
+        case "insuranceImage":
+          this.involvedPartiesArray[i].insuranceImage = data.files;
+          console.log(this.involvedPartiesArray);
+          break;
+        case "policeReport":
+          this.policeReport = data.files;
+          break;
+        case "licensePlate":
+          this.licensePlate = data.files;
+          break;
+        case "vinNo":
+          this.vinNo = data.files;
+          break;
+        case "allFourSide":
+          this.allFourSide = data.files;
+          break;
+        case "closeUp":
+          this.closeUp = data.files;
           break;
       }
 
@@ -491,7 +571,7 @@ export class FormPage implements OnInit {
 
   }
 
-  deleteUploadAudio(file: any,index: number) {
+  deleteUploadAudio(file: any, index: number) {
     this.playUploadAudio(file)
     this.uploadAudio.splice(index, 1)
     console.log(this.uploadAudio, index)
@@ -536,7 +616,7 @@ export class FormPage implements OnInit {
     console.log(this.witnessArray)
   }
 
-  addInvolvedParty(){
+  addInvolvedParty() {
     this.involvedPartiesArray.push(this.involvedPartiesObject)
     console.log(this.involvedPartiesArray)
   }
@@ -548,7 +628,7 @@ export class FormPage implements OnInit {
 
   removeImage(index: number, name: string) {
     console.log(this.actualAreaOfDamage.length)
-    if(name == "actualAreaOfDamage"){
+    if (name == "actualAreaOfDamage") {
       this.actualAreaOfDamage.splice(index, 1);
     }
     console.log(this.actualAreaOfDamage.length)

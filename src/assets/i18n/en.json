@@ -87,7 +87,8 @@
         "submit":"Entregar",
 
         "form5_header":"Other Vehicle Damage",
-        "label_my_vehicle_other":"Other Party’s Vehicle"
+        "label_my_vehicle_other":"Other Party’s Vehicle",
+        "label_add_more_party_other":"Add More Parties"
 
 
 

@@ -80,22 +80,25 @@ export class FormPage implements OnInit {
   track: any;
   witnessObj = { name: '', phone: '', email: '', image: [] }
   witnessArray: any = []
-  public actualAreaOfDamage: PickedFile[] = [];
+  imageActualArea:{} = {
+    local: [],
+    server: [],
+    isUploaded : false 
+  }
+  public actualAreaOfDamage: string[] = [];
   public nearestStreet: PickedFile[] = [];
   public policeReport: PickedFile[] = [];
   public licensePlate: PickedFile[] = [];
   public vinNo: PickedFile[] = [];
   public allFourSide: PickedFile[] = [];
   public closeUp: PickedFile[] = [];
-
-  latAndLng: string = "";
-
   involvedPartiesArray: any = [];
   involvedPartiesObject = { idImage: [], insuranceImage: [] };
-
-
   otherVehicleArray: any = [];
   otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [] };
+  latAndLng: string = "";
+
+
 
   constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
@@ -121,7 +124,6 @@ export class FormPage implements OnInit {
     });
 
     this.slideTwoForm = formBuilder.group({
-
     });
 
     this.slideThreeForm = this.formBuilder.group({
@@ -152,6 +154,8 @@ export class FormPage implements OnInit {
       name: '',
       number: '',
       insuranceCompany: '',
+      id: [],
+      insurance: []
     })
   }
   addInvolvedParties() {
@@ -191,6 +195,11 @@ export class FormPage implements OnInit {
       vehicleLicencePlate: '',
       vinNo: '',
       towCompany: '',
+      licenceImg: [],
+      vinNoOther: [],
+      all4side: [],
+      closeUpOther: [],
+      map: ''
     })
   }
   addOtherVehicle() {
@@ -203,10 +212,10 @@ export class FormPage implements OnInit {
     this.otherVehicle().removeAt(i)
   }
 
-  async permission(){
+  async permission() {
     const permissionStatus = await Geolocation.checkPermissions();
     console.log('Permission status: ', permissionStatus.location);
-    if(permissionStatus?.location != 'granted') {
+    if (permissionStatus?.location != 'granted') {
       const requestStatus = await Geolocation.requestPermissions();
     }
   }
@@ -260,14 +269,43 @@ export class FormPage implements OnInit {
       return console.log('Please provide all the required values!');
     }
   }
-  submitFiveForm() {
+  submitFiveForm = async () => {
+    console.log(this.slideOneForm.value, "one");
+    console.log(this.slideTwoForm.value, "Two");
+    console.log(this.slideThreeForm.value, "Three");
+    console.log(this.slideFourForm.value, "Four");
+    console.log(this.slideFiveForm.value, "Five");
 
+    let formToMail = {
+      name_insured: this.slideOneForm.controls['name_insured'].value,
+      policy_no: this.slideOneForm.controls['name_insured'].value,
+      tell_us_what_happenend: this.slideOneForm.controls['tell_us_what_happened'].value,
+      storedAudio: this.storedAudio,
+      uploadAudio: this.uploadAudio,
+      address_of_accident: this.latAndLng,
+      image_surrounding: this.actualAreaOfDamage,
+      image_nearest_street: [],
+      involvedparty: this.involvedParties().value,
+      witness: this.witness().value,
+      police_name:this.slideThreeForm.controls['policeName'].value ,
+      police_report: this.slideThreeForm.controls['policeReport'].value ,
+      image_police_report: [],
+      vehicle_make_model: this.slideFourForm.controls['vehicleMakeModel'].value ,
+      licence_plate: this.slideFourForm.controls['vehicleLicencePlateNo'].value ,
+      image_licence: [],
+      vin_no: this.slideFourForm.controls['vehicleVinNo'].value ,
+      image_vin_no:[],
+      speedometer: this.slideFourForm.controls['speedometer'].value ,
+      image_all_side: [],
+      image_close_up: [],
+      tow_company: this.slideFourForm.controls['towCompany'].value ,
+      tow_company_address: this.slideFourForm.controls['towCompany'].value,
+      other_vehcile_damage: this.otherVehicle().value
+
+
+    }
+    console.log(formToMail)
   }
-
-
-
-
-
 
   steps = {
     email: "hitenchandora21@gmail.com",
@@ -354,19 +392,21 @@ export class FormPage implements OnInit {
   //imagePicker
   async openImagePicker(name: string, i: number): Promise<void> {
     console.log(i)
-    const result = await FilePicker.pickImages({
+    await FilePicker.pickImages({
       multiple: true,
       readData: true,
     }).then(data => {
       switch (name) {
         case "actualAreaOfDamage":
-          this.actualAreaOfDamage = data.files;
-          this.actualAreaOfDamage.forEach(async (file) => {
+          // this.actualAreaOfDamage = data.files;
+          data.files.forEach(async (file) => {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            });
+            }).then(res =>{
+              this.actualAreaOfDamage.push(res.url)
+            })
           });
           break;
         case "nearestStreet":
@@ -381,10 +421,16 @@ export class FormPage implements OnInit {
           break;
         case "idImage":
           this.involvedPartiesArray[i].idImage = data.files;
+          this.involvedParties().at(i).patchValue({
+            id: data.files,
+          })
           console.log(this.involvedPartiesArray);
           break;
         case "insuranceImage":
           this.involvedPartiesArray[i].insuranceImage = data.files;
+          this.involvedParties().at(i).patchValue({
+            insurance: data.files,
+          })
           console.log(this.involvedPartiesArray);
           break;
         case "policeReport":
@@ -404,18 +450,30 @@ export class FormPage implements OnInit {
           break;
         case "licensePlateOther":
           this.otherVehicleArray[i].licenceImg = data.files;
+          this.otherVehicle().at(i).patchValue({
+            licenceImg: data.files,
+          })
           console.log(this.otherVehicleArray);
           break;
         case "vinNoOther":
           this.otherVehicleArray[i].vinNoOther = data.files;
+          this.otherVehicle().at(i).patchValue({
+            vinNoOther: data.files,
+          })
           console.log(this.otherVehicleArray);
           break;
         case "all4sideOther":
           this.otherVehicleArray[i].all4side = data.files;
+          this.otherVehicle().at(i).patchValue({
+            all4side: data.files,
+          })
           console.log(this.otherVehicleArray);
           break;
         case "closeUpOther":
           this.otherVehicleArray[i].closeUpOther = data.files;
+          this.otherVehicle().at(i).patchValue({
+            closeUpOther: data.files,
+          })
           console.log(this.otherVehicleArray);
           break;
       }
@@ -621,30 +679,6 @@ export class FormPage implements OnInit {
     });
   }
 
-
-
-
-  // add and remove witness
-  // addWitness() {
-  //   console.log(this.witnessArray)
-  //   this.witnessArray.push(this.witnessObj);
-  // }
-  deleteWitness(i: number) {
-    console.log(i)
-    this.witnessArray.splice(i, i);
-    console.log(this.witnessArray)
-  }
-
-  addInvolvedParty() {
-    this.involvedPartiesArray.push(this.involvedPartiesObject)
-    console.log(this.involvedPartiesArray)
-  }
-
-  deleteInvolvedParty(i: number) {
-    this.involvedPartiesArray.splice(i, 1);
-  }
-
-
   removeImage(index: number, name: string) {
     console.log(this.actualAreaOfDamage.length)
     if (name == "actualAreaOfDamage") {
@@ -653,4 +687,30 @@ export class FormPage implements OnInit {
     console.log(this.actualAreaOfDamage.length)
   }
 
+
+  // formToMail:{} = {
+  //   name_insured:'',
+  //   policy_no:'',
+  //   tell_us_what_happenend:'',
+  //   address_of_accident:'',
+  //   audio:[],
+  //   image_surrounding:[],
+  //   image_nearest_street:[],
+  //   involvedparty:[],
+  //   witness:[],
+  //   police_name:'',
+  //   police_report:'',
+  //   image_police_report:[],
+  //   vehicle_make_model:'',
+  //   licence_plate:'',
+  //   image_licence:[],
+  //   vin_no:'',
+  //   image_vin_no:'',
+  //   speedometer:'',
+  //   image_all_side:'',
+  //   image_close_up:'',
+  //   tow_company:'',
+  //   tow_company_address:'',
+  //   other_vehcile_damage:''
+  // }
 }

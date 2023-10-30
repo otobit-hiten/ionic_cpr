@@ -123,7 +123,7 @@
             <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
               [routerLink]="['location']">
               <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-              <ion-text>{{latAndLng}}</ion-text>
+              <ion-text> {{latAndLng}} </ion-text>
             </ion-item>
             <div
               *ngIf="this.slideTwoForm.controls?.address_of_accident?.touched && this.slideTwoForm.controls?.address_of_accident?.invalid">
@@ -151,7 +151,7 @@
                 <div class="image_holder_damage">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"
                     (click)="removeImage(i,'actualAreaOfDamage')"></ion-icon>
-                  <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
+                  <img class="imag_prev" *ngIf="file" [src]="file" />
                 </div>
               </ion-col>
             </ion-grid>
@@ -245,7 +245,7 @@
                         <img class="imag_prev" src="assets/img_holder.png" />
                       </div>
                     </ion-col>
-                    <ion-col *ngFor="let file of involvedPartiesArray[i].idImage" size="3">
+                    <ion-col *ngFor="let file of involvedPartiesArray[i].idImage" size="3" formControlName="id">
                       <div class="image_holder_damage">
                         <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
                         <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
@@ -292,7 +292,7 @@
                     <ion-col *ngFor="let file of involvedPartiesArray[i].insuranceImage" size="3">
                       <div class="image_holder_damage">
                         <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
+                        <img  class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.path)" />
                       </div>
                     </ion-col>
                   </ion-grid>
@@ -701,15 +701,16 @@
               {{'form.label_add_more_party_other'|  translate}}</ion-button>
           </div>
         </div>
-      </form>
+      
       <ion-row>
         <ion-col>
           <ion-button expand="block" (click)="goPrev()">{{'form.previous'| translate}}</ion-button>
         </ion-col>
         <ion-col>
-          <ion-button expand="block">{{'form.submit'| translate}}</ion-button>
+          <ion-button expand="block" type="submit">{{'form.submit'| translate}}</ion-button>
         </ion-col>
       </ion-row>
+    </form>
     </swiper-slide>
   </swiper-container>
 </ion-content>

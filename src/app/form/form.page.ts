@@ -80,17 +80,12 @@ export class FormPage implements OnInit {
   witnessArray: any = []
   public actualAreaOfDamage: PickedFile[] = [];
   public nearestStreet: PickedFile[] = [];
-  public liscenseAndNoPlate: PickedFile[] = [];
-  public insuranceIdImage: PickedFile[] = [];
   public policeReport: PickedFile[] = [];
   public licensePlate: PickedFile[] = [];
   public vinNo: PickedFile[] = [];
   public allFourSide: PickedFile[] = [];
   public closeUp: PickedFile[] = [];
-  public otherPartyCarImage: PickedFile[] = [];
-  public otherPartyCloseUpImage: PickedFile[] = [];
-  public otherPartyVinNo: PickedFile[] = [];
-  public otherPartylicensePlate: PickedFile[] = [];
+
   latAndLng: string = "";
 
   involvedPartiesArray: any = [];
@@ -98,7 +93,7 @@ export class FormPage implements OnInit {
 
 
   otherVehicleArray: any = [];
-  otherVehicleArrayObject = { licenceImg: [], vinNo: [], all$side: [], closeUp: [] };
+  otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [] };
 
   constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute) {
     this.route.queryParams.subscribe((params) => {
@@ -130,13 +125,16 @@ export class FormPage implements OnInit {
     this.slideThreeForm = this.formBuilder.group({
       involvedParties: this.formBuilder.array([]),
       witness: this.formBuilder.array([]),
+      policeName: '',
+      policeReport: ''
     })
 
     this.slideFourForm = formBuilder.group({
       vehicleMakeModel: '',
       vehicleLicencePlateNo: '',
-      vehicleVinNo:'',
-      speedometer:'',
+      vehicleVinNo: '',
+      speedometer: '',
+      towCompany: ''
     })
 
     this.slideFiveForm = this.formBuilder.group({
@@ -150,10 +148,8 @@ export class FormPage implements OnInit {
   newInvolvedParties(): FormGroup {
     return this.formBuilder.group({
       name: '',
-      idImage: [],
       number: '',
       insuranceCompany: '',
-      insuranceImage: []
     })
   }
   addInvolvedParties() {
@@ -189,15 +185,14 @@ export class FormPage implements OnInit {
   }
   newOtherVehicle(): FormGroup {
     return this.formBuilder.group({
-      name: '',
-      idImage: [],
-      number: '',
-      insuranceCompany: '',
-      insuranceImage: []
+      vehicleMakeModel: '',
+      vehicleLicencePlate: '',
+      vinNo: '',
+      twoCompany: '',
     })
   }
   addOtherVehicle() {
-    let otherVehicleArrayObject = { licenceImg: [], vinNo: [], all$side: [], closeUp: [] };
+    let otherVehicleArrayObject = { licenceImg: [], vinNo: [], all4side: [], closeUp: [] };
     this.otherVehicleArray.push(otherVehicleArrayObject)
     this.otherVehicle().push(this.newOtherVehicle());
   }
@@ -240,7 +235,7 @@ export class FormPage implements OnInit {
 
   submitThreeForm = async () => {
     if (this.slideThreeForm.valid) {
-      console.log(this.slideThreeForm.value,"Three");
+      console.log(this.slideThreeForm.value, "Three");
       this.swiper = await this.swiperRef?.nativeElement.swiper;
       this.goNext();
     } else {
@@ -250,15 +245,15 @@ export class FormPage implements OnInit {
 
   submitFourForm = async () => {
     if (this.slideFourForm.valid) {
-      console.log(this.slideFourForm.value,"Four");
+      console.log(this.slideFourForm.value, "Four");
       this.swiper = await this.swiperRef?.nativeElement.swiper;
       this.goNext();
     } else {
       return console.log('Please provide all the required values!');
     }
   }
-  submitFiveForm(){
-    
+  submitFiveForm() {
+
   }
 
 
@@ -398,6 +393,22 @@ export class FormPage implements OnInit {
           break;
         case "closeUp":
           this.closeUp = data.files;
+          break;
+        case "licensePlateOther":
+          this.otherVehicleArray[i].licenceImg = data.files;
+          console.log(this.otherVehicleArray);
+          break;
+        case "vinNoOther":
+          this.otherVehicleArray[i].vinNoOther = data.files;
+          console.log(this.otherVehicleArray);
+          break;
+        case "all4sideOther":
+          this.otherVehicleArray[i].all4side = data.files;
+          console.log(this.otherVehicleArray);
+          break;
+        case "closeUpOther":
+          this.otherVehicleArray[i].closeUpOther = data.files;
+          console.log(this.otherVehicleArray);
           break;
       }
 

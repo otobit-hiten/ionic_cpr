@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { GoogleMap } from '@capacitor/google-maps';
-import { NavigationExtras, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router, RouterModule } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { LatLng, Marker } from '@capacitor/google-maps/dist/typings/definitions';
 import { animate } from '@angular/animations';
@@ -29,23 +29,32 @@ export class LocationPage implements OnInit {
   drag:boolean = false;
 
 
-  constructor(private ngZone: NgZone, private changeRef: ChangeDetectorRef,private router: Router, private navCtrl: NavController) {
+  constructor(private route : ActivatedRoute, private ngZone: NgZone, private changeRef: ChangeDetectorRef,private router: Router, private navCtrl: NavController) {
 
   }
 
    async ngOnInit() {
-    let perm = await Geolocation.requestPermissions();
+    const permissionStatus = await Geolocation.checkPermissions();
+    console.log('Permission status: ', permissionStatus.location);
+    if(permissionStatus?.location != 'granted') {
+      const requestStatus = await Geolocation.requestPermissions();
+    }
+   }
+
+   openSettings(app = false){
+    console.log('open settings...');
    }
 
   ionViewDidEnter(){
     this.currentPosition()
-    this.createMap()
+    
   }
    currentPosition = async () => {
     const coordinates = await Geolocation.getCurrentPosition();
     console.log('Current position:', coordinates);
     this.cordinates = {lat : coordinates.coords.latitude, lng : coordinates.coords.longitude}
     console.log('Current position:', this.cordinates);
+    this.createMap()
   };
 
   async createMap() {
@@ -57,7 +66,6 @@ export class LocationPage implements OnInit {
         center: this.cordinates,
         zoom: 15,
       },
-
     });
 
     await this.newMap.addMarker({
@@ -89,8 +97,6 @@ export class LocationPage implements OnInit {
       //   draggable : true,
       // });
     })
-
-
 
   }
 

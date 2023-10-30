@@ -310,19 +310,17 @@
               form.label_add_more_party
               <ion-icon slot="start" name="add-outline"></ion-icon></ion-button>
           </div>
-
           <div class="tenth_label" translate>form.label_were_any_witness</div>
           <div class="black_line"></div>
-          <div class="involved_parties" formNameArray="witness">
-            <div *ngFor="let data of witness().controls; let i = index" [formGroupName]="i">
+          <div class="involved_parties" formArrayName="witness">
+            <div *ngFor="let data of witness().controls; let j = index" [formGroupName]="j" >
               <ion-label class="sixth_label" translate> form.label_witness_name</ion-label>
-              <ion-input placeholder="{{ 'form.input_witness_name' | translate }}" formControlName="witness_name"
-                class="form-control"></ion-input>
+              <ion-input placeholder="{{ 'form.input_witness_name' | translate }}" formControlName="name">
+              </ion-input>
               <ion-label class="sixth_label" translate>form.label_witness_contact</ion-label>
-              <ion-input placeholder="{{ 'form.label_witness_contact' | translate }}" formControlName="witness_number"
-                class="form-control"></ion-input>
-              <ion-button shape="round" fill="outline" size="default" (click)="removeWitness(i)" translate>
-                <ion-icon name="trash-outline"></ion-icon>form.delete</ion-button>
+              <ion-input placeholder="{{ 'form.label_witness_contact' | translate }}" formControlName="number"></ion-input>
+              <ion-button shape="round" fill="outline" size="default" (click)="removeWitness(j)">
+                <ion-icon name="trash-outline"></ion-icon>{{'form.delete' | translate}}</ion-button>
             </div>
             <ion-button class="involved_parties_button" shape="round" fill="outline" size="default"
               (click)="addWitness()" translate>
@@ -595,12 +593,12 @@
                 </ion-list>
               </div>
               <div class="police_rep_no">
-                <ion-label class="label_text" translate="">form.label_vin_no</ion-label>
+                <ion-label class="label_text">{{'form.label_vin_no' | translate}}</ion-label>
                 <ion-input fill="outline" placeholder="{{'form.input_vin_no' | translate }}"  formControlName="vinNo" >
                 </ion-input>
               </div>
               <div class="upload_img">
-                <ion-label class="label_text" translate>form.label_img_vin_no</ion-label>
+                <ion-label class="label_text">{{'form.label_img_vin_no'| translate}}</ion-label>
 
                 <ion-list class="border" lines="none">
                   <ion-grid>
@@ -621,13 +619,13 @@
                   </ion-grid>
 
                   <ion-item>
-                    <ion-button slot="end" class="add_image" (click)="openImagePicker('vinNoOther',i)" translate>form.add_img</ion-button>
+                    <ion-button slot="end" class="add_image" (click)="openImagePicker('vinNoOther',i)">{{ 'form.add_img' | translate }}</ion-button>
                   </ion-item>
                 </ion-list>
               </div>
 
               <div class="upload_police_report">
-                <ion-label class="label_text" translate>form.label_img_all_4_side</ion-label>
+                <ion-label class="label_text">{{'form.label_img_all_4_side'| translate}}</ion-label>
                 <ion-list class="border" lines="none">
                   <ion-grid>
                     <ion-col *ngIf="otherVehicleArray[i].all4side.length===0" size="3">
@@ -647,16 +645,16 @@
                   </ion-grid>
 
                   <ion-item>
-                    <ion-button slot="end" class="add_image" (click)="openImagePicker('all4sideOther',i)" translate>form.add_img</ion-button>
+                    <ion-button slot="end" class="add_image" (click)="openImagePicker('all4sideOther',i)">{{'form.add_img' | translate}}</ion-button>
                   </ion-item>
                 </ion-list>
               </div>
 
               <div class="upload_police_report">
-                <ion-label class="label_text" translate>form.label_img_close_up</ion-label>
+                <ion-label class="label_text">{{'form.label_img_close_up'| translate}}</ion-label>
                 <ion-list class="border" lines="none">
                   <ion-grid>
-                    <ion-col *ngIf="otherVehicleArray[i].closeUp.length===0" size="3">
+                    <ion-col *ngIf="otherVehicleArray[i].closeUpOther.length===0" size="3">
                       <div class="image_holder">
                         <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
                         <img class="imag_prev" src="assets/img_holder.png" />
@@ -673,43 +671,43 @@
                   </ion-grid>
 
                   <ion-item>
-                    <ion-button slot="end" class="add_image" (click)="openImagePicker('closeUpOther',i)" translate>form.add_img</ion-button>
+                    <ion-button slot="end" class="add_image" (click)="openImagePicker('closeUpOther',i)">{{'form.add_image'| translate}}</ion-button>
                   </ion-item>
                 </ion-list>
               </div>
               <div>
                 <div>
-                  <ion-label translate>form.label_was_vehicle_towed</ion-label>
+                  <ion-label >{{'form.label_was_vehicle_towed' | translate}}</ion-label>
                 </div>
                 <div>
-                  <ion-label class="sixth_label" translate>form.label_tow_company </ion-label>
+                  <ion-label class="sixth_label">{{'form.label_tow_company'| translate}} </ion-label>
                   <ion-input placeholder="{{'form.input_tow_company' | translate }}" formControlName="towCompany"></ion-input>
                 </div>
                 <div class="address">
-                  <ion-label class="label_text" translate>form.label_tow_company_address </ion-label>
+                  <ion-label class="label_text">{{'form.label_tow_company_address'| translate}}</ion-label>
 
-                  <ion-item class="location" translate>
+                  <ion-item class="location">
                     <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-                    form.label_tow_company_address
+                   {{'form.label_tow_company_address'| translate}}
                   </ion-item>
                 </div>
               </div>
-              <ion-button shape="round" fill="outline" size="default" (click)="removeOtherVehicle(i)" translate>
-                <ion-icon slot="start" name="trash-outline"></ion-icon>form.delete</ion-button>
+              <ion-button shape="round" fill="outline" size="default" (click)="removeOtherVehicle(i)">
+                <ion-icon slot="start" name="trash-outline"></ion-icon>{{'form.delete'| translate}}</ion-button>
             </ion-list>
             <ion-button class="involved_parties_button" shape="round" fill="outline" size="default"
-              (click)="addOtherVehicle()" translate translate>
+              (click)="addOtherVehicle()">
               <ion-icon slot="start" name="add-outline"></ion-icon>
-              form.label_add_more_party_other</ion-button>
+              {{'form.label_add_more_party_other'|  translate}}</ion-button>
           </div>
         </div>
       </form>
       <ion-row>
         <ion-col>
-          <ion-button expand="block" (click)="goPrev()" translate>form.previous</ion-button>
+          <ion-button expand="block" (click)="goPrev()">{{'form.previous'| translate}}</ion-button>
         </ion-col>
         <ion-col>
-          <ion-button expand="block" translate>form.submit</ion-button>
+          <ion-button expand="block">{{'form.submit'| translate}}</ion-button>
         </ion-col>
       </ion-row>
     </swiper-slide>

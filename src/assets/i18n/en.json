@@ -84,7 +84,7 @@
         "input_tow_company":"Towing company Name",
         "label_tow_company_address":"Towing company Address",
         "label_add_more_vehicle":"Add More vehicle",
-        "submit":"Entregar",
+        "submit":"Submit",
 
         "form5_header":"Other Vehicle Damage",
         "label_my_vehicle_other":"Other Party’s Vehicle",

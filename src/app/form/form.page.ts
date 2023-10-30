@@ -10,10 +10,12 @@ import { Capacitor } from '@capacitor/core';
 import { VoiceRecorder, RecordingData } from 'capacitor-voice-recorder';
 import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Cloudinary, ResourceType } from '@capawesome/capacitor-cloudinary';
 import { LanguageService } from '../services/language.service';
+import { Geolocation } from '@capacitor/geolocation';
+
 
 
 @Component({
@@ -30,6 +32,7 @@ export class FormPage implements OnInit {
   selected = '';
 
   ngOnInit() {
+    this.permission()
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
 
@@ -66,7 +69,6 @@ export class FormPage implements OnInit {
   slideThreeForm: FormGroup
   slideFourForm: FormGroup
   slideFiveForm: FormGroup
-
   recording: boolean = false;
   displayTime = '';
   time = 0;
@@ -95,7 +97,7 @@ export class FormPage implements OnInit {
   otherVehicleArray: any = [];
   otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [] };
 
-  constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute) {
+  constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
       if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
         this.latAndLng = 'Address of Accident';
@@ -168,8 +170,8 @@ export class FormPage implements OnInit {
   }
   newWitness(): FormGroup {
     return this.formBuilder.group({
-      witness_name: '',
-      witness_number: '',
+      name: '',
+      number: '',
     })
   }
   addWitness() {
@@ -188,11 +190,11 @@ export class FormPage implements OnInit {
       vehicleMakeModel: '',
       vehicleLicencePlate: '',
       vinNo: '',
-      twoCompany: '',
+      towCompany: '',
     })
   }
   addOtherVehicle() {
-    let otherVehicleArrayObject = { licenceImg: [], vinNo: [], all4side: [], closeUp: [] };
+    let otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [] };
     this.otherVehicleArray.push(otherVehicleArrayObject)
     this.otherVehicle().push(this.newOtherVehicle());
   }
@@ -201,7 +203,13 @@ export class FormPage implements OnInit {
     this.otherVehicle().removeAt(i)
   }
 
-
+  async permission(){
+    const permissionStatus = await Geolocation.checkPermissions();
+    console.log('Permission status: ', permissionStatus.location);
+    if(permissionStatus?.location != 'granted') {
+      const requestStatus = await Geolocation.requestPermissions();
+    }
+  }
 
   async initialize() {
     await Cloudinary.initialize({ cloudName: 'dbdfrtxli' });

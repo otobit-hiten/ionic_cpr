@@ -24,6 +24,10 @@ const config: CapacitorConfig = {
       layoutName: 'launch_screen',
       useDialog: true,
     },
+    LocalNotifications: {
+      iconColor: "#488AFF",
+      smallIcon:'cpr_logo.png'
+    }
   },
 };
 

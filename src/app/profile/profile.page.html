@@ -28,9 +28,15 @@
 <ion-content>
   <ion-row style="width: max-content" class="avatar">
     <ion-col>
-      <ion-avatar>
-        <ion-img *ngIf="imageData.localPath !== '' " [src]="convertPathToWebPath(imageData.localPath)"  alt=""/>
-        <ion-img *ngIf="imageData.localPath === '' " src="assets/profile_pic.png" alt="assets/user.png" />
+      <ion-avatar   *ngIf="pro.length === 0">
+        <img src="assets/profile_pic.png" alt="assets/user.png" />
+      </ion-avatar>
+      <ion-avatar   *ngFor="let file of pro; let i = index">
+        <img   *ngIf="file.path !== '' "  [src]="domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+file.data)"  alt="assets/user.png"/>
+
+        <!-- <img   *ngIf="file.path !== '' "  [src]="convertPathToWebPath(file.path!)"  alt="assets/user.png"/> -->
+        <!-- <ion-img *ngIf="imageData.base64 !== '' " [src]="convertPathToWebPath(imageData.base64)"  alt=""/>
+        <ion-img *ngIf="imageData.base64 === '' " src="assets/profile_pic.png" alt="assets/user.png" /> -->
 
       </ion-avatar>
     </ion-col>

@@ -11,6 +11,7 @@ import { Filesystem, Directory, FileInfo } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core'
+import { profile } from 'console';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -19,16 +20,17 @@ import { ChangeDetectorRef } from '@angular/core'
   imports: [IonicModule, CommonModule, FormsModule, TranslateModule]
 })
 export class ProfilePage implements OnInit {
-  user: User = { name: '', phone: '', email: '', policyNo: '', image: { name: '', localPath: '' } }
+  user: User = { name: '', phone: '', email: '', policyNo: '', image:[] }
   public name: string = "";
   public phone: string = "";
   public email: string = "";
   public policyNo: string = "";
+  public pro: PickedFile[] =[]
   public imageData = { name: '', base64: '', path: '', localPath: '' };
   public isEdit: boolean = false;
   public dataExists: boolean = false;
   private localPath: string = "";
-  constructor(private userService: UserService, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService,private changeRef: ChangeDetectorRef) { }
+  constructor(private userService: UserService, public readonly domSanitizer: DomSanitizer, public languageService: LanguageService,private changeRef: ChangeDetectorRef) { }
   public selected = '';   //set default language here  {en= English ; es = spanish}
   languageList: any = []
   ionChange(event:any) {
@@ -55,7 +57,7 @@ export class ProfilePage implements OnInit {
   }
   set() {
     this.isEdit = false;
-    let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo, image: this.imageData }
+    let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo, image: this.pro }
     this.userService.get("user").then((data: any) => {
       if (data === "" || data === null || data.value === null) {
         this.userService.create("user", JSON.stringify(user));
@@ -81,8 +83,18 @@ export class ProfilePage implements OnInit {
           this.isEdit = false
           console.log(this.isEdit)
         }
-        this.imageData.name = this.user.image.name;
-        this.imageData.localPath = this.user.image.localPath;
+        console.log("read")
+        console.log(this.user.image)
+        
+          Filesystem.readFile({
+            path: this.user.image[0].name,
+            directory: Directory.Data,
+          }).then((res: any) => {
+              console.log(res,"read")
+          });
+          this.pro = this.user.image
+        
+     
       } else {
         this.isEdit = true
         console.log(this.isEdit)
@@ -106,19 +118,23 @@ export class ProfilePage implements OnInit {
       multiple: false,
       readData: true,
     }).then(data => {
-      data.files.forEach(file => {
-        this.imageData.name = file.name;
-        this.imageData.path = file.path!;
-      })
-      console.log(data);
+      this.pro = data.files
+      console.log(this.pro);
     });
-    await Filesystem.copy({ from: this.imageData.path, to: "photo.jpg", directory: Directory.External, toDirectory: Directory.Data }).then((data: any) => {
-      console.log("data")
-      console.log(data)
-      this.imageData.localPath = data.uri
+
+    const fileName = Date.now() + '.jpeg';
+    await Filesystem.writeFile({ 
+      data: this.pro[0].name, 
+      path: fileName,
+      directory: Directory.Data 
+    }).then((data: any) => { 
+      console.log(data,"Write")
     });
   }
   removeImage() {
+    let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo, image: []}
+    this.userService.update("user", JSON.stringify(user));
+    this.pro = []
     this.imageData.name = "";
     this.imageData.base64 = "";
     this.imageData.path = "";

@@ -100,7 +100,7 @@ export class FormPage implements OnInit {
 
 
 
-  constructor(public formBuilder: FormBuilder, private changeRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
+  constructor(public formBuilder: FormBuilder,   private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
       if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
         this.latAndLng = 'Address of Accident';

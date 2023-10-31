@@ -1,6 +1,6 @@
 import { LanguageService } from './../services/language.service';
 import { UserService } from './../services/user.service';
-import { User } from './../services/user';
+import { Image, User } from './../services/user';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,20 +20,22 @@ import { profile } from 'console';
   imports: [IonicModule, CommonModule, FormsModule, TranslateModule]
 })
 export class ProfilePage implements OnInit {
-  user: User = { name: '', phone: '', email: '', policyNo: '', image:[] }
+  user: User = { name: '', phone: '', email: '', policyNo: '' }
+  image: Image = { name: '', path: '', localPath: '' }
   public name: string = "";
   public phone: string = "";
   public email: string = "";
   public policyNo: string = "";
-  public pro: PickedFile[] =[]
+  public pro: PickedFile[] = []
   public imageData = { name: '', base64: '', path: '', localPath: '' };
   public isEdit: boolean = false;
   public dataExists: boolean = false;
   private localPath: string = "";
-  constructor(private userService: UserService, public readonly domSanitizer: DomSanitizer, public languageService: LanguageService,private changeRef: ChangeDetectorRef) { }
+  public imagePath: string = '';
+  constructor(private userService: UserService, public readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private changeRef: ChangeDetectorRef) { }
   public selected = '';   //set default language here  {en= English ; es = spanish}
   languageList: any = []
-  ionChange(event:any) {
+  ionChange(event: any) {
     console.log(event)
     console.log(event.target.value)
     this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
@@ -49,7 +51,8 @@ export class ProfilePage implements OnInit {
     this.get()
 
   }
-  ionViewDidEnter(){
+  ionViewDidEnter() {
+    this.get();
     console.log(this.selected)
     this.selected = this.languageService.selectedLanguage
     console.log(this.selected)
@@ -57,7 +60,7 @@ export class ProfilePage implements OnInit {
   }
   set() {
     this.isEdit = false;
-    let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo, image: this.pro }
+    let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo }
     this.userService.get("user").then((data: any) => {
       if (data === "" || data === null || data.value === null) {
         this.userService.create("user", JSON.stringify(user));
@@ -84,23 +87,24 @@ export class ProfilePage implements OnInit {
           console.log(this.isEdit)
         }
         console.log("read")
-        console.log(this.user.image)
-        
-          Filesystem.readFile({
-            path: this.user.image[0].name,
-            directory: Directory.Data,
-          }).then((res: any) => {
-              console.log(res,"read")
-          });
-          this.pro = this.user.image
-        
-     
       } else {
         this.isEdit = true
         console.log(this.isEdit)
       }
     }
     );
+    await this.userService.get("image").then((data: any) => {
+      if (data != null && data.value != null) {
+        console.log(data)
+        console.log(data.value)
+        let imageData = JSON.parse(data.value);
+        if (this.image !=null) {
+          this.image=imageData
+          console.log("imagedata")
+        }
+        console.log(this.image)
+      }
+    })
   }
   update() {
     console.log(this.isEdit)
@@ -118,27 +122,34 @@ export class ProfilePage implements OnInit {
       multiple: false,
       readData: true,
     }).then(data => {
-      this.pro = data.files
-      console.log(this.pro);
+      console.log("here reached")
+      const fileName = Date.now() + '.jpeg';
+      Filesystem.writeFile({
+        data: data.files[0].data!,
+        path: fileName,
+        directory: Directory.Data
+
+      }).then((data: any) => {
+        console.log(data, "Write");
+        this.image.name = fileName;
+        this.image.path = data.uri;
+        var win: any = window;
+        this.image.localPath = win.Ionic.WebView.convertFileSrc(data.uri);
+        this.userService.create("image", JSON.stringify(this.image));
+        console.log("imagepath")
+        console.log(this.image.localPath)
+        this.get();
+      });
     });
 
-    const fileName = Date.now() + '.jpeg';
-    await Filesystem.writeFile({ 
-      data: this.pro[0].name, 
-      path: fileName,
-      directory: Directory.Data 
-    }).then((data: any) => { 
-      console.log(data,"Write")
-    });
+
+
   }
   removeImage() {
-    let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo, image: []}
-    this.userService.update("user", JSON.stringify(user));
-    this.pro = []
-    this.imageData.name = "";
-    this.imageData.base64 = "";
-    this.imageData.path = "";
-    this.imageData.localPath = "";
+    this.image.name = "";
+    this.image.path = "";
+    this.image.localPath=""
+    this.userService.create("image", JSON.stringify(this.image));
     this.get()
   }
 }

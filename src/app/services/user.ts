@@ -19,3 +19,10 @@ export interface Image {
   path: string;
   localPath: string;
 }
+
+export interface UploadImage{
+  name: string;
+  path: string;
+  localPath: string;
+  isUploaded : boolean;
+}

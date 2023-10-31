@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Cloudinary, ResourceType } from '@capawesome/capacitor-cloudinary';
 import { LanguageService } from '../services/language.service';
 import { Geolocation } from '@capacitor/geolocation';
+import { UploadImage } from '../services/user';
 
 
 
@@ -83,9 +84,15 @@ export class FormPage implements OnInit {
   imageActualArea:{} = {
     local: [],
     server: [],
-    isUploaded : false 
+    isUploaded : false
   }
-  public actualAreaOfDamage: string[] = [];
+  // public actualAreaOfDamage:{} = {
+  //   local: [],
+  //   server: [],
+  //   isUploaded : false
+  // }
+
+  public actualAreaOfDamage: UploadImage[] =[]
   public nearestStreet: PickedFile[] = [];
   public policeReport: PickedFile[] = [];
   public licensePlate: PickedFile[] = [];
@@ -398,14 +405,21 @@ export class FormPage implements OnInit {
     }).then(data => {
       switch (name) {
         case "actualAreaOfDamage":
-          // this.actualAreaOfDamage = data.files;
           data.files.forEach(async (file) => {
+            this.actualAreaOfDamage.push({
+              isUploaded:false,
+              localPath:file.path!,
+              path: '',
+              name:''
+            })
+            var place = this.actualAreaOfDamage.length-1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
             }).then(res =>{
-              this.actualAreaOfDamage.push(res.url)
+              this.actualAreaOfDamage[place].path=res.url;
+              this.actualAreaOfDamage[place].isUploaded=true;
             })
           });
           break;

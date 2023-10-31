@@ -256,7 +256,7 @@
                     src="assets/img_del.svg"
                     (click)="removeImage(i,'actualAreaOfDamage')"
                   ></ion-icon>
-                  <img class="imag_prev" *ngIf="file" [src]="file" />
+                  <img class="imag_prev" *ngIf="file" [src]="convertPathToWebPath(file.localPath)" />
                 </div>
               </ion-col>
             </ion-grid>

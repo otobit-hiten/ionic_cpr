@@ -93,12 +93,12 @@ export class FormPage implements OnInit {
   // }
 
   public actualAreaOfDamage: UploadImage[] =[]
-  public nearestStreet: PickedFile[] = [];
-  public policeReport: PickedFile[] = [];
-  public licensePlate: PickedFile[] = [];
-  public vinNo: PickedFile[] = [];
-  public allFourSide: PickedFile[] = [];
-  public closeUp: PickedFile[] = [];
+  public nearestStreet: UploadImage[] = [];
+  public policeReport: UploadImage[] = [];
+  public licensePlate: UploadImage[] = [];
+  public vinNo: UploadImage[] = [];
+  public allFourSide: UploadImage[] = [];
+  public closeUp: UploadImage[] = [];
   involvedPartiesArray: any = [];
   involvedPartiesObject = { idImage: [], insuranceImage: [] };
   otherVehicleArray: any = [];
@@ -424,13 +424,22 @@ export class FormPage implements OnInit {
           });
           break;
         case "nearestStreet":
-          this.nearestStreet = data.files;
-          this.nearestStreet.forEach(async (file) => {
+          data.files.forEach(async (file) => {
+            this.nearestStreet.push({
+              isUploaded:false,
+              localPath:file.path!,
+              path: '',
+              name:''
+            })
+            var place = this.nearestStreet.length-1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            });
+            }).then(res =>{
+              this.nearestStreet[place].path=res.url;
+              this.nearestStreet[place].isUploaded=true;
+            })
           });
           break;
         case "idImage":
@@ -448,19 +457,99 @@ export class FormPage implements OnInit {
           console.log(this.involvedPartiesArray);
           break;
         case "policeReport":
-          this.policeReport = data.files;
+          data.files.forEach(async (file) => {
+            this.policeReport.push({
+              isUploaded:false,
+              localPath:file.path!,
+              path: '',
+              name:''
+            })
+            var place = this.policeReport.length-1
+            await Cloudinary.uploadResource({
+              path: file.path,
+              resourceType: ResourceType.Image,
+              uploadPreset: 'm442awuh',
+            }).then(res =>{
+              this.policeReport[place].path=res.url;
+              this.policeReport[place].isUploaded=true;
+            })
+          });
           break;
         case "licensePlate":
-          this.licensePlate = data.files;
+          data.files.forEach(async (file) => {
+            this.licensePlate.push({
+              isUploaded:false,
+              localPath:file.path!,
+              path: '',
+              name:''
+            })
+            var place = this.licensePlate.length-1
+            await Cloudinary.uploadResource({
+              path: file.path,
+              resourceType: ResourceType.Image,
+              uploadPreset: 'm442awuh',
+            }).then(res =>{
+              this.licensePlate[place].path=res.url;
+              this.licensePlate[place].isUploaded=true;
+            })
+          });
           break;
         case "vinNo":
-          this.vinNo = data.files;
+          data.files.forEach(async (file) => {
+            this.vinNo.push({
+              isUploaded:false,
+              localPath:file.path!,
+              path: '',
+              name:''
+            })
+            var place = this.vinNo.length-1
+            await Cloudinary.uploadResource({
+              path: file.path,
+              resourceType: ResourceType.Image,
+              uploadPreset: 'm442awuh',
+            }).then(res =>{
+              this.vinNo[place].path=res.url;
+              this.vinNo[place].isUploaded=true;
+            })
+          });
           break;
         case "allFourSide":
-          this.allFourSide = data.files;
+          data.files.forEach(async (file) => {
+            this.allFourSide.push({
+              isUploaded:false,
+              localPath:file.path!,
+              path: '',
+              name:''
+            })
+            var place = this.allFourSide.length-1
+            await Cloudinary.uploadResource({
+              path: file.path,
+              resourceType: ResourceType.Image,
+              uploadPreset: 'm442awuh',
+            }).then(res =>{
+              this.allFourSide[place].path=res.url;
+              this.allFourSide[place].isUploaded=true;
+            })
+          });
           break;
         case "closeUp":
-          this.closeUp = data.files;
+          data.files.forEach(async (file) => {
+            this.closeUp.push({
+              isUploaded:false,
+              localPath:file.path!,
+              path: '',
+              name:''
+            })
+            var place = this.closeUp.length-1
+            await Cloudinary.uploadResource({
+              path: file.path,
+              resourceType: ResourceType.Image,
+              uploadPreset: 'm442awuh',
+            }).then(res =>{
+              this.closeUp[place].path=res.url;
+              this.actualAreaOfDamage[place].isUploaded=true;
+            })
+          });
           break;
         case "licensePlateOther":
           this.otherVehicleArray[i].licenceImg = data.files;

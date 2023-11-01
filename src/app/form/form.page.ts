@@ -16,6 +16,8 @@ import { Cloudinary, ResourceType } from '@capawesome/capacitor-cloudinary';
 import { LanguageService } from '../services/language.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { UploadImage } from '../services/user';
+import { LoaderService } from '../services/loader.service';
+import { timeStamp } from 'console';
 
 
 
@@ -98,7 +100,7 @@ export class FormPage implements OnInit {
 
 
 
-  constructor(public formBuilder: FormBuilder,   private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
+  constructor(private loader: LoaderService, public formBuilder: FormBuilder,   private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
       console.log(params);
     if(params['map'] === 'towCompany'){
@@ -292,41 +294,136 @@ export class FormPage implements OnInit {
     }
   }
   submitFiveForm = async () => {
-    console.log(this.slideOneForm.value, "one");
-    console.log(this.slideTwoForm.value, "Two");
-    console.log(this.slideThreeForm.value, "Three");
-    console.log(this.slideFourForm.value, "Four");
-    console.log(this.slideFiveForm.value, "Five");
+    this.loader.showLoader();
+    
+    let address_of_accident: string[] = []
+    this.actualAreaOfDamage.forEach((res) =>{
+      address_of_accident.push(res.path)
+    }) 
 
-    let formToMail = {
+    let nearest_street: string[]  = []
+    this.nearestStreet.forEach((res) =>{
+      nearest_street.push(res.path)
+    })
+    
+    let police_report: string[]  = []
+    this.policeReport.forEach((res) =>{
+      police_report.push(res.path)
+    })
+    
+    let image_licence: string[]  = []
+    this.licensePlate.forEach((res) =>{
+      image_licence.push(res.path)
+    })
+
+    let vin_image: string[]  = []
+    this.vinNo.forEach((res) =>{
+      vin_image.push(res.path)
+    })
+
+    let all_side: string[]  = []
+    this.allFourSide.forEach((res) =>{
+      all_side.push(res.path)
+    })
+
+    let closeup: string[]  = []
+    this.closeUp.forEach((res) =>{
+      closeup.push(res.path)
+    })
+
+    this.involvedPartiesArray.forEach((res: any,index: number) => {
+      let datas: string[] = []
+      res.idImage.forEach((data : any)=> {
+          datas.push(data.path) 
+      })
+      this.involvedParties().at(index).patchValue({
+        id:datas
+      })
+    })
+
+    this.involvedPartiesArray.forEach((res: any,index: number) => {
+      let datas: string[] = []
+      res.insuranceImage.forEach((data : any)=> {
+          datas.push(data.path) 
+      })
+      this.involvedParties().at(index).patchValue({
+        insurance:datas
+      })
+    })
+
+    this.otherVehicleArray.forEach((res: any,index: number) => {
+      let datas: string[] = []
+      res.licenceImg.forEach((data : any)=> {
+          datas.push(data.path) 
+      })
+      this.otherVehicle().at(index).patchValue({
+        licenceImg:datas
+      })
+    })
+
+    this.otherVehicleArray.forEach((res: any,index: number) => {
+      let datas: string[] = []
+      res.vinNoOther.forEach((data : any)=> {
+          datas.push(data.path) 
+      })
+      this.otherVehicle().at(index).patchValue({
+        vinNoOther:datas
+      })
+    })
+
+    this.otherVehicleArray.forEach((res: any,index: number) => {
+      let datas: string[] = []
+      res.all4side.forEach((data : any)=> {
+          datas.push(data.path) 
+      })
+      this.otherVehicle().at(index).patchValue({
+        all4side:datas
+      })
+    })
+
+    this.otherVehicleArray.forEach((res: any,index: number) => {
+      let datas: string[] = []
+      res.closeUpOther.forEach((data : any)=> {
+          datas.push(data.path) 
+      })
+      this.otherVehicle().at(index).patchValue({
+        closeUpOther:datas
+      })
+    })
+
+     this.formToMail = {
       name_insured: this.slideOneForm.controls['name_insured'].value,
       policy_no: this.slideOneForm.controls['name_insured'].value,
       tell_us_what_happenend: this.slideOneForm.controls['tell_us_what_happened'].value,
       storedAudio: this.storedAudio,
       uploadAudio: this.uploadAudio,
       address_of_accident: this.latAndLng,
-      image_surrounding: this.actualAreaOfDamage,
-      image_nearest_street: [],
+      image_surrounding: address_of_accident,
+      image_nearest_street: nearest_street,
       involvedparty: this.involvedParties().value,
       witness: this.witness().value,
       police_name:this.slideThreeForm.controls['policeName'].value ,
       police_report: this.slideThreeForm.controls['policeReport'].value ,
-      image_police_report: [],
+      image_police_report: police_report,
       vehicle_make_model: this.slideFourForm.controls['vehicleMakeModel'].value ,
       licence_plate: this.slideFourForm.controls['vehicleLicencePlateNo'].value ,
-      image_licence: [],
+      image_licence: image_licence,
       vin_no: this.slideFourForm.controls['vehicleVinNo'].value ,
-      image_vin_no:[],
+      image_vin_no:vin_image,
       speedometer: this.slideFourForm.controls['speedometer'].value ,
-      image_all_side: [],
-      image_close_up: [],
+      image_all_side:all_side,
+      image_close_up: closeup,
       tow_company: this.slideFourForm.controls['towCompany'].value ,
       tow_company_address: this.lat_lang_towCompany,
       other_vehcile_damage: this.otherVehicle().value
-
-
     }
-    console.log(formToMail)
+    
+    console.log(this.formToMail)
+
+    this.call().then(rres =>{
+      this.loader.hideLoader()
+    })
+
   }
 
   steps = {
@@ -420,6 +517,7 @@ export class FormPage implements OnInit {
     }).then(data => {
       switch (name) {
         case "actualAreaOfDamage":
+          this.loader.showLoader()
           data.files.forEach(async (file) => {
             this.actualAreaOfDamage.push({
               isUploaded:false,
@@ -435,8 +533,10 @@ export class FormPage implements OnInit {
             }).then(res =>{
               this.actualAreaOfDamage[place].path=res.url;
               this.actualAreaOfDamage[place].isUploaded=true;
+              this.loader.hideLoader()
             })
           });
+         
           break;
 
         case "nearestStreet":
@@ -911,29 +1011,32 @@ export class FormPage implements OnInit {
   }
 
 
-  // formToMail:{} = {
-  //   name_insured:'',
-  //   policy_no:'',
-  //   tell_us_what_happenend:'',
-  //   address_of_accident:'',
-  //   audio:[],
-  //   image_surrounding:[],
-  //   image_nearest_street:[],
-  //   involvedparty:[],
-  //   witness:[],
-  //   police_name:'',
-  //   police_report:'',
-  //   image_police_report:[],
-  //   vehicle_make_model:'',
-  //   licence_plate:'',
-  //   image_licence:[],
-  //   vin_no:'',
-  //   image_vin_no:'',
-  //   speedometer:'',
-  //   image_all_side:'',
-  //   image_close_up:'',
-  //   tow_company:'',
-  //   tow_company_address:'',
-  //   other_vehcile_damage:''
-  // }
+  
+  formToMail:{} = {
+    name_insured: '',
+      policy_no: '',
+      tell_us_what_happenend: '',
+      uploadAudio: [],
+      address_of_accident: '',
+      image_surrounding: [],
+      image_nearest_street: [],
+      involvedparty: FormArray,
+      witness: FormArray ,
+      police_name:'' ,
+      police_report:'' ,
+      image_police_report: [],
+      vehicle_make_model: '' ,
+      licence_plate: '' ,
+      image_licence: [],
+      vin_no: '' ,
+      image_vin_no:[],
+      speedometer:'' ,
+      image_all_side:[],
+      image_close_up: [],
+      tow_company: '',
+      tow_company_address: '',
+      other_vehcile_damage: FormArray
+  }
+
+
 }

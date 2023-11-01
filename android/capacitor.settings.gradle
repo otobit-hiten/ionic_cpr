@@ -41,5 +41,8 @@ project(':capawesome-capacitor-cloudinary').projectDir = new File('../node_modul
 include ':capawesome-capacitor-file-picker'
 project(':capawesome-capacitor-file-picker').projectDir = new File('../node_modules/@capawesome/capacitor-file-picker/android')
 
+include ':jonz94-capacitor-image-picker'
+project(':jonz94-capacitor-image-picker').projectDir = new File('../node_modules/@jonz94/capacitor-image-picker/android')
+
 include ':capacitor-voice-recorder'
 project(':capacitor-voice-recorder').projectDir = new File('../node_modules/capacitor-voice-recorder/android')

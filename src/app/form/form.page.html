@@ -149,7 +149,7 @@
                 <div class="image_holder_damage">
                   <ion-icon class="imag_icon" src="assets/img_del.svg"
                     (click)="removeImage(i,'actualAreaOfDamage')"></ion-icon>
-                  <img class="imag_prev" *ngIf="file" [src]="convertPathToWebPath(file.localPath)" />
+                  <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                 </div>
               </ion-col>
             </ion-grid>
@@ -170,7 +170,6 @@
               <ion-grid>
                 <ion-col *ngIf="nearestStreet.length===0" size="3">
                   <div class="image_holder_damage">
-                    <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
                     <img class="imag_prev" src="assets/img_holder.png" />
                     <img class="imag_prev" src="assets/img_holder.png" />
                     <img class="imag_prev" src="assets/img_holder.png" />
@@ -181,7 +180,7 @@
                   <div class="image_holder_damage">
                     <ion-icon class="imag_icon" src="assets/img_del.svg"
                       (click)="removeImage(i,'nearestStreet')"></ion-icon>
-                    <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                    <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
@@ -240,7 +239,6 @@
                   <ion-grid>
                     <ion-col *ngIf="involvedPartiesArray[i].idImage.length===0" size="3">
                       <div class="image_holder_damage">
-                        <!-- <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon> -->
                         <img class="imag_prev" src="assets/img_holder.png" />
                         <img class="imag_prev" src="assets/img_holder.png" />
                         <img class="imag_prev" src="assets/img_holder.png" />
@@ -249,7 +247,7 @@
                     <ion-col *ngFor="let file of involvedPartiesArray[i].idImage" size="3" formControlName="id">
                       <div class="image_holder_damage">
                         <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                        <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
@@ -293,7 +291,7 @@
                     <ion-col *ngFor="let file of involvedPartiesArray[i].insuranceImage" size="3">
                       <div class="image_holder_damage">
                         <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                        <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
@@ -361,7 +359,7 @@
                 <ion-col *ngFor="let file of policeReport" size="3">
                   <div class="image_holder_damage">
                     <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                    <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                    <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
@@ -419,7 +417,7 @@
                 <ion-col *ngFor="let file of licensePlate" size="3">
                   <div class="image_holder_damage">
                     <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                    <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                    <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
@@ -453,7 +451,7 @@
                 <ion-col *ngFor="let file of vinNo" size="3">
                   <div class="image_holder_damage">
                     <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                    <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                    <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
@@ -487,7 +485,7 @@
                 <ion-col *ngFor="let file of allFourSide" size="3">
                   <div class="image_holder_damage">
                     <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                    <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                    <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
@@ -514,7 +512,7 @@
                 <ion-col *ngFor="let file of closeUp" size="3">
                   <div class="image_holder_damage">
                     <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                    <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                    <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
@@ -607,7 +605,7 @@
                     <ion-col *ngFor="let file of otherVehicleArray[i].licenceImg" size="3">
                       <div class="image_holder_damage">
                         <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                        <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
@@ -639,7 +637,7 @@
                     <ion-col *ngFor="let file of otherVehicleArray[i].vinNoOther" size="3">
                       <div class="image_holder_damage">
                         <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                        <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
@@ -666,7 +664,7 @@
                     <ion-col *ngFor="let file of otherVehicleArray[i].all4side" size="3">
                       <div class="image_holder_damage">
                         <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                        <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
@@ -693,7 +691,7 @@
                     <ion-col *ngFor="let file of otherVehicleArray[i].closeUpOther" size="3">
                       <div class="image_holder_damage">
                         <ion-icon class="imag_icon" src="assets/img_del.svg"></ion-icon>
-                        <img class="imag_prev" *ngIf="file.path" [src]="convertPathToWebPath(file.localPath)" />
+                        <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
@@ -720,7 +718,7 @@
                   <ion-item class="location_accident" translate routerDirection="forward"
                     [routerLink]="['location', 'towCompanyOther',i]">
                     <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-                    <ion-input style="border: none; outline: none;" class="form-control" formControlName="map" [(ngModel)]="otherVehicleArray[i].map"></ion-input>   
+                    <ion-input style="border: none; outline: none;" class="form-control" formControlName="map" [(ngModel)]="otherVehicleArray[i].map"></ion-input>
                   </ion-item>
                 </div>
               </div>

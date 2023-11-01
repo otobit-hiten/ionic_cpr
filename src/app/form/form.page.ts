@@ -83,7 +83,7 @@ export class FormPage implements OnInit {
   track: any;
   latAndLng: string = "";
   lat_lang_towCompany: string = ''
-  public actualAreaOfDamage: UploadImage[] =[]
+  public actualAreaOfDamage: UploadImage[] = []
   public nearestStreet: UploadImage[] = [];
   public policeReport: UploadImage[] = [];
   public licensePlate: UploadImage[] = [];
@@ -95,45 +95,45 @@ export class FormPage implements OnInit {
   involvedPartiesArray: any = [];
   involvedPartiesObject = { idImage: [], insuranceImage: [] };
   otherVehicleArray: any = [];
-  otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [], map:'' };
+  otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [], map: '' };
 
 
 
 
-  constructor(private loader: LoaderService, public formBuilder: FormBuilder,   private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
+  constructor(private loader: LoaderService, public formBuilder: FormBuilder, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
       console.log(params);
-    if(params['map'] === 'towCompany'){
-      if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
-        this.lat_lang_towCompany = 'Address of Accident';
-      } else {
-        this.lat_lang_towCompany = `${params['lat']},${params['lng']}`;
+      if (params['map'] === 'towCompany') {
+        if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
+          this.lat_lang_towCompany = 'Address of Accident';
+        } else {
+          this.lat_lang_towCompany = `${params['lat']},${params['lng']}`;
+        }
       }
-    }
-    if(params['map'] === 'addressAccident'){
-      if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
-        this.latAndLng = 'Address of Accident';
-      } else {
-        this.latAndLng = `${params['lat']},${params['lng']}`;
+      if (params['map'] === 'addressAccident') {
+        if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
+          this.latAndLng = 'Address of Accident';
+        } else {
+          this.latAndLng = `${params['lat']},${params['lng']}`;
+        }
       }
-    }
-    if(params['map'] === 'towCompanyOther'){
-      let i = Number(`${params['int']}`)
-      let mapValue = `${params['lat']},${params['lng']}`
-      console.log('NUMBERRRR')
-      console.log(i)
-      if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
-        this.otherVehicle().at(i).patchValue({
-          map:'Address of Accident'
-        });
-        this.otherVehicleArray[i].map = mapValue
-      } else {
-        this.otherVehicle().at(i).patchValue({
-          map:mapValue
-        });
+      if (params['map'] === 'towCompanyOther') {
+        let i = Number(`${params['int']}`)
+        let mapValue = `${params['lat']},${params['lng']}`
+        console.log('NUMBERRRR')
+        console.log(i)
+        if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
+          this.otherVehicle().at(i).patchValue({
+            map: 'Address of Accident'
+          });
+          this.otherVehicleArray[i].map = mapValue
+        } else {
+          this.otherVehicle().at(i).patchValue({
+            map: mapValue
+          });
+        }
       }
-    }
-      
+
 
     });
     console.log(this.swiperRef?.nativeElement.swiper);
@@ -295,103 +295,103 @@ export class FormPage implements OnInit {
   }
   submitFiveForm = async () => {
     this.loader.showLoader();
-    
-    let address_of_accident: string[] = []
-    this.actualAreaOfDamage.forEach((res) =>{
-      address_of_accident.push(res.path)
-    }) 
 
-    let nearest_street: string[]  = []
-    this.nearestStreet.forEach((res) =>{
+    let address_of_accident: string[] = []
+    this.actualAreaOfDamage.forEach((res) => {
+      address_of_accident.push(res.path)
+    })
+
+    let nearest_street: string[] = []
+    this.nearestStreet.forEach((res) => {
       nearest_street.push(res.path)
     })
-    
-    let police_report: string[]  = []
-    this.policeReport.forEach((res) =>{
+
+    let police_report: string[] = []
+    this.policeReport.forEach((res) => {
       police_report.push(res.path)
     })
-    
-    let image_licence: string[]  = []
-    this.licensePlate.forEach((res) =>{
+
+    let image_licence: string[] = []
+    this.licensePlate.forEach((res) => {
       image_licence.push(res.path)
     })
 
-    let vin_image: string[]  = []
-    this.vinNo.forEach((res) =>{
+    let vin_image: string[] = []
+    this.vinNo.forEach((res) => {
       vin_image.push(res.path)
     })
 
-    let all_side: string[]  = []
-    this.allFourSide.forEach((res) =>{
+    let all_side: string[] = []
+    this.allFourSide.forEach((res) => {
       all_side.push(res.path)
     })
 
-    let closeup: string[]  = []
-    this.closeUp.forEach((res) =>{
+    let closeup: string[] = []
+    this.closeUp.forEach((res) => {
       closeup.push(res.path)
     })
 
-    this.involvedPartiesArray.forEach((res: any,index: number) => {
+    this.involvedPartiesArray.forEach((res: any, index: number) => {
       let datas: string[] = []
-      res.idImage.forEach((data : any)=> {
-          datas.push(data.path) 
+      res.idImage.forEach((data: any) => {
+        datas.push(data.path)
       })
       this.involvedParties().at(index).patchValue({
-        id:datas
+        id: datas
       })
     })
 
-    this.involvedPartiesArray.forEach((res: any,index: number) => {
+    this.involvedPartiesArray.forEach((res: any, index: number) => {
       let datas: string[] = []
-      res.insuranceImage.forEach((data : any)=> {
-          datas.push(data.path) 
+      res.insuranceImage.forEach((data: any) => {
+        datas.push(data.path)
       })
       this.involvedParties().at(index).patchValue({
-        insurance:datas
+        insurance: datas
       })
     })
 
-    this.otherVehicleArray.forEach((res: any,index: number) => {
+    this.otherVehicleArray.forEach((res: any, index: number) => {
       let datas: string[] = []
-      res.licenceImg.forEach((data : any)=> {
-          datas.push(data.path) 
+      res.licenceImg.forEach((data: any) => {
+        datas.push(data.path)
       })
       this.otherVehicle().at(index).patchValue({
-        licenceImg:datas
+        licenceImg: datas
       })
     })
 
-    this.otherVehicleArray.forEach((res: any,index: number) => {
+    this.otherVehicleArray.forEach((res: any, index: number) => {
       let datas: string[] = []
-      res.vinNoOther.forEach((data : any)=> {
-          datas.push(data.path) 
+      res.vinNoOther.forEach((data: any) => {
+        datas.push(data.path)
       })
       this.otherVehicle().at(index).patchValue({
-        vinNoOther:datas
+        vinNoOther: datas
       })
     })
 
-    this.otherVehicleArray.forEach((res: any,index: number) => {
+    this.otherVehicleArray.forEach((res: any, index: number) => {
       let datas: string[] = []
-      res.all4side.forEach((data : any)=> {
-          datas.push(data.path) 
+      res.all4side.forEach((data: any) => {
+        datas.push(data.path)
       })
       this.otherVehicle().at(index).patchValue({
-        all4side:datas
+        all4side: datas
       })
     })
 
-    this.otherVehicleArray.forEach((res: any,index: number) => {
+    this.otherVehicleArray.forEach((res: any, index: number) => {
       let datas: string[] = []
-      res.closeUpOther.forEach((data : any)=> {
-          datas.push(data.path) 
+      res.closeUpOther.forEach((data: any) => {
+        datas.push(data.path)
       })
       this.otherVehicle().at(index).patchValue({
-        closeUpOther:datas
+        closeUpOther: datas
       })
     })
 
-     this.formToMail = {
+    this.formToMail = {
       name_insured: this.slideOneForm.controls['name_insured'].value,
       policy_no: this.slideOneForm.controls['name_insured'].value,
       tell_us_what_happenend: this.slideOneForm.controls['tell_us_what_happened'].value,
@@ -402,86 +402,35 @@ export class FormPage implements OnInit {
       image_nearest_street: nearest_street,
       involvedparty: this.involvedParties().value,
       witness: this.witness().value,
-      police_name:this.slideThreeForm.controls['policeName'].value ,
-      police_report: this.slideThreeForm.controls['policeReport'].value ,
+      police_name: this.slideThreeForm.controls['policeName'].value,
+      police_report: this.slideThreeForm.controls['policeReport'].value,
       image_police_report: police_report,
-      vehicle_make_model: this.slideFourForm.controls['vehicleMakeModel'].value ,
-      licence_plate: this.slideFourForm.controls['vehicleLicencePlateNo'].value ,
+      vehicle_make_model: this.slideFourForm.controls['vehicleMakeModel'].value,
+      licence_plate: this.slideFourForm.controls['vehicleLicencePlateNo'].value,
       image_licence: image_licence,
-      vin_no: this.slideFourForm.controls['vehicleVinNo'].value ,
-      image_vin_no:vin_image,
-      speedometer: this.slideFourForm.controls['speedometer'].value ,
-      image_all_side:all_side,
+      vin_no: this.slideFourForm.controls['vehicleVinNo'].value,
+      image_vin_no: vin_image,
+      speedometer: this.slideFourForm.controls['speedometer'].value,
+      image_all_side: all_side,
       image_close_up: closeup,
-      tow_company: this.slideFourForm.controls['towCompany'].value ,
+      tow_company: this.slideFourForm.controls['towCompany'].value,
       tow_company_address: this.lat_lang_towCompany,
       other_vehcile_damage: this.otherVehicle().value
     }
-    
+
     console.log(this.formToMail)
 
-    this.call().then(rres =>{
+    this.call().then(rres => {
       this.loader.hideLoader()
     })
 
   }
 
-  steps = {
-    email: "hitenchandora21@gmail.com",
-    name: "",
-    location: "",
-    injured: [
-      {
-        name: "",
-        images: [
-          {
-            url: "",
-            name: "image1"
-          },
-          {
-            url: "",
-            name: "image1"
-          }
-        ]
-      }
-    ],
-    witness: [
-      {
-        name: "",
-        images: []
-      }
-    ],
-    policeOfficer: {
-      name: "",
-      reportNumber: ""
-    },
-    audio: [
-      {
-        base64: "",
-        name: ""
-      }
-    ],
-    images: [
-      {
-        url: "http://res.cloudinary.com/dbdfrtxli/image/upload/v1695960777/qn0gqv0sagb15ndzppa1.jpg",
-        name: "image1"
-      },
-      {
-        url: "http://res.cloudinary.com/dbdfrtxli/image/upload/v1695960777/apzx7udrexbdi35atkit.jpg",
-        name: "image2"
-      }
-    ]
-  }
-
-
-
-
-
   async call() {
     try {
       console.log("Calling...")
       var Parse = require('parse');
-      const query = await Parse.Cloud.run('result', this.steps)
+      const query = await Parse.Cloud.run('result', this.formToMail)
       console.log(query)
     } catch (error) {
       console.log(error);
@@ -517,44 +466,40 @@ export class FormPage implements OnInit {
     }).then(data => {
       switch (name) {
         case "actualAreaOfDamage":
-          this.loader.showLoader()
           data.files.forEach(async (file) => {
             this.actualAreaOfDamage.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             })
-            var place = this.actualAreaOfDamage.length-1
+            var place = this.actualAreaOfDamage.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.actualAreaOfDamage[place].path=res.url;
-              this.actualAreaOfDamage[place].isUploaded=true;
-              this.loader.hideLoader()
+            }).then(res => {
+              this.actualAreaOfDamage[place].path = res.url;
+              this.actualAreaOfDamage[place].isUploaded = true;
             })
           });
-         
           break;
-
         case "nearestStreet":
           data.files.forEach(async (file) => {
             this.nearestStreet.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             })
-            var place = this.nearestStreet.length-1
+            var place = this.nearestStreet.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.nearestStreet[place].path=res.url;
-              this.nearestStreet[place].isUploaded=true;
+            }).then(res => {
+              this.nearestStreet[place].path = res.url;
+              this.nearestStreet[place].isUploaded = true;
             })
           });
           break;
@@ -562,19 +507,19 @@ export class FormPage implements OnInit {
         case "idImage":
           data.files.forEach(async (file) => {
             this.involvedPartiesArray[i].idImage.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             });
-            var place = this.involvedPartiesArray[i].idImage.length-1
+            var place = this.involvedPartiesArray[i].idImage.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.involvedPartiesArray[i].idImage[place].path=res.url;
-              this.involvedPartiesArray[i].idImage[place].isUploaded=true;
+            }).then(res => {
+              this.involvedPartiesArray[i].idImage[place].path = res.url;
+              this.involvedPartiesArray[i].idImage[place].isUploaded = true;
             })
           })
           this.involvedParties().at(i).patchValue({
@@ -585,19 +530,19 @@ export class FormPage implements OnInit {
         case "insuranceImage":
           data.files.forEach(async (file) => {
             this.involvedPartiesArray[i].insuranceImage.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             });
-            var place = this.involvedPartiesArray[i].insuranceImage.length-1
+            var place = this.involvedPartiesArray[i].insuranceImage.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.involvedPartiesArray[i].insuranceImage[place].path=res.url;
-              this.involvedPartiesArray[i].insuranceImage[place].isUploaded=true;
+            }).then(res => {
+              this.involvedPartiesArray[i].insuranceImage[place].path = res.url;
+              this.involvedPartiesArray[i].insuranceImage[place].isUploaded = true;
             })
           })
           this.involvedParties().at(i).patchValue({
@@ -608,19 +553,19 @@ export class FormPage implements OnInit {
         case "policeReport":
           data.files.forEach(async (file) => {
             this.policeReport.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             })
-            var place = this.policeReport.length-1
+            var place = this.policeReport.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.policeReport[place].path=res.url;
-              this.policeReport[place].isUploaded=true;
+            }).then(res => {
+              this.policeReport[place].path = res.url;
+              this.policeReport[place].isUploaded = true;
             })
           });
           break;
@@ -628,19 +573,19 @@ export class FormPage implements OnInit {
         case "licensePlate":
           data.files.forEach(async (file) => {
             this.licensePlate.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             })
-            var place = this.licensePlate.length-1
+            var place = this.licensePlate.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.licensePlate[place].path=res.url;
-              this.licensePlate[place].isUploaded=true;
+            }).then(res => {
+              this.licensePlate[place].path = res.url;
+              this.licensePlate[place].isUploaded = true;
             })
           });
           break;
@@ -648,19 +593,19 @@ export class FormPage implements OnInit {
         case "vinNo":
           data.files.forEach(async (file) => {
             this.vinNo.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             })
-            var place = this.vinNo.length-1
+            var place = this.vinNo.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.vinNo[place].path=res.url;
-              this.vinNo[place].isUploaded=true;
+            }).then(res => {
+              this.vinNo[place].path = res.url;
+              this.vinNo[place].isUploaded = true;
             })
           });
           break;
@@ -668,19 +613,19 @@ export class FormPage implements OnInit {
         case "allFourSide":
           data.files.forEach(async (file) => {
             this.allFourSide.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             })
-            var place = this.allFourSide.length-1
+            var place = this.allFourSide.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.allFourSide[place].path=res.url;
-              this.allFourSide[place].isUploaded=true;
+            }).then(res => {
+              this.allFourSide[place].path = res.url;
+              this.allFourSide[place].isUploaded = true;
             })
           });
           break;
@@ -688,19 +633,19 @@ export class FormPage implements OnInit {
         case "closeUp":
           data.files.forEach(async (file) => {
             this.closeUp.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             })
-            var place = this.closeUp.length-1
+            var place = this.closeUp.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.closeUp[place].path=res.url;
-              this.closeUp[place].isUploaded=true;
+            }).then(res => {
+              this.closeUp[place].path = res.url;
+              this.closeUp[place].isUploaded = true;
             })
           });
           break;
@@ -708,19 +653,19 @@ export class FormPage implements OnInit {
         case "licensePlateOther":
           data.files.forEach(async (file) => {
             this.otherVehicleArray[i].licenceImg.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             });
-            var place =this.otherVehicleArray[i].licenceImg.length-1
+            var place = this.otherVehicleArray[i].licenceImg.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.otherVehicleArray[i].licenceImg[place].path=res.url;
-              this.otherVehicleArray[i].licenceImg[place].isUploaded=true;
+            }).then(res => {
+              this.otherVehicleArray[i].licenceImg[place].path = res.url;
+              this.otherVehicleArray[i].licenceImg[place].isUploaded = true;
             })
           });
           this.otherVehicle().at(i).patchValue({
@@ -731,19 +676,19 @@ export class FormPage implements OnInit {
         case "vinNoOther":
           data.files.forEach(async (file) => {
             this.otherVehicleArray[i].vinNoOther.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             });
-            var place =this.otherVehicleArray[i].vinNoOther.length-1
+            var place = this.otherVehicleArray[i].vinNoOther.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.otherVehicleArray[i].vinNoOther[place].path=res.url;
-              this.otherVehicleArray[i].vinNoOther[place].isUploaded=true;
+            }).then(res => {
+              this.otherVehicleArray[i].vinNoOther[place].path = res.url;
+              this.otherVehicleArray[i].vinNoOther[place].isUploaded = true;
             })
           });
           this.otherVehicle().at(i).patchValue({
@@ -754,22 +699,22 @@ export class FormPage implements OnInit {
         case "all4sideOther":
           data.files.forEach(async (file) => {
             this.otherVehicleArray[i].all4side.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             });
-            var place =this.otherVehicleArray[i].all4side.length-1
+            var place = this.otherVehicleArray[i].all4side.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.otherVehicleArray[i].all4side[place].path=res.url;
-              this.otherVehicleArray[i].all4side[place].isUploaded=true;
+            }).then(res => {
+              this.otherVehicleArray[i].all4side[place].path = res.url;
+              this.otherVehicleArray[i].all4side[place].isUploaded = true;
             })
           });
-          
+
           this.otherVehicle().at(i).patchValue({
             all4side: this.otherVehicleArray[i].all4side,
           })
@@ -779,19 +724,19 @@ export class FormPage implements OnInit {
         case "closeUpOther":
           data.files.forEach(async (file) => {
             this.otherVehicleArray[i].closeUpOther.push({
-              isUploaded:false,
-              localPath:file.path!,
+              isUploaded: false,
+              localPath: file.path!,
               path: '',
-              name:''
+              name: ''
             });
-            var place =this.otherVehicleArray[i].closeUpOther.length-1
+            var place = this.otherVehicleArray[i].closeUpOther.length - 1
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
               uploadPreset: 'm442awuh',
-            }).then(res =>{
-              this.otherVehicleArray[i].closeUpOther[place].path=res.url;
-              this.otherVehicleArray[i].closeUpOther[place].isUploaded=true;
+            }).then(res => {
+              this.otherVehicleArray[i].closeUpOther[place].path = res.url;
+              this.otherVehicleArray[i].closeUpOther[place].isUploaded = true;
             })
           });
           this.otherVehicle().at(i).patchValue({
@@ -1004,38 +949,38 @@ export class FormPage implements OnInit {
 
   removeImage(index: number, name: string) {
     console.log(this.actualAreaOfDamage.length)
-    if (name == "actualAreaOfDamage") {
+    if (name === "actualAreaOfDamage") {
       this.actualAreaOfDamage.splice(index, 1);
     }
     console.log(this.actualAreaOfDamage.length)
   }
 
 
-  
-  formToMail:{} = {
+
+  formToMail: {} = {
     name_insured: '',
-      policy_no: '',
-      tell_us_what_happenend: '',
-      uploadAudio: [],
-      address_of_accident: '',
-      image_surrounding: [],
-      image_nearest_street: [],
-      involvedparty: FormArray,
-      witness: FormArray ,
-      police_name:'' ,
-      police_report:'' ,
-      image_police_report: [],
-      vehicle_make_model: '' ,
-      licence_plate: '' ,
-      image_licence: [],
-      vin_no: '' ,
-      image_vin_no:[],
-      speedometer:'' ,
-      image_all_side:[],
-      image_close_up: [],
-      tow_company: '',
-      tow_company_address: '',
-      other_vehcile_damage: FormArray
+    policy_no: '',
+    tell_us_what_happenend: '',
+    uploadAudio: [],
+    address_of_accident: '',
+    image_surrounding: [],
+    image_nearest_street: [],
+    involvedparty: FormArray,
+    witness: FormArray,
+    police_name: '',
+    police_report: '',
+    image_police_report: [],
+    vehicle_make_model: '',
+    licence_plate: '',
+    image_licence: [],
+    vin_no: '',
+    image_vin_no: [],
+    speedometer: '',
+    image_all_side: [],
+    image_close_up: [],
+    tow_company: '',
+    tow_company_address: '',
+    other_vehcile_damage: FormArray
   }
 
 

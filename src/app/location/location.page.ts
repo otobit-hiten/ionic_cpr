@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { GoogleMap } from '@capacitor/google-maps';
-import { ActivatedRoute, NavigationExtras, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, ParamMap, Router, RouterModule } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { LatLng, Marker } from '@capacitor/google-maps/dist/typings/definitions';
 import { animate } from '@angular/animations';
 import { Locations } from '../services/user';
+import { map } from 'rxjs';
 
 @Component({
 
@@ -27,13 +28,24 @@ export class LocationPage implements OnInit {
   marker :any;
   cordinates: LatLng = {lat: 0, lng: 0}
   drag:boolean = false;
-
+  from_map: string = ''
+  int_number: number = -1
 
   constructor(private route : ActivatedRoute, private ngZone: NgZone, private changeRef: ChangeDetectorRef,private router: Router, private navCtrl: NavController) {
 
   }
 
    async ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.from_map = params.get('map')!
+      if(this.from_map === 'towCompanyOther'){
+        this.int_number = +params.get('id1')!
+      }
+      console.log('Hello',this.from_map)
+      console.log('Hello',this.int_number)
+
+   });
+
     const permissionStatus = await Geolocation.checkPermissions();
     console.log('Permission status: ', permissionStatus.location);
     if(permissionStatus?.location != 'granted') {
@@ -109,12 +121,12 @@ export class LocationPage implements OnInit {
    getLocation(){
     let location: Locations = {lat:this.cordinates.lat, lng:this.cordinates.lng};
     this.router.navigate(['/tabs/dashboard/form'],{
-      queryParams:{lat:location.lat, lng:location.lng},
+      queryParams:{lat:location.lat, lng:location.lng, map: this.from_map, int:this.int_number},
     })
    }
    navigate(){
     this.router.navigate(['/tabs/dashboard/form'],{
-      queryParams:{lat:this.cordinates.lat, lng:this.cordinates.lng},
+      queryParams:{lat:this.cordinates.lat, lng:this.cordinates.lng,  map: this.from_map, int:this.int_number},
     })
    }
 }

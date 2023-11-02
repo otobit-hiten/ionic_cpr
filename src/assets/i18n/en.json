@@ -129,7 +129,11 @@
         "header":"About CPR Insurances",
         "text_1":"CPR Insurance Group, LLC, licensed by the Texas Department of Insurance, is an independent claim adjusters and administrators company, providing innovative resolution strategies to insurance companies, self-insured corporations, governmental entities, insurance agents and broker",
         "text_2":"Our company is headquartered in Irving, Texas, with partner locations in Louisiana and Oklahoma. CPR handles all major areas of insurance claims including auto, property, and casualty.",
-        "text_3":""
+        "text_3":"We have professional teams on staff for those clients in need of a complete TPA outsourcing solution or we can provide adjusters for the field for clients in need of a professional field solution. Our experienced TPA team will manage 100% of your claims needs from initial loss notice to final closure including custom financial and statistical reporting."
+    },
+
+    "contact":{
+        "contact_us":"Contact us to File a new Claim."
     }
 
 }

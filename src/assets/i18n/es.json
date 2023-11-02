@@ -1,6 +1,6 @@
 {
     "dashboard": {
-        "Title": "Lamentamos su accidente y estamos aquí para ayudarlo de inmediato.",
+        "Title": "Lamentamos su accidente y estamos aquí para ayudarle de inmediato.",
         "Sub_Title": "Nuestro equipo está aquí para usted las 24 horas del día, los 7 días de la semana, listo para ayudarlo a iniciar el proceso de reclamo y volver a encarrilar su vida. Simplemente elija una de las siguientes opciones para enviar su reclamo. Cuanta más información pueda proporcionar, más rápido y con mayor precisión podremos manejar su reclamo.",
         "submit_claim_btn":"Presentar un reclamo en línea",
         "contact_us_btn":"Contáctenos para soporte de reclamos",
@@ -8,13 +8,13 @@
         "imp_tip_header":"Consejos importantes durante un accidente ",
         "tip_1":"No firme ningún documento a menos que sea para la policía. ",
         "tip_2":"Grabe notas de voz que incluyan daños, lesiones, testigos y lo sucedido. ",
-        "tip_3":"Nombre de registro de otras conductoras ",
+        "tip_3":"Nombre de registro de otras conductores",
         "tip_4":"No le digas a nadie que el accidente fue culpa tuya aunque creas que lo fue ",
         "tip_5":"Tenga cuidado al exponer los hechos, no lo que cree que sucedió. "
     },
     "form":{
         "form1_header":"Resumen de accidentes ",
-        "header_policy":"Política",
+        "header_policy":"Políza",
         "label_name":"Nombre asegurado ",
         "input_name":"Nombre asegurado ",
         "label_policy_number":"Número de póliza ",
@@ -22,7 +22,7 @@
         "header_what_happened":"qué sucedió",
         "label_what_happened":"Cuéntanos qué pasó ",
         "input_what_happened":"Describe dónde, cuándo y cómo ocurrió el accidente. lugar. Describa los daños que se produjeron. ",
-        "label_record_audio":"Grabar audio",
+        "label_record_audio":"Grabar el audio",
         "next":"Próxima",
 
         
@@ -33,24 +33,24 @@
         "label_img_surrounding":"Imágenes del área real de daños por el accidente. De cerca y desde unos 10 pies.",
         "subtitle_img_nearest":"Fotografías de la ubicación de los vehículos inmediatamente después del accidente. Imágenes del letrero de la calle más cercana que indique el nombre de la calle y la dirección de la foto.",
         "add_img":"Añadir imagen",
-        "label_img_nearest":"Imágenes del letrero de la calle más cercana que indique el nombre de la calle y la dirección de la foto.",
+        "label_img_nearest":"Imágenes del letrero que de le nombre de la calle y la dirección de la foto.",
         "previous":"Previo",
 
         
       
 
-        "form3_header":"Partes involucradas",
+        "form3_header":"Personas  involucradas",
         "label_who_was_involved":"¿Quién estuvo involucrado en el accidente?",  
-        "label_name_of_party":"Nombre de la otra parte",
-        "input_name_of_party":"Nombre de la otra parte",
-        "label_img_insurance_id":"Agregue una foto de la licencia o identificación de la otra parte",
-        "subtitle_img_insurance_id":"Pictures of the license plate.",
+        "label_name_of_party":"Nombre de la otra persona",
+        "input_name_of_party":"Nombre de la otra persona",
+        "label_img_insurance_id":"Agregue una foto de la licencia o identificación de la otra persona",
+        "subtitle_img_insurance_id":"Fotografías de la matricula o placa de el vehiculo.",
         "label_contact_no":"Teléfono de contacto",
         "input_contact_no":"Teléfono de contacto",
-        "label_other_party_insurance_company":"Compañía de seguros de la otra parte",
-        "input_other_party_insurance_company":"Compañía de seguros de la otra parte",
+        "label_other_party_insurance_company":"Compañía de seguros de la otra parsona",
+        "input_other_party_insurance_company":"Compañía de seguros de la otra parsona",
         "label_other_party_insurance_img":"Cargue las imágenes de su identificación de seguro",
-        "label_add_more_party":"Agregar más fiesta",
+        "label_add_more_party":"Agregar a otra persona",
         "label_witness_name":"Nombre del testigo",
         "input_witness_name":"Nombre del testigo",
         "label_witness_contact":"Número de teléfono del testigo",
@@ -60,8 +60,8 @@
         "label_was_any_police_report":"¿Hubo un informe policial?",
         "label_police_name":"Nombre del oficial de policía",
         "input_police_name":"Nombre del oficial de policía",
-        "label_police_report_no":"Número de informe policial",
-        "input_police_report_no":"Número de informe policial",
+        "label_police_report_no":"Número de el reporte de policia",
+        "input_police_report_no":"Número de el reporte de policia",
         "label_img_police_report":"Por favor cargue imágenes del informe policial",
         "delete":"Borrar",
 
@@ -76,8 +76,8 @@
         "input_licence_plate":"Número de placa del vehículo",
         "label_img_licence":"Cargue una imagen de la matrícula.",
         "subtitle_img_licence":"Fotografías de la matrícula.",
-        "label_vin_no":"Número VIN del vehículo",
-        "input_vin_no":"Número VIN del vehículo",
+        "label_vin_no":"Número ineditficaccion (VIN) del vehículo",
+        "input_vin_no":"Número ineditficaccion (VIN) del vehículo",
         "label_img_vin_no":"Cargue una imagen del número VIN del vehículo en el parabrisas del lado del conductor, justo encima del tablero.",
         "label_speedometer":"Kilometraje del vehículo desde el velocímetro",
         "input_speedometer":"Kilometraje del vehículo desde el velocímetro",
@@ -91,7 +91,7 @@
         "submit":"Entregar",
 
         "form5_header":"Otros daños al vehículo",
-        "label_my_vehicle_other":"Vehículo de la otra parte",
+        "label_my_vehicle_other":"Vehículo de la otra persona",
         "label_add_more_party_other":"Agregar más fiestas"
        
 
@@ -101,8 +101,8 @@
         "profile_header":"Información de la cuenta",
         "label_name":"Nombre",
         "input_name":"Nombre",
-        "label_number":"Telefono no.",
-        "input_number":"Telefono no.",
+        "label_number":"Numero de Telefono",
+        "input_number":"Numero de Telefono",
         "label_email":"Correo electrónico",
         "input_email":"Correo electrónico",
         "label_policy_number":"Número de póliza",
@@ -132,7 +132,11 @@
         "header":"Acerca del seguro CPR",
         "text_1":"CPR Insurance Group, LLC, con licencia del Departamento de Seguros de Texas, es una empresa administradora y liquidadora de reclamaciones independiente que ofrece estrategias de resolución innovadoras a compañías de seguros, corporaciones autoaseguradas, entidades gubernamentales, agentes y corredores de seguros. ",
         "text_2":"Nuestra empresa tiene su sede en Irving, Texas, y cuenta con ubicaciones asociadas en Luisiana y Oklahoma. CPR maneja todas las áreas principales de reclamos de seguros, incluidos automóviles, propiedad y accidentes.",
-        "text_3":"Contamos con equipos profesionales para aquellos clientes que necesitan una solución completa de subcontratación de TPA o podemos proporcionar ajustadores de campo para los clientes que necesitan una solución de campo profesional. Nuestro experimentado equipo de TPA gestionará el 100% de sus necesidades de reclamos, desde el aviso de pérdida inicial hasta el cierre final, incluidos informes financieros y estadísticos personalizados. "
+        "text_3":"Contamos con equipos profesionales para aquellos clientes que necesitan una solución completa de subcontratación de TPA o podemos proporcionar ajustadores de campo para los clientes que necesitan una solución de campo profesional. Nuestro experimentado equipo de TPA manegara  el 100% de sus necesidades de reclamos, desde el aviso de pérdida inicial hasta el cierre final, incluidos informes financieros y estadísticas personalizadas."
+    },
+
+    "contact":{
+        "contact_us":"Contáctenos para presentar un nuevo reclamo."
     }
 
 }

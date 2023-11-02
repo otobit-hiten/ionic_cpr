@@ -1,41 +1,59 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-header>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/tabs/dashboard"></ion-back-button>
-        <ion-img src="assets/logo.png"></ion-img>
-      </ion-buttons>
-    </ion-header>
+  <ion-toolbar class="header">
+    <ion-row class="ion-justify-content-between" >
+     
+        <ion-buttons>
+          <ion-back-button defaultHref="/tabs/dashboard" icon="assets/back_button.svg"></ion-back-button>
+        </ion-buttons>
+    
+      <ion-col size="7.5" class="logo"
+        ><img class="logo" src="assets/cpr_logo.png"
+      /></ion-col>
+      <ion-col  size="3" class="lang-sel"
+        ><ion-select
+          class="holder"
+          [compareWith]="compareWith"
+          value="{{languageService.selectedLanguage}}"
+          placeholder="Language"
+          (ionChange)="ionChange($event)"
+          interface="popover"
+        >
+
+          <ion-select-option
+            *ngFor="let lang of languageList"
+            [value]="lang.code">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            {{lang.title}}
+            </ion-select-option
+          >
+        </ion-select>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card class="text">
-    <ion-card-title>
-      We are sorry for your accident and we are here to provide immediate
-      assistance.
-    </ion-card-title>
-    <p></p>
-    <ion-card-subtitle>
-      Our qualified claim intake staff is available 24/7/365 to take your loss
-      and begin the process towards resolution. Our goal is to get your life
-      back to normal as quickly as possible. Please use one of the options
-      below to provide us with as much information as possible so we can
-      quickly and accurately manage your claim.
-    </ion-card-subtitle>
-  </ion-card>
-    <div class="sheet">
-    <ion-text style="font-size: x-large; font-weight: 700">Contact us to File a new Claim</ion-text><br>
-     <ion-button expand="block" fill="clear" size="large" class="contact" href="tel:9016788767">
-       <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-       <ion-text style="text-transform: none; color: #000;">(855) 215-6439</ion-text>
-     </ion-button>
-     <ion-button expand="block" fill="clear" size="large" class="contact" href="mailto: abc@example.com">
-       <ion-icon slot="start" src="assets/mail.svg"></ion-icon>
-       <ion-text style="text-transform: none; color: #000;" >newclaims@cprins.com</ion-text>
-     </ion-button>
-    </div>
+  <div class="new-background-color">
+    <ion-list>
+      <ion-item class="title" lines="none" translate>
+        dashboard.Title
+      </ion-item>
+      <ion-item lines="none" translate class="Sub_title">
+        dashboard.Sub_Title
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-button fill="outline" expand="full" shape="round" class="custom-button">
+    <ion-icon name="heart" slot="start"></ion-icon>
+    (855) 215-6439
+  </ion-button>
+  <ion-button  fill="outline" expand="full" shape="round" class="custom-button">
+    <ion-icon name="star" slot="start"></ion-icon>
+    newclaims@cprins.com
+  </ion-button>
 </ion-content>
+
 
 
 <!-- <ion-header>

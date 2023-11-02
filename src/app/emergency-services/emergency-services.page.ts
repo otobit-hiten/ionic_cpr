@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { Browser } from '@capacitor/browser';
+import { LanguageService } from '../services/language.service';
 
 @Component({
   selector: 'app-emergency-services',
@@ -16,30 +17,30 @@ import { Browser } from '@capacitor/browser';
 })
 export class EmergencyServicesPage implements OnInit {
 
-  languageList = [
-    {
-       code: "en", title: "English", text: "English"
-    },
-    {
-      code: "es", title: "Spanish", text: "Española"
-    }
-  ]
-  constructor(private translateService :TranslateService) { }
+ 
+  constructor( public languageService: LanguageService) { }
 
-  ionChange(event:any) {
-    console.log(event.detail.value)
-    this.translateService.use(event.target.value ? event.target.value : "en")
-  }
-  compareWith : any ;
-  MyDefaultValue: String ="en";  //set default language here  {en= English ; es = spanish}
-
-  compareWithFn(o1: any, o2: any) {
-    return o1 === o2;
-  };
-
+  languageList: any = [];
+  selected = ''; //set default language here  {en= English ; es = spanish}
+  compareWith: any;
 
   ngOnInit() {
+    this.languageList = this.languageService.getLanguage();
+    this.selected = this.languageService.selectedLanguage
   }
+  ionViewDidEnter() {
+    console.log(this.selected)
+    this.selected = this.languageService.selectedLanguage
+    console.log(this.selected)
+  }
+  ionChange(event: any) {
+    console.log(event)
+    console.log(event.target.value)
+    this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
+    console.log(this.languageService.selectedLanguage)
+  }
+
+
 
   async openbrowser(event:string){
     if(event === 'hospital'){

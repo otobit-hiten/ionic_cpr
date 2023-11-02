@@ -18,6 +18,8 @@ PODS:
     - Capacitor
   - CapacitorKeyboard (5.0.6):
     - Capacitor
+  - CapacitorLocalNotifications (5.0.6):
+    - Capacitor
   - CapacitorPreferences (5.0.6):
     - Capacitor
   - CapacitorSplashScreen (5.0.6):
@@ -58,6 +60,14 @@ PODS:
   - GoogleMaps/Base (7.4.0)
   - GoogleMaps/Maps (7.4.0):
     - GoogleMaps/Base
+  - Jonz94CapacitorImagePicker (2.0.0):
+    - Capacitor
+    - YPImagePicker
+  - PryntTrimmerView (4.0.2)
+  - SteviaLayout (5.1.2)
+  - YPImagePicker (5.2.1.0):
+    - PryntTrimmerView (= 4.0.2)
+    - SteviaLayout (= 5.1.2)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -69,18 +79,23 @@ DEPENDENCIES:
   - "CapacitorGoogleMaps (from `../../node_modules/@capacitor/google-maps`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
+  - "CapacitorLocalNotifications (from `../../node_modules/@capacitor/local-notifications`)"
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - CapacitorVoiceRecorder (from `../../node_modules/capacitor-voice-recorder`)
   - "CapawesomeCapacitorCloudinary (from `../../node_modules/@capawesome/capacitor-cloudinary`)"
   - "CapawesomeCapacitorFilePicker (from `../../node_modules/@capawesome/capacitor-file-picker`)"
+  - "Jonz94CapacitorImagePicker (from `../../node_modules/@jonz94/capacitor-image-picker`)"
+  - YPImagePicker (from `https://github.com/jonz94/YPImagePicker.git`, tag `5.2.1.0`)
 
 SPEC REPOS:
   trunk:
     - Cloudinary
     - Google-Maps-iOS-Utils
     - GoogleMaps
+    - PryntTrimmerView
+    - SteviaLayout
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -101,6 +116,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
     :path: "../../node_modules/@capacitor/keyboard"
+  CapacitorLocalNotifications:
+    :path: "../../node_modules/@capacitor/local-notifications"
   CapacitorPreferences:
     :path: "../../node_modules/@capacitor/preferences"
   CapacitorSplashScreen:
@@ -113,6 +130,16 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capawesome/capacitor-cloudinary"
   CapawesomeCapacitorFilePicker:
     :path: "../../node_modules/@capawesome/capacitor-file-picker"
+  Jonz94CapacitorImagePicker:
+    :path: "../../node_modules/@jonz94/capacitor-image-picker"
+  YPImagePicker:
+    :git: https://github.com/jonz94/YPImagePicker.git
+    :tag: 5.2.1.0
+
+CHECKOUT OPTIONS:
+  YPImagePicker:
+    :git: https://github.com/jonz94/YPImagePicker.git
+    :tag: 5.2.1.0
 
 SPEC CHECKSUMS:
   Capacitor: 4c0681b47eebeba1f902093d24149cf2f518393e
@@ -124,6 +151,7 @@ SPEC CHECKSUMS:
   CapacitorGoogleMaps: 8268d118faf014c5004b0e711e52af7190257451
   CapacitorHaptics: 1fffc1217c7e64a472d7845be50fb0c2f7d4204c
   CapacitorKeyboard: b978154b024a5f65e044908e37d15b7de58b9d12
+  CapacitorLocalNotifications: c2d8b14794064fd4814b1d6c4ddbac8029afa295
   CapacitorPreferences: f03954bcb0ff09c792909e46bff88e3183c16b10
   CapacitorSplashScreen: 5fa2ab5e46cf5cc530cf16a51c80c7a986579ccd
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
@@ -133,7 +161,11 @@ SPEC CHECKSUMS:
   Cloudinary: c6a6a66b8b9aac18dce2ad54eb0243ea5e5119b8
   Google-Maps-iOS-Utils: f77eab4c4326d7e6a277f8e23a0232402731913a
   GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
+  Jonz94CapacitorImagePicker: 9e3fe870389143933fc18dbc631dd70a1eb5e254
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
+  SteviaLayout: 05424e528d643657d39ce72c786e4adf13cfc5f2
+  YPImagePicker: a904f09d282be4ca4ed27c780a5485e119657eaa
 
-PODFILE CHECKSUM: 2768e5bcb89ed9eeb6d6de67ed757c694d5c2d5f
+PODFILE CHECKSUM: 379af12eacda49e06d22c8f77a60d854ace665a0
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.10.1

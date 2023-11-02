@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Privacy - Microphone Usage Description</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -30,8 +32,7 @@
 	<string>Privacy - Location Always Usage Description</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Privacy - Location When In Use Usage Description</string>
-	<key>NSMicroPhoneUsageDescription</key>
-	<string>To Record Audio</string>
+	
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>To Add Image</string>
 	<key>NSPhotoLibraryUsageDescription</key>

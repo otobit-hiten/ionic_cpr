@@ -7,6 +7,7 @@ import { LanguageService } from '../services/language.service';
 import { Directory, Encoding, Filesystem, } from '@capacitor/filesystem';
 import { HttpClient } from '@angular/common/http';
 import { LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
+import { GenericResponse, VoiceRecorder } from 'capacitor-voice-recorder';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class Dashboard {
   constructor(private toastController: ToastController,private http: HttpClient, public languageService: LanguageService) {
   }
   ngOnInit() {
+
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
   }

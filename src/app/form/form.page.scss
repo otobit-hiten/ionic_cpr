@@ -125,7 +125,7 @@ ion-input {
   border-radius: 8px;
   border: 1px solid #bdbdbd;
   padding-left: 10px !important;
-  margin-top:5%;
+  margin-top: 5%;
   margin-bottom: 5%;
 }
 .border_address {
@@ -468,12 +468,11 @@ ion-input {
   .image_holder_damage {
     position: relative;
     display: inline-block;
-    --padding:0px !important;
+    --padding: 0px !important;
     .imag_prev {
       border-radius: 20px;
       width: 100px;
       height: 100px;
-
     }
     .imag_icon {
       zoom: 1.5;
@@ -506,7 +505,6 @@ ion-input {
   --padding-start: 30px;
   --padding-end: 30px;
   margin-bottom: 5%;
-
 }
 .wrap-damage {
   color: #828282 !important;
@@ -517,21 +515,21 @@ ion-input {
   line-height: normal;
   width: fit-content;
 }
-.involved_parties{
+.involved_parties {
   margin-top: 3% !important;
-  margin-bottom :3%;
+  margin-bottom: 3%;
 }
-.involved_parties_button{
+.involved_parties_button {
   color: #fe524d;
   font-family: Poppins;
   font-size: medium;
   font-style: normal;
   font-weight: 600;
   width: 100%;
-  float:left;
+  float: left;
   margin-bottom: 4%;
 }
-.other_parties_button{
+.other_parties_button {
   color: #fe524d;
   font-family: Poppins;
   font-size: medium;
@@ -547,7 +545,6 @@ ion-input {
   font-weight: 600;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
-
 }
 .input_sixth_two {
   color: #201e1e;
@@ -561,7 +558,7 @@ ion-input {
   margin-bottom: 3% !important;
   outline: 0 !important;
 }
-.police_number_header{
+.police_number_header {
   color: #201e1e;
   font-family: Poppins;
   font-size: 14px;
@@ -569,9 +566,9 @@ ion-input {
   font-weight: 600;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
-  margin-top:30%;
+  margin-top: 30%;
 }
-.name_of_party{
+.name_of_party {
   color: #201e1e;
   font-family: Poppins;
   font-size: 14px;
@@ -579,13 +576,13 @@ ion-input {
   font-weight: 600;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
-  margin-bottom:13% !important;
+  margin-bottom: 13% !important;
 }
-.party_gap{
+.party_gap {
   height: 6px !important;
 }
-.involved_parties{
-  .form-control{
+.involved_parties {
+  .form-control {
     margin-top: 3px !important;
     margin-bottom: 5px !important;
   }
@@ -600,10 +597,9 @@ ion-input {
   line-height: 135%; /* 24.3px */
   margin-top: 10px;
 }
-.delete_button{
-  color:#fe524d !important;
-  --background:#ffffff !important;
+.delete_button {
+  color: #fe524d !important;
+  --background: #ffffff !important;
   margin-top: -1%;
   float: right;
 }
-

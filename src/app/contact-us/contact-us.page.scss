@@ -21,22 +21,41 @@
   display: flex;
   orientation: vertical;
   --background: #e5ebf1 !important;
-
 }
 
-
 .custom-button {
-  color: #FE524D;
+  margin-top: 40px;
+  color: #fe524d;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid #fe524d;
   padding: 10px;
+  text-align: left !important;
+
 }
 
 .custom-button ion-icon {
-  font-size: 20px;
+  font-size: 30px;
 }
 
-.button-text {
-  text-align: left;
+
+
+.contact_text {
+  font-family: "poppins";
+  font-size: large;
+  font-weight: bold;
+  padding: 15px;
+  line-height: 24.3px;
+  word-wrap: break-word;
+}
+span.ion-text-left {
+  margin-right: auto;
+  color: #000;
+  font-family: "poppins";
+  font-size: medium;
+  font-weight: bold;
+  line-height: 24.3px;
+  text-transform: none;
 }

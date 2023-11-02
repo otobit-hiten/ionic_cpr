@@ -44,30 +44,17 @@
     </ion-list>
   </div>
 
-  <ion-button fill="outline" expand="full" shape="round" class="custom-button">
-    <ion-icon name="heart" slot="start"></ion-icon>
-    (855) 215-6439
+  <div class="contact_text">
+  <ion-text translate>contact.contact_us</ion-text>
+  <ion-button fill="clear" expand="full" class="custom-button" (click)="call()">
+    <ion-icon name="call-outline" slot="start"></ion-icon>
+    <span class="ion-text-left">(855) 215-6439</span></ion-button>
+    
+  <ion-button  fill="clear" expand="block" class="custom-button" (click)="mail()">
+    <ion-icon class="ion-text-left" name="mail-outline" slot="start"></ion-icon>
+    <span class="ion-text-left">newclaim@cprins.com</span>
   </ion-button>
-  <ion-button  fill="outline" expand="full" shape="round" class="custom-button">
-    <ion-icon name="star" slot="start"></ion-icon>
-    newclaims@cprins.com
-  </ion-button>
+</div>
 </ion-content>
 
 
-
-<!-- <ion-header>
-  <ion-toolbar class="new-background-color">
-    <ion-buttons slot="start" >
-      <ion-back-button icon="assets/company.svg" defaultHref="/tabs/dashboard"></ion-back-button>
-      <ion-img class="logo" src="assets/cpr_logo.png"></ion-img>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <ion-button>
-    <ion-icon slot="start" src="assets/submit_claim.svg"></ion-icon>
-    ccc
-
-  </ion-button>
-</ion-content> -->

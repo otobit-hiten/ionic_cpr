@@ -36,4 +36,13 @@ export class ContactUsPage implements OnInit {
     console.log(this.languageService.selectedLanguage)
   }
 
+  call(){
+    window.open('tel:(855) 215-6439');
+  }
+
+  mail()
+  {
+    window.open('mailto:test@test.com');
+
+  }
 }

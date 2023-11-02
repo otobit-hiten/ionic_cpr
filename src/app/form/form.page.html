@@ -20,7 +20,7 @@
 <ion-content>
   <div class="grey-line"></div>
   <swiper-container #swiper (slidechange)="swiperSlideChanged($event)" [allowTouchMove]="false" loop="false">
-    <swiper-slide>
+    <swiper-slide >
       <ion-img class="stepper" src="assets/step_1.svg"></ion-img>
       <ion-label class="stepperr_title" style="display: flex; justify-content: center" translate>
         form.form1_header
@@ -564,14 +564,15 @@
                     <ion-icon slot="end" name="trash-outline"></ion-icon>{{'form.delete'| translate}}</ion-button>
                   <ion-label class="sixth_two_label" translate>form.label_vehicle_make_and_model</ion-label>
                 </div>
-                <ion-input class="input_six_two" fill="outline"
+                <ion-input class="input_sixth_two" 
                   placeholder="{{'form.input_vehicle_make_and_model' | translate }}"
-                  formControlName="vehicleMakeModel"></ion-input>
+                  formControlName="vehicleMakeModel">
+                </ion-input>
               </div>
 
               <div class="police_rep_no">
                 <ion-label class="sixth_two_label" translate>form.label_licence_plate</ion-label>
-                <ion-input fill="outline" placeholder="{{'form.input_licence_plate' | translate }}"
+                <ion-input class="input_sixth_two"  placeholder="{{'form.input_licence_plate' | translate }}"
                   formControlName="vehicleLicencePlate">
                 </ion-input>
               </div>
@@ -602,7 +603,7 @@
               </div>
               <div class="police_rep_no">
                 <ion-label class="sixth_two_label">{{'form.label_vin_no' | translate}}</ion-label>
-                <ion-input fill="outline" placeholder="{{'form.input_vin_no' | translate }}" formControlName="vinNo">
+                <ion-input  class="input_sixth_two"  placeholder="{{'form.input_vin_no' | translate }}" formControlName="vinNo">
                 </ion-input>
               </div>
               <div class="upload_img">
@@ -685,16 +686,16 @@
               </div>
               <div>
                 <div>
-                  <ion-label>{{'form.label_was_vehicle_towed' | translate}}</ion-label>
+                  <ion-label class="label_text_policy">{{'form.label_was_vehicle_towed' | translate}}</ion-label>
                 </div>
                 <div>
-                  <ion-label class="sixth_label">{{'form.label_tow_company'| translate}}
+                  <ion-label class="sixth_two_label">{{'form.label_tow_company'| translate}}
                   </ion-label>
-                  <ion-input placeholder="{{'form.input_tow_company' | translate }}"
+                  <ion-input  class="input_sixth_two" placeholder="{{'form.input_tow_company' | translate }}"
                     formControlName="towCompany"></ion-input>
                 </div>
                 <div class="address">
-                  <ion-label class="label_text">{{'form.label_tow_company_address'| translate}}</ion-label>
+                  <ion-label class="sixth_two_label">{{'form.label_tow_company_address'| translate}}</ion-label>
 
                   <ion-item class="location_accident" translate routerDirection="forward"
                     [routerLink]="['location', 'towCompanyOther',i]">

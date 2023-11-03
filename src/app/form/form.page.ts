@@ -37,9 +37,9 @@ export class FormPage implements OnInit {
   languageList: any = []
   selected = '';
 
-  ngOnInit() {
+  async ngOnInit() {
     
-    this.permission()
+    await this.permission()
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
 

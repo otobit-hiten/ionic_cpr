@@ -20,9 +20,20 @@ body {
 }
 
 .location {
+  width: 100%;
   padding: 10px;
   font-family: Poppins;
-  font-size: medium;
+  font-size: large;
   font-style: normal;
   font-weight: normal;
+}
+
+.button_loc{
+  float: right;
+  border-radius: 10px;
+  --color: #fe524d;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

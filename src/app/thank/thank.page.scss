@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-element {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+ion-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+ion-label {
+    text-align: center;
+    font-family: Poppins;
+    font-weight: bold;
+    font-size: larger;
+}
+
+ion-button {
+    margin-top: 10%;
+}

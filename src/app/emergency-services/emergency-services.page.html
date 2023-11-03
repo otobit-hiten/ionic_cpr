@@ -39,27 +39,27 @@
 <ion-label class="page_title" translate>emergency_services.header</ion-label><br>
 <ion-label translate>emergency_services.header</ion-label>
 
-<ion-button expand="block" fill="clear"(click)="openbrowser('fire')">
-  <ion-icon slot="start" name="flame-outline"  size="large"></ion-icon>
+<ion-button expand="block"   size="large" fill="clear"(click)="openbrowser('fire')">
+  <ion-icon slot="start" name="flame-outline" ></ion-icon>
   <span  class="ion-text-left" style="text-transform: none; color: #000;" translate>emergency_services.fire</span>
 
 </ion-button>
 
-<ion-button expand="block" fill="clear" (click)="openbrowser('hospital')">
-  <ion-icon slot="start"  name="medkit-outline"></ion-icon>
+<ion-button expand="block" fill="clear" size="large" (click)="openbrowser('hospital')">
+  <ion-icon slot="start"   name="medkit-outline"></ion-icon>
   <span  class="ion-text-left" style="text-transform: none; color: #000;" translate>emergency_services.hospital</span>
 
 </ion-button>
 
 
-<ion-button expand="block"  fill="clear" size="large" (click)="openbrowser('police')">
+<ion-button expand="block"  fill="clear" size="large"  (click)="openbrowser('police')">
   <ion-icon slot="start" name="business-outline"></ion-icon>
   <span  class="ion-text-left" style="text-transform: none; color: #000;" translate>emergency_services.police</span>
 
 </ion-button>
 
 
-<ion-button expand="block"  fill="clear" size="large">
+<ion-button expand="block"  fill="clear" size="large" (click)="call()">
   <ion-icon slot="start" name="shield-outline"></ion-icon>
   <span  class="ion-text-left" style="text-transform: none; color: #000;" translate>emergency_services.911</span>
 

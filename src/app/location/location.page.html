@@ -1,27 +1,27 @@
-<ion-header>
+<ion-header >
   <ion-toolbar>
-    <ion-back-button slot="start"
-    defaultHref="form"></ion-back-button>
-    <ion-title>Map</ion-title>
+    <ion-back-button slot="start" defaultHref="/tabs/dashboard/form"></ion-back-button>
+
+      <div class="location">
+        <ion-button class="button_loc" size="small" fill="clear"  *ngIf="drag"  (click)="navigate()">
+          <ion-icon class="button_loc" size="small" name="locate-outline"></ion-icon>        
+        </ion-button>
+        <ion-button class="button_loc" size="small" fill="clear" *ngIf="drag"  (click)="getLocation()">
+          Use this location
+        </ion-button>
+          <ion-button class="button_loc" size="small" fill="clear" *ngIf="!drag" (click)="navigate()">
+            Use current location
+          </ion-button>
+         
+
+      </div>
+
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="location">
-  <ion-label>Latitude: {{cordinates.lat}} </ion-label><br>
-  <ion-label>Longitude: {{cordinates.lng}}</ion-label><br>
-  <ion-row>
-    <ion-col>
-      <ion-button size="small" *ngIf="drag" expand="block" (click)="getLocation()">Use this location</ion-button>
-    </ion-col>
-    <ion-col>
-      <ion-button size="small" expand="block" (click)="navigate()">Use current location</ion-button>
-    </ion-col>
-  </ion-row>
-</div>
   <div class="gmap">
-  <capacitor-google-map #map></capacitor-google-map>
-</div>
+    <capacitor-google-map #map></capacitor-google-map>
+  </div>
 </ion-content>
-
-

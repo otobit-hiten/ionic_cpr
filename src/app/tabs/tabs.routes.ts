@@ -41,10 +41,7 @@ export const routes: Routes = [
                 path: '',
                 loadComponent: () => import('../form/form.page').then(m => m.FormPage)
               },
-              {
-                path: 'location/:map/:id1',
-                loadComponent: () => import('../location/location.page').then(m => m.LocationPage)
-              }
+             
             ]
           }
         ]

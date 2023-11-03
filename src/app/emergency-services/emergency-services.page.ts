@@ -62,4 +62,9 @@ export class EmergencyServicesPage implements OnInit {
     }else if(event === 'fire')
     await Browser.open({ url: `https://www.google.co.in/maps/search/FireStation/@${lat},${lng}` });
   }
+
+
+  call(){
+    window.open('tel:911');
+  }
 }

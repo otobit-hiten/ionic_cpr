@@ -58,19 +58,19 @@
 
     <ion-label class="profile_header_one" translate>profile.label_name</ion-label>
 
-    <ion-input [(ngModel)]="name" [readonly]="!isEdit" type="name" translate></ion-input>
+    <ion-input fill="outline" [(ngModel)]="name" [readonly]="!isEdit" type="name" translate></ion-input>
 
-    <ion-label class="profile_headers" translate>profile.label_number</ion-label>
+    <ion-label  class="profile_headers" translate>profile.label_number</ion-label>
 
-    <ion-input [(ngModel)]="phone" [readonly]="!isEdit" type="Number"></ion-input>
+    <ion-input fill="outline" [(ngModel)]="phone" [readonly]="!isEdit" type="Number"></ion-input>
 
-    <ion-label class="profile_headers" translate>profile.label_number</ion-label>
+    <ion-label  class="profile_headers" translate>profile.label_email</ion-label>
 
-    <ion-input [(ngModel)]="email"  [readonly]="!isEdit" type="Email" ></ion-input>
+    <ion-input  fill="outline" [(ngModel)]="email"  [readonly]="!isEdit" type="Email" ></ion-input>
 
     <ion-label class="profile_headers" translate>profile.label_policy_number</ion-label>
 
-    <ion-input [(ngModel)]="policyNo" [readonly]="!isEdit" type=""></ion-input>
+    <ion-input fill="outline" [(ngModel)]="policyNo" [readonly]="!isEdit" type="Number"></ion-input>
 
     <ion-button *ngIf="!isEdit " class="submit"  shape="round" expand="block" (click)="update()" translate>profile.edit</ion-button>
 

@@ -25,7 +25,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     importProvidersFrom(IonicModule.forRoot({
-      backButtonText: ''
+      backButtonText: '',
     }), FormsModule),
     importProvidersFrom(HttpClientModule),
     importProvidersFrom(IonicStorageModule.forRoot()),

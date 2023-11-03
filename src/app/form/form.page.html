@@ -48,8 +48,8 @@
               </div>
             </div>
             <ion-label class="label_text_policy_number" translate="">form.label_policy_number</ion-label>
-            <ion-input class="textarea" placeholder="{{ 'form.input_policy_number' | translate }}"
-              formControlName="policy_no">
+            <ion-input type="Number" class="textarea" placeholder="{{ 'form.input_policy_number' | translate }}"
+              formControlName="policy_no_">
             </ion-input>
           </div>
           <div class="black-line"></div>
@@ -112,7 +112,8 @@
             <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
               [routerLink]="['location', 'addressAccident',-1]">
               <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-              <ion-text translate> {{latAndLng}} </ion-text>
+              <ion-text> {{latAndLng}} </ion-text>
+              <ion-text translate *ngIf="latAndLng === ''">form.Address_of_accident</ion-text>
             </ion-item>
             <div
               *ngIf="this.slideTwoForm.controls?.address_of_accident?.touched && this.slideTwoForm.controls?.address_of_accident?.invalid">
@@ -254,7 +255,7 @@
                 <ion-label class="name_of_party" translate>
                   form.label_contact_no
                 </ion-label>
-                <ion-input placeholder="{{ 'form.input_contact_no' | translate }}" formControlName="number"
+                <ion-input type="Number" placeholder="{{ 'form.input_contact_no' | translate }}" formControlName="number"
                   class="form-control"></ion-input>
               </div>
               <div>
@@ -312,7 +313,7 @@
                 formControlName="name">
               </ion-input>
               <ion-label class="sixth_two_label" translate>form.label_witness_contact</ion-label>
-              <ion-input class="input_sixth_two" placeholder="{{ 'form.label_witness_contact' | translate }}"
+              <ion-input type="Number" class="input_sixth_two" placeholder="{{ 'form.label_witness_contact' | translate }}"
                 formControlName="number"></ion-input>
             </div>
             <ion-button class="involved_parties_button" shape="default" fill="outline" size="default"
@@ -529,8 +530,8 @@
               <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false" 
                 [routerLink]="['location', 'towCompany','-1']">
                 <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-
                 <ion-text> {{lat_lang_towCompany}} </ion-text>
+                <ion-text translate *ngIf="lat_lang_towCompany === ''">form.Address_of_accident</ion-text>
               </ion-item>
             </div>
           </div>
@@ -703,7 +704,10 @@
                   <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false" 
                     [routerLink]="['location', 'towCompanyOther',i]">
                     <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-                    <ion-input readonly="true" style="border: none; outline: none;" class="form-control" formControlName="map" [(ngModel)]="otherVehicleArray[i].map"></ion-input>
+                    
+                    <ion-input  *ngIf="otherVehicle().at(i).get('map')?.value!==''" readonly="true" style="border: none; outline: none;" class="form-control" formControlName="map"></ion-input>
+                    <ion-text translate  *ngIf="otherVehicle().at(i).get('map')?.value===''">form.Address_of_accident</ion-text>
+
                   </ion-item>
                 </div>
               </div>

@@ -15,10 +15,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Cloudinary, ResourceType } from '@capawesome/capacitor-cloudinary';
 import { LanguageService } from '../services/language.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { UploadImage } from '../services/user';
+import { UploadImage, User } from '../services/user';
 import { LoaderService } from '../services/loader.service';
 import { timeStamp } from 'console';
 import { ImagePicker } from '@jonz94/capacitor-image-picker';
+import { UserService } from '../services/user.service';
 
 
 
@@ -36,12 +37,14 @@ export class FormPage implements OnInit {
   selected = '';
 
   ngOnInit() {
+    
     this.permission()
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
 
     this.swiperReady()
     VoiceRecorder.requestAudioRecordingPermission()
+    this.getUserData()
     // this.loadAudio();
     this.witnessArray.push(this.witnessObj)
     console.log(this.witnessArray.length)
@@ -51,15 +54,12 @@ export class FormPage implements OnInit {
     console.log(this.selected)
     this.selected = this.languageService.selectedLanguage
     console.log(this.selected)
-
-
   }
   ionChange(event: any) {
     console.log(event)
     console.log(event.target.value)
     this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
     console.log(this.languageService.selectedLanguage)
-
   }
 
   compareWith: any;
@@ -80,7 +80,7 @@ export class FormPage implements OnInit {
   displayTime = '';
   time = 0;
   storedAudio: any[] = [];
- 
+
   public playback = false;
   ref = new Audio();
   selectedItem: any;
@@ -101,10 +101,10 @@ export class FormPage implements OnInit {
   otherVehicleArray: any = [];
   otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [], map: '' };
   audioFile: string[] = []
-
-  constructor(private loader: LoaderService, public formBuilder: FormBuilder, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
+  user: User = { name: '', phone: '', email: '', policyNo: '' }
+  constructor(private userService: UserService, private loader: LoaderService, public formBuilder: FormBuilder, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
-      console.log(params);
+      console.log(params['map'])
       if (params['map'] === 'towCompany') {
         if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
           this.lat_lang_towCompany = '0,0';
@@ -129,13 +129,14 @@ export class FormPage implements OnInit {
             map: '0,0'
           });
           this.otherVehicleArray[i].map = mapValue
+          console.log(this.otherVehicle().value)
         } else {
           this.otherVehicle().at(i).patchValue({
             map: mapValue
           });
+          console.log(this.otherVehicle().value)
         }
       }
-
 
     });
     console.log(this.swiperRef?.nativeElement.swiper);
@@ -144,9 +145,9 @@ export class FormPage implements OnInit {
     (Parse as any).serverURL = "https://parseapi.back4app.com/";
 
     this.slideOneForm = formBuilder.group({
-      name_insured: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*')])],
-      policy_no: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('^\\d+$')])],
-      tell_us_what_happened: ['', Validators.compose([Validators.maxLength(30)])],
+      name_insured: [''],
+      policy_no_: [''],
+      tell_us_what_happened: [''],
     });
 
     this.slideTwoForm = formBuilder.group({
@@ -242,7 +243,8 @@ export class FormPage implements OnInit {
     const permissionStatus = await Geolocation.checkPermissions();
     console.log('Permission status: ', permissionStatus.location);
     if (permissionStatus?.location != 'granted') {
-      const requestStatus = await Geolocation.requestPermissions();
+      await Geolocation.requestPermissions();
+      await Geolocation.getCurrentPosition();
     }
   }
 
@@ -434,7 +436,10 @@ export class FormPage implements OnInit {
       console.log("Calling...")
       var Parse = require('parse');
       const query = await Parse.Cloud.run('result', this.formToMail)
-      console.log(query)
+      console.log(query['response'])
+      if (query['response'] === 'sent') {
+        this.router.navigateByUrl('/thank', { replaceUrl: true })
+      }
     } catch (error) {
       console.log(error);
     }
@@ -443,8 +448,7 @@ export class FormPage implements OnInit {
 
   async swiperReady() {
     this.swiper = await this.swiperRef?.nativeElement.swiper;
-    console.log("rready")
-    this.goNext();
+    // this.goNext();
   }
 
   goNext() {
@@ -777,14 +781,14 @@ export class FormPage implements OnInit {
       result.files.forEach((res) => {
         console.log(res.name)
         let contains = true;
-        contains =  this.storedAudio.some(function(el){ return el.name === res.name});
-        if(!contains){
+        contains = this.storedAudio.some(function (el) { return el.name === res.name });
+        if (!contains) {
           this.storedAudio.push(res)
         }
         console.log(contains)
       })
-      
-      
+
+
     });
 
   }
@@ -843,27 +847,27 @@ export class FormPage implements OnInit {
 
 
   // play and delete recorded audio
-  async play(fileName: any, file:any) {
-   let base64Sound: string | Blob = ''
-    if(fileName.slice(-3) === 'wav'){
+  async play(fileName: any, file: any) {
+    let base64Sound: string | Blob = ''
+    if (fileName.slice(-3) === 'wav') {
       const audioFile = await Filesystem.readFile({
         path: fileName,
         directory: Directory.External
       });
       base64Sound = audioFile.data!
-    }else{
+    } else {
       const contents = await Filesystem.readFile({
         path: file.path!,
       })
       base64Sound = contents.data!
     }
-   
+
     if (this.track != this.selectedItem) {
       this.playback = false;
     } else {
       this.playback = true;
     }
-     
+
     if (!this.playback) {
       this.ref.src = `data:audio/aac;base64,${base64Sound}`
       this.ref.play();
@@ -891,7 +895,7 @@ export class FormPage implements OnInit {
   async deleteAudio(fileName: any, file: any, index: number) {
     this.play(fileName, file)
     let name = fileName
-    if(name.slice(-3) === 'wav'){
+    if (name.slice(-3) === 'wav') {
       console.log(fileName)
       await Filesystem.deleteFile({
         path: fileName,
@@ -899,10 +903,10 @@ export class FormPage implements OnInit {
       })
       this.storedAudio.splice(index, 1)
       // this.loadAudio();
-    }else{
+    } else {
       this.storedAudio.splice(index, 1)
     }
-    
+
   }
 
 
@@ -1027,5 +1031,17 @@ export class FormPage implements OnInit {
     other_vehcile_damage: FormArray
   }
 
-
+  async getUserData() {
+    await this.userService.get("user").then((data: any) => {
+      if (data.value != null) {
+        console.log(data)
+        let userData = JSON.parse(data.value);
+        this.user = userData;
+        this.slideOneForm.patchValue({
+          name_insured: this.user.name,
+          policy_no_: this.user.policyNo
+        })
+      }
+    })
+  } 
 }

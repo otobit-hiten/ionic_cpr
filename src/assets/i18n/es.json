@@ -60,8 +60,8 @@
         "label_was_any_police_report":"¿Hubo un informe policial?",
         "label_police_name":"Nombre del oficial de policía",
         "input_police_name":"Nombre del oficial de policía",
-        "label_police_report_no":"Número de el reporte de policia",
-        "input_police_report_no":"Número de el reporte de policia",
+        "label_police_report_no":"Informe policial I.d.",
+        "input_police_report_no":"Informe policial I.d.",
         "label_img_police_report":"Por favor cargue imágenes del informe policial",
         "delete":"Borrar",
 

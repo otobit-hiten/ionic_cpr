@@ -58,8 +58,8 @@
         "label_was_any_police_report":"Was there a police report?",
         "label_police_name":"Police Officer name",
         "input_police_name":"Police Officer name",
-        "label_police_report_no":"Police Report number",
-        "input_police_report_no":"Police Report number",
+        "label_police_report_no":"Police Report Id",
+        "input_police_report_no":"Police Report Id",
         "label_img_police_report":"Please Upload Police Report Images",
         "delete":"Delete",
 

@@ -70,7 +70,7 @@
 
             <ion-label class="label_text_radio" translate>form.label_record_audio</ion-label>
             <div class="record_audio">
-              <ion-item lines="none">
+              <ion-item lines="none" detail="false" >
                 <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
                   color="primary"></ion-icon>
                 <ion-label translate="">form.label_record_audio </ion-label>
@@ -304,6 +304,8 @@
                 <ion-button class="delete_button" shape="default" fill="clear" size="default"
                   (click)="removeWitness(j)">
                   <ion-icon slot="end" name="trash-outline"></ion-icon>{{'form.delete' | translate}}</ion-button>
+                  <div class="party_gap"></div>
+
               </div>
 
               <ion-input class="input_sixth_two" placeholder="{{ 'form.input_witness_name' | translate }}"
@@ -524,7 +526,7 @@
               <ion-label class="label_text" translate>form.label_tow_company_address
               </ion-label>
 
-              <ion-item class="location_accident" translate routerDirection="forward"
+              <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false" 
                 [routerLink]="['location', 'towCompany','-1']">
                 <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
 
@@ -562,6 +564,7 @@
                   <ion-button class="delete_button" shape="default" fill="clear" size="default"
                     (click)="removeOtherVehicle(i)">
                     <ion-icon slot="end" name="trash-outline"></ion-icon>{{'form.delete'| translate}}</ion-button>
+                    <div class="party_gap"></div>
                   <ion-label class="sixth_two_label" translate>form.label_vehicle_make_and_model</ion-label>
                 </div>
                 <ion-input class="input_sixth_two" 
@@ -697,7 +700,7 @@
                 <div class="address">
                   <ion-label class="sixth_two_label">{{'form.label_tow_company_address'| translate}}</ion-label>
 
-                  <ion-item class="location_accident" translate routerDirection="forward"
+                  <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false" 
                     [routerLink]="['location', 'towCompanyOther',i]">
                     <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
                     <ion-input readonly="true" style="border: none; outline: none;" class="form-control" formControlName="map" [(ngModel)]="otherVehicleArray[i].map"></ion-input>

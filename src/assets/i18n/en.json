@@ -112,6 +112,7 @@
     "add_resource":{
         "header":"Additional Claim Resources ",
         "header_title":"Additional Claim Resources ",
+        "header_subtitle":"Please contact us from the scene if possible.",
         "tow_btn":"Towing Services",
         "emergency_btn":"Emergency Services",
         "refer_btn":"Refer a Friend",

@@ -24,7 +24,9 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    importProvidersFrom(IonicModule.forRoot({}), FormsModule),
+    importProvidersFrom(IonicModule.forRoot({
+      backButtonText: ''
+    }), FormsModule),
     importProvidersFrom(HttpClientModule),
     importProvidersFrom(IonicStorageModule.forRoot()),
      importProvidersFrom(TranslateModule.forRoot(

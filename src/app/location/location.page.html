@@ -7,24 +7,21 @@
 </ion-header>
 
 <ion-content>
+  <div class="location">
+  <ion-label>Latitude: {{cordinates.lat}} </ion-label><br>
+  <ion-label>Longitude: {{cordinates.lng}}</ion-label><br>
+  <ion-row>
+    <ion-col>
+      <ion-button size="small" *ngIf="drag" expand="block" (click)="getLocation()">Use this location</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button size="small" expand="block" (click)="navigate()">Use current location</ion-button>
+    </ion-col>
+  </ion-row>
+</div>
   <div class="gmap">
   <capacitor-google-map #map></capacitor-google-map>
 </div>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>
-      <ion-label>Latitude: {{cordinates.lat}} </ion-label><br>
-      <ion-label>Longitude: {{cordinates.lng}}</ion-label><br>
-      <ion-row>
-        <ion-col>
-          <ion-button *ngIf="drag" expand="block" (click)="getLocation()">Use this location</ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button expand="block" (click)="navigate()">Use current location</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-title>
-  </ion-toolbar>
-</ion-footer>
+

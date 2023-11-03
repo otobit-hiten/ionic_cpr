@@ -115,6 +115,7 @@
     "add_resource":{
         "header":"Recursos adicionales para reclamos",
         "header_title":"Por favor contáctenos desde la escena si es posible.",
+        "header_subtitle":"Por favor contáctenos desde la escena si es posible.",
         "tow_btn":"Servicios de remolque",
         "emergency_btn":"Servicios de emergencia",
         "refer_btn":"Recomendar a un amigo",

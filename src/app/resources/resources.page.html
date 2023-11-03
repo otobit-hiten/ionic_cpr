@@ -28,29 +28,30 @@
 <ion-content [fullscreen]="false">
   <div class="content">
 <ion-label class="page_title" translate>add_resource.header</ion-label><br>
-<ion-label translate>add_resource.header_title</ion-label>
+<ion-label translate>add_resource.header_subtitle</ion-label>
 
 <ion-button expand="block" fill="clear" size="large" class="button" (click)="openbrowser('tow')">
-  <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-  <ion-text style="text-transform: none; color: #000;" translate>add_resource.tow_btn</ion-text>
+  <ion-icon size="large" slot="start" src="assets/tow.svg"></ion-icon>
+  <span  class="ion-text-left" style="text-transform: none; color: #000;" translate>add_resource.tow_btn</span>
 </ion-button>
+
 
 <ion-button expand="block" fill="clear" size="large" routerDirection="forward" [routerLink]="['/tabs/resources/emergency-services']" class="button">
-  <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-  <ion-text style="text-transform: none; color: #000;" translate>add_resource.emergency_btn</ion-text>
+  <ion-icon size="large" slot="start" src="assets/sos.svg"></ion-icon>
+  <span  class="ion-text-left" style="text-transform: none; color: #000;" translate>add_resource.emergency_btn</span>
 </ion-button>
 
 
-<ion-button expand="block"  fill="clear" size="large" class="button">
+<!-- <ion-button expand="block"  fill="clear" size="large" class="button">
   <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-  <ion-text style="text-transform: none; color: #000;" translate>add_resource.share_btn</ion-text>
-</ion-button>
+  <span  class="ion-text-left" style="text-transform: none; color: #000;" translate>add_resource.share_btn</span>
+</ion-button> -->
 
 
-<ion-button expand="block"  fill="clear" size="large" class="button">
+<!-- <ion-button expand="block"  fill="clear" size="large" class="button">
   <ion-icon slot="start" src="assets/gp.svg"></ion-icon>
-  <ion-text style="text-transform: none; color: #000;" translate>add_resource.refer_btn</ion-text>
-</ion-button>
+  <span  class="ion-text-left" style="text-transform: none; color: #000;" translate>add_resource.refer_btn</span>
+</ion-button> -->
 
 </div>
 </ion-content>

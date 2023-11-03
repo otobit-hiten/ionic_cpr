@@ -6,6 +6,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { Browser } from '@capacitor/browser';
 import { LanguageService } from '../services/language.service';
+import { Geolocation } from '@capacitor/geolocation';
+import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
 
 @Component({
   selector: 'app-emergency-services',
@@ -17,7 +19,7 @@ import { LanguageService } from '../services/language.service';
 })
 export class EmergencyServicesPage implements OnInit {
 
- 
+
   constructor( public languageService: LanguageService) { }
 
   languageList: any = [];
@@ -43,13 +45,21 @@ export class EmergencyServicesPage implements OnInit {
 
 
   async openbrowser(event:string){
+    const coordinates = await Geolocation.getCurrentPosition();
+    console.log('Current position:', coordinates);
+    let lat = coordinates.coords.latitude
+    let lng = coordinates.coords.longitude
+
+    console.log('Current position:', lat, lng);
+    console.log('Current position:', `https://www.google.co.in/maps/search/Hospitals/@${lat},${lng}`);
+
     if(event === 'hospital'){
-      await Browser.open({ url: 'https://www.google.co.in/maps/search/Hospitals/@21.1797475,72.8059125' });
+      await Browser.open({ url: `https://www.google.co.in/maps/search/Hospitals/@${lat},${lng}`});
 
     }else if(event === 'police'){
-      await Browser.open({ url: 'https://www.google.co.in/maps/search/Police/@21.1797475,72.8059125' });
+      await Browser.open({ url: `https://www.google.co.in/maps/search/Police/@${lat},${lng}` });
 
     }else if(event === 'fire')
-    await Browser.open({ url: 'https://www.google.co.in/maps/search/FireStation/@21.1797475,72.8059125' });
+    await Browser.open({ url: `https://www.google.co.in/maps/search/FireStation/@${lat},${lng}` });
   }
 }

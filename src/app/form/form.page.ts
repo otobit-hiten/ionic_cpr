@@ -928,9 +928,9 @@ export class FormPage implements OnInit {
 
 
   // upload audio to Cloudinary
-  async uploadAudioToCloudinary() {
+   uploadAudioToCloudinary() {
     this.storedAudio.forEach(async element => {
-      await Cloudinary.uploadResource({
+       await Cloudinary.uploadResource({
         path: element.uri,
         resourceType: ResourceType.Video,
         uploadPreset: 'm442awuh',

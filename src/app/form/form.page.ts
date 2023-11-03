@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonicModule } from '@ionic/angular';
 import * as  Parse from 'parse';
 import { Swiper } from 'swiper'
 import { FilePicker, PickFilesResult, PickedFile } from '@capawesome/capacitor-file-picker';
@@ -32,6 +32,7 @@ import { UserService } from '../services/user.service';
   imports: [IonicModule, CommonModule, ReactiveFormsModule, FormsModule, TranslateModule, RouterModule]
 })
 export class FormPage implements OnInit {
+  @ViewChild(IonContent) content!: IonContent;
 
   languageList: any = []
   selected = '';
@@ -398,7 +399,7 @@ export class FormPage implements OnInit {
     this.formToMail = {
       email: "hitenchandora21@gmail.com",
       name_insured: this.slideOneForm.controls['name_insured'].value,
-      policy_no: this.slideOneForm.controls['name_insured'].value,
+      policy_no: this.slideOneForm.controls['policy_no_'].value,
       tell_us_what_happenend: this.slideOneForm.controls['tell_us_what_happened'].value,
       audioFile: this.audioFile,
       address_of_accident: this.latAndLng,
@@ -452,11 +453,13 @@ export class FormPage implements OnInit {
   }
 
   goNext() {
-    this.swiper?.slideNext(500);
+    this.swiper?.slideNext(50);
+    this.content.scrollToTop();
   }
 
   goPrev() {
-    this.swiper?.slidePrev(500);
+    this.swiper?.slidePrev(50);
+    this.content.scrollToTop();
   }
 
   swiperSlideChanged(e: any) {

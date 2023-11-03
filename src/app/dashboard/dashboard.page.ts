@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule, ToastController } from '@ionic/angular';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule} from '@ngx-translate/core';
 import { LanguageService } from '../services/language.service';
-import { Directory, Encoding, Filesystem, } from '@capacitor/filesystem';
+import { Directory, Filesystem, WriteFileResult, } from '@capacitor/filesystem';
 import { HttpClient } from '@angular/common/http';
 import { LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
-import { GenericResponse, VoiceRecorder } from 'capacitor-voice-recorder';
+import { FileOpener } from '@capacitor-community/file-opener';
 
 
 @Component({
@@ -20,7 +20,7 @@ import { GenericResponse, VoiceRecorder } from 'capacitor-voice-recorder';
 export class Dashboard {
 
   languageList: any = [];
-  selected = ''; //set default language here  {en= English ; es = spanish}
+  selected = '';
   compareWith: any;
   constructor(private toastController: ToastController,private http: HttpClient, public languageService: LanguageService) {
   }
@@ -41,28 +41,6 @@ export class Dashboard {
     console.log(this.languageService.selectedLanguage)
   }
 
-
-
-  async downloadForm() {
-    let base64: string = ''
-    this.http.get('/assets/form.pdf', { responseType: 'blob' as 'json' })
-      .subscribe(async res => {
-        const reader = new FileReader();
-        reader.readAsDataURL(res as Blob);
-        reader.onloadend = function () {
-          base64 = reader.result?.toString()!;
-          console.log(base64.substring(28));
-        }
-      });
-
-    const fileName = new Date().getTime() + '.pdf';
-    await Filesystem.writeFile({
-      path: fileName,
-      data: base64,
-      directory: Directory.Documents,
-    });
-  }
-
   public async openFile() {
     const filepath: string = `assets/form.pdf`;
     this.openLocalFileOnFileOpener(filepath);
@@ -70,8 +48,7 @@ export class Dashboard {
 
   async openLocalFileOnFileOpener(filepath: string, contentType: string = 'application/pdf') {
     return this.http.get(filepath, { responseType: 'arraybuffer' }).subscribe(async (response) => {
-      //
-      // Get base64 data
+ 
       const binaryData = new Uint8Array(response);
       let binary = '';
       const bytes = new Uint8Array(binaryData);
@@ -80,17 +57,25 @@ export class Dashboard {
         binary += String.fromCharCode(bytes[i]);
       }
       const base64Data = window.btoa(binary);
-      // Create temporary file
-      await Filesystem.writeFile({
-        path: 'Accord Form.pdf',
-        data: base64Data,
-        directory: Directory.Documents,
-      });
+     
+      try{
+          await Filesystem.writeFile({
+          path: 'Accord_Form_cpr.pdf',
+          data: base64Data,
+          directory: Directory.Documents,
+        }).then((res) => {
+          this.sendNotification(contentType, res.uri)
+        });
+      }catch(e:any){
+        this.presentToast('Try again later..','top')
+      }
+      
 
-      this.sendNotification()
+      
+      
     });
   }
-  async sendNotification() {
+  async sendNotification(contentType:string,uri:string) {
     let option : ScheduleOptions = {
       notifications:[
         {
@@ -103,22 +88,32 @@ export class Dashboard {
     }
     try{
         await LocalNotifications.schedule(option)
-        this.presentToast('top')
+        LocalNotifications.addListener('localNotificationActionPerformed', (payload) => {
+            if(payload.actionId === 'tap'){
+              FileOpener.open({
+                filePath:uri,
+                contentType:contentType,
+                openWithDefault:true
+              })
+            }
+    });
+        this.presentToast('File Downloaded','top')
     }catch(e:any){
-
+       
     }
-
   }
 
  
-    async presentToast(position: 'top') {
+    async presentToast(msg: string, position: 'top') {
       const toast = await this.toastController.create({
-        message: "File Downloaded",
+        message: msg,
         duration: 1500,
         position,
         color: 'primary'
       });
       await toast.present();
     }
+
+   
   
 }

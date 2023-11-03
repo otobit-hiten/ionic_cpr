@@ -44,7 +44,7 @@ export class LocationPage implements OnInit {
       }
       console.log('Hello',this.from_map)
       console.log('Hello',this.int_number)
-
+      this.currentPosition()
    });
 
     const permissionStatus = await Geolocation.checkPermissions();
@@ -58,10 +58,7 @@ export class LocationPage implements OnInit {
     console.log('open settings...');
    }
 
-  ionViewDidEnter(){
-    this.currentPosition()
-    
-  }
+ 
    currentPosition = async () => {
     const coordinates = await Geolocation.getCurrentPosition();
     console.log('Current position:', coordinates);
@@ -85,6 +82,9 @@ export class LocationPage implements OnInit {
     await this.newMap.addMarker({
       coordinate: this.cordinates,
       draggable : true,
+    }).then((mark)=>{
+      this.marker = mark
+      console.log("MARKKKKKKKKKKKK", mark)
     });
 
     await this.newMap.setCamera({
@@ -136,6 +136,12 @@ export class LocationPage implements OnInit {
       queryParams:{lat:this.current.lat, lng:this.current.lng,  map: this.from_map, int:this.int_number},
     })
     await this.newMap.destroy();
+   }
+
+   async cuuuuuu(){
+    this.newMap.removeMarker(this.marker)
+    await this.newMap.destroy();
+    this.ngOnInit()
    }
 }
 

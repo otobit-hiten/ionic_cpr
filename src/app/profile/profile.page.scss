@@ -50,8 +50,12 @@ ion-button.remove {
 .form {
   padding: 20px;
 }
+ion-label{
+  font-size: medium;
+  font-style: normal;
+  font-weight: 500;
+}
 ion-input {
-  margin-top: 10px;
   font-family: "poppins";
 }
 
@@ -62,19 +66,16 @@ ion-avatar {
 .page_header{
   color: #201E1E;
   font-family: Poppins;
-  font-size: 16px;
+  font-size: larger;
   font-style: normal;
   font-weight: 600;
-  line-height: 135%; /* 21.6px */
+  font-size: large;
+  /* 21.6px */
 }
 .profile_header_one {
   color: #201e1e;
   font-family: Poppins;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: 0.07px;
   text-transform: capitalize;
-  padding-top: 100%;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }

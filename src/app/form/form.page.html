@@ -20,13 +20,13 @@
 <ion-content>
   <div class="grey-line"></div>
   <swiper-container #swiper (slidechange)="swiperSlideChanged($event)" [allowTouchMove]="false" loop="false">
-    <swiper-slide >
+    <swiper-slide>
       <ion-img class="stepper" src="assets/step_1.svg"></ion-img>
       <ion-label class="stepperr_title" style="display: flex; justify-content: center" translate>
         form.form1_header
       </ion-label>
 
-      <form [formGroup]="slideOneForm" (ngSubmit)="submitOneForm()">
+      <form [formGroup]="slideOneForm" >
         <div class="form_1">
           <div class="what_happen">
             <ion-label class="label_text_policy" translate>form.header_policy</ion-label>
@@ -92,7 +92,7 @@
 
           </div>
 
-          <ion-button class="next_button" type="submit" expand="block" translate>form.next</ion-button>
+          <ion-button class="next_button" (click)="goNext()" expand="block" translate>form.next</ion-button>
         </div>
       </form>
     </swiper-slide>
@@ -103,7 +103,7 @@
         form.form2_header
       </ion-label>
 
-      <form [formGroup]="slideTwoForm" (ngSubmit)="submitTwoForm()">
+      <form [formGroup]="slideTwoForm">
         <div class="form_2">
           <div class="address">
             <ion-label class="label_text" translate>form.header_where_did_take_place</ion-label>
@@ -191,7 +191,7 @@
               <ion-button class="next_button" expand="block" (click)="goPrev()" translate>form.previous</ion-button>
             </ion-col>
             <ion-col>
-              <ion-button class="next_button" expand="block" type="submit" translate>form.next</ion-button>
+              <ion-button class="next_button" expand="block" (click)="goNext()" translate>form.next</ion-button>
             </ion-col>
           </ion-row>
         </div>
@@ -203,7 +203,7 @@
       <ion-label class="stepperr_title" style="display: flex; justify-content: center" translate>
         form.form3_header</ion-label>
 
-      <form [formGroup]="slideThreeForm" (ngSubmit)="submitThreeForm()">
+      <form [formGroup]="slideThreeForm">
         <div class="form_3">
           <div>
             <ion-label class="ninth_label" translate>form.label_who_was_involved</ion-label>
@@ -364,7 +364,7 @@
               <ion-button class="next_button" expand="block" (click)="goPrev()" translate>form.previous</ion-button>
             </ion-col>
             <ion-col>
-              <ion-button class="next_button" expand="block" type="submit" translate>form.next</ion-button>
+              <ion-button class="next_button" expand="block" (click)="goNext()" translate>form.next</ion-button>
             </ion-col>
           </ion-row>
         </div>
@@ -375,7 +375,7 @@
       <ion-img class="stepper" src="assets/step_4.svg"></ion-img>
       <ion-label class="stepperr_title" style="display: flex; justify-content: center" translate>
         form.form4_header</ion-label>
-      <form [formGroup]="slideFourForm" (ngSubmit)="submitFourForm()">
+      <form [formGroup]="slideFourForm" >
         <div class="form_4">
           <div>
             <ion-label class="label_other_vehicle" translate>form.label_my_vehicle</ion-label>
@@ -542,7 +542,7 @@
             <ion-button class="next_button" expand="block" (click)="goPrev()" translate>form.previous</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button class="next_button" expand="block" type="submit" translate>form.next</ion-button>
+            <ion-button class="next_button" expand="block" (click)="goNext()"  translate>form.next</ion-button>
           </ion-col>
         </ion-row>
       </form>
@@ -552,7 +552,7 @@
       <ion-img class="stepper" src="assets/step_5.svg"></ion-img>
       <ion-label class="stepperr_title" style="display: flex; justify-content: center"
         translate>form.form5_header</ion-label>
-      <form [formGroup]="slideFiveForm" (ngSubmit)="submitFiveForm()">
+      <form [formGroup]="slideFiveForm">
         <div class="form_5">
           <div>
             <ion-label class="label_text_policy" translate>form.label_my_vehicle_other</ion-label>
@@ -725,7 +725,7 @@
               translate}}</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button class="next_button" expand="block" type="submit">{{'form.submit'| translate}}</ion-button>
+            <ion-button class="next_button" expand="block" (click)="submitFiveForm()">{{'form.submit'| translate}}</ion-button>
           </ion-col>
         </ion-row>
       </form>

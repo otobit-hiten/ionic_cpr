@@ -71,6 +71,7 @@ export class FormPage implements OnInit {
 
   @ViewChild('swiper')
   swiperRef: ElementRef | undefined;
+
   swiper?: Swiper
   slideOneForm: FormGroup
   slideTwoForm: FormGroup
@@ -298,6 +299,12 @@ export class FormPage implements OnInit {
     }
   }
   submitFiveForm = async () => {
+   this.slideOneForm.value
+   this.slideTwoForm.value
+   this.slideThreeForm.value
+   this.slideFourForm.value
+   this.slideFiveForm.value
+
     this.loader.showLoader();
     this.uploadAudioToCloudinary()
     let address_of_accident: string[] = []
@@ -448,17 +455,21 @@ export class FormPage implements OnInit {
 
 
   async swiperReady() {
+
     this.swiper = await this.swiperRef?.nativeElement.swiper;
+    
+
     // this.goNext();
   }
 
   goNext() {
-    this.swiper?.slideNext(50);
+    this.swiper?.slideNext(200);
     this.content.scrollToTop();
+   
   }
 
   goPrev() {
-    this.swiper?.slidePrev(50);
+    this.swiper?.slidePrev(200);
     this.content.scrollToTop();
   }
 

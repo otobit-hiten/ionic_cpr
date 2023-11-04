@@ -43,6 +43,5 @@ export class ContactUsPage implements OnInit {
   mail()
   {
     window.open('mailto:test@test.com');
-
   }
 }

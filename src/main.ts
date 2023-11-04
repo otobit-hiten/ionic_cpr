@@ -10,6 +10,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { MaskitoModule } from '@maskito/angular';
 
 
 export function createTranslate(http: HttpClient) {
@@ -27,7 +28,7 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(IonicModule.forRoot({
       backButtonText: '',
     }), FormsModule),
-    importProvidersFrom(HttpClientModule),
+    importProvidersFrom(HttpClientModule,MaskitoModule),
     importProvidersFrom(IonicStorageModule.forRoot()),
      importProvidersFrom(TranslateModule.forRoot(
       {

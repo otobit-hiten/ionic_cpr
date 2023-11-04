@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { TranslateModule} from '@ngx-translate/core';
 import { LanguageService } from '../services/language.service';
-import { Directory, Filesystem, WriteFileResult, } from '@capacitor/filesystem';
+import { Directory, DownloadFileResult, Filesystem, WriteFileResult, } from '@capacitor/filesystem';
 import { HttpClient } from '@angular/common/http';
 import { LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
 import { FileOpener } from '@capacitor-community/file-opener';
+import { Capacitor } from '@capacitor/core';
 
 
 @Component({
@@ -24,10 +25,11 @@ export class Dashboard {
   compareWith: any;
   constructor(private toastController: ToastController,private http: HttpClient, public languageService: LanguageService) {
   }
-  ngOnInit() {
-
+   async ngOnInit() {
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
+     await Filesystem.requestPermissions()
+     await LocalNotifications.requestPermissions()
   }
   ionViewDidEnter() {
     console.log(this.selected)
@@ -42,8 +44,19 @@ export class Dashboard {
   }
 
   public async openFile() {
-    const filepath: string = `assets/form.pdf`;
-    this.openLocalFileOnFileOpener(filepath);
+
+    Filesystem.downloadFile({
+      url: 'https://drive.google.com/u/1/uc?id=1WaxQqtKB8ZjrdrcSiSs0Q4xixehti9M8&export=download',
+      path: 'Accord_Cpe_form.pdf',
+      recursive: true,
+      progress: true,
+      directory:Directory.Documents
+    }).then((res)=>{
+      const contentType = 'application/pdf'
+      this.sendNotification(contentType,res.path!)
+    })
+    // const filepath: string = `assets/form.pdf`;
+    // this.openLocalFileOnFileOpener(filepath);
   }
 
   async openLocalFileOnFileOpener(filepath: string, contentType: string = 'application/pdf') {
@@ -69,10 +82,6 @@ export class Dashboard {
       }catch(e:any){
         this.presentToast('Try again later..','top')
       }
-      
-
-      
-      
     });
   }
   async sendNotification(contentType:string,uri:string) {
@@ -109,7 +118,6 @@ export class Dashboard {
         message: msg,
         duration: 1500,
         position,
-        color: 'primary'
       });
       await toast.present();
     }

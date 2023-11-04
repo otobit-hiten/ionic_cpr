@@ -12,14 +12,19 @@ import { Capacitor } from '@capacitor/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core'
 import { profile } from 'console';
+import { MaskitoElementPredicateAsync, MaskitoOptions } from '@maskito/core';
+import { MaskitoModule } from '@maskito/angular';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, TranslateModule]
+  imports: [IonicModule, CommonModule, MaskitoModule ,FormsModule, TranslateModule]
 })
 export class ProfilePage implements OnInit {
+  
+
   user: User = { name: '', phone: '', email: '', policyNo: '' }
   image: Image = { name: '', path: '', localPath: '' }
   public name: string = "";

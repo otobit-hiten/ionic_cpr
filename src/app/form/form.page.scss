@@ -613,7 +613,19 @@ ion-input {
   width: 100%;
 }
 
-.add_audio {
+.add_audio_bg {
+  margin-left: 5px;
+  border-radius: 10px;
+  --background: #fe524d !important;
+  --padding-top: 6% !important;
+  --padding-bottom: 6% !important;
+
+}
+.audio_bg {
+  margin-left: 5px;
+  border-radius: 10px;
+  --background: #fe524d !important;
+
 }
 
 .add_record {

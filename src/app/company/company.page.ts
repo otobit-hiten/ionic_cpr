@@ -38,4 +38,14 @@ export class CompanyPage implements OnInit {
     this.selected = this.languageService.selectedLanguage
     console.log(this.selected)
   }
+
+  call(){
+    window.open('tel:(855) 215-6439');
+  }
+
+  mail()
+  {
+    window.open('mailto:test@test.com');
+
+  }
 }

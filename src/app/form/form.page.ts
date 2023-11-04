@@ -38,8 +38,8 @@ export class FormPage implements OnInit {
   selected = '';
 
   async ngOnInit() {
-    
-    await this.permission()
+
+
     this.languageList = this.languageService.getLanguage();
     this.selected = this.languageService.selectedLanguage
 
@@ -47,9 +47,8 @@ export class FormPage implements OnInit {
     VoiceRecorder.requestAudioRecordingPermission()
     this.getUserData()
     // this.loadAudio();
-    this.witnessArray.push(this.witnessObj)
-    console.log(this.witnessArray.length)
     this.initialize();
+    await this.permission()
   }
   ionViewDidEnter() {
     console.log(this.selected)
@@ -101,8 +100,9 @@ export class FormPage implements OnInit {
   involvedPartiesObject = { idImage: [], insuranceImage: [] };
   otherVehicleArray: any = [];
   otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [], map: '' };
-  audioFile: string[] = []
+  audioFiles: string[] = []
   user: User = { name: '', phone: '', email: '', policyNo: '' }
+  images: string[] = []
   constructor(private userService: UserService, private loader: LoaderService, public formBuilder: FormBuilder, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
       console.log(params['map'])
@@ -299,154 +299,155 @@ export class FormPage implements OnInit {
     }
   }
 
-  submitFiveForm = async () => {
-   this.slideOneForm.value
-   this.slideTwoForm.value
-   this.slideThreeForm.value
-   this.slideFourForm.value
-   this.slideFiveForm.value
-
+  async submitFiveForm() {
     this.loader.showLoader();
-    this.uploadAudioToCloudinary()
-    let address_of_accident: string[] = []
+    this.slideOneForm.value
+    this.slideTwoForm.value
+    this.slideThreeForm.value
+    this.slideFourForm.value
+    this.slideFiveForm.value
+    console.log(this.storedAudio.length)
+    await this.uploadAudioToCloudinary()
+
+    
     this.actualAreaOfDamage.forEach((res) => {
-      address_of_accident.push(res.path)
+      this.images.push(res.path)
     })
-
-    let nearest_street: string[] = []
     this.nearestStreet.forEach((res) => {
-      nearest_street.push(res.path)
+      this.images.push(res.path)
     })
-
-    let police_report: string[] = []
     this.policeReport.forEach((res) => {
-      police_report.push(res.path)
+      this.images.push(res.path)
     })
 
-    let image_licence: string[] = []
     this.licensePlate.forEach((res) => {
-      image_licence.push(res.path)
+      this.images.push(res.path)
     })
 
-    let vin_image: string[] = []
     this.vinNo.forEach((res) => {
-      vin_image.push(res.path)
+      this.images.push(res.path)
     })
 
-    let all_side: string[] = []
     this.allFourSide.forEach((res) => {
-      all_side.push(res.path)
+      this.images.push(res.path)
     })
 
-    let closeup: string[] = []
     this.closeUp.forEach((res) => {
-      closeup.push(res.path)
+      this.images.push(res.path)
     })
 
     this.involvedPartiesArray.forEach((res: any, index: number) => {
-      let datas: string[] = []
+
       res.idImage.forEach((data: any) => {
-        datas.push(data.path)
+        this.images.push(data.path)
       })
       this.involvedParties().at(index).patchValue({
-        id: datas
+        id: []
       })
     })
 
     this.involvedPartiesArray.forEach((res: any, index: number) => {
-      let datas: string[] = []
       res.insuranceImage.forEach((data: any) => {
-        datas.push(data.path)
+        this.images.push(data.path)
       })
       this.involvedParties().at(index).patchValue({
-        insurance: datas
+        insurance: []
       })
     })
 
     this.otherVehicleArray.forEach((res: any, index: number) => {
-      let datas: string[] = []
+     
       res.licenceImg.forEach((data: any) => {
-        datas.push(data.path)
+        this.images.push(data.path)
       })
       this.otherVehicle().at(index).patchValue({
-        licenceImg: datas
+        licenceImg: []
       })
     })
 
     this.otherVehicleArray.forEach((res: any, index: number) => {
-      let datas: string[] = []
+      
       res.vinNoOther.forEach((data: any) => {
-        datas.push(data.path)
+        this.images.push(data.path)
       })
       this.otherVehicle().at(index).patchValue({
-        vinNoOther: datas
+        vinNoOther: []
       })
     })
 
     this.otherVehicleArray.forEach((res: any, index: number) => {
-      let datas: string[] = []
       res.all4side.forEach((data: any) => {
-        datas.push(data.path)
+        this.images.push(data.path)
       })
       this.otherVehicle().at(index).patchValue({
-        all4side: datas
+        all4side: []
       })
     })
 
     this.otherVehicleArray.forEach((res: any, index: number) => {
-      let datas: string[] = []
       res.closeUpOther.forEach((data: any) => {
-        datas.push(data.path)
+        this.images.push(data.path)
       })
       this.otherVehicle().at(index).patchValue({
-        closeUpOther: datas
+        closeUpOther: []
       })
     })
 
 
-    this.formToMail = {
-      email: "hitenchandora21@gmail.com",
-      name_insured: this.slideOneForm.controls['name_insured'].value,
-      policy_no: this.slideOneForm.controls['policy_no_'].value,
-      tell_us_what_happenend: this.slideOneForm.controls['tell_us_what_happened'].value,
-      audioFile: this.audioFile,
-      address_of_accident: this.latAndLng,
-      image_surrounding: address_of_accident,
-      image_nearest_street: nearest_street,
-      involvedparty: this.involvedParties().value,
-      witness: this.witness().value,
-      police_name: this.slideThreeForm.controls['policeName'].value,
-      police_report: this.slideThreeForm.controls['policeReport'].value,
-      image_police_report: police_report,
-      vehicle_make_model: this.slideFourForm.controls['vehicleMakeModel'].value,
-      licence_plate: this.slideFourForm.controls['vehicleLicencePlateNo'].value,
-      image_licence: image_licence,
-      vin_no: this.slideFourForm.controls['vehicleVinNo'].value,
-      image_vin_no: vin_image,
-      speedometer: this.slideFourForm.controls['speedometer'].value,
-      image_all_side: all_side,
-      image_close_up: closeup,
-      tow_company: this.slideFourForm.controls['towCompany'].value,
-      tow_company_address: this.lat_lang_towCompany,
-      other_vehcile_damage: this.otherVehicle().value
-    }
-
-    console.log(this.formToMail)
+   
+    
+   
 
     this.call().then(rres => {
       this.loader.hideLoader()
     })
 
-   
+    console.log(this.formToMail)
+
+
 
   }
 
 
   async call() {
     try {
+      this.formToMail = {
+        email: "hitenchandora21@gmail.com",
+        name_insured: this.slideOneForm.controls['name_insured'].value,
+        policy_no: this.slideOneForm.controls['policy_no_'].value,
+        tell_us_what_happenend: this.slideOneForm.controls['tell_us_what_happened'].value,
+        audioFile: this.audioFiles,
+        address_of_accident: this.latAndLng,
+        involvedparty: this.involvedParties().value,
+        witness: this.witness().value,
+        police_name: this.slideThreeForm.controls['policeName'].value,
+        police_report: this.slideThreeForm.controls['policeReport'].value,
+        vehicle_make_model: this.slideFourForm.controls['vehicleMakeModel'].value,
+        licence_plate: this.slideFourForm.controls['vehicleLicencePlateNo'].value,
+        vin_no: this.slideFourForm.controls['vehicleVinNo'].value,
+        speedometer: this.slideFourForm.controls['speedometer'].value,
+        tow_company: this.slideFourForm.controls['towCompany'].value,
+        tow_company_address: this.lat_lang_towCompany,
+        other_vehcile_damage: this.otherVehicle().value,
+        images: this.images
+      }
+  
       console.log("Calling...")
       var Parse = require('parse');
       const query = await Parse.Cloud.run('result', this.formToMail)
+      await Filesystem.readdir({
+        path: '',
+        directory: Directory.External
+      }).then((res)=>{
+        res.files.forEach((res) => {
+          if(res.name.slice(-3) === 'wav'){
+            Filesystem.deleteFile({
+              path: res.name,
+              directory: Directory.External
+            })
+          }
+        })
+      })
       console.log(query['response'])
       if (query['response'] === 'sent') {
         this.router.navigateByUrl('/thank', { replaceUrl: true })
@@ -467,7 +468,7 @@ export class FormPage implements OnInit {
     this.swiper = await this.swiperRef?.nativeElement.swiper;
     this.swiper?.slideNext(500);
     this.content.scrollToTop();
-   
+
   }
 
   async goPrev() {
@@ -797,12 +798,14 @@ export class FormPage implements OnInit {
     }).then(result => {
       result.files.forEach((res) => {
         console.log(res.name)
-        let contains = true;
-        contains = this.storedAudio.some(function (el) { return el.name === res.name });
-        if (!contains) {
-          this.storedAudio.push(res)
+        if (res.name.slice(-3) === 'wav') {
+          let contains = true;
+          contains = this.storedAudio.some(function (el) { return el.name === res.name });
+          if (!contains) {
+            this.storedAudio.push(res)
+            console.log(res.uri)
+          }
         }
-        console.log(contains)
       })
 
 
@@ -836,7 +839,7 @@ export class FormPage implements OnInit {
     VoiceRecorder.stopRecording().then(async (res: RecordingData) => {
       const fileToSave = res.value.recordDataBase64
       console.log(fileToSave);
-      const fileName = new Date().getTime() + '.wav';
+      const fileName = new Date().getTime()+ '.wav';
       await Filesystem.writeFile({
         path: fileName,
         directory: Directory.External,
@@ -931,22 +934,33 @@ export class FormPage implements OnInit {
     await FilePicker.pickFiles({
       types: ['audio/aac'],
     }).then(async res => {
-      console.log(res)
+      console.log(res.files[0])
       this.storedAudio.push(res.files[0]);
 
     });
   }
 
   // upload audio to Cloudinary
-   uploadAudioToCloudinary() {
+  uploadAudioToCloudinary() {
     this.storedAudio.forEach(async element => {
-       await Cloudinary.uploadResource({
-        path: element.uri,
-        resourceType: ResourceType.Video,
-        uploadPreset: 'm8knf6ho',
-      }).then(response => {
-        this.audioFile.push(response.url)
-      })
+      if(element.name.slice(-3) === 'wav'){
+        await Cloudinary.uploadResource({
+          path: element.uri,
+          resourceType: ResourceType.Video,
+          uploadPreset: 'm8knf6ho',
+        }).then(response => {
+          this.audioFiles.push(response.url)
+        })
+      }else if(element.name.slice(-3) === 'acc'){
+        await Cloudinary.uploadResource({
+          path: element.path,
+          resourceType: ResourceType.Video,
+          uploadPreset: 'm8knf6ho',
+        }).then(response => {
+          this.audioFiles.push(response.url)
+        })
+      }
+  
     });
 
   }
@@ -1016,7 +1030,6 @@ export class FormPage implements OnInit {
   }
 
   formToMail: {} = {
-    email: "hitenchandora21@gmail.com",
     name_insured: '',
     policy_no: '',
     tell_us_what_happenend: '',
@@ -1039,7 +1052,8 @@ export class FormPage implements OnInit {
     image_close_up: [],
     tow_company: '',
     tow_company_address: '',
-    other_vehcile_damage: FormArray
+    other_vehcile_damage: FormArray,
+    images: []
   }
 
   async getUserData() {
@@ -1054,5 +1068,5 @@ export class FormPage implements OnInit {
         })
       }
     })
-  } 
+  }
 }

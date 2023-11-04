@@ -76,8 +76,8 @@
                 <ion-label translate>form.label_record_audio </ion-label>
                 <span *ngIf="recording"> {{displayTime}}</span>
               </ion-item>
-              <ion-item class="add_audio" lines="none" detail="false">
-                <ion-icon  size="small"  *ngIf="!recording" name="add-outline" class="add_audio" (click)="addAudio()"></ion-icon>
+              <ion-item *ngIf="!recording" class="add_audio_bg" lines="none" detail="false">
+                <ion-icon class="audio_bg"  size="default" color="light"  src="assets/upload_audio.svg" class="add_audio" (click)="addAudio()"></ion-icon>
               </ion-item>
             </div>
             <ion-list lines="none">

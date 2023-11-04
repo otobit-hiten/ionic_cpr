@@ -41,6 +41,8 @@
     "@ionic/angular": "^7.5.3",
     "@ionic/storage-angular": "^4.0.0",
     "@jonz94/capacitor-image-picker": "^2.0.0",
+    "@maskito/angular": "^1.8.1",
+    "@maskito/core": "^1.8.1",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@types/parse": "^3.0.5",

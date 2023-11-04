@@ -12,12 +12,20 @@ import { Router, RouterModule } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule, RouterModule]
 })
 export class ThankPage implements OnInit {
-
- 
+   timeoutId : ReturnType<typeof setTimeout> 
+    countdown = 5;
+    timer = 0
     constructor( private router: Router) { 
-    setTimeout(() => {
+      setInterval(() => {
+        this.countdown = --this.countdown <= 0 ? 5 : this.countdown;
+      
+        this.timer = this.countdown;
+      }, 1000);
+    this.timeoutId = setTimeout(() => {
     this.router.navigateByUrl('', { replaceUrl: true })
-    }, 5000); // 2000 milliseconds (2 seconds) delay
+    }, 5000);
+
+    
   }
   
 
@@ -27,6 +35,7 @@ export class ThankPage implements OnInit {
 
 
   gotoDashboard(){
+    clearTimeout(this.timeoutId)
     this.router.navigateByUrl('', { replaceUrl: true })
   }
 

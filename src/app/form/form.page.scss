@@ -603,3 +603,27 @@ ion-input {
   margin-top: -1%;
   float: right;
 }
+
+.record_audio_outer {
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.add_audio {
+}
+
+.add_record {
+  border-radius: 5px;
+  padding: 3px;
+  border: 0.5px solid #828282;
+  flex: 1;
+  
+}
+swiper-slide{
+  overflow: auto;
+  height: calc(100vh - 150px);
+}

@@ -13,10 +13,18 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class ThankPage implements OnInit {
 
-  constructor( private router: Router) { }
+ 
+    constructor( private router: Router) { 
+    setTimeout(() => {
+    this.router.navigateByUrl('', { replaceUrl: true })
+    }, 5000); // 2000 milliseconds (2 seconds) delay
+  }
+  
 
   ngOnInit() {
+
   }
+
 
   gotoDashboard(){
     this.router.navigateByUrl('', { replaceUrl: true })

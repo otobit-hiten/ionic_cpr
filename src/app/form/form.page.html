@@ -69,13 +69,15 @@
             </ion-textarea>
 
             <ion-label class="label_text_radio" translate>form.label_record_audio</ion-label>
-            <div class="record_audio">
-              <ion-item lines="none" detail="false" >
+            <div class="record_audio_outer">
+              <ion-item class="add_record" lines="none" detail="false" >
                 <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
                   color="primary"></ion-icon>
-                <ion-label translate="">form.label_record_audio </ion-label>
+                <ion-label translate>form.label_record_audio </ion-label>
                 <span *ngIf="recording"> {{displayTime}}</span>
-                <ion-icon *ngIf="!recording" name="add-outline" class="add_audio" (click)="addAudio()"></ion-icon>
+              </ion-item>
+              <ion-item class="add_audio" lines="none" detail="false">
+                <ion-icon  size="small"  *ngIf="!recording" name="add-outline" class="add_audio" (click)="addAudio()"></ion-icon>
               </ion-item>
             </div>
             <ion-list lines="none">

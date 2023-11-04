@@ -82,7 +82,6 @@ export class FormPage implements OnInit {
   displayTime = '';
   time = 0;
   storedAudio: any[] = [];
-
   public playback = false;
   ref = new Audio();
   selectedItem: any;
@@ -251,7 +250,8 @@ export class FormPage implements OnInit {
   }
 
   async initialize() {
-    await Cloudinary.initialize({ cloudName: 'dbdfrtxli' });
+    console.log('initializing...');
+    await Cloudinary.initialize({ cloudName: 'dd4uptwsc' });
     console.log('initialize');
   };
 
@@ -298,6 +298,7 @@ export class FormPage implements OnInit {
       return console.log('Please provide all the required values!');
     }
   }
+
   submitFiveForm = async () => {
    this.slideOneForm.value
    this.slideTwoForm.value
@@ -436,6 +437,8 @@ export class FormPage implements OnInit {
       this.loader.hideLoader()
     })
 
+   
+
   }
 
 
@@ -455,21 +458,21 @@ export class FormPage implements OnInit {
 
 
   async swiperReady() {
-
     this.swiper = await this.swiperRef?.nativeElement.swiper;
-    
-
     // this.goNext();
   }
 
-  goNext() {
-    this.swiper?.slideNext(200);
+  async goNext() {
+    this.initialize()
+    this.swiper = await this.swiperRef?.nativeElement.swiper;
+    this.swiper?.slideNext(500);
     this.content.scrollToTop();
    
   }
 
-  goPrev() {
-    this.swiper?.slidePrev(200);
+  async goPrev() {
+    this.swiper = await this.swiperRef?.nativeElement.swiper;
+    this.swiper?.slidePrev(500);
     this.content.scrollToTop();
   }
 
@@ -504,7 +507,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.actualAreaOfDamage[place].path = res.url;
               this.actualAreaOfDamage[place].isUploaded = true;
@@ -525,7 +528,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.nearestStreet[place].path = res.url;
               this.nearestStreet[place].isUploaded = true;
@@ -545,7 +548,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.involvedPartiesArray[i].idImage[place].path = res.url;
               this.involvedPartiesArray[i].idImage[place].isUploaded = true;
@@ -568,7 +571,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.involvedPartiesArray[i].insuranceImage[place].path = res.url;
               this.involvedPartiesArray[i].insuranceImage[place].isUploaded = true;
@@ -591,7 +594,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.policeReport[place].path = res.url;
               this.policeReport[place].isUploaded = true;
@@ -611,7 +614,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.licensePlate[place].path = res.url;
               this.licensePlate[place].isUploaded = true;
@@ -631,7 +634,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.vinNo[place].path = res.url;
               this.vinNo[place].isUploaded = true;
@@ -651,7 +654,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.allFourSide[place].path = res.url;
               this.allFourSide[place].isUploaded = true;
@@ -671,7 +674,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.closeUp[place].path = res.url;
               this.closeUp[place].isUploaded = true;
@@ -691,7 +694,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.otherVehicleArray[i].licenceImg[place].path = res.url;
               this.otherVehicleArray[i].licenceImg[place].isUploaded = true;
@@ -714,7 +717,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.otherVehicleArray[i].vinNoOther[place].path = res.url;
               this.otherVehicleArray[i].vinNoOther[place].isUploaded = true;
@@ -737,7 +740,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.otherVehicleArray[i].all4side[place].path = res.url;
               this.otherVehicleArray[i].all4side[place].isUploaded = true;
@@ -762,7 +765,7 @@ export class FormPage implements OnInit {
             await Cloudinary.uploadResource({
               path: file.path,
               resourceType: ResourceType.Image,
-              uploadPreset: 'm442awuh',
+              uploadPreset: 'm8knf6ho',
             }).then(res => {
               this.otherVehicleArray[i].closeUpOther[place].path = res.url;
               this.otherVehicleArray[i].closeUpOther[place].isUploaded = true;
@@ -806,6 +809,7 @@ export class FormPage implements OnInit {
     });
 
   }
+
   startOrStopRecording() {
     if (!this.recording) {
       this.startRecording();
@@ -824,6 +828,7 @@ export class FormPage implements OnInit {
     this.startTimer()
 
   }
+
   stopRecording() {
     if (!this.recording) {
       return
@@ -857,8 +862,6 @@ export class FormPage implements OnInit {
       this.startTimer()
     }, 1000)
   }
-
-
 
   // play and delete recorded audio
   async play(fileName: any, file: any) {
@@ -923,7 +926,6 @@ export class FormPage implements OnInit {
 
   }
 
-
   //upload and delete uploaded audio from device
   async addAudio() {
     await FilePicker.pickFiles({
@@ -935,16 +937,13 @@ export class FormPage implements OnInit {
     });
   }
 
-
-
-
   // upload audio to Cloudinary
    uploadAudioToCloudinary() {
     this.storedAudio.forEach(async element => {
        await Cloudinary.uploadResource({
         path: element.uri,
         resourceType: ResourceType.Video,
-        uploadPreset: 'm442awuh',
+        uploadPreset: 'm8knf6ho',
       }).then(response => {
         this.audioFile.push(response.url)
       })
@@ -1015,8 +1014,6 @@ export class FormPage implements OnInit {
 
     }
   }
-
-
 
   formToMail: {} = {
     email: "hitenchandora21@gmail.com",

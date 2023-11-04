@@ -44,10 +44,11 @@ export class FormPage implements OnInit {
     this.selected = this.languageService.selectedLanguage
 
     this.swiperReady()
-    VoiceRecorder.requestAudioRecordingPermission()
+    this.loadAudio();
     this.getUserData()
-    // this.loadAudio();
     this.initialize();
+
+    VoiceRecorder.requestAudioRecordingPermission()
     await this.permission()
   }
   ionViewDidEnter() {
@@ -412,7 +413,6 @@ export class FormPage implements OnInit {
   async call() {
     try {
       this.formToMail = {
-        email: "hitenchandora21@gmail.com",
         name_insured: this.slideOneForm.controls['name_insured'].value,
         policy_no: this.slideOneForm.controls['policy_no_'].value,
         tell_us_what_happenend: this.slideOneForm.controls['tell_us_what_happened'].value,

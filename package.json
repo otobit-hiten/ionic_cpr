@@ -46,6 +46,7 @@
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@types/parse": "^3.0.5",
+    "capacitor-native-settings": "^5.0.1",
     "capacitor-voice-recorder": "^5.0.0",
     "ionic-stepper": "^1.1.0",
     "ionicons": "^7.0.0",

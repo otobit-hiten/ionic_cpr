@@ -26,6 +26,7 @@ def capacitor_pods
   pod 'CapawesomeCapacitorCloudinary', :path => '../../node_modules/@capawesome/capacitor-cloudinary'
   pod 'CapawesomeCapacitorFilePicker', :path => '../../node_modules/@capawesome/capacitor-file-picker'
   pod 'Jonz94CapacitorImagePicker', :path => '../../node_modules/@jonz94/capacitor-image-picker'
+  pod 'CapacitorNativeSettings', :path => '../../node_modules/capacitor-native-settings'
   pod 'CapacitorVoiceRecorder', :path => '../../node_modules/capacitor-voice-recorder'
 end
 

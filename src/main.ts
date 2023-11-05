@@ -28,7 +28,8 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(IonicModule.forRoot({
       backButtonText: '',
     }), FormsModule),
-    importProvidersFrom(HttpClientModule,MaskitoModule),
+    importProvidersFrom(HttpClientModule),
+    importProvidersFrom(MaskitoModule),
     importProvidersFrom(IonicStorageModule.forRoot()),
      importProvidersFrom(TranslateModule.forRoot(
       {

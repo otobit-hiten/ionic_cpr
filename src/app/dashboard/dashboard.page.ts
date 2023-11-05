@@ -44,10 +44,11 @@ export class Dashboard {
   }
 
   public async openFile() {
+    const fileName = 'Accord-'+new Date().getTime()+'.pdf';
 
     Filesystem.downloadFile({
       url: 'https://drive.google.com/u/1/uc?id=1WaxQqtKB8ZjrdrcSiSs0Q4xixehti9M8&export=download',
-      path: 'Accord_Cpe_form.pdf',
+      path: fileName,
       recursive: true,
       progress: true,
       directory:Directory.Documents

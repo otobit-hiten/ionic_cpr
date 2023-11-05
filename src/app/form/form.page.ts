@@ -20,6 +20,9 @@ import { LoaderService } from '../services/loader.service';
 import { timeStamp } from 'console';
 import { ImagePicker } from '@jonz94/capacitor-image-picker';
 import { UserService } from '../services/user.service';
+import { MaskitoElementPredicateAsync, MaskitoOptions } from '@maskito/core';
+import { MaskitoModule } from '@maskito/angular';
+import { AndroidSettings, IOSSettings, NativeSettings } from 'capacitor-native-settings';
 
 
 
@@ -29,7 +32,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./form.page.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [IonicModule, CommonModule, ReactiveFormsModule, FormsModule, TranslateModule, RouterModule]
+  imports: [IonicModule, CommonModule, MaskitoModule, ReactiveFormsModule, FormsModule, TranslateModule, RouterModule]
 })
 export class FormPage implements OnInit {
   @ViewChild(IonContent) content!: IonContent;
@@ -37,6 +40,10 @@ export class FormPage implements OnInit {
   languageList: any = []
   selected = '';
 
+  readonly phoneMask: MaskitoOptions = {
+    mask: ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+  };
+  readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
   async ngOnInit() {
 
 
@@ -106,22 +113,22 @@ export class FormPage implements OnInit {
   images: string[] = []
   constructor(private userService: UserService, private loader: LoaderService, public formBuilder: FormBuilder, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
-      console.log(params['map'])
-      if (params['map'] === 'towCompany') {
+      console.log(params['map'],"Hiten")
+      if (params['map'] === ':towCompany') {
         if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
           this.lat_lang_towCompany = '0,0';
         } else {
           this.lat_lang_towCompany = `${params['lat']},${params['lng']}`;
         }
       }
-      if (params['map'] === 'addressAccident') {
+      if (params['map'] === ':addressAccident') {
         if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
           this.latAndLng = '0,0';
         } else {
           this.latAndLng = `${params['lat']},${params['lng']}`;
         }
       }
-      if (params['map'] === 'towCompanyOther') {
+      if (params['map'] === ':towCompanyOther') {
         let i = Number(`${params['int']}`)
         let mapValue = `${params['lat']},${params['lng']}`
         console.log('NUMBERRRR')
@@ -244,7 +251,7 @@ export class FormPage implements OnInit {
   async permission() {
     const permissionStatus = await Geolocation.checkPermissions();
     console.log('Permission status: ', permissionStatus.location);
-    if (permissionStatus?.location != 'granted') {
+    if (permissionStatus?.location !== 'granted') {
       await Geolocation.requestPermissions();
       await Geolocation.getCurrentPosition();
     }
@@ -308,7 +315,7 @@ export class FormPage implements OnInit {
     this.slideFourForm.value
     this.slideFiveForm.value
     console.log(this.storedAudio.length)
-    await this.uploadAudioToCloudinary()
+    this.uploadAudioToCloudinary()
 
     
     this.actualAreaOfDamage.forEach((res) => {
@@ -487,7 +494,7 @@ export class FormPage implements OnInit {
     console.log(i)
 
     await ImagePicker.present({
-      limit: 10,
+      limit: 5,
       surpassLimitMessage: 'You cannot select more than %d images.',
       titleText: 'Pick a image',
       albumsTitleText: 'Chose an album',
@@ -1069,4 +1076,40 @@ export class FormPage implements OnInit {
       }
     })
   }
+
+
+  async openMap(value:string, int: number){
+      try {
+        const status = await Geolocation.requestPermissions()
+        if (status.coarseLocation === 'denied' || status.location === 'denied') {
+          const requestStatus = await Geolocation.checkPermissions();
+          if (requestStatus.coarseLocation === 'denied' || requestStatus.location === 'denied') {
+            this.openNativeSettings(true)
+            return
+          } else {
+            this.getCurrentlocation(value,int)
+          }
+        } else {
+          this.getCurrentlocation(value,int)
+        }
+      } catch (e: any) {
+        if (e.message === 'Location services are not enabled') {
+          this.openNativeSettings()
+        }
+      }
+    }
+
+    openNativeSettings(app = false) {
+      return NativeSettings.open({
+        optionAndroid: app ? AndroidSettings.ApplicationDetails : AndroidSettings.Location,
+        optionIOS: app ? IOSSettings.App : IOSSettings.LocationServices
+      })
+    }
+
+    async getCurrentlocation(value:string, int: number) {
+      await Geolocation.getCurrentPosition();
+      this.router.navigateByUrl(`tabs/dashboard/form/location/:${value}/:${int}`)
+    }
+
+  
 }

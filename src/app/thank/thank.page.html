@@ -1,24 +1,18 @@
-
 <ion-header class="ion-no-border">
-  <ion-toolbar class="header">  
-        <ion-buttons (click)="gotoDashboard()">
-          <ion-back-button defaultHref="" icon="assets/back_button.svg"></ion-back-button>
-        </ion-buttons>
+  <ion-toolbar class="header">
+    <ion-buttons (click)="gotoDashboard()">
+      <ion-back-button defaultHref="" icon="assets/back_button.svg"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content  class="container">
-
-  <div class="centered-element">
-  <ion-icon name="checkmark-done-outline"></ion-icon><br>
-  {{timer}}
-  <ion-label>
-    Your Claim has been submitted
-  </ion-label>
-  <ion-label>
-    Our team will contact you soon.
-  </ion-label>
-
-  <ion-button  fill="outline" (click)="gotoDashboard()" >Dashboard</ion-button>
-</div>
+<ion-content>
+  <div class="centered-content">
+    <ion-icon name="checkmark-done-outline" color="success"></ion-icon>
+   
+    <ion-label>Your Claim has been submitted</ion-label>
+    <ion-label>Our team will contact you soon.</ion-label><br>
+    <ion-label>Redirecting to dashboard... {{timer}}</ion-label><br>
+    <ion-button fill="outline" (click)="gotoDashboard()">Dashboard</ion-button>
+  </div>
 </ion-content>

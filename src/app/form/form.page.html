@@ -111,8 +111,7 @@
             <ion-label class="label_text" translate>form.header_where_did_take_place</ion-label>
             <div class="black_line"></div>
             <ion-label class="label_text_accident" translate>form.Address_of_accident</ion-label>
-            <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
-              [routerLink]="['location', 'addressAccident',-1]">
+            <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward" (click)="openMap('addressAccident',-1)">
               <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
               <ion-text> {{latAndLng}} </ion-text>
               <ion-text translate *ngIf="latAndLng === ''">form.Address_of_accident</ion-text>
@@ -257,7 +256,7 @@
                 <ion-label class="name_of_party" translate>
                   form.label_contact_no
                 </ion-label>
-                <ion-input type="Number" placeholder="{{ 'form.input_contact_no' | translate }}" formControlName="number"
+                <ion-input  [maskito]="phoneMask" [maskitoElement]="maskPredicate" placeholder="{{ 'form.input_contact_no' | translate }}" formControlName="number"
                   class="form-control"></ion-input>
               </div>
               <div>
@@ -315,7 +314,7 @@
                 formControlName="name">
               </ion-input>
               <ion-label class="sixth_two_label" translate>form.label_witness_contact</ion-label>
-              <ion-input type="Number" class="input_sixth_two" placeholder="{{ 'form.label_witness_contact' | translate }}"
+              <ion-input [maskito]="phoneMask" [maskitoElement]="maskPredicate" class="input_sixth_two" placeholder="{{ 'form.label_witness_contact' | translate }}"
                 formControlName="number"></ion-input>
             </div>
             <ion-button class="involved_parties_button" shape="default" fill="outline" size="default"
@@ -530,7 +529,7 @@
               </ion-label>
 
               <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false" 
-                [routerLink]="['location', 'towCompany','-1']">
+                 (click)="openMap('towCompany',-1)">
                 <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
                 <ion-text> {{lat_lang_towCompany}} </ion-text>
                 <ion-text translate *ngIf="lat_lang_towCompany === ''">form.Address_of_accident</ion-text>
@@ -704,7 +703,7 @@
                   <ion-label class="sixth_two_label">{{'form.label_tow_company_address'| translate}}</ion-label>
 
                   <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false" 
-                    [routerLink]="['location', 'towCompanyOther',i]">
+                     (click)="openMap('towCompanyOther',i)">
                     <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
                     
                     <ion-input  *ngIf="otherVehicle().at(i).get('map')?.value!==''" readonly="true" style="border: none; outline: none;" class="form-control" formControlName="map"></ion-input>

@@ -24,6 +24,7 @@ dependencies {
     implementation project(':capawesome-capacitor-cloudinary')
     implementation project(':capawesome-capacitor-file-picker')
     implementation project(':jonz94-capacitor-image-picker')
+    implementation project(':capacitor-native-settings')
     implementation project(':capacitor-voice-recorder')
 
 }

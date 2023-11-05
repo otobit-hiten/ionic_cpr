@@ -24,6 +24,10 @@ import { MaskitoModule } from '@maskito/angular';
 })
 export class ProfilePage implements OnInit {
   
+  readonly phoneMask: MaskitoOptions = {
+    mask: ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+  };
+  readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 
   user: User = { name: '', phone: '', email: '', policyNo: '' }
   image: Image = { name: '', path: '', localPath: '' }

@@ -14,7 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 export class ThankPage implements OnInit {
    timeoutId : ReturnType<typeof setTimeout> 
     countdown = 5;
-    timer = 0
+    timer = 5
     constructor( private router: Router) { 
       setInterval(() => {
         this.countdown = --this.countdown <= 0 ? 5 : this.countdown;

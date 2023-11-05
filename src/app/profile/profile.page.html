@@ -51,7 +51,7 @@
     <div class="profile_header_one">
       <ion-label translate>profile.label_number</ion-label>
     </div>
-    <ion-input fill="outline" [(ngModel)]="phone" [readonly]="!isEdit" type="Number"></ion-input>
+    <ion-input [maskito]="phoneMask" [maskitoElement]="maskPredicate" fill="outline" [(ngModel)]="phone" [readonly]="!isEdit"></ion-input>
     <div class="profile_header_one">
       <ion-label translate>profile.label_email</ion-label>
     </div>

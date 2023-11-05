@@ -23,6 +23,7 @@ ext {
     playServicesLocationVersion='21.0.1'
     cloudinaryAndroidVersion='2.3.0'
     androidxBrowserVersion='1.5.0'
+    playServicesLocationVersion ='21.0.1'
 
 
 }

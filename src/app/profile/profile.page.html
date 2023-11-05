@@ -47,19 +47,19 @@
     <div class="profile_header_one">
       <ion-label translate>profile.label_name</ion-label>
     </div>
-    <ion-input fill="outline" [(ngModel)]="name" [readonly]="!isEdit" type="name" translate></ion-input>
+    <ion-input [(ngModel)]="name" [readonly]="!isEdit" type="name" translate></ion-input>
     <div class="profile_header_one">
       <ion-label translate>profile.label_number</ion-label>
     </div>
-    <ion-input [maskito]="phoneMask" [maskitoElement]="maskPredicate" fill="outline" [(ngModel)]="phone" [readonly]="!isEdit"></ion-input>
+    <ion-input [maskito]="phoneMask" [maskitoElement]="maskPredicate"  [(ngModel)]="phone" [readonly]="!isEdit"></ion-input>
     <div class="profile_header_one">
       <ion-label translate>profile.label_email</ion-label>
     </div>
-    <ion-input fill="outline" [(ngModel)]="email" [readonly]="!isEdit" type="Email"></ion-input>
+    <ion-input  [(ngModel)]="email" [readonly]="!isEdit" type="Email"></ion-input>
     <div class="profile_header_one">
       <ion-label translate>profile.label_policy_number</ion-label>
     </div>
-    <ion-input fill="outline" [(ngModel)]="policyNo" [readonly]="!isEdit" type="Number"></ion-input>
+    <ion-input  [(ngModel)]="policyNo" [readonly]="!isEdit" type="Number"></ion-input>
 
     <ion-button *ngIf="!isEdit " class="submit" shape="round" expand="block" (click)="update()"
       translate>profile.edit</ion-button>

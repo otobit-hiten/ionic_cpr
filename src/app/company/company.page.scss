@@ -18,6 +18,13 @@
 .text {
   padding: 3%;
   text-align: left;
+  font-size: medium;
+}
+.text_head{
+  padding: 3%;
+  text-align: left;
+  font-weight: bold;
+  font-size: medium;
 }
 
 ion-img.map {
@@ -28,4 +35,14 @@ ion-img.map {
   height:.1%;
   width:80%;
   align-self: center;
+}
+
+.list{
+  line-height: 1em;
+  font-size: medium;
+}
+
+.list_adv{
+  line-height: 1.1em;
+  font-size: medium;
 }

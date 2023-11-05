@@ -39,13 +39,20 @@ export class CompanyPage implements OnInit {
     console.log(this.selected)
   }
 
-  call(){
-    window.open('tel:(855) 215-6439');
+  call(value:string){
+    if(value === 'phone'){
+      window.open('tel:(972) 887-3666');
+    }
+    if(value === 'toll'){
+      window.open('tel:(855) 215-6439');
+    }
+    
+    
   }
 
   mail()
   {
-    window.open('mailto:test@test.com');
+    window.open('mailto:info@cprins.com');
 
   }
 }

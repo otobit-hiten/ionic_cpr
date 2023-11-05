@@ -1,24 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="header">
-    <ion-row class="ion-justify-content-between" >
-      <ion-col size="7.5" class="logo"
-        ><img class="logo" src="assets/cpr_logo.png"
-      /></ion-col>
-      <ion-col  size="3" class="lang-sel"
-        ><ion-select
-          class="holder"
-          [compareWith]="compareWith"
-          value="{{languageService.selectedLanguage}}"
-          placeholder="Language"
-          (ionChange)="ionChange($event)"
-
-          interface="popover"
-        >
-          <ion-select-option
-            *ngFor="let lang of languageList"
-            [value]="lang.code"
-            >{{lang.title}}</ion-select-option
-          >
+    <ion-row class="ion-justify-content-between">
+      <ion-col size="7.5" class="logo"><img class="logo" src="assets/cpr_logo.png" /></ion-col>
+      <ion-col size="3" class="lang-sel"><ion-select class="holder" [compareWith]="compareWith"
+          value="{{languageService.selectedLanguage}}" placeholder="Language" (ionChange)="ionChange($event)"
+          interface="popover">
+          <ion-select-option *ngFor="let lang of languageList" [value]="lang.code">{{lang.title}}</ion-select-option>
         </ion-select>
       </ion-col>
     </ion-row>
@@ -31,27 +18,39 @@
     <ion-text translate>company.header</ion-text>
   </div>
   <div class="text">
-    <ion-text translate
-      >company.text_1</ion-text
-    >
+    <ion-text translate>company.text_1</ion-text>
   </div>
   <div class="text">
-    <ion-text translate
-      >company.text_2</ion-text
-    >
+    <ion-text translate>company.text_2</ion-text>
   </div>
   <ion-img class="map" src="assets/map.png"></ion-img>
   <div class="text">
-    <ion-text
-      translate>company.text_3</ion-text
-    >
+    <ion-text translate>company.text_3</ion-text>
   </div>
-  <ion-button fill="clear" expand="full" class="custom-button" (click)="call()">
-    <ion-icon name="call-outline" slot="start" ></ion-icon>
+  <div class="text">
+    <ion-text translate>company.text_4</ion-text>
+  </div>
+
+  <ion-text class="text_head" translate>company.adv_header</ion-text>
+  <ul class="list_adv">
+    <li class="text" [innerHTML]="'company.point_1' | translate" ></li>
+    <li class="text" [innerHTML]="'company.point_2' | translate" ></li>
+    <li class="text" [innerHTML]="'company.point_3' | translate" ></li>
+    <li class="text" [innerHTML]="'company.point_4' | translate" ></li>
+  </ul>
+  <ion-text class="text_head" translate>company.contact_us</ion-text>
+  <ul class="list">
+    <li class="text" [innerHTML]="'company.phone' | translate" (click)="call('phone')"></li>
+    <li class="text" [innerHTML]="'company.toll' | translate" (click)="call('toll')" ></li>
+    <li class="text" [innerHTML]="'company.fax' | translate"></li>
+    <li class="text" [innerHTML]="'company.email' | translate" (click)="mail()" ></li>
+  </ul>
+</ion-content> 
+  <!-- <!-- <ion-button fill="clear" expand="full" class="custom-button" (click)="call()">
+    <ion-icon name="call-outline" slot="start"></ion-icon>
     <span class="ion-text-left">(855) 215-6439</span></ion-button>
-    
-  <ion-button  fill="clear" expand="block" class="custom-button" (click)="mail()">
-    <ion-icon class="ion-text-left" name="mail-outline" slot="start"  ></ion-icon>
+
+  <ion-button fill="clear" expand="block" class="custom-button" (click)="mail()">
+    <ion-icon class="ion-text-left" name="mail-outline" slot="start"></ion-icon>
     <span class="ion-text-left">newclaim@cprins.com</span>
-  </ion-button>
-</ion-content>
+  </ion-button> -->

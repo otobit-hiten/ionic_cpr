@@ -133,7 +133,18 @@
         "header":"Acerca del seguro CPR",
         "text_1":"CPR Insurance Group, LLC, con licencia del Departamento de Seguros de Texas, es una empresa administradora y liquidadora de reclamaciones independiente que ofrece estrategias de resolución innovadoras a compañías de seguros, corporaciones autoaseguradas, entidades gubernamentales, agentes y corredores de seguros. ",
         "text_2":"Nuestra empresa tiene su sede en Irving, Texas, y cuenta con ubicaciones asociadas en Luisiana y Oklahoma. CPR maneja todas las áreas principales de reclamos de seguros, incluidos automóviles, propiedad y accidentes.",
-        "text_3":"Contamos con equipos profesionales para aquellos clientes que necesitan una solución completa de subcontratación de TPA o podemos proporcionar ajustadores de campo para los clientes que necesitan una solución de campo profesional. Nuestro experimentado equipo de TPA manegara  el 100% de sus necesidades de reclamos, desde el aviso de pérdida inicial hasta el cierre final, incluidos informes financieros y estadísticas personalizadas."
+        "text_3":"Contamos con equipos profesionales para aquellos clientes que necesitan una solución completa de subcontratación de TPA o podemos proporcionar ajustadores de campo para los clientes que necesitan una solución de campo profesional. Nuestro experimentado equipo de TPA manegara  el 100% de sus necesidades de reclamos, desde el aviso de pérdida inicial hasta el cierre final, incluidos informes financieros y estadísticas personalizadas.",
+        "text_4": "Nuestras soluciones de servicios de campo incluyen equipos de respuesta a pérdidas catastróficas liderados por expertos de primer nivel de la industria en las áreas de daños a automóviles y propiedades. Todos los ajustadores de campo son supervisados por ajustadores administrativos internos en nuestra oficina de Irving para garantizar la calidad.",
+        "adv_header": "La ventaja de la CPR",
+        "point_1": "<strong>Programa PLUS de CPR</strong> – Proceso de Control de Calidad Interno que asegurará la entrega de un producto consistente en todo el país.",
+        "point_2": "<strong>Capacidad y flexibilidad</strong> – Nuestras soluciones se adaptan a sus necesidades actuales y futuras.",
+        "point_3": "<strong>La extensión geográfica de la RCP</strong> – Nuestra red nacional de recursos nos permite ofrecer nuestros servicios a sus ubicaciones actuales y futuras.",
+        "point_4": "<strong>Programa de resolución rápida de CPR</strong> – ¡Autoestimaciones en 3 días! ¡Acuerdos de campo para reclamantes de siniestros! ¡Elimine los honorarios de abogados, tarifas de alquiler y mejore la satisfacción del cliente!",
+        "contact_us": "Contacta con nosotras",
+        "phone": "<strong>Telefono no</strong> – (972) 887 - 3666",
+        "toll": "<strong>Número gratuito</strong> – (855) 215 - 6439",
+        "fax": "<strong>Número de fax.</strong> – (469) 565 - 8545",
+        "email": "<strong>Identificación de correo</strong> – info@cprins.com"
     },
 
     "contact":{

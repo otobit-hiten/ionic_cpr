@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.cpr.insurance;
 
 import com.getcapacitor.BridgeActivity;
 

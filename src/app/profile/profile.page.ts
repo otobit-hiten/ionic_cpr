@@ -29,12 +29,12 @@ export class ProfilePage implements OnInit {
   };
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 
-  user: User = { name: '', phone: '', email: '', policyNo: '' }
+  user: User = { name: '', phone: '', email: '', company_name: '' }
   image: Image = { name: '', path: '', localPath: '' }
   public name: string = "";
   public phone: string = "";
   public email: string = "";
-  public policyNo: string = "";
+  public company_name: string = "";
   public pro: PickedFile[] = []
   public imageData = { name: '', base64: '', path: '', localPath: '' };
   public isEdit: boolean = false;
@@ -69,7 +69,7 @@ export class ProfilePage implements OnInit {
   }
   set() {
     this.isEdit = false;
-    let user: User = { name: this.name, phone: this.phone, email: this.email, policyNo: this.policyNo }
+    let user: User = { name: this.name, phone: this.phone, email: this.email, company_name: this.company_name }
     this.userService.get("user").then((data: any) => {
       if (data === "" || data === null || data.value === null) {
         this.userService.create("user", JSON.stringify(user));
@@ -87,8 +87,8 @@ export class ProfilePage implements OnInit {
         this.name = this.user.name;
         this.phone = this.user.phone;
         this.email = this.user.email;
-        this.policyNo = this.user.policyNo;
-        if (this.name === "" && this.phone === "" && this.email === "" && this.policyNo === "") {
+        this.company_name = this.user.company_name;
+        if (this.name === "" && this.phone === "" && this.email === "" && this.company_name === "") {
           this.isEdit = true
           console.log(this.isEdit)
         } else {

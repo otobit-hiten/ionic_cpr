@@ -109,7 +109,7 @@ export class FormPage implements OnInit {
   otherVehicleArray: any = [];
   otherVehicleArrayObject = { licenceImg: [], vinNoOther: [], all4side: [], closeUpOther: [], map: '' };
   audioFiles: string[] = []
-  user: User = { name: '', phone: '', email: '', policyNo: '' }
+  user: User = { name: '', phone: '', email: '', company_name: '' }
   images: string[] = []
   constructor(private userService: UserService, private loader: LoaderService, public formBuilder: FormBuilder, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
@@ -154,9 +154,12 @@ export class FormPage implements OnInit {
     (Parse as any).serverURL = "https://parseapi.back4app.com/";
 
     this.slideOneForm = formBuilder.group({
-      name_insured: [''],
+      company_name: [''],
       policy_no_: [''],
       tell_us_what_happened: [''],
+      driver_name:[''],
+      driver_email:[''],
+      driver_phone:['']
     });
 
     this.slideTwoForm = formBuilder.group({
@@ -420,8 +423,11 @@ export class FormPage implements OnInit {
   async call() {
     try {
       this.formToMail = {
-        name_insured: this.slideOneForm.controls['name_insured'].value,
+        company_name: this.slideOneForm.controls['company_name'].value,
         policy_no: this.slideOneForm.controls['policy_no_'].value,
+        driver_name: this.slideOneForm.controls['driver_name'].value,
+        driver_phone: this.slideOneForm.controls['driver_phone'].value,
+        driver_email: this.slideOneForm.controls['driver_email'].value,
         tell_us_what_happenend: this.slideOneForm.controls['tell_us_what_happened'].value,
         audioFile: this.audioFiles,
         address_of_accident: this.latAndLng,
@@ -1037,8 +1043,11 @@ export class FormPage implements OnInit {
   }
 
   formToMail: {} = {
-    name_insured: '',
+    company_name: '',
     policy_no: '',
+    driver_phone: '',
+    driver_email: '',
+    driver_name: '',
     tell_us_what_happenend: '',
     audioFile: [],
     address_of_accident: '',
@@ -1070,8 +1079,10 @@ export class FormPage implements OnInit {
         let userData = JSON.parse(data.value);
         this.user = userData;
         this.slideOneForm.patchValue({
-          name_insured: this.user.name,
-          policy_no_: this.user.policyNo
+          company_name: this.user.company_name,
+          driver_email: this.user.email,
+          driver_phone: this.user.phone,
+          driver_name: this.user.name
         })
       }
     })

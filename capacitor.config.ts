@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.cpr.insurance',
-  appName: 'Cpr Insurance App',
+  appName: 'CPR Insurance App',
   webDir: 'www',
   server: {
     androidScheme: 'https',

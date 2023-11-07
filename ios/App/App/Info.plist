@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<key>UIFileSharingEnabled</key>
-  <string>YES</string>
- 
-  <key>LSSupportsOpeningDocumentsInPlace</key>
-  <string>YES</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Privacy - Microphone Usage Description</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -27,6 +20,8 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
@@ -37,13 +32,14 @@
 	<string>Privacy - Location Always Usage Description</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Privacy - Location When In Use Usage Description</string>
-	
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Privacy - Microphone Usage Description</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>To Add Image</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To Store Image</string>
 	<key>UIFileSharingEnabled</key>
-	<string>To Capture Image</string>
+	<false/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

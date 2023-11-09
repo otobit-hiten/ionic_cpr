@@ -10,8 +10,9 @@ export class LoaderService {
 
 
   showLoader(){
+    
     this.loadingController.create({
-      message: 'Please wait...',
+      message: 'Please wait, file are being uploaded ...',
       spinner: 'crescent'
     }).then((res) => {
       res.present();

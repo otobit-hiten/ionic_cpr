@@ -26,7 +26,7 @@
         form.form1_header
       </ion-label>
 
-      <form [formGroup]="slideOneForm" >
+      <form [formGroup]="slideOneForm">
         <div class="form_1">
           <div class="what_happen">
             <ion-label class="label_text_policy" translate>form.header_policy</ion-label>
@@ -70,14 +70,15 @@
 
             <ion-label class="label_text_radio" translate>form.label_record_audio</ion-label>
             <div class="record_audio_outer">
-              <ion-item class="add_record" lines="none" detail="false" >
+              <ion-item class="add_record" lines="none" detail="false">
                 <ion-icon [name]="recording === true ? 'stop' : 'play'" slot="start" (click)="startOrStopRecording()"
                   color="primary"></ion-icon>
                 <ion-label translate>form.label_record_audio </ion-label>
                 <span *ngIf="recording"> {{displayTime}}</span>
               </ion-item>
               <ion-item *ngIf="!recording" class="add_audio_bg" lines="none" detail="false">
-                <ion-icon class="audio_bg"  size="default" color="light"  src="assets/upload_audio.svg" class="add_audio" (click)="addAudio()"></ion-icon>
+                <ion-icon class="audio_bg" size="default" color="light" src="assets/upload_audio.svg" class="add_audio"
+                  (click)="addAudio()"></ion-icon>
               </ion-item>
             </div>
             <ion-list lines="none">
@@ -111,7 +112,8 @@
             <ion-label class="label_text" translate>form.header_where_did_take_place</ion-label>
             <div class="black_line"></div>
             <ion-label class="label_text_accident" translate>form.Address_of_accident</ion-label>
-            <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward" (click)="openMap('addressAccident',-1)">
+            <ion-item class="location_accident" lines="none" detail="false" routerDirection="forward"
+              (click)="openMap('addressAccident',-1)">
               <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
               <ion-text> {{latAndLng}} </ion-text>
               <ion-text translate *ngIf="latAndLng === ''">form.Address_of_accident</ion-text>
@@ -148,10 +150,13 @@
               <ion-label *ngIf="actualAreaOfDamage.length === 0" class="ion-text-wrap ion-no-padding"
                 translate>form.label_img_surrounding</ion-label>
             </ion-item>
-
             <ion-item>
-              <ion-button class="add_image_damage" slot="end" (click)="openImagePicker('actualAreaOfDamage',-1)"
-                translate>form.add_img</ion-button>
+              <ion-row>
+                <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                    (click)="openImagePicker('actualAreaOfDamage',-1)" translate>form.add_img</ion-button></ion-col>
+                <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('actualAreaOfDamage',-1)">Take a
+                    Picture</ion-button></ion-col>
+              </ion-row>
             </ion-item>
           </ion-list>
           <div class="upload_scene">
@@ -181,8 +186,12 @@
               </ion-item>
 
               <ion-item>
-                <ion-button slot="end" class="add_image_damage" translate
-                  (click)="openImagePicker('nearestStreet',-1)">form.add_img</ion-button>
+                <ion-row>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openImagePicker('nearestStreet',-1)" translate>form.add_img</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('nearestStreet',-1)">Take a
+                      Picture</ion-button></ion-col>
+                </ion-row>
               </ion-item>
             </ion-list>
           </div>
@@ -234,9 +243,11 @@
                         <img class="imag_prev" src="assets/img_holder.png" />
                       </div>
                     </ion-col>
-                    <ion-col *ngFor="let file of involvedPartiesArray[i].idImage; let j = index" size="3" formControlName="id">
+                    <ion-col *ngFor="let file of involvedPartiesArray[i].idImage; let j = index" size="3"
+                      formControlName="id">
                       <div class="image_holder_damage">
-                        <ion-icon  *ngIf="file.localPath"  class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i, j, 'idImage')" ></ion-icon>
+                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                          (click)="removeImage(i, j, 'idImage')"></ion-icon>
                         <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
@@ -247,8 +258,12 @@
                   </ion-item>
 
                   <ion-item>
-                    <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('idImage',i)"
-                      translate>form.add_img</ion-button>
+                    <ion-row>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openImagePicker('idImage',i)" translate>form.add_img</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('idImage',i)">Take a
+                          Picture</ion-button></ion-col>
+                    </ion-row>
                   </ion-item>
                 </ion-list>
               </div>
@@ -256,7 +271,8 @@
                 <ion-label class="name_of_party" translate>
                   form.label_contact_no
                 </ion-label>
-                <ion-input  [maskito]="phoneMask" [maskitoElement]="maskPredicate" placeholder="{{ 'form.input_contact_no' | translate }}" formControlName="number"
+                <ion-input [maskito]="phoneMask" [maskitoElement]="maskPredicate"
+                  placeholder="{{ 'form.input_contact_no' | translate }}" formControlName="number"
                   class="form-control"></ion-input>
               </div>
               <div>
@@ -279,14 +295,19 @@
                     </ion-col>
                     <ion-col *ngFor="let file of involvedPartiesArray[i].insuranceImage; let j = index" size="3">
                       <div class="image_holder_damage">
-                        <ion-icon *ngIf="file.localPath"  class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,j,'insuranceImage')"></ion-icon>
+                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                          (click)="removeImage(i,j,'insuranceImage')"></ion-icon>
                         <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
                   <ion-item>
-                    <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('insuranceImage',i)"
-                      translate>form.add_img</ion-button>
+                    <ion-row>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openImagePicker('insuranceImage',i)" translate>form.add_img</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('insuranceImage',i)">Take a
+                          Picture</ion-button></ion-col>
+                    </ion-row>
                   </ion-item>
                 </ion-list>
               </div>
@@ -306,7 +327,7 @@
                 <ion-button class="delete_button" shape="default" fill="clear" size="default"
                   (click)="removeWitness(j)">
                   <ion-icon slot="end" name="trash-outline"></ion-icon>{{'form.delete' | translate}}</ion-button>
-                  <div class="party_gap"></div>
+                <div class="party_gap"></div>
 
               </div>
 
@@ -314,8 +335,8 @@
                 formControlName="name">
               </ion-input>
               <ion-label class="sixth_two_label" translate>form.label_witness_contact</ion-label>
-              <ion-input [maskito]="phoneMask" [maskitoElement]="maskPredicate" class="input_sixth_two" placeholder="{{ 'form.label_witness_contact' | translate }}"
-                formControlName="number"></ion-input>
+              <ion-input [maskito]="phoneMask" [maskitoElement]="maskPredicate" class="input_sixth_two"
+                placeholder="{{ 'form.label_witness_contact' | translate }}" formControlName="number"></ion-input>
             </div>
             <ion-button class="involved_parties_button" shape="default" fill="outline" size="default"
               (click)="addWitness()" translate>
@@ -349,14 +370,19 @@
                 </ion-col>
                 <ion-col *ngFor="let file of policeReport; let i = index" size="3">
                   <div class="image_holder_damage">
-                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,-1,'policeReport')"></ion-icon>
+                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                      (click)="removeImage(i,-1,'policeReport')"></ion-icon>
                     <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
               <ion-item>
-                <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('policeReport',-1)"
-                  translate>form.add_img</ion-button>
+                <ion-row>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openImagePicker('policeReport',-1)" translate>form.add_img</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('policeReport',-1)">Take a
+                      Picture</ion-button></ion-col>
+                </ion-row>
               </ion-item>
             </ion-list>
           </div>
@@ -376,7 +402,7 @@
       <ion-img class="stepper" src="assets/step_4.svg"></ion-img>
       <ion-label class="stepperr_title" style="display: flex; justify-content: center" translate>
         form.form4_header</ion-label>
-      <form [formGroup]="slideFourForm" >
+      <form [formGroup]="slideFourForm">
         <div class="form_4">
           <div>
             <ion-label class="label_other_vehicle" translate>form.label_my_vehicle</ion-label>
@@ -407,15 +433,20 @@
                 </ion-col>
                 <ion-col *ngFor="let file of licensePlate; let i = index" size="3">
                   <div class="image_holder_damage">
-                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,-1,'licensePlate')"></ion-icon>
+                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                      (click)="removeImage(i,-1,'licensePlate')"></ion-icon>
                     <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
 
               <ion-item>
-                <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('licensePlate',-1)"
-                  translate>form.add_img</ion-button>
+                <ion-row>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openImagePicker('licensePlate',-1)" translate>form.add_img</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('licensePlate',-1)">Take a
+                      Picture</ion-button></ion-col>
+                </ion-row>
               </ion-item>
             </ion-list>
           </div>
@@ -440,15 +471,20 @@
                 </ion-col>
                 <ion-col *ngFor="let file of vinNo; let i = index" size="3">
                   <div class="image_holder_damage">
-                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,-1,'vinNo')"></ion-icon>
+                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                      (click)="removeImage(i,-1,'vinNo')"></ion-icon>
                     <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
 
               <ion-item>
-                <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('vinNo',-1)"
-                  translate>form.add_img</ion-button>
+                <ion-row>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openImagePicker('vinNo',-1)" translate>form.add_img</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('vinNo',-1)">Take a
+                      Picture</ion-button></ion-col>
+                </ion-row>
               </ion-item>
             </ion-list>
           </div>
@@ -473,15 +509,20 @@
                 </ion-col>
                 <ion-col *ngFor="let file of allFourSide; let i = index" size="3">
                   <div class="image_holder_damage">
-                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,-1,'allFourSide')"></ion-icon>
+                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                      (click)="removeImage(i,-1,'allFourSide')"></ion-icon>
                     <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
 
               <ion-item>
-                <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('allFourSide',-1)"
-                  translate>form.add_img</ion-button>
+                <ion-row>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openImagePicker('allFourSide',-1)" translate>form.add_img</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('allFourSide',-1)">Take a
+                      Picture</ion-button></ion-col>
+                </ion-row>
               </ion-item>
             </ion-list>
           </div>
@@ -492,7 +533,7 @@
               <ion-grid>
                 <ion-col *ngIf="closeUp.length===0" size="3">
                   <div class="image_holder_damage">
-                  
+
                     <img class="imag_prev" src="assets/img_holder.png" />
                     <img class="imag_prev" src="assets/img_holder.png" />
                     <img class="imag_prev" src="assets/img_holder.png" />
@@ -500,15 +541,20 @@
                 </ion-col>
                 <ion-col *ngFor="let file of closeUp; let i = index" size="3">
                   <div class="image_holder_damage">
-                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,-1,'closeUp')"></ion-icon>
+                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                      (click)="removeImage(i,-1,'closeUp')"></ion-icon>
                     <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                   </div>
                 </ion-col>
               </ion-grid>
 
               <ion-item>
-                <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('closeUp',-1)"
-                  translate>form.add_img</ion-button>
+                <ion-row>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openImagePicker('closeUp',-1)" translate>form.add_img</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('closeUp',-1)">Take a
+                      Picture</ion-button></ion-col>
+                </ion-row>
               </ion-item>
             </ion-list>
           </div>
@@ -528,8 +574,8 @@
               <ion-label class="label_text" translate>form.label_tow_company_address
               </ion-label>
 
-              <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false" 
-                 (click)="openMap('towCompany',-1)">
+              <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false"
+                (click)="openMap('towCompany',-1)">
                 <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
                 <ion-text> {{lat_lang_towCompany}} </ion-text>
                 <ion-text translate *ngIf="lat_lang_towCompany === ''">form.Address_of_accident</ion-text>
@@ -543,7 +589,7 @@
             <ion-button class="next_button" expand="block" (click)="goPrev()" translate>form.previous</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button class="next_button" expand="block" (click)="goNext()"  translate>form.next</ion-button>
+            <ion-button class="next_button" expand="block" (click)="goNext()" translate>form.next</ion-button>
           </ion-col>
         </ion-row>
       </form>
@@ -566,18 +612,17 @@
                   <ion-button class="delete_button" shape="default" fill="clear" size="default"
                     (click)="removeOtherVehicle(i)">
                     <ion-icon slot="end" name="trash-outline"></ion-icon>{{'form.delete'| translate}}</ion-button>
-                    <div class="party_gap"></div>
+                  <div class="party_gap"></div>
                   <ion-label class="sixth_two_label" translate>form.label_vehicle_make_and_model</ion-label>
                 </div>
-                <ion-input class="input_sixth_two" 
-                  placeholder="{{'form.input_vehicle_make_and_model' | translate }}"
+                <ion-input class="input_sixth_two" placeholder="{{'form.input_vehicle_make_and_model' | translate }}"
                   formControlName="vehicleMakeModel">
                 </ion-input>
               </div>
 
               <div class="police_rep_no">
                 <ion-label class="sixth_two_label" translate>form.label_licence_plate</ion-label>
-                <ion-input class="input_sixth_two"  placeholder="{{'form.input_licence_plate' | translate }}"
+                <ion-input class="input_sixth_two" placeholder="{{'form.input_licence_plate' | translate }}"
                   formControlName="vehicleLicencePlate">
                 </ion-input>
               </div>
@@ -594,21 +639,27 @@
                     </ion-col>
                     <ion-col *ngFor="let file of otherVehicleArray[i].licenceImg; let j=index" size="3">
                       <div class="image_holder_damage">
-                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg" (click)="removeImage(i,j,'licensePlateOther')"></ion-icon>
+                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                          (click)="removeImage(i,j,'licensePlateOther')"></ion-icon>
                         <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
 
                   <ion-item>
-                    <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('licensePlateOther',i)"
-                      translate>form.add_img</ion-button>
+                    <ion-row>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openImagePicker('licensePlateOther',i)" translate>form.add_img</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('licensePlateOther',i)">Take a
+                          Picture</ion-button></ion-col>
+                    </ion-row>
                   </ion-item>
                 </ion-list>
               </div>
               <div class="police_rep_no">
                 <ion-label class="sixth_two_label">{{'form.label_vin_no' | translate}}</ion-label>
-                <ion-input  class="input_sixth_two"  placeholder="{{'form.input_vin_no' | translate }}" formControlName="vinNo">
+                <ion-input class="input_sixth_two" placeholder="{{'form.input_vin_no' | translate }}"
+                  formControlName="vinNo">
                 </ion-input>
               </div>
               <div class="upload_img">
@@ -625,15 +676,20 @@
                     </ion-col>
                     <ion-col *ngFor="let file of otherVehicleArray[i].vinNoOther; let j=index" size="3">
                       <div class="image_holder_damage">
-                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"  (click)="removeImage(i,j,'vinNoOther')"></ion-icon>
+                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                          (click)="removeImage(i,j,'vinNoOther')"></ion-icon>
                         <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
 
                   <ion-item>
-                    <ion-button slot="end" class="add_image_damage" (click)="openImagePicker('vinNoOther',i)">{{
-                      'form.add_img' | translate }}</ion-button>
+                    <ion-row>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openImagePicker('vinNoOther',i)" translate>form.add_img</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('vinNoOther',i)">Take a
+                          Picture</ion-button></ion-col>
+                    </ion-row>        
                   </ion-item>
                 </ion-list>
               </div>
@@ -651,15 +707,20 @@
                     </ion-col>
                     <ion-col *ngFor="let file of otherVehicleArray[i].all4side; let j= index" size="3">
                       <div class="image_holder_damage">
-                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"  (click)="removeImage(i,j,'all4sideOther')"></ion-icon>
+                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                          (click)="removeImage(i,j,'all4sideOther')"></ion-icon>
                         <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
 
                   <ion-item>
-                    <ion-button slot="end" class="add_image_damage"
-                      (click)="openImagePicker('all4sideOther',i)">{{'form.add_img' | translate}}</ion-button>
+                    <ion-row>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openImagePicker('all4sideOther',i)" translate>form.add_img</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('all4sideOther',i)">Take a
+                          Picture</ion-button></ion-col>
+                    </ion-row>
                   </ion-item>
                 </ion-list>
               </div>
@@ -677,15 +738,20 @@
                     </ion-col>
                     <ion-col *ngFor="let file of otherVehicleArray[i].closeUpOther; let j= index" size="3">
                       <div class="image_holder_damage">
-                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"  (click)="removeImage(i,j,'closeUpOther')"></ion-icon>
+                        <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                          (click)="removeImage(i,j,'closeUpOther')"></ion-icon>
                         <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
                       </div>
                     </ion-col>
                   </ion-grid>
 
                   <ion-item>
-                    <ion-button slot="end" class="add_image_damage"
-                      (click)="openImagePicker('closeUpOther',i)">{{'form.add_img'| translate}}</ion-button>
+                    <ion-row>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openImagePicker('closeUpOther',i)" translate>form.add_img</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('closeUpOther',i)">Take a
+                          Picture</ion-button></ion-col>
+                    </ion-row>
                   </ion-item>
                 </ion-list>
               </div>
@@ -696,18 +762,20 @@
                 <div>
                   <ion-label class="sixth_two_label">{{'form.label_tow_company'| translate}}
                   </ion-label>
-                  <ion-input  class="input_sixth_two" placeholder="{{'form.input_tow_company' | translate }}"
+                  <ion-input class="input_sixth_two" placeholder="{{'form.input_tow_company' | translate }}"
                     formControlName="towCompany"></ion-input>
                 </div>
                 <div class="address">
                   <ion-label class="sixth_two_label">{{'form.label_tow_company_address'| translate}}</ion-label>
 
-                  <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false" 
-                     (click)="openMap('towCompanyOther',i)">
+                  <ion-item class="location_accident" translate routerDirection="forward" lines="none" detail="false"
+                    (click)="openMap('towCompanyOther',i)">
                     <ion-icon class="location_icon" slot="start" color="primary" name="location-outline"></ion-icon>
-                    
-                    <ion-input  *ngIf="otherVehicle().at(i).get('map')?.value!==''" readonly="true" style="border: none; outline: none;" class="form-control" formControlName="map"></ion-input>
-                    <ion-text translate  *ngIf="otherVehicle().at(i).get('map')?.value===''">form.Address_of_accident</ion-text>
+
+                    <ion-input *ngIf="otherVehicle().at(i).get('map')?.value!==''" readonly="true"
+                      style="border: none; outline: none;" class="form-control" formControlName="map"></ion-input>
+                    <ion-text translate
+                      *ngIf="otherVehicle().at(i).get('map')?.value===''">form.Address_of_accident</ion-text>
 
                   </ion-item>
                 </div>
@@ -726,7 +794,8 @@
               translate}}</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button class="next_button" expand="block" (click)="submitFiveForm()">{{'form.submit'| translate}}</ion-button>
+            <ion-button class="next_button" expand="block" (click)="submitFiveForm()">{{'form.submit'|
+              translate}}</ion-button>
           </ion-col>
         </ion-row>
       </form>

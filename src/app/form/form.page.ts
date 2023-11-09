@@ -23,6 +23,7 @@ import { UserService } from '../services/user.service';
 import { MaskitoElementPredicateAsync, MaskitoOptions } from '@maskito/core';
 import { MaskitoModule } from '@maskito/angular';
 import { AndroidSettings, IOSSettings, NativeSettings } from 'capacitor-native-settings';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 
 
@@ -35,50 +36,16 @@ import { AndroidSettings, IOSSettings, NativeSettings } from 'capacitor-native-s
   imports: [IonicModule, CommonModule, MaskitoModule, ReactiveFormsModule, FormsModule, TranslateModule, RouterModule]
 })
 export class FormPage implements OnInit {
-  @ViewChild(IonContent) content!: IonContent;
 
+  @ViewChild(IonContent) content!: IonContent;
   languageList: any = []
   selected = '';
-
   readonly phoneMask: MaskitoOptions = {
     mask: ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
   };
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
-  async ngOnInit() {
-
-
-    this.languageList = this.languageService.getLanguage();
-    this.selected = this.languageService.selectedLanguage
-
-    this.swiperReady()
-    this.loadAudio();
-    this.getUserData()
-    this.initialize();
-
-    VoiceRecorder.requestAudioRecordingPermission()
-    await this.permission()
-  }
-  ionViewDidEnter() {
-    console.log(this.selected)
-    this.selected = this.languageService.selectedLanguage
-    console.log(this.selected)
-  }
-  ionChange(event: any) {
-    console.log(event)
-    console.log(event.target.value)
-    this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
-    console.log(this.languageService.selectedLanguage)
-  }
-
-  compareWith: any;
-  MyDefaultValue: String = "en";  //set default language here  {en= English ; es = spanish}
-  compareWithFn(o1: any, o2: any) {
-    return o1 === o2;
-  };
-
   @ViewChild('swiper')
   swiperRef: ElementRef | undefined;
-
   swiper?: Swiper
   slideOneForm: FormGroup
   slideTwoForm: FormGroup
@@ -111,9 +78,44 @@ export class FormPage implements OnInit {
   audioFiles: string[] = []
   user: User = { name: '', phone: '', email: '', company_name: '' }
   images: string[] = []
+  compareWith: any;
+  MyDefaultValue: String = "en";  //set default language here  {en= English ; es = spanish}
+  compareWithFn(o1: any, o2: any) {
+    return o1 === o2;
+  };
+  formToMail: {} = {
+    company_name: '',
+    policy_no: '',
+    driver_phone: '',
+    driver_email: '',
+    driver_name: '',
+    tell_us_what_happenend: '',
+    audioFile: [],
+    address_of_accident: '',
+    image_surrounding: [],
+    image_nearest_street: [],
+    involvedparty: FormArray,
+    witness: FormArray,
+    police_name: '',
+    police_report: '',
+    image_police_report: [],
+    vehicle_make_model: '',
+    licence_plate: '',
+    image_licence: [],
+    vin_no: '',
+    image_vin_no: [],
+    speedometer: '',
+    image_all_side: [],
+    image_close_up: [],
+    tow_company: '',
+    tow_company_address: '',
+    other_vehcile_damage: FormArray,
+    images: []
+  }
+  loadddd: Boolean = false
   constructor(private userService: UserService, private loader: LoaderService, public formBuilder: FormBuilder, private readonly domSanitizer: DomSanitizer, public languageService: LanguageService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
-      console.log(params['map'],"Hiten")
+      console.log(params['map'], "Hiten")
       if (params['map'] === ':towCompany') {
         if (typeof params['lat'] === "undefined" || typeof params['lng'] === "undefined") {
           this.lat_lang_towCompany = '0,0';
@@ -157,9 +159,9 @@ export class FormPage implements OnInit {
       company_name: [''],
       policy_no_: [''],
       tell_us_what_happened: [''],
-      driver_name:[''],
-      driver_email:[''],
-      driver_phone:['']
+      driver_name: [''],
+      driver_email: [''],
+      driver_phone: ['']
     });
 
     this.slideTwoForm = formBuilder.group({
@@ -185,9 +187,72 @@ export class FormPage implements OnInit {
     })
   }
 
+  async ngOnInit() {
+    this.languageList = this.languageService.getLanguage();
+    this.selected = this.languageService.selectedLanguage
+    this.swiperReady()
+    this.loadAudio();
+    this.getUserData()
+    this.initialize();
+    VoiceRecorder.requestAudioRecordingPermission()
+    await this.permission()
+  }
+
+  ionViewDidEnter() {
+    console.log(this.selected)
+    this.selected = this.languageService.selectedLanguage
+    console.log(this.selected)
+  }
+
+  ionChange(event: any) {
+    console.log(event)
+    console.log(event.target.value)
+    this.languageService.setLanguage(event.target.value ? event.target.value : this.selected)
+    console.log(this.languageService.selectedLanguage)
+  }
+
+  async permission() {
+    const permissionStatus = await Geolocation.checkPermissions();
+    console.log('Permission status: ', permissionStatus.location);
+    if (permissionStatus?.location !== 'granted') {
+      await Geolocation.requestPermissions();
+      await Geolocation.getCurrentPosition();
+    }
+  }
+
+  async initialize() {
+    console.log('initializing...');
+    await Cloudinary.initialize({ cloudName: 'dd4uptwsc' });
+    console.log('initialize');
+  };
+
+  async swiperReady() {
+    this.swiper = await this.swiperRef?.nativeElement.swiper;
+    // this.goNext();
+  }
+
+  async goNext() {
+
+    this.swiper = await this.swiperRef?.nativeElement.swiper;
+    this.swiper?.slideNext(500);
+    this.content.scrollToTop();
+
+  }
+
+  async goPrev() {
+    this.swiper = await this.swiperRef?.nativeElement.swiper;
+    this.swiper?.slidePrev(500);
+    this.content.scrollToTop();
+  }
+
+  swiperSlideChanged(e: any) {
+    console.log('changed: ', e);
+  }
+
   involvedParties(): FormArray {
     return this.slideThreeForm.get("involvedParties") as FormArray
   }
+
   newInvolvedParties(): FormGroup {
     return this.formBuilder.group({
       name: '',
@@ -197,16 +262,17 @@ export class FormPage implements OnInit {
       insurance: []
     })
   }
+
   addInvolvedParties() {
     let involvedPartiesObjects = { idImage: [], insuranceImage: [] };
     this.involvedPartiesArray.push(involvedPartiesObjects)
     this.involvedParties().push(this.newInvolvedParties());
   }
+
   removeInvolvedParties(i: number) {
     this.involvedPartiesArray.splice(i, 1)
     this.involvedParties().removeAt(i)
   }
-
 
   witness(): FormArray {
     return this.slideThreeForm.get("witness") as FormArray
@@ -223,7 +289,6 @@ export class FormPage implements OnInit {
   removeWitness(i: number) {
     this.witness().removeAt(i)
   }
-
 
   otherVehicle(): FormArray {
     return this.slideFiveForm.get("otherVehicle") as FormArray
@@ -251,175 +316,164 @@ export class FormPage implements OnInit {
     this.otherVehicle().removeAt(i)
   }
 
-  async permission() {
-    const permissionStatus = await Geolocation.checkPermissions();
-    console.log('Permission status: ', permissionStatus.location);
-    if (permissionStatus?.location !== 'granted') {
-      await Geolocation.requestPermissions();
-      await Geolocation.getCurrentPosition();
-    }
-  }
-
-  async initialize() {
-    console.log('initializing...');
-    await Cloudinary.initialize({ cloudName: 'dd4uptwsc' });
-    console.log('initialize');
-  };
-
 
   get errorControl() {
     return this.slideOneForm.controls;
   }
 
-  submitOneForm = async () => {
-    if (this.slideOneForm.valid) {
-      console.log(this.slideOneForm.value);
-      this.swiper = await this.swiperRef?.nativeElement.swiper;
-      this.goNext();
-    } else {
-      return console.log('Please provide all the required values!');
-    }
-  }
-  submitTwoForm = async () => {
-    if (this.slideTwoForm.valid) {
-      console.log(this.slideTwoForm.value);
-      this.swiper = await this.swiperRef?.nativeElement.swiper;
-      this.goNext();
-    } else {
-      return console.log('Please provide all the required values!');
-    }
-  }
-
-  submitThreeForm = async () => {
-    if (this.slideThreeForm.valid) {
-      console.log(this.slideThreeForm.value, "Three");
-      this.swiper = await this.swiperRef?.nativeElement.swiper;
-      this.goNext();
-    } else {
-      return console.log('Please provide all the required values!');
-    }
-  }
-
-  submitFourForm = async () => {
-    if (this.slideFourForm.valid) {
-      console.log(this.slideFourForm.value, "Four");
-      this.swiper = await this.swiperRef?.nativeElement.swiper;
-      this.goNext();
-    } else {
-      return console.log('Please provide all the required values!');
-    }
-  }
-
   async submitFiveForm() {
-    this.loader.showLoader();
-    this.slideOneForm.value
-    this.slideTwoForm.value
-    this.slideThreeForm.value
-    this.slideFourForm.value
-    this.slideFiveForm.value
-    console.log(this.storedAudio.length)
-    this.uploadAudioToCloudinary()
-
-    
-    this.actualAreaOfDamage.forEach((res) => {
-      this.images.push(res.path)
-    })
-    this.nearestStreet.forEach((res) => {
-      this.images.push(res.path)
-    })
-    this.policeReport.forEach((res) => {
-      this.images.push(res.path)
-    })
-
-    this.licensePlate.forEach((res) => {
-      this.images.push(res.path)
-    })
-
-    this.vinNo.forEach((res) => {
-      this.images.push(res.path)
-    })
-
-    this.allFourSide.forEach((res) => {
-      this.images.push(res.path)
-    })
-
-    this.closeUp.forEach((res) => {
-      this.images.push(res.path)
-    })
-
-    this.involvedPartiesArray.forEach((res: any, index: number) => {
-
-      res.idImage.forEach((data: any) => {
-        this.images.push(data.path)
+    if (!this.loadddd) {
+      this.loader.showLoader()
+      this.loadddd = true
+    }
+    let combinedData = this.actualAreaOfDamage.concat(this.nearestStreet,
+      this.policeReport,
+      this.licensePlate,
+      this.vinNo,
+      this.allFourSide,
+      this.closeUp)
+    let nestedArrayImages: any[] = []
+    this.involvedPartiesArray.forEach((res: any, i: number) => {
+      this.involvedPartiesArray[i].idImage.forEach((res: any) => {
+        nestedArrayImages.push(res)
       })
-      this.involvedParties().at(index).patchValue({
-        id: []
+      this.involvedPartiesArray[i].insuranceImage.forEach((res: any) => {
+        nestedArrayImages.push(res)
+      })
+    })
+    this.otherVehicleArray.forEach((res: any, i: number) => {
+      this.otherVehicleArray[i].licenceImg.forEach((res: any) => {
+        nestedArrayImages.push(res)
+      })
+      this.otherVehicleArray[i].vinNoOther.forEach((res: any) => {
+        nestedArrayImages.push(res)
+      })
+      this.otherVehicleArray[i].all4side.forEach((res: any) => {
+        nestedArrayImages.push(res)
+      })
+      this.otherVehicleArray[i].closeUpOther.forEach((res: any) => {
+        nestedArrayImages.push(res)
       })
     })
 
-    this.involvedPartiesArray.forEach((res: any, index: number) => {
-      res.insuranceImage.forEach((data: any) => {
-        this.images.push(data.path)
-      })
-      this.involvedParties().at(index).patchValue({
-        insurance: []
-      })
-    })
+    if (!combinedData.every(eleme => eleme.isUploaded === true)) {
+      setTimeout(() => {
+        this.submitFiveForm()
+      }, 1500);
+    } else {
+      if (!nestedArrayImages.every(eleme => eleme.isUploaded === true)) {
+        setTimeout(() => {
+          this.submitFiveForm()
+        }, 1500);
+      }
+      else {
+        this.slideOneForm.value
+        this.slideTwoForm.value
+        this.slideThreeForm.value
+        this.slideFourForm.value
+        this.slideFiveForm.value
+        await this.uploadAudioToCloudinary()
+        setTimeout(() => {   
+        }, 2000);
+        this.actualAreaOfDamage.forEach((res) => {
+          this.images.push(res.path)
+        })
+        this.nearestStreet.forEach((res) => {
+          this.images.push(res.path)
+        })
+        this.policeReport.forEach((res) => {
+          this.images.push(res.path)
+        })
 
-    this.otherVehicleArray.forEach((res: any, index: number) => {
-     
-      res.licenceImg.forEach((data: any) => {
-        this.images.push(data.path)
-      })
-      this.otherVehicle().at(index).patchValue({
-        licenceImg: []
-      })
-    })
+        this.licensePlate.forEach((res) => {
+          this.images.push(res.path)
+        })
 
-    this.otherVehicleArray.forEach((res: any, index: number) => {
-      
-      res.vinNoOther.forEach((data: any) => {
-        this.images.push(data.path)
-      })
-      this.otherVehicle().at(index).patchValue({
-        vinNoOther: []
-      })
-    })
+        this.vinNo.forEach((res) => {
+          this.images.push(res.path)
+        })
 
-    this.otherVehicleArray.forEach((res: any, index: number) => {
-      res.all4side.forEach((data: any) => {
-        this.images.push(data.path)
-      })
-      this.otherVehicle().at(index).patchValue({
-        all4side: []
-      })
-    })
+        this.allFourSide.forEach((res) => {
+          this.images.push(res.path)
+        })
 
-    this.otherVehicleArray.forEach((res: any, index: number) => {
-      res.closeUpOther.forEach((data: any) => {
-        this.images.push(data.path)
-      })
-      this.otherVehicle().at(index).patchValue({
-        closeUpOther: []
-      })
-    })
+        this.closeUp.forEach((res) => {
+          this.images.push(res.path)
+        })
 
+        this.involvedPartiesArray.forEach((res: any, index: number) => {
 
-   
-    
-   
+          res.idImage.forEach((data: any) => {
+            this.images.push(data.path)
+          })
+          this.involvedParties().at(index).patchValue({
+            id: []
+          })
+        })
 
-    this.call().then(rres => {
-      this.loader.hideLoader()
-    })
+        this.involvedPartiesArray.forEach((res: any, index: number) => {
+          res.insuranceImage.forEach((data: any) => {
+            this.images.push(data.path)
+          })
+          this.involvedParties().at(index).patchValue({
+            insurance: []
+          })
+        })
 
-    console.log(this.formToMail)
+        this.otherVehicleArray.forEach((res: any, index: number) => {
 
+          res.licenceImg.forEach((data: any) => {
+            this.images.push(data.path)
+          })
+          this.otherVehicle().at(index).patchValue({
+            licenceImg: []
+          })
+        })
 
+        this.otherVehicleArray.forEach((res: any, index: number) => {
 
+          res.vinNoOther.forEach((data: any) => {
+            this.images.push(data.path)
+          })
+          this.otherVehicle().at(index).patchValue({
+            vinNoOther: []
+          })
+        })
+
+        this.otherVehicleArray.forEach((res: any, index: number) => {
+          res.all4side.forEach((data: any) => {
+            this.images.push(data.path)
+          })
+          this.otherVehicle().at(index).patchValue({
+            all4side: []
+          })
+        })
+
+        this.otherVehicleArray.forEach((res: any, index: number) => {
+          res.closeUpOther.forEach((data: any) => {
+            this.images.push(data.path)
+          })
+          this.otherVehicle().at(index).patchValue({
+            closeUpOther: []
+          })
+        })
+
+        console.log(nestedArrayImages.length)
+        console.log(nestedArrayImages)
+        console.log(combinedData.length)
+        console.log(combinedData)
+
+        this.call().then(() => {
+          this.loader.hideLoader()
+          this.loadddd = false
+        })
+      }
+    }
+
+    // this.call().then(() => {
+    //   this.loader.hideLoader()
+    // })
   }
-
-
   async call() {
     try {
       this.formToMail = {
@@ -444,16 +498,16 @@ export class FormPage implements OnInit {
         other_vehcile_damage: this.otherVehicle().value,
         images: this.images
       }
-  
       console.log("Calling...")
+      console.log(this.formToMail)
       var Parse = require('parse');
       const query = await Parse.Cloud.run('result', this.formToMail)
       await Filesystem.readdir({
         path: '',
         directory: Directory.External
-      }).then((res)=>{
+      }).then((res) => {
         res.files.forEach((res) => {
-          if(res.name.slice(-3) === 'wav'){
+          if (res.name.slice(-3) === 'wav') {
             Filesystem.deleteFile({
               path: res.name,
               directory: Directory.External
@@ -469,31 +523,6 @@ export class FormPage implements OnInit {
       console.log(error);
     }
   }
-
-
-  async swiperReady() {
-    this.swiper = await this.swiperRef?.nativeElement.swiper;
-    // this.goNext();
-  }
-
-  async goNext() {
-    this.initialize()
-    this.swiper = await this.swiperRef?.nativeElement.swiper;
-    this.swiper?.slideNext(500);
-    this.content.scrollToTop();
-
-  }
-
-  async goPrev() {
-    this.swiper = await this.swiperRef?.nativeElement.swiper;
-    this.swiper?.slidePrev(500);
-    this.content.scrollToTop();
-  }
-
-  swiperSlideChanged(e: any) {
-    console.log('changed: ', e);
-  }
-
 
   //imagePicker
   async openImagePicker(name: string, i: number): Promise<void> {
@@ -796,12 +825,287 @@ export class FormPage implements OnInit {
 
   }
 
+  async openCamera(name: string, i: number) {
+    await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera
+    }).then(async (file) => {
+      switch (name) {
+        case "actualAreaOfDamage":
+          this.actualAreaOfDamage.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          })
+
+          var place = this.actualAreaOfDamage.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.actualAreaOfDamage[place].path = res.url;
+            this.actualAreaOfDamage[place].isUploaded = true;
+          })
+          break;
+        case "nearestStreet":
+          this.nearestStreet.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          })
+          var place = this.nearestStreet.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.nearestStreet[place].path = res.url;
+            this.nearestStreet[place].isUploaded = true;
+          })
+          break;
+
+        case "idImage":
+          this.involvedPartiesArray[i].idImage.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          });
+          var place = this.involvedPartiesArray[i].idImage.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.involvedPartiesArray[i].idImage[place].path = res.url;
+            this.involvedPartiesArray[i].idImage[place].isUploaded = true;
+          })
+          this.involvedParties().at(i).patchValue({
+            id: this.involvedPartiesArray[i].idImage,
+          })
+          break;
+
+        case "insuranceImage":
+          this.involvedPartiesArray[i].insuranceImage.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          });
+          var place = this.involvedPartiesArray[i].insuranceImage.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.involvedPartiesArray[i].insuranceImage[place].path = res.url;
+            this.involvedPartiesArray[i].insuranceImage[place].isUploaded = true;
+          })
+
+          this.involvedParties().at(i).patchValue({
+            insurance: this.involvedPartiesArray[i].insuranceImage,
+          })
+          break;
+
+        case "policeReport":
+          this.policeReport.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          })
+          var place = this.policeReport.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.policeReport[place].path = res.url;
+            this.policeReport[place].isUploaded = true;
+          })
+
+          break;
+
+        case "licensePlate":
+          this.licensePlate.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          })
+          var place = this.licensePlate.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.licensePlate[place].path = res.url;
+            this.licensePlate[place].isUploaded = true;
+          })
+
+          break;
+
+        case "vinNo":
+          this.vinNo.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          })
+          var place = this.vinNo.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.vinNo[place].path = res.url;
+            this.vinNo[place].isUploaded = true;
+          })
+
+          break;
+
+        case "allFourSide":
+          this.allFourSide.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          })
+          var place = this.allFourSide.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.allFourSide[place].path = res.url;
+            this.allFourSide[place].isUploaded = true;
+          })
+
+          break;
+
+        case "closeUp":
+          this.closeUp.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          })
+          var place = this.closeUp.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.closeUp[place].path = res.url;
+            this.closeUp[place].isUploaded = true;
+          })
+
+          break;
+
+        case "licensePlateOther":
+          this.otherVehicleArray[i].licenceImg.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          });
+          var place = this.otherVehicleArray[i].licenceImg.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.otherVehicleArray[i].licenceImg[place].path = res.url;
+            this.otherVehicleArray[i].licenceImg[place].isUploaded = true;
+          })
+
+          this.otherVehicle().at(i).patchValue({
+            licenceImg: this.otherVehicleArray[i].licenceImg,
+          })
+          break;
+
+        case "vinNoOther":
+          this.otherVehicleArray[i].vinNoOther.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          });
+          var place = this.otherVehicleArray[i].vinNoOther.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.otherVehicleArray[i].vinNoOther[place].path = res.url;
+            this.otherVehicleArray[i].vinNoOther[place].isUploaded = true;
+          })
+
+          this.otherVehicle().at(i).patchValue({
+            vinNoOther: this.otherVehicleArray[i].vinNoOther,
+          })
+          break;
+
+        case "all4sideOther":
+          this.otherVehicleArray[i].all4side.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          });
+          var place = this.otherVehicleArray[i].all4side.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.otherVehicleArray[i].all4side[place].path = res.url;
+            this.otherVehicleArray[i].all4side[place].isUploaded = true;
+          })
+
+
+          this.otherVehicle().at(i).patchValue({
+            all4side: this.otherVehicleArray[i].all4side,
+          })
+          console.log(this.otherVehicleArray);
+          break;
+
+        case "closeUpOther":
+          this.otherVehicleArray[i].closeUpOther.push({
+            isUploaded: false,
+            localPath: file.path!,
+            path: '',
+            name: ''
+          });
+          var place = this.otherVehicleArray[i].closeUpOther.length - 1
+          await Cloudinary.uploadResource({
+            path: file.path,
+            resourceType: ResourceType.Image,
+            uploadPreset: 'm8knf6ho',
+          }).then(res => {
+            this.otherVehicleArray[i].closeUpOther[place].path = res.url;
+            this.otherVehicleArray[i].closeUpOther[place].isUploaded = true;
+          })
+
+          this.otherVehicle().at(i).patchValue({
+            closeUpOther: this.otherVehicleArray[i].closeUpOther,
+          })
+          console.log(this.otherVehicleArray);
+          break;
+      }
+    })
+  }
+
   // convert path of image
   public convertPathToWebPath(path: string): SafeUrl {
     const fileSrc = Capacitor.convertFileSrc(path);
     return this.domSanitizer.bypassSecurityTrustUrl(fileSrc);
   }
-
 
   //voice record load, start, stop and timer
   loadAudio() {
@@ -820,8 +1124,6 @@ export class FormPage implements OnInit {
           }
         }
       })
-
-
     });
 
   }
@@ -852,7 +1154,7 @@ export class FormPage implements OnInit {
     VoiceRecorder.stopRecording().then(async (res: RecordingData) => {
       const fileToSave = res.value.recordDataBase64
       console.log(fileToSave);
-      const fileName = new Date().getTime()+ '.wav';
+      const fileName = new Date().getTime() + '.wav';
       await Filesystem.writeFile({
         path: fileName,
         directory: Directory.External,
@@ -878,7 +1180,6 @@ export class FormPage implements OnInit {
       this.startTimer()
     }, 1000)
   }
-
   // play and delete recorded audio
   async play(fileName: any, file: any) {
     let base64Sound: string | Blob = ''
@@ -941,7 +1242,6 @@ export class FormPage implements OnInit {
     }
 
   }
-
   //upload and delete uploaded audio from device
   async addAudio() {
     await FilePicker.pickFiles({
@@ -952,31 +1252,24 @@ export class FormPage implements OnInit {
 
     });
   }
-
   // upload audio to Cloudinary
-  uploadAudioToCloudinary() {
-    this.storedAudio.forEach(async element => {
-      if(element.name.slice(-3) === 'wav'){
-        await Cloudinary.uploadResource({
-          path: element.uri,
+  async uploadAudioToCloudinary() {
+    console.log(this.storedAudio.length)
+  for (const element of this.storedAudio) {
+    if (element.name.slice(-3) === 'wav' || element.name.slice(-3) === 'acc') {
+      try {
+        const response = await Cloudinary.uploadResource({
+          path: element.name.slice(-3) === 'wav' ? element.uri : element.path,
           resourceType: ResourceType.Video,
           uploadPreset: 'm8knf6ho',
-        }).then(response => {
-          this.audioFiles.push(response.url)
-        })
-      }else if(element.name.slice(-3) === 'acc'){
-        await Cloudinary.uploadResource({
-          path: element.path,
-          resourceType: ResourceType.Video,
-          uploadPreset: 'm8knf6ho',
-        }).then(response => {
-          this.audioFiles.push(response.url)
-        })
+        });
+        this.audioFiles.push(response.url);
+      } catch (error) {
+        console.error("Error uploading file:", error);
       }
-  
-    });
-
+    }
   }
+}
 
   removeImage(index: number, innerIndex: number, name: string) {
     console.log(this.actualAreaOfDamage.length)
@@ -1042,36 +1335,6 @@ export class FormPage implements OnInit {
     }
   }
 
-  formToMail: {} = {
-    company_name: '',
-    policy_no: '',
-    driver_phone: '',
-    driver_email: '',
-    driver_name: '',
-    tell_us_what_happenend: '',
-    audioFile: [],
-    address_of_accident: '',
-    image_surrounding: [],
-    image_nearest_street: [],
-    involvedparty: FormArray,
-    witness: FormArray,
-    police_name: '',
-    police_report: '',
-    image_police_report: [],
-    vehicle_make_model: '',
-    licence_plate: '',
-    image_licence: [],
-    vin_no: '',
-    image_vin_no: [],
-    speedometer: '',
-    image_all_side: [],
-    image_close_up: [],
-    tow_company: '',
-    tow_company_address: '',
-    other_vehcile_damage: FormArray,
-    images: []
-  }
-
   async getUserData() {
     await this.userService.get("user").then((data: any) => {
       if (data.value != null) {
@@ -1088,39 +1351,37 @@ export class FormPage implements OnInit {
     })
   }
 
-
-  async openMap(value:string, int: number){
-      try {
-        const status = await Geolocation.requestPermissions()
-        if (status.coarseLocation === 'denied' || status.location === 'denied') {
-          const requestStatus = await Geolocation.checkPermissions();
-          if (requestStatus.coarseLocation === 'denied' || requestStatus.location === 'denied') {
-            this.openNativeSettings(true)
-            return
-          } else {
-            this.getCurrentlocation(value,int)
-          }
+  async openMap(value: string, int: number) {
+    try {
+      const status = await Geolocation.requestPermissions()
+      if (status.coarseLocation === 'denied' || status.location === 'denied') {
+        const requestStatus = await Geolocation.checkPermissions();
+        if (requestStatus.coarseLocation === 'denied' || requestStatus.location === 'denied') {
+          this.openNativeSettings(true)
+          return
         } else {
-          this.getCurrentlocation(value,int)
+          this.getCurrentlocation(value, int)
         }
-      } catch (e: any) {
-        if (e.message === 'Location services are not enabled') {
-          this.openNativeSettings()
-        }
+      } else {
+        this.getCurrentlocation(value, int)
+      }
+    } catch (e: any) {
+      if (e.message === 'Location services are not enabled') {
+        this.openNativeSettings()
       }
     }
+  }
 
-    openNativeSettings(app = false) {
-      return NativeSettings.open({
-        optionAndroid: app ? AndroidSettings.ApplicationDetails : AndroidSettings.Location,
-        optionIOS: app ? IOSSettings.App : IOSSettings.LocationServices
-      })
-    }
+  openNativeSettings(app = false) {
+    return NativeSettings.open({
+      optionAndroid: app ? AndroidSettings.ApplicationDetails : AndroidSettings.Location,
+      optionIOS: app ? IOSSettings.App : IOSSettings.LocationServices
+    })
+  }
 
-    async getCurrentlocation(value:string, int: number) {
-      await Geolocation.getCurrentPosition();
-      this.router.navigateByUrl(`tabs/dashboard/form/location/:${value}/:${int}`)
-    }
+  async getCurrentlocation(value: string, int: number) {
+    await Geolocation.getCurrentPosition();
+    this.router.navigateByUrl(`tabs/dashboard/form/location/:${value}/:${int}`)
+  }
 
-  
 }

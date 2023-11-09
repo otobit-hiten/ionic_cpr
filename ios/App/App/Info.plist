@@ -25,19 +25,19 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<string>To Capture Image</string>
+	<string>CPR Insurance App uses permissions to open downloaded files and documents.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>To Capture Image</string>
+	<string>CPR Insurance App uses to the camera to capture images for easy claim filing.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Privacy - Location Always Usage Description</string>
+	<string>CPR Insurance App uses Location to obtain the correct coordinates from where the claim was lodged.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Privacy - Location When In Use Usage Description</string>
+	<string>CPR Insurance App uses Location to obtain the correct coordinates from where the claim was lodged.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Privacy - Microphone Usage Description</string>
+	<string>CPR Insurance App require microphone to record audio for easy claim filing.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>To Add Image</string>
+	<string>CPR Insurance App require to the Photo Library to pick images for easy claim filing.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To Store Image</string>
+	<string>CPR Insurance App require Photo Library to pick images for easy claim filing.</string>
 	<key>UIFileSharingEnabled</key>
 	<false/>
 	<key>UILaunchStoryboardName</key>

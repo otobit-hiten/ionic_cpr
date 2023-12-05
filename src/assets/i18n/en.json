@@ -73,6 +73,7 @@
         "input_speedometer": "Vehicle mileage from speedometer",
         "label_img_all_4_side": "Upload photos of car from all four corners, showcasing the front, back, and two sides of the car",
         "label_img_close_up": "Upload close-up photos of damages to the vehicle",
+        "label_img_speedometer": "Upload photo of car mileage from speedometer",
         "label_was_vehicle_towed": "Was your vehicle towed?",
         "label_tow_company": "Towing Company Name",
         "input_tow_company": "Towing Company Name",
@@ -81,7 +82,8 @@
         "submit": "Submit",
         "form5_header": "Other Vehicle Damage",
         "label_my_vehicle_other": "Other Party’s Vehicle",
-        "label_add_more_party_other": "Add Other Party’s Vehicle "
+        "label_add_more_party_other": "Add Other Party’s Vehicle ",
+        "label_take_picture":"Take a picture"
     },
     "profile": {
         "profile_header": "Account Information",

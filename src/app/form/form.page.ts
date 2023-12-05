@@ -67,6 +67,7 @@ export class FormPage implements OnInit {
   public policeReport: UploadImage[] = [];
   public licensePlate: UploadImage[] = [];
   public vinNo: UploadImage[] = [];
+  public speedometer: UploadImage[] = [];
   public allFourSide: UploadImage[] = [];
   public closeUp: UploadImage[] = [];
   witnessObj = { name: '', phone: '', email: '', image: [] }
@@ -105,6 +106,7 @@ export class FormPage implements OnInit {
     vin_no: '',
     image_vin_no: [],
     speedometer: '',
+    speedometer_img:'',
     image_all_side: [],
     image_close_up: [],
     tow_company: '',
@@ -179,6 +181,7 @@ export class FormPage implements OnInit {
       vehicleLicencePlateNo: '',
       vehicleVinNo: '',
       speedometer: '',
+      speedometer_img:'',
       towCompany: ''
     })
 
@@ -393,6 +396,10 @@ export class FormPage implements OnInit {
           this.images.push(res.path)
         })
 
+        this.speedometer.forEach((res) => {
+          this.images.push(res.path)
+        })
+
         this.allFourSide.forEach((res) => {
           this.images.push(res.path)
         })
@@ -493,6 +500,7 @@ export class FormPage implements OnInit {
         licence_plate: this.slideFourForm.controls['vehicleLicencePlateNo'].value,
         vin_no: this.slideFourForm.controls['vehicleVinNo'].value,
         speedometer: this.slideFourForm.controls['speedometer'].value,
+        speedometer_img: this.slideFourForm.controls['speedometer_img'].value,
         tow_company: this.slideFourForm.controls['towCompany'].value,
         tow_company_address: this.lat_lang_towCompany,
         other_vehcile_damage: this.otherVehicle().value,
@@ -685,6 +693,26 @@ export class FormPage implements OnInit {
           });
           break;
 
+          case "speedometer":
+            data.images.forEach(async (file) => {
+              this.speedometer.push({
+                isUploaded: false,
+                localPath: file.path!,
+                path: '',
+                name: ''
+              })
+              var place = this.speedometer.length - 1
+              await Cloudinary.uploadResource({
+                path: file.path,
+                resourceType: ResourceType.Image,
+                uploadPreset: 'm8knf6ho',
+              }).then(res => {
+                this.speedometer[place].path = res.url;
+                this.speedometer[place].isUploaded = true;
+              })
+            });
+            break;
+          
         case "allFourSide":
           data.images.forEach(async (file) => {
             this.allFourSide.push({
@@ -968,6 +996,26 @@ export class FormPage implements OnInit {
           })
 
           break;
+
+
+          case "speedometer":
+            this.speedometer.push({
+              isUploaded: false,
+              localPath: file.path!,
+              path: '',
+              name: ''
+            })
+            var place = this.speedometer.length - 1
+            await Cloudinary.uploadResource({
+              path: file.path,
+              resourceType: ResourceType.Image,
+              uploadPreset: 'm8knf6ho',
+            }).then(res => {
+              this.speedometer[place].path = res.url;
+              this.speedometer[place].isUploaded = true;
+            })
+            break;
+
 
         case "allFourSide":
           this.allFourSide.push({
@@ -1292,6 +1340,10 @@ export class FormPage implements OnInit {
       case "vinNo":
         this.vinNo.splice(index, 1);
         break;
+
+        case "speedometer":
+          this.speedometer.splice(index, 1);
+          break;
       case "licensePlate":
         this.licensePlate.splice(index, 1);
         break;
@@ -1319,6 +1371,7 @@ export class FormPage implements OnInit {
           vinNoOther: this.otherVehicleArray[index].vinNoOther
         })
         break;
+        
       case "all4sideOther":
         this.otherVehicleArray[index].all4side.splice(innerIndex, 1)
         this.otherVehicle().at(index).patchValue({

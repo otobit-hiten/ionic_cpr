@@ -83,12 +83,15 @@
         "input_speedometer":"Kilometraje del vehículo desde el velocímetro",
         "label_img_all_4_side":"Agregue fotografías del automóvil desde las cuatro esquinas, mostrando la parte delantera, trasera y dos lados del automóvil.",
         "label_img_close_up":"Agregue fotografías en primer plano de los daños al vehículo.",
+        "label_img_speedometer": "Cargue una foto del kilometraje del vehículo desde el velocímetror",
         "label_was_vehicle_towed":"¿Su vehículo fue remolcado?",
         "label_tow_company":"Nombre de la empresa de remolque",
         "input_tow_company":"Nombre de la empresa de remolque",
         "label_tow_company_address":"Dirección de la empresa de remolque",
         "label_add_more_vehicle":"Añadir más vehículo",
         "submit":"Entregar",
+        "label_take_picture":"Toma una foto",
+
 
         "form5_header":"Otros daños al vehículo",
         "label_my_vehicle_other":"Vehículo de la otra persona",

@@ -154,8 +154,9 @@
               <ion-row>
                 <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                     (click)="openImagePicker('actualAreaOfDamage',-1)" translate>form.add_img</ion-button></ion-col>
-                <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('actualAreaOfDamage',-1)">Take a
-                    Picture</ion-button></ion-col>
+                <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                    (click)="openCamera('actualAreaOfDamage',-1)"
+                    translate>form.label_take_picture</ion-button></ion-col>
               </ion-row>
             </ion-item>
           </ion-list>
@@ -189,8 +190,8 @@
                 <ion-row>
                   <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                       (click)="openImagePicker('nearestStreet',-1)" translate>form.add_img</ion-button></ion-col>
-                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('nearestStreet',-1)">Take a
-                      Picture</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openCamera('nearestStreet',-1)"translate>form.label_take_picture</ion-button></ion-col>
                 </ion-row>
               </ion-item>
             </ion-list>
@@ -261,8 +262,8 @@
                     <ion-row>
                       <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                           (click)="openImagePicker('idImage',i)" translate>form.add_img</ion-button></ion-col>
-                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('idImage',i)">Take a
-                          Picture</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openCamera('idImage',i)"translate>form.label_take_picture</ion-button></ion-col>
                     </ion-row>
                   </ion-item>
                 </ion-list>
@@ -305,8 +306,8 @@
                     <ion-row>
                       <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                           (click)="openImagePicker('insuranceImage',i)" translate>form.add_img</ion-button></ion-col>
-                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('insuranceImage',i)">Take a
-                          Picture</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openCamera('insuranceImage',i)"translate>form.label_take_picture</ion-button></ion-col>
                     </ion-row>
                   </ion-item>
                 </ion-list>
@@ -380,8 +381,8 @@
                 <ion-row>
                   <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                       (click)="openImagePicker('policeReport',-1)" translate>form.add_img</ion-button></ion-col>
-                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('policeReport',-1)">Take a
-                      Picture</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openCamera('policeReport',-1)"translate>form.label_take_picture</ion-button></ion-col>
                 </ion-row>
               </ion-item>
             </ion-list>
@@ -444,8 +445,8 @@
                 <ion-row>
                   <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                       (click)="openImagePicker('licensePlate',-1)" translate>form.add_img</ion-button></ion-col>
-                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('licensePlate',-1)">Take a
-                      Picture</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openCamera('licensePlate',-1)" translate>form.label_take_picture</ion-button></ion-col>
                 </ion-row>
               </ion-item>
             </ion-list>
@@ -482,8 +483,8 @@
                 <ion-row>
                   <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                       (click)="openImagePicker('vinNo',-1)" translate>form.add_img</ion-button></ion-col>
-                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('vinNo',-1)">Take a
-                      Picture</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openCamera('vinNo',-1)" translate>form.label_take_picture</ion-button></ion-col>
                 </ion-row>
               </ion-item>
             </ion-list>
@@ -494,6 +495,37 @@
             </ion-label>
             <ion-input class="input_sixth_two" formControlName="speedometer"
               placeholder="{{'form.input_speedometer' | translate }}"></ion-input>
+          </div>
+
+          <div class="upload_img">
+            <ion-label class="input_sixth_two" translate>form.label_img_speedometer</ion-label>
+            <ion-list class="border_address_damage" lines="none">
+              <ion-grid>
+                <ion-col *ngIf="speedometer.length===0" size="3">
+                  <div class="image_holder_damage">
+                    <img class="imag_prev" src="assets/img_holder.png" />
+                    <img class="imag_prev" src="assets/img_holder.png" />
+                    <img class="imag_prev" src="assets/img_holder.png" />
+                  </div>
+                </ion-col>
+                <ion-col *ngFor="let file of speedometer; let i = index" size="3">
+                  <div class="image_holder_damage">
+                    <ion-icon *ngIf="file.localPath" class="imag_icon" src="assets/img_del.svg"
+                      (click)="removeImage(i,-1,'speedometer')"></ion-icon>
+                    <img class="imag_prev" *ngIf="file.localPath" [src]="convertPathToWebPath(file.localPath)" />
+                  </div>
+                </ion-col>
+              </ion-grid>
+
+              <ion-item>
+                <ion-row>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openImagePicker('speedometer',-1)" translate>form.add_img</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openCamera('speedometer',-1)" translate>form.label_take_picture</ion-button></ion-col>
+                </ion-row>
+              </ion-item>
+            </ion-list>
           </div>
 
           <div class="upload_img">
@@ -520,8 +552,8 @@
                 <ion-row>
                   <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                       (click)="openImagePicker('allFourSide',-1)" translate>form.add_img</ion-button></ion-col>
-                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('allFourSide',-1)">Take a
-                      Picture</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openCamera('allFourSide',-1)" translate>form.label_take_picture</ion-button></ion-col>
                 </ion-row>
               </ion-item>
             </ion-list>
@@ -552,8 +584,8 @@
                 <ion-row>
                   <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                       (click)="openImagePicker('closeUp',-1)" translate>form.add_img</ion-button></ion-col>
-                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('closeUp',-1)">Take a
-                      Picture</ion-button></ion-col>
+                  <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                      (click)="openCamera('closeUp',-1)" translate>form.label_take_picture</ion-button></ion-col>
                 </ion-row>
               </ion-item>
             </ion-list>
@@ -650,8 +682,8 @@
                     <ion-row>
                       <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                           (click)="openImagePicker('licensePlateOther',i)" translate>form.add_img</ion-button></ion-col>
-                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('licensePlateOther',i)">Take a
-                          Picture</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openCamera('licensePlateOther',i)" translate>form.label_take_picture</ion-button></ion-col>
                     </ion-row>
                   </ion-item>
                 </ion-list>
@@ -687,9 +719,9 @@
                     <ion-row>
                       <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                           (click)="openImagePicker('vinNoOther',i)" translate>form.add_img</ion-button></ion-col>
-                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('vinNoOther',i)">Take a
-                          Picture</ion-button></ion-col>
-                    </ion-row>        
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openCamera('vinNoOther',i)" translate>form.label_take_picture</ion-button></ion-col>
+                    </ion-row>
                   </ion-item>
                 </ion-list>
               </div>
@@ -718,8 +750,8 @@
                     <ion-row>
                       <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                           (click)="openImagePicker('all4sideOther',i)" translate>form.add_img</ion-button></ion-col>
-                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('all4sideOther',i)">Take a
-                          Picture</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openCamera('all4sideOther',i)" translate>form.label_take_picture</ion-button></ion-col>
                     </ion-row>
                   </ion-item>
                 </ion-list>
@@ -749,8 +781,8 @@
                     <ion-row>
                       <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
                           (click)="openImagePicker('closeUpOther',i)" translate>form.add_img</ion-button></ion-col>
-                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage" (click)="openCamera('closeUpOther',i)">Take a
-                          Picture</ion-button></ion-col>
+                      <ion-col size="6"> <ion-button expand="block" class="add_image_damage"
+                          (click)="openCamera('closeUpOther',i)" translate>form.label_take_picture</ion-button></ion-col>
                     </ion-row>
                   </ion-item>
                 </ion-list>
